@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {NavBar} from "./companents/NavBar/NavBar";
+import {Queue} from "./page/Queue";
+import {Songs} from "./page/Songs";
+import {SavedQueue} from "./page/SavedQueue";
+import {HistoryQueue} from "./page/History";
+import {Settings} from "./page/Settings";
+import {About} from "./page/About";
+import {Button} from "react-bootstrap";
+import {connect} from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    componentDidMount() {
+        console.log(this.props.counter);
+    }
+
+    render() {
+
+
+        return (
+            <React.Fragment>
+                <BrowserRouter>
+                    <NavBar/>
+                    <Switch>
+                        <Route component={Queue} path="/queue" />
+                        <Route component={Songs} path="/songs" />
+                        <Route component={SavedQueue} path="/saved-queue" />
+                        <Route component={HistoryQueue} path="/history" />
+                        <Route component={Settings} path="/settings" />
+                        <Route component={About} path="/about" />
+                    </Switch>
+                </BrowserRouter>
+            </React.Fragment>
+        );
+    }
+    
+
 }
 
-export default App;
+function mapStateToProps(state) {
+    return {
+        counter: state.counter
+    }
+}
+
+export default connect(mapStateToProps)(App);
