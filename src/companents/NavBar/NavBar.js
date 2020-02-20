@@ -3,9 +3,15 @@ import {NavLink} from "react-router-dom";
 import Auth from "../Auth/Auth";
 import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
+import Toolbar from "@material-ui/core/Toolbar";
+import AppBar from "@material-ui/core/AppBar";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from '@material-ui/icons/Menu';
+import Typography from "@material-ui/core/Typography";
 
 
 class NavBar extends Component {
+
     render() {
         return (
             <nav className="navbar navbar-dark navbar-expand-lg bg-primary">
@@ -44,6 +50,7 @@ class NavBar extends Component {
                         {/*        About*/}
                         {/*    </NavLink>*/}
                         {/*</li>*/}
+
 
                     </ul>
                 </div>

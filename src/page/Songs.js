@@ -1,5 +1,8 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import IconButton from "@material-ui/core/IconButton";
+import {Link} from "react-router-dom";
 
 
 export const Songs = () => {
@@ -18,6 +21,17 @@ export const Songs = () => {
                 <h1>Songs</h1>
                 <div className="card">
                     <div className="card-header" style={noneBorderBottom}>
+                        <Link to="/">
+                            <IconButton
+                                aria-label="show more"
+
+                                aria-haspopup="true"
+
+                                color="inherit"
+                            >
+                                <AddCircleOutlineIcon/>
+                            </IconButton>
+                        </Link>
                         <Button className="btn-light" ><i className="fas fa-plus-circle"></i></Button>
                         <Button className="btn-light" ><i className="fas fa-edit"></i></Button>
                         <Button className="btn-light" ><i className="fas fa-trash"></i></Button>
