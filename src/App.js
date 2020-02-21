@@ -9,7 +9,8 @@ import {Settings} from "./page/Settings";
 import {About} from "./page/About";
 import {connect} from 'react-redux'
 import {autoLogin} from "./store/action/auth";
-import NavBar from "./companents/NavBar/NavBar";
+import {NavBar} from "./companents/NavBar/NavBar";
+import {DrawerCustom} from "./companents/Drawer/DrawerCustom";
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
             <React.Fragment>
                 <BrowserRouter>
                     <NavBar/>
+                    <DrawerCustom/>
                     <div className="container pt-4">
                         <Switch>
                             <Route component={Queue} path="/queue" />
