@@ -4,10 +4,23 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import MailIcon from '@material-ui/icons/Mail';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
+import {Queue} from "../../page/Queue";
+import {Link} from "react-router-dom";
+import {
+    Code,
+    FormatListNumbered,
+    History,
+    LibraryBooks,
+    LibraryMusic,
+    QueueMusic,
+    SdStorage,
+    Settings
+} from "@material-ui/icons";
+
+
 
 const drawerWidth = 240;
 
@@ -23,8 +36,66 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         padding: theme.spacing(3),
     },
-    toolbar: theme.mixins.toolbar,
+    toolbar: {
+        marginTop: '60px' //TODO не динамичекий
+    },
+
 }));
+
+function renderLink(props, index) {
+
+    return(
+        <li>
+            <ListItem button component={Link} to={props.link} key={index}>
+                <ListItemIcon>
+                    {props.icon}
+                </ListItemIcon>
+                <ListItemText>{props.title}</ListItemText>
+            </ListItem>
+        </li>
+    )
+}
+
+const menu = [
+    {
+        title: 'Queue',
+        link: 'queue',
+        icon: <QueueMusic/>
+    },
+    {
+        title: 'Songs',
+        link: 'songs',
+        icon: <LibraryMusic/>
+    },
+    {
+        title: 'Saved Queue',
+        link: 'saved-queue',
+        icon: <LibraryBooks/>
+    },
+    {
+        title: 'History',
+        link: 'history',
+        icon: <History/>
+    },
+]
+
+const subMenu = [
+    {
+        title: 'Bot Commands',
+        link: 'bot-commands',
+        icon: <Code/>
+    },
+    {
+        title: 'Settings',
+        link: null,
+        icon: <Settings/>
+    },
+    {
+        title: 'Edit mode',
+        link: null
+    },
+]
+
 
 export const DrawerCustom  = () => {
     const classes = useStyles();
@@ -34,20 +105,14 @@ export const DrawerCustom  = () => {
             role="presentation"
         >
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
+                {menu.map((link, index) => (
+                   renderLink(link, index)
                 ))}
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
+                {subMenu.map((link, index) => (
+                    renderLink(link, index)
                 ))}
             </List>
         </div>

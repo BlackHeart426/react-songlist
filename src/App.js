@@ -11,24 +11,52 @@ import {connect} from 'react-redux'
 import {autoLogin} from "./store/action/auth";
 import {NavBar} from "./companents/NavBar/NavBar";
 import {DrawerCustom} from "./companents/Drawer/DrawerCustom";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
-class App extends Component {
+const drawerWidth = 240;
 
-    componentDidMount() {
-        this.props.autoLogin()
-    }
 
-    render() {
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+        marginTop: '40px',
+    },
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
+    },
+    drawerPaper: {
+        width: drawerWidth,
+    },
+    content: {
+        flexGrow: 1,
+        marginTop: '40px', //TODO не динамичекий
+        padding: theme.spacing(3),
+    },
+    toolbar: theme.mixins.toolbar,
+}));
 
+export const App = () => {
+    const classes = useStyles();
 
         return (
-            <React.Fragment>
-                <BrowserRouter>
-                    <NavBar/>
-                    <DrawerCustom/>
-                    <div className="container pt-4">
+            <div className={classes.root}>
+                <CssBaseline />
+                <NavBar className={classes.appBar}/>
+                <DrawerCustom
+                    className={classes.drawer}
+                    classes={{
+                    paper: classes.drawerPaper,
+                     }}
+                />
+                <main className={classes.content}>
+                    <div  className={classes.toolbar}>
                         <Switch>
-                            <Route component={Queue} path="/queue" />
+                            <Route component={Queue} path="/queue"/>
                             <Route component={Songs} path="/songs" />
                             <Route component={SavedQueue} path="/saved-queue" />
                             <Route component={HistoryQueue} path="/history" />
@@ -36,24 +64,7 @@ class App extends Component {
                             <Route component={About} path="/about" />
                         </Switch>
                     </div>
-                </BrowserRouter>
-            </React.Fragment>
+                </main>
+            </div>
         );
     }
-    
-
-}
-
-function mapStateToProps(state) {
-    return {
-        isAuthenticated: !!state.auth.token
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        autoLogin: () => dispatch(autoLogin())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
