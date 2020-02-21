@@ -3,23 +3,22 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import MailIcon from '@material-ui/icons/Mail';
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
-import {Queue} from "../../page/Queue";
 import {Link} from "react-router-dom";
 import {
-    Code,
-    FormatListNumbered,
+    Code, ExpandLess, ExpandMore,
     History,
     LibraryBooks,
     LibraryMusic,
     QueueMusic,
-    SdStorage,
-    Settings
+    Settings, StarBorder
 } from "@material-ui/icons";
-
+import Collapse from "@material-ui/core/Collapse";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import ImageIcon from '@material-ui/icons/Image';
 
 
 const drawerWidth = 240;
@@ -37,19 +36,21 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(3),
     },
     toolbar: {
-        marginTop: '60px' //TODO не динамичекий
+        marginTop: '65px' //TODO не динамичекий
+    },
+    nested: {
+        paddingLeft: theme.spacing(4),
     },
 
 }));
 
+
 function renderLink(props, index) {
 
     return(
-        <li>
-            <ListItem button component={Link} to={props.link} key={index}>
-                <ListItemIcon>
-                    {props.icon}
-                </ListItemIcon>
+        <li key={index}>
+            <ListItem button component={Link} to={props.link ? props.link : '#'} >
+                {props.icon ? <ListItemIcon>{props.icon}</ListItemIcon> : <React.Fragment></React.Fragment>}
                 <ListItemText>{props.title}</ListItemText>
             </ListItem>
         </li>
@@ -85,25 +86,28 @@ const subMenu = [
         link: 'bot-commands',
         icon: <Code/>
     },
-    {
-        title: 'Settings',
-        link: null,
-        icon: <Settings/>
-    },
-    {
-        title: 'Edit mode',
-        link: null
-    },
 ]
 
 
 export const DrawerCustom  = () => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const handleClick = () => {
+        setOpen(!open);
+    };
     const sideList = () => (
         <div
             className={classes.toolbar}
             role="presentation"
         >
+            <ListItem>
+                <ListItemAvatar>
+                    <Avatar>
+                        <ImageIcon />
+                    </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary="Black__Heart" secondary="Streamer" />
+            </ListItem>
             <List>
                 {menu.map((link, index) => (
                    renderLink(link, index)
@@ -115,6 +119,20 @@ export const DrawerCustom  = () => {
                     renderLink(link, index)
                 ))}
             </List>
+            <ListItem button onClick={handleClick} >
+                <ListItemIcon><Settings/></ListItemIcon>
+                <ListItemText>Settings</ListItemText>
+                {open ? <ExpandLess /> : <ExpandMore />}</ListItem>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    <ListItem button className={classes.nested}>
+                        <ListItemIcon>
+                            <StarBorder />
+                        </ListItemIcon>
+                        <ListItemText primary="Starred" />
+                    </ListItem>
+                </List>
+            </Collapse>
         </div>
     );
 

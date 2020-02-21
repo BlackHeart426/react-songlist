@@ -1,14 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import {Queue} from "./page/Queue";
 import {Songs} from "./page/Songs";
 import {SavedQueue} from "./page/SavedQueue";
 import {HistoryQueue} from "./page/History";
 import {Settings} from "./page/Settings";
 import {About} from "./page/About";
-import {connect} from 'react-redux'
-import {autoLogin} from "./store/action/auth";
 import {NavBar} from "./companents/NavBar/NavBar";
 import {DrawerCustom} from "./companents/Drawer/DrawerCustom";
 import makeStyles from "@material-ui/core/styles/makeStyles";

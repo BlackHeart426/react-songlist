@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import {Button} from "react-bootstrap";
+
 import {connect} from "react-redux";
 import {auth, logout} from "../../store/action/auth";
+import Button from "@material-ui/core/Button";
 
 class Auth extends Component {
 
@@ -34,21 +35,22 @@ class Auth extends Component {
                 <Button
                     onClick={this.registerHandler}
                     type="submit"
-                    className="btn-dark"
+                    color="inherit"
                 >
                     Регистрация
                 </Button>
                 <Button
                     onClick={this.loginHandler}
-                    className="btn-light"
                     type="submit"
+                    color="inherit"
+
                 >
                     Вход
                 </Button>
                 <Button
                     onClick={this.logoutHandler}
-                    className="btn-light"
                     type="submit"
+                    color="inherit"
                 >
                     Выход
                 </Button>
