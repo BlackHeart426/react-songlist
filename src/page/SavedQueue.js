@@ -1,5 +1,13 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import {Card} from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import ControlPointIcon from "@material-ui/icons/ControlPoint";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
+import ToggleOffIcon from "@material-ui/icons/ToggleOff";
 
 
 export const SavedQueue = () => {
@@ -15,54 +23,15 @@ export const SavedQueue = () => {
 
     return (
         <>
-            <form>
-                <h1>Songs</h1>
-                <div className="card">
-                    <div className="card-header" style={noneBorderBottom}>
-                        <Button className="btn-light" ><i className="fas fa-plus-circle"></i></Button>
-                        <Button className="btn-light" ><i className="fas fa-trash"></i></Button>
-                        <div className="row">
-                            <div className="col">
-                                <input type="text" className="form-control" placeholder="Search"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="card-body" style={pt0}>
-                        <table className="table table-striped" style={noneBottomMargin}>
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </form>
-
+            <h1>SavedQueue</h1>
+            <Card>
+                <IconButton>
+                    <ControlPointIcon/>
+                </IconButton>
+                <IconButton>
+                    <DeleteIcon/>
+                </IconButton>
+            </Card>
         </>
-
     )
 }
