@@ -270,7 +270,6 @@ export default function ComponentTablePagination(props) {
      * Выбрать все
      */
     const handleSelectAllClick = event => {
-        debugger
         if (event.target.checked) {
             const newSelecteds = props.rowsData.map(n => n.title);
             setSelected(newSelecteds);
@@ -364,8 +363,10 @@ export default function ComponentTablePagination(props) {
                             {stableSort(props.rowsData, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
+
                                     const isItemSelected = isSelected(row.title);
                                     const labelId = `enhanced-table-checkbox-${index}`;
+
 
                                     return (
                                         <TableRow
@@ -386,35 +387,29 @@ export default function ComponentTablePagination(props) {
                                                     inputProps={{'aria-labelledby': labelId}}
                                                 />
                                             </TableCell>
-                                            <TableCell align="center" component="th" id={labelId} scope="row" padding="none">
-                                                {row.title}
-                                            </TableCell>
-
-                                            <TableCell align="center">{row.artist}</TableCell>
-                                            <TableCell align="center">{row.timesPlayed}</TableCell>
-                                            <TableCell align="center">{row.lastPlayed}</TableCell>
-                                            <TableCell align="center">
-                                                {
-                                                    row.tag == 'tag'  ?
+                                            //TODO переписать
+                                            { Object.keys(row).map(item =>
+                                                row[item] === 'tag'
+                                                    ?
+                                                    <TableCell align="center">
                                                         <MusicNoteIcon/>
-                                                        :
-                                                        <React.Fragment/>
-                                                }
-                                            </TableCell>
-                                            <TableCell align="center">
-                                            {
-                                                row.action == 'btn' && editMode ?
-                                                <Button
-                                                    type="submit"
-                                                    color="primary"
-                                                    variant="outlined"
-                                                >
-                                                    request
-                                                </Button>
-                                                   :
-                                                <React.Fragment/>
+                                                </TableCell>
+                                                : row[item] === 'btn'
+                                                    ?
+                                                    <TableCell align="center">
+                                                        <Button
+                                                            type="submit"
+                                                            color="primary"
+                                                            variant="outlined"
+                                                        >
+                                                            request
+                                                        </Button>
+                                                    </TableCell>
+                                                    :<TableCell align="center">
+                                                        {row[item]}
+                                                    </TableCell>
+                                            )
                                             }
-                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}

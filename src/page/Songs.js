@@ -15,6 +15,17 @@ export const Songs = () => {
         marginTop: '10px'
     }
 
+    // function createData(title, artist, timesPlayed, lastPlayed, tag, action) {
+    //     return [
+    //         { value: title, type: 'text' },
+    //         { value: artist, type: 'text' },
+    //         { value: timesPlayed, type: 'text' },
+    //         { value: lastPlayed, type: 'text' },
+    //         { value: tag, type: 'tag' },
+    //         { value: action, type: 'btn' }
+    //     ]
+    // }
+
     function createData(title, artist, timesPlayed, lastPlayed, tag, action) {
         return {title, artist, timesPlayed, lastPlayed, tag, action}
     }
