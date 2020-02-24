@@ -22,15 +22,20 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-
+/**
+ * Функция обертки массива
+ */
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
 }
 
+/**
+ *  Массив строк
+ */
 const rows = [
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Donut', 452, 25.0, 51, 4.9),
-    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 310, 3.7, 67, 4.3),
+    createData('Donut', 300, 25.0, 51, 4.9),
+    createData('Eclair', 305, 16.0, 24, 6.0),
     createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
     createData('Gingerbread', 356, 16.0, 49, 3.9),
     createData('Honeycomb', 408, 3.2, 87, 6.5),
@@ -43,6 +48,9 @@ const rows = [
     createData('Oreo', 437, 18.0, 63, 4.0),
 ];
 
+/**
+ *  Значок сортировки
+ */
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -60,8 +68,10 @@ function getComparator(order, orderBy) {
 }
 
 function stableSort(array, comparator) {
+
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
+
         const order = comparator(a[0], b[0]);
         if (order !== 0) return order;
         return a[1] - b[1];
@@ -83,6 +93,8 @@ function EnhancedTableHead(props) {
                         indeterminate={numSelected > 0 && numSelected < rowCount}
                         checked={rowCount > 0 && numSelected === rowCount}
                         onChange={onSelectAllClick}
+                        value="secondary"
+                        color="primary"
                         inputProps={{ 'aria-label': 'select all desserts' }}
                     />
                 </TableCell>
@@ -131,7 +143,7 @@ const useToolbarStyles = makeStyles(theme => ({
         theme.palette.type === 'light'
             ? {
                 color: theme.palette.secondary.main,
-                backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+                backgroundColor: lighten(theme.palette.info.light, 0.85),
             }
             : {
                 color: theme.palette.text.primary,
@@ -151,9 +163,10 @@ const EnhancedTableToolbar = props => {
             className={clsx(classes.root, {
                 [classes.highlight]: numSelected > 0,
             })}
+
         >
             {numSelected > 0 ? (
-                <Typography className={classes.title} color="inherit" variant="subtitle1">
+                <Typography className={classes.title} color="primary" variant="subtitle1">
                     {numSelected} selected
                 </Typography>
             ) : (
@@ -215,7 +228,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function EnhancedTable() {
+/**
+ * Общая функция
+ * @returns {*}
+ * @constructor
+ */
+
+export default function ComponentTablePagination() {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
@@ -224,12 +243,18 @@ export default function EnhancedTable() {
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+    /**
+     * Сортировка
+     */
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
         setOrderBy(property);
     };
 
+    /**
+     * Выбрать все
+     */
     const handleSelectAllClick = event => {
         if (event.target.checked) {
             const newSelecteds = rows.map(n => n.name);
@@ -239,6 +264,9 @@ export default function EnhancedTable() {
         setSelected([]);
     };
 
+    /**
+     *  Выбрать элемент
+     */
     const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name);
         let newSelected = [];
@@ -259,21 +287,37 @@ export default function EnhancedTable() {
         setSelected(newSelected);
     };
 
+    /**
+     *  Изменить страницу
+     */
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
 
+    /**
+     *  Изменить количество элементов на странице
+     */
     const handleChangeRowsPerPage = event => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
 
+    /**
+     *  Изменить межстрочное растояние
+     */
     const handleChangeDense = event => {
         setDense(event.target.checked);
     };
 
+    /**
+     *  Проверка текущего выбраного элемента
+     */
     const isSelected = name => selected.indexOf(name) !== -1;
 
+
+    /**
+     *  Проверка на пустую строку
+     */
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (
@@ -312,9 +356,12 @@ export default function EnhancedTable() {
                                             tabIndex={-1}
                                             key={row.name}
                                             selected={isItemSelected}
+
                                         >
                                             <TableCell padding="checkbox">
                                                 <Checkbox
+                                                    value="secondary"
+                                                    color="primary"
                                                     checked={isItemSelected}
                                                     inputProps={{'aria-labelledby': labelId}}
                                                 />
@@ -347,10 +394,10 @@ export default function EnhancedTable() {
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
             </Paper>
-            {/*<FormControlLabel*/}
-            {/*    control={<Switch checked={dense} onChange={handleChangeDense}/>}*/}
-            {/*    label="Dense padding"*/}
-            {/*/>*/}
+            <FormControlLabel
+                control={<Switch checked={dense} onChange={handleChangeDense}/>}
+                label="Dense padding"
+            />
         </div>
     );
 }

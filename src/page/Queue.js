@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import {Card} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
@@ -9,18 +8,9 @@ import BlockIcon from '@material-ui/icons/Block';
 import TablePagination from '../companents/TablePagination/TablePagination'
 
 export const Queue = () => {
-    let pt0 = {
-        padding: 0
-    }
     let mbt10 = {
       marginBottom: '10px',
         marginTop: '10px'
-    }
-    let noneBorderBottom = {
-        borderBottom: 0
-    }
-    let noneBottomMargin = {
-        marginBottom: 0
     }
     return (
         <>

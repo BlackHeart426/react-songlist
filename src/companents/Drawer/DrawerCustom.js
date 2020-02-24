@@ -69,7 +69,7 @@ const menu = [
         icon: <LibraryMusic/>
     },
     {
-        title: 'Saved Queue',
+        title: 'Saved queue',
         link: 'saved-queue',
         icon: <LibraryBooks/>
     },
@@ -82,7 +82,7 @@ const menu = [
 
 const subMenu = [
     {
-        title: 'Bot Commands',
+        title: 'Bot commands',
         link: 'bot-commands',
         icon: <Code/>
     },

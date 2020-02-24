@@ -30,7 +30,7 @@ export const NavBar = () => {
                 <AppBar position="fixed" className={classes.appBar}>
                     <Toolbar>
                         <Typography variant="h6" className={classes.title}>
-                            News
+                            React stream song-list
                         </Typography>
                         <Auth/>
                     </Toolbar>
