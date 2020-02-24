@@ -11,6 +11,7 @@ import {NavBar} from "./companents/NavBar/NavBar";
 import {DrawerCustom} from "./companents/Drawer/DrawerCustom";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import {AlertCustom} from  './companents/Alert/Alert'
 
 const drawerWidth = 240;
 
@@ -63,6 +64,7 @@ export const App = () => {
                         </Switch>
                     </div>
                 </main>
+                {/*<AlertCustom alert={{text: 'Test'}}/>*/}
             </div>
         );
     }

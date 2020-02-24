@@ -21,6 +21,8 @@ import {lighten} from "@material-ui/core";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import Button from "@material-ui/core/Button";
 
 /**
  * Функция обертки массива
@@ -84,6 +86,10 @@ function EnhancedTableHead(props) {
     const createSortHandler = property => event => {
         onRequestSort(event, property);
     };
+    let bold = {
+        fontWeight: 700,
+        fontSize: 16
+    }
 
     return (
         <TableHead>
@@ -98,17 +104,18 @@ function EnhancedTableHead(props) {
                         inputProps={{ 'aria-label': 'select all desserts' }}
                     />
                 </TableCell>
-                {headCells.map(headCell => (
+                {props.data.map(headCell => (
                     <TableCell
                         key={headCell.id}
-                        align={headCell.numeric ? 'right' : 'left'}
+                        align={headCell.numeric ? 'center' : 'center'}
                         padding={headCell.disablePadding ? 'none' : 'default'}
                         sortDirection={orderBy === headCell.id ? order : false}
                     >
-                        <TableSortLabel
+                        {headCell.order ?  <TableSortLabel
                             active={orderBy === headCell.id}
                             direction={orderBy === headCell.id ? order : 'asc'}
                             onClick={createSortHandler(headCell.id)}
+                            style={bold}
                         >
                             {headCell.label}
                             {orderBy === headCell.id ? (
@@ -116,7 +123,12 @@ function EnhancedTableHead(props) {
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </span>
                             ) : null}
-                        </TableSortLabel>
+                        </TableSortLabel> :
+                            <div style={bold}>
+                                {headCell.label}
+                            </div>
+                        }
+
                     </TableCell>
                 ))}
             </TableRow>
@@ -196,13 +208,6 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-    { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-    { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-    { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-    { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
-];
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -234,15 +239,24 @@ const useStyles = makeStyles(theme => ({
  * @constructor
  */
 
-export default function ComponentTablePagination() {
+export default function ComponentTablePagination(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
+    const [editMode, setEditMode] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    // console.log(props.headCells)
 
+    // const headCells = [
+    //     { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
+    //     { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
+    //     { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
+    //     { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+    //     { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+    // ];
     /**
      * Сортировка
      */
@@ -256,8 +270,9 @@ export default function ComponentTablePagination() {
      * Выбрать все
      */
     const handleSelectAllClick = event => {
+        debugger
         if (event.target.checked) {
-            const newSelecteds = rows.map(n => n.name);
+            const newSelecteds = props.rowsData.map(n => n.title);
             setSelected(newSelecteds);
             return;
         }
@@ -309,6 +324,10 @@ export default function ComponentTablePagination() {
         setDense(event.target.checked);
     };
 
+    const handleChangeEditMode = event => {
+        setEditMode(event.target.checked);
+    };
+
     /**
      *  Проверка текущего выбраного элемента
      */
@@ -323,7 +342,7 @@ export default function ComponentTablePagination() {
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <EnhancedTableToolbar numSelected={selected.length}/>
+                {/*<EnhancedTableToolbar numSelected={selected.length}/>*/}
                 <TableContainer>
                     <Table
                         className={classes.table}
@@ -338,23 +357,24 @@ export default function ComponentTablePagination() {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                            rowCount={props.rowsData.length}
+                            data={props.headCells}
                         />
                         <TableBody>
-                            {stableSort(rows, getComparator(order, orderBy))
+                            {stableSort(props.rowsData, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.name);
+                                    const isItemSelected = isSelected(row.title);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={event => handleClick(event, row.name)}
+                                            onClick={event => handleClick(event, row.title)}
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.name}
+                                            key={row.title}
                                             selected={isItemSelected}
 
                                         >
@@ -366,13 +386,35 @@ export default function ComponentTablePagination() {
                                                     inputProps={{'aria-labelledby': labelId}}
                                                 />
                                             </TableCell>
-                                            <TableCell component="th" id={labelId} scope="row" padding="none">
-                                                {row.name}
+                                            <TableCell align="center" component="th" id={labelId} scope="row" padding="none">
+                                                {row.title}
                                             </TableCell>
-                                            <TableCell align="right">{row.calories}</TableCell>
-                                            <TableCell align="right">{row.fat}</TableCell>
-                                            <TableCell align="right">{row.carbs}</TableCell>
-                                            <TableCell align="right">{row.protein}</TableCell>
+
+                                            <TableCell align="center">{row.artist}</TableCell>
+                                            <TableCell align="center">{row.timesPlayed}</TableCell>
+                                            <TableCell align="center">{row.lastPlayed}</TableCell>
+                                            <TableCell align="center">
+                                                {
+                                                    row.tag == 'tag'  ?
+                                                        <MusicNoteIcon/>
+                                                        :
+                                                        <React.Fragment/>
+                                                }
+                                            </TableCell>
+                                            <TableCell align="center">
+                                            {
+                                                row.action == 'btn' && editMode ?
+                                                <Button
+                                                    type="submit"
+                                                    color="primary"
+                                                    variant="outlined"
+                                                >
+                                                    request
+                                                </Button>
+                                                   :
+                                                <React.Fragment/>
+                                            }
+                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -395,8 +437,12 @@ export default function ComponentTablePagination() {
                 />
             </Paper>
             <FormControlLabel
-                control={<Switch checked={dense} onChange={handleChangeDense}/>}
+                control={<Switch color="primary" checked={dense} onChange={handleChangeDense}/>}
                 label="Dense padding"
+            />
+            <FormControlLabel
+                control={<Switch color="primary" checked={editMode} onChange={handleChangeEditMode}/>}
+                label="Edit mode"
             />
         </div>
     );

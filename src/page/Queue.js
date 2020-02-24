@@ -12,6 +12,9 @@ export const Queue = () => {
       marginBottom: '10px',
         marginTop: '10px'
     }
+
+
+
     return (
         <>
             <h1>Queue</h1>

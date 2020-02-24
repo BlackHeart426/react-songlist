@@ -19,6 +19,7 @@ import Collapse from "@material-ui/core/Collapse";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ImageIcon from '@material-ui/icons/Image';
+import Switch from "@material-ui/core/Switch";
 
 
 const drawerWidth = 240;
@@ -58,15 +59,16 @@ function renderLink(props, index) {
 }
 
 const menu = [
-    {
-        title: 'Queue',
-        link: 'queue',
-        icon: <QueueMusic/>
-    },
+
     {
         title: 'Songs',
         link: 'songs',
         icon: <LibraryMusic/>
+    },
+    {
+        title: 'Queue',
+        link: 'queue',
+        icon: <QueueMusic/>
     },
     {
         title: 'Saved queue',
@@ -133,6 +135,10 @@ export const DrawerCustom  = () => {
                     </ListItem>
                 </List>
             </Collapse>
+            <ListItem>
+                <ListItemIcon><Switch color="primary"/></ListItemIcon>
+                <ListItemText>Edit mode</ListItemText>
+            </ListItem>
         </div>
     );
 
