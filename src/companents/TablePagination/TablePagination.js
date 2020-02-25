@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Paper from "@material-ui/core/Paper";
@@ -23,6 +23,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import Button from "@material-ui/core/Button";
+import {EditModeContext} from "../../contex/editMode/editNodeContext";
 
 /**
  * Функция обертки массива
@@ -249,6 +250,7 @@ export default function ComponentTablePagination(props) {
     const [dense, setDense] = React.useState(false);
     const [editMode, setEditMode] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const {statusEditMode} = useContext(EditModeContext)
     // console.log(props.headCells)
 
     // const headCells = [
@@ -359,7 +361,7 @@ export default function ComponentTablePagination(props) {
                             onRequestSort={handleRequestSort}
                             rowCount={props.rowsData.length}
                             data={props.headCells}
-                            editMode = {editMode}
+                            editMode = {statusEditMode}
                         />
                         <TableBody>
                             {stableSort(props.rowsData, getComparator(order, orderBy))
@@ -381,7 +383,7 @@ export default function ComponentTablePagination(props) {
                                             selected={isItemSelected}
 
                                         >
-                                            {editMode ?
+                                            {statusEditMode ?
                                                 <TableCell padding="checkbox">
                                                 <Checkbox
                                                     value="secondary"
@@ -393,14 +395,14 @@ export default function ComponentTablePagination(props) {
                                             : <></>}
 
                                             {/*TODO Переписать с типом элемента*/}
-                                            { Object.keys(row).map(item => (
-                                                <TableCell align="center">
+                                            { Object.keys(row).map((item, indexRow) => (
+                                                <TableCell align="center" key={indexRow}>
                                                     {
                                                         row[item] === 'tag' ?
                                                         <MusicNoteIcon/> : <></>
                                                     }
                                                     {
-                                                        row[item] === 'btn' && editMode  ?
+                                                        row[item] === 'btn' && statusEditMode  ?
                                                         <Button
                                                             type="submit"
                                                             color="primary"

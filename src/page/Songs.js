@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import IconButton from "@material-ui/core/IconButton";
 import {Card} from "@material-ui/core";
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
@@ -8,8 +8,19 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import TablePagination from '../companents/TablePagination/TablePagination'
 import Switch from "@material-ui/core/Switch";
+import {EditModeContext} from "../contex/editMode/editNodeContext";
+
 
 export const Songs = () => {
+
+    const {statusEditMode} = useContext(EditModeContext)
+
+
+
+    // function handlerControl() {
+    //     show('qwe')
+    // }
+
     let mbt10 = {
         marginBottom: '10px',
         marginTop: '10px'
@@ -48,6 +59,7 @@ export const Songs = () => {
     return (
         <div>
             <h1>Songs</h1>
+
             <Card style={mbt10}>
                 <IconButton>
                     <ControlPointIcon/>

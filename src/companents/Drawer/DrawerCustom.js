@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -20,9 +20,13 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ImageIcon from '@material-ui/icons/Image';
 import Switch from "@material-ui/core/Switch";
+import {EditModeContext} from "../../contex/editMode/editNodeContext";
+import {AlertContext} from "../../contex/alert/alertContext";
 
 
 const drawerWidth = 240;
+
+
 
 const useStyles = makeStyles(theme => ({
     drawer: {
@@ -91,12 +95,18 @@ const subMenu = [
 ]
 
 
+
 export const DrawerCustom  = () => {
+    const {toggle, statusEditMode} = useContext(EditModeContext)
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleClick = () => {
         setOpen(!open);
     };
+    function handlerEditMode() {
+        toggle(!statusEditMode)
+        console.log(statusEditMode)
+    }
     const sideList = () => (
         <div
             className={classes.toolbar}
@@ -136,7 +146,7 @@ export const DrawerCustom  = () => {
                 </List>
             </Collapse>
             <ListItem>
-                <ListItemIcon><Switch color="primary"/></ListItemIcon>
+                <ListItemIcon><Switch onChange={handlerEditMode} color="primary"/></ListItemIcon>
                 <ListItemText>Edit mode</ListItemText>
             </ListItem>
         </div>

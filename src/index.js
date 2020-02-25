@@ -8,6 +8,8 @@ import rootReducer from "./store/reducers/rootReducer";
 import {Provider} from 'react-redux'
 import thunk from "redux-thunk";
 import {BrowserRouter} from "react-router-dom";
+import {AlertState} from "./contex/alert/AlertState";
+import {EditModeState} from "./contex/editMode/EditModeState";
 
 const composeEnhancers =
     typeof window === 'object' &&
@@ -23,11 +25,15 @@ const store = createStore(
 
 
 const app = (
-    <BrowserRouter>
-        <Provider store={store}>
-            <App/>
-        </Provider>
-    </BrowserRouter>
+    <EditModeState>
+        <AlertState>
+            <BrowserRouter>
+                <Provider store={store}>
+                    <App/>
+                </Provider>
+            </BrowserRouter>
+        </AlertState>
+    </EditModeState>
 )
 
 ReactDOM.render(app, document.getElementById('root'));

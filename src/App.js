@@ -12,6 +12,7 @@ import {DrawerCustom} from "./companents/Drawer/DrawerCustom";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {AlertCustom} from  './companents/Alert/Alert'
+import {AlertState} from "./contex/alert/AlertState";
 
 const drawerWidth = 240;
 
@@ -43,28 +44,29 @@ export const App = () => {
     const classes = useStyles();
 
         return (
-            <div className={classes.root}>
-                <CssBaseline />
-                <NavBar className={classes.appBar}/>
-                <DrawerCustom
-                    className={classes.drawer}
-                    classes={{
-                    paper: classes.drawerPaper,
-                     }}
-                />
-                <main className={classes.content}>
-                    <div  className={classes.toolbar}>
-                        <Switch>
-                            <Route component={Queue} path="/queue"/>
-                            <Route component={Songs} path="/songs" />
-                            <Route component={SavedQueue} path="/saved-queue" />
-                            <Route component={HistoryQueue} path="/history" />
-                            <Route component={Settings} path="/settings" />
-                            <Route component={About} path="/about" />
-                        </Switch>
-                    </div>
-                </main>
-                {/*<AlertCustom alert={{text: 'Test'}}/>*/}
-            </div>
+
+                <div className={classes.root}>
+                    <CssBaseline />
+                    <NavBar className={classes.appBar}/>
+                    <DrawerCustom
+                        className={classes.drawer}
+                        classes={{
+                        paper: classes.drawerPaper,
+                         }}
+                    />
+                    <main className={classes.content}>
+                        <div  className={classes.toolbar}>
+                            <Switch>
+                                <Route component={Queue} path="/queue"/>
+                                <Route component={Songs} path="/songs" />
+                                <Route component={SavedQueue} path="/saved-queue" />
+                                <Route component={HistoryQueue} path="/history" />
+                                <Route component={Settings} path="/settings" />
+                                <Route component={About} path="/about" />
+                            </Switch>
+                            <AlertCustom text={'Test'}/>
+                        </div>
+                    </main>
+                </div>
         );
     }
