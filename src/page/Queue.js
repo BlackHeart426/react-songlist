@@ -13,7 +13,24 @@ export const Queue = () => {
         marginTop: '10px'
     }
 
+    function createData(position, title, artist, amount, requestBy, note, action) {
+        return {position, title, artist, amount, requestBy, note, action}
+    }
 
+    const headCells = [
+        { id: 'position', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Position', type: 'txt' },
+        { id: 'title', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
+        { id: 'artist', numeric: false, order: true, disablePadding: false, editMode: true, label: 'Artist', type: 'txt' },
+        { id: 'amount', numeric: true, order: true, disablePadding: false, editMode: true, label: 'Amount', type: 'txt' },
+        { id: 'request-by', numeric: false, order: true, disablePadding: false, editMode: true, label: 'Request by', type: 'txt' },
+        { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
+        { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
+    ];
+
+    const rows = [
+        createData(1,'The Kill', '30 Seconds To Mars', 5, 'Black', 'for me', 'btn'),
+        createData(2,'Hello', 'Adele', 10, 'Heart', 'for my friends', 'btn'),
+    ]
 
     return (
         <>
@@ -32,7 +49,7 @@ export const Queue = () => {
                     <BlockIcon/>
                 </IconButton>
             </Card>
-            <TablePagination/>
+            <TablePagination headCells = {headCells} rowsData = {rows}/>
         </>
 
     )
