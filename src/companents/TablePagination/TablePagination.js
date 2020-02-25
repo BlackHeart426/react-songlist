@@ -94,16 +94,17 @@ function EnhancedTableHead(props) {
     return (
         <TableHead>
             <TableRow>
-                <TableCell padding="checkbox">
-                    <Checkbox
-                        indeterminate={numSelected > 0 && numSelected < rowCount}
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        value="secondary"
-                        color="primary"
-                        inputProps={{ 'aria-label': 'select all desserts' }}
-                    />
-                </TableCell>
+                    {props.editMode ?
+                        <TableCell padding="checkbox">
+                            <Checkbox
+                            indeterminate={numSelected > 0 && numSelected < rowCount}
+                            checked={rowCount > 0 && numSelected === rowCount}
+                            onChange={onSelectAllClick}
+                            value="secondary"
+                            color="primary"
+                            inputProps={{ 'aria-label': 'select all desserts' }}
+                            />
+                        </TableCell>: <></>}
                 {props.data.map(headCell => (
                     <TableCell
                         key={headCell.id}
@@ -112,18 +113,18 @@ function EnhancedTableHead(props) {
                         sortDirection={orderBy === headCell.id ? order : false}
                     >
                         {headCell.order ?  <TableSortLabel
-                            active={orderBy === headCell.id}
-                            direction={orderBy === headCell.id ? order : 'asc'}
-                            onClick={createSortHandler(headCell.id)}
-                            style={bold}
-                        >
-                            {headCell.label}
-                            {orderBy === headCell.id ? (
-                                <span className={classes.visuallyHidden}>
+                                active={orderBy === headCell.id}
+                                direction={orderBy === headCell.id ? order : 'asc'}
+                                onClick={createSortHandler(headCell.id)}
+                                style={bold}
+                            >
+                                {headCell.label}
+                                {orderBy === headCell.id ? (
+                                    <span className={classes.visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </span>
-                            ) : null}
-                        </TableSortLabel> :
+                                ) : null}
+                            </TableSortLabel> :
                             <div style={bold}>
                                 {headCell.label}
                             </div>
@@ -358,6 +359,7 @@ export default function ComponentTablePagination(props) {
                             onRequestSort={handleRequestSort}
                             rowCount={props.rowsData.length}
                             data={props.headCells}
+                            editMode = {editMode}
                         />
                         <TableBody>
                             {stableSort(props.rowsData, getComparator(order, orderBy))
@@ -379,37 +381,43 @@ export default function ComponentTablePagination(props) {
                                             selected={isItemSelected}
 
                                         >
-                                            <TableCell padding="checkbox">
+                                            {editMode ?
+                                                <TableCell padding="checkbox">
                                                 <Checkbox
                                                     value="secondary"
                                                     color="primary"
                                                     checked={isItemSelected}
                                                     inputProps={{'aria-labelledby': labelId}}
                                                 />
-                                            </TableCell>
-                                            //TODO переписать
-                                            { Object.keys(row).map(item =>
-                                                row[item] === 'tag'
-                                                    ?
-                                                    <TableCell align="center">
-                                                        <MusicNoteIcon/>
                                                 </TableCell>
-                                                : row[item] === 'btn'
-                                                    ?
-                                                    <TableCell align="center">
+                                            : <></>}
+
+                                            {/*TODO Переписать с типом элемента*/}
+                                            { Object.keys(row).map(item => (
+                                                <TableCell align="center">
+                                                    {
+                                                        row[item] === 'tag' ?
+                                                        <MusicNoteIcon/> : <></>
+                                                    }
+                                                    {
+                                                        row[item] === 'btn' && editMode  ?
                                                         <Button
                                                             type="submit"
                                                             color="primary"
                                                             variant="outlined"
                                                         >
                                                             request
-                                                        </Button>
-                                                    </TableCell>
-                                                    :<TableCell align="center">
-                                                        {row[item]}
-                                                    </TableCell>
-                                            )
-                                            }
+                                                        </Button> : <></>
+                                                    }
+                                                    {
+                                                        row[item] != 'btn' &&  row[item] != 'tag'?
+                                                        <> {row[item]} </> : <></>
+                                                    }
+
+                                                </TableCell>
+                                                )
+                                            )}
+
                                         </TableRow>
                                     );
                                 })}

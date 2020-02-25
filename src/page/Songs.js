@@ -43,6 +43,7 @@ export const Songs = () => {
         createData('The Kill', '30 Seconds To Mars', 1, '1 week age', 'tag', 'btn'),
         createData('Hello', 'Adele', 2, '2 week age', 'tag', 'btn'),
     ]
+    //TODO переписать на массив с типом элемента
 
     return (
         <div>
