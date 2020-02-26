@@ -6,7 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
-import TablePagination from '../companents/TablePagination/TablePagination'
+import TablePagination from '../companents/TablePagination/ComponentTablePagination'
 import Switch from "@material-ui/core/Switch";
 import {EditModeContext} from "../contex/editMode/editNodeContext";
 
@@ -15,7 +15,9 @@ export const Songs = () => {
 
     const {statusEditMode} = useContext(EditModeContext)
 
-
+    const btnAction = [
+        { type:'button', title:'Request', handler: requestHandler },
+    ]
 
     // function handlerControl() {
     //     show('qwe')
@@ -28,14 +30,18 @@ export const Songs = () => {
 
     // function createData(title, artist, timesPlayed, lastPlayed, tag, action) {
     //     return [
-    //         { value: title, type: 'text' },
-    //         { value: artist, type: 'text' },
-    //         { value: timesPlayed, type: 'text' },
-    //         { value: lastPlayed, type: 'text' },
-    //         { value: tag, type: 'tag' },
-    //         { value: action, type: 'btn' }
+    //         { name: 'title', value: title, type: 'text' },
+    //         { name: 'artist', value: artist, type: 'text' },
+    //         { name: 'timesPlayed', value: timesPlayed, type: 'text' },
+    //         { name: 'lastPlayed', value: lastPlayed, type: 'text' },
+    //         { name: 'tag', value: tag, type: 'tag' },
+    //         { name: 'action', value: action, type: 'btn', handler: requestHandler }
     //     ]
     // }
+    function requestHandler() {
+        console.log('request')
+
+    }
 
     function createData(title, artist, timesPlayed, lastPlayed, tag, action) {
         return {title, artist, timesPlayed, lastPlayed, tag, action}

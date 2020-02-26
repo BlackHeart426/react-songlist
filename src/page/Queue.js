@@ -5,13 +5,19 @@ import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import EditIcon from '@material-ui/icons/Edit';
 import PublishIcon from '@material-ui/icons/Publish';
 import BlockIcon from '@material-ui/icons/Block';
-import TablePagination from '../companents/TablePagination/TablePagination'
+import TablePagination from '../companents/TablePagination/ComponentTablePagination'
 
 export const Queue = () => {
     let mbt10 = {
-      marginBottom: '10px',
+        marginBottom: '10px',
         marginTop: '10px'
     }
+
+    const btnAction = [
+        { type:'icon', icon:'Detail' },
+        { type:'icon', icon:'Remove' },
+        { type:'icon', icon:'Success' }
+    ]
 
     function createData(position, title, artist, amount, requestBy, note, action) {
         return {position, title, artist, amount, requestBy, note, action}
@@ -26,6 +32,7 @@ export const Queue = () => {
         { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
         { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
+
 
     const rows = [
         createData(1,'The Kill', '30 Seconds To Mars', 5, 'Black', 'for me', 'btn'),

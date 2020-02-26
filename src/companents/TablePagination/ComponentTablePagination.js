@@ -24,191 +24,9 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import Button from "@material-ui/core/Button";
 import {EditModeContext} from "../../contex/editMode/editNodeContext";
+import {EnhancedTableHead} from "./EnhancedTableHead";
+import {getComparator, stableSort} from "./stableSort";
 
-/**
- * Функция обертки массива
- */
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-/**
- *  Массив строк
- */
-const rows = [
-    createData('Cupcake', 310, 3.7, 67, 4.3),
-    createData('Donut', 300, 25.0, 51, 4.9),
-    createData('Eclair', 305, 16.0, 24, 6.0),
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-    createData('Honeycomb', 408, 3.2, 87, 6.5),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Jelly Bean', 375, 0.0, 94, 0.0),
-    createData('KitKat', 518, 26.0, 65, 7.0),
-    createData('Lollipop', 392, 0.2, 98, 0.0),
-    createData('Marshmallow', 318, 0, 81, 2.0),
-    createData('Nougat', 360, 19.0, 9, 37.0),
-    createData('Oreo', 437, 18.0, 63, 4.0),
-];
-
-/**
- *  Значок сортировки
- */
-function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
-        return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-        return 1;
-    }
-    return 0;
-}
-
-function getComparator(order, orderBy) {
-    return order === 'desc'
-        ? (a, b) => descendingComparator(a, b, orderBy)
-        : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function stableSort(array, comparator) {
-
-    const stabilizedThis = array.map((el, index) => [el, index]);
-    stabilizedThis.sort((a, b) => {
-
-        const order = comparator(a[0], b[0]);
-        if (order !== 0) return order;
-        return a[1] - b[1];
-    });
-    return stabilizedThis.map(el => el[0]);
-}
-
-function EnhancedTableHead(props) {
-    const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
-    const createSortHandler = property => event => {
-        onRequestSort(event, property);
-    };
-    let bold = {
-        fontWeight: 700,
-        fontSize: 16
-    }
-
-    return (
-        <TableHead>
-            <TableRow>
-                    {props.editMode ?
-                        <TableCell padding="checkbox">
-                            <Checkbox
-                            indeterminate={numSelected > 0 && numSelected < rowCount}
-                            checked={rowCount > 0 && numSelected === rowCount}
-                            onChange={onSelectAllClick}
-                            value="secondary"
-                            color="primary"
-                            inputProps={{ 'aria-label': 'select all desserts' }}
-                            />
-                        </TableCell>: <></>}
-                {props.data.map(headCell => (
-                    <TableCell
-                        key={headCell.id}
-                        align={headCell.numeric ? 'center' : 'center'}
-                        padding={headCell.disablePadding ? 'none' : 'default'}
-                        sortDirection={orderBy === headCell.id ? order : false}
-                    >
-                        {headCell.order ?  <TableSortLabel
-                                active={orderBy === headCell.id}
-                                direction={orderBy === headCell.id ? order : 'asc'}
-                                onClick={createSortHandler(headCell.id)}
-                                style={bold}
-                            >
-                                {headCell.label}
-                                {orderBy === headCell.id ? (
-                                    <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
-                                ) : null}
-                            </TableSortLabel> :
-                            <div style={bold}>
-                                {headCell.label}
-                            </div>
-                        }
-
-                    </TableCell>
-                ))}
-            </TableRow>
-        </TableHead>
-    );
-}
-
-EnhancedTableHead.propTypes = {
-    classes: PropTypes.object.isRequired,
-    numSelected: PropTypes.number.isRequired,
-    onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
-    order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-    orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
-};
-
-const useToolbarStyles = makeStyles(theme => ({
-    root: {
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(1),
-    },
-    highlight:
-        theme.palette.type === 'light'
-            ? {
-                color: theme.palette.secondary.main,
-                backgroundColor: lighten(theme.palette.info.light, 0.85),
-            }
-            : {
-                color: theme.palette.text.primary,
-                backgroundColor: theme.palette.secondary.dark,
-            },
-    title: {
-        flex: '1 1 100%',
-    },
-}));
-
-const EnhancedTableToolbar = props => {
-    const classes = useToolbarStyles();
-    const { numSelected } = props;
-
-    return (
-        <Toolbar
-            className={clsx(classes.root, {
-                [classes.highlight]: numSelected > 0,
-            })}
-
-        >
-            {numSelected > 0 ? (
-                <Typography className={classes.title} color="primary" variant="subtitle1">
-                    {numSelected} selected
-                </Typography>
-            ) : (
-                <Typography className={classes.title} variant="h6" id="tableTitle">
-                    Nutrition
-                </Typography>
-            )}
-
-            {numSelected > 0 ? (
-                <Tooltip title="Delete">
-                    <IconButton aria-label="delete">
-                        <DeleteIcon />
-                    </IconButton>
-                </Tooltip>
-            ) : (
-                <Tooltip title="Filter list">
-                    <IconButton aria-label="filter list">
-                        <FilterListIcon />
-                    </IconButton>
-                </Tooltip>
-            )}
-        </Toolbar>
-    );
-};
-
-EnhancedTableToolbar.propTypes = {
-    numSelected: PropTypes.number.isRequired,
-};
 
 
 const useStyles = makeStyles(theme => ({
@@ -235,12 +53,6 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-/**
- * Общая функция
- * @returns {*}
- * @constructor
- */
-
 export default function ComponentTablePagination(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
@@ -251,15 +63,7 @@ export default function ComponentTablePagination(props) {
     const [editMode, setEditMode] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const {statusEditMode} = useContext(EditModeContext)
-    // console.log(props.headCells)
 
-    // const headCells = [
-    //     { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-    //     { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-    //     { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-    //     { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-    //     { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
-    // ];
     /**
      * Сортировка
      */
@@ -339,7 +143,7 @@ export default function ComponentTablePagination(props) {
     /**
      *  Проверка на пустую строку
      */
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.rowsData.length - page * rowsPerPage);
 
     return (
         <div className={classes.root}>
@@ -367,7 +171,6 @@ export default function ComponentTablePagination(props) {
                             {stableSort(props.rowsData, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-
                                     const isItemSelected = isSelected(row.title);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -383,8 +186,8 @@ export default function ComponentTablePagination(props) {
                                             selected={isItemSelected}
 
                                         >
-                                            {statusEditMode ?
-                                                <TableCell padding="checkbox">
+                                            {statusEditMode
+                                            ? <TableCell padding="checkbox">
                                                 <Checkbox
                                                     value="secondary"
                                                     color="primary"
@@ -398,22 +201,36 @@ export default function ComponentTablePagination(props) {
                                             { Object.keys(row).map((item, indexRow) => (
                                                 <TableCell align="center" key={indexRow}>
                                                     {
-                                                        row[item] === 'tag' ?
-                                                        <MusicNoteIcon/> : <></>
+                                                        row[item] == 'tag'
+                                                        ? <MusicNoteIcon/>
+                                                        : <></>
                                                     }
                                                     {
-                                                        row[item] === 'btn' && statusEditMode  ?
-                                                        <Button
+                                                        row[item] == 'btn' && statusEditMode
+                                                        ? <Button
                                                             type="submit"
                                                             color="primary"
                                                             variant="outlined"
                                                         >
                                                             request
-                                                        </Button> : <></>
+                                                        </Button>
+                                                        : <></>
                                                     }
                                                     {
-                                                        row[item] != 'btn' &&  row[item] != 'tag'?
-                                                        <> {row[item]} </> : <></>
+                                                        row[item] != 'btn' &&  row[item] != 'tag'
+                                                        ? <> {row[item]} </>
+                                                        : <></>
+                                                    }
+                                                    {
+                                                        typeof row[item] === 'object'
+                                                        ? <Button
+                                                                type="submit"
+                                                                color="primary"
+                                                                variant="outlined"
+                                                            >
+                                                                row[item].title
+                                                            </Button>
+                                                        : <></>
                                                     }
 
                                                 </TableCell>
@@ -434,7 +251,7 @@ export default function ComponentTablePagination(props) {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={props.rowsData.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
