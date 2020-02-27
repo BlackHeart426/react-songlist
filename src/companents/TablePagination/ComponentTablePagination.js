@@ -12,15 +12,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
-import Toolbar from "@material-ui/core/Toolbar";
-import TableHead from "@material-ui/core/TableHead";
-import {lighten} from "@material-ui/core";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import Button from "@material-ui/core/Button";
 import {EditModeContext} from "../../contex/editMode/editNodeContext";
@@ -239,7 +230,7 @@ export default function ComponentTablePagination(props) {
 
                                         </TableRow>
                                     );
-                                })}
+                            })}
                             {emptyRows > 0 && (
                                 <TableRow style={{height: (dense ? 33 : 53) * emptyRows}}>
                                     <TableCell colSpan={6}/>
