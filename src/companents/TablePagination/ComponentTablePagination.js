@@ -17,6 +17,7 @@ import Button from "@material-ui/core/Button";
 import {EditModeContext} from "../../contex/editMode/editNodeContext";
 import {EnhancedTableHead} from "./EnhancedTableHead";
 import {getComparator, stableSort} from "./stableSort";
+import {componentTags} from "./componentTags";
 
 
 
@@ -44,6 +45,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+
 export default function ComponentTablePagination(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
@@ -55,6 +57,7 @@ export default function ComponentTablePagination(props) {
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const {statusEditMode} = useContext(EditModeContext)
 
+
     /**
      * Сортировка
      */
@@ -63,6 +66,7 @@ export default function ComponentTablePagination(props) {
         setOrder(isAsc ? 'desc' : 'asc');
         setOrderBy(property);
     };
+
 
     /**
      * Выбрать все
@@ -136,6 +140,7 @@ export default function ComponentTablePagination(props) {
      */
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.rowsData.length - page * rowsPerPage);
 
+
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
@@ -190,37 +195,29 @@ export default function ComponentTablePagination(props) {
 
                                             {/*TODO Переписать с типом элемента*/}
                                             { Object.keys(row).map((item, indexRow) => (
+
                                                 <TableCell align="center" key={indexRow}>
+
                                                     {
-                                                        row[item] == 'tag'
-                                                        ? <MusicNoteIcon/>
+                                                        row[item].type == 'tag'
+                                                        ? componentTags[row[item].name]
                                                         : <></>
                                                     }
                                                     {
-                                                        row[item] == 'btn' && statusEditMode
+                                                        row[item].type == 'btn' && statusEditMode
                                                         ? <Button
                                                             type="submit"
                                                             color="primary"
                                                             variant="outlined"
+                                                            onClick={() => row[item].handler(row.title)}
                                                         >
                                                             request
                                                         </Button>
                                                         : <></>
                                                     }
                                                     {
-                                                        row[item] != 'btn' &&  row[item] != 'tag'
+                                                        row[item].type != 'btn' &&  row[item].type != 'tag'
                                                         ? <> {row[item]} </>
-                                                        : <></>
-                                                    }
-                                                    {
-                                                        typeof row[item] === 'object'
-                                                        ? <Button
-                                                                type="submit"
-                                                                color="primary"
-                                                                variant="outlined"
-                                                            >
-                                                                row[item].title
-                                                            </Button>
                                                         : <></>
                                                     }
 

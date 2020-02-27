@@ -28,23 +28,14 @@ export const Songs = () => {
         marginTop: '10px'
     }
 
-    // function createData(title, artist, timesPlayed, lastPlayed, tag, action) {
-    //     return [
-    //         { name: 'title', value: title, type: 'text' },
-    //         { name: 'artist', value: artist, type: 'text' },
-    //         { name: 'timesPlayed', value: timesPlayed, type: 'text' },
-    //         { name: 'lastPlayed', value: lastPlayed, type: 'text' },
-    //         { name: 'tag', value: tag, type: 'tag' },
-    //         { name: 'action', value: action, type: 'btn', handler: requestHandler }
-    //     ]
-    // }
-    function requestHandler() {
-        console.log('request')
+
+    function requestHandler(id) {
+        console.log('request', id)
 
     }
 
-    function createData(title, artist, timesPlayed, lastPlayed, tag, action) {
-        return {title, artist, timesPlayed, lastPlayed, tag, action}
+    function createData(title, artist, timesPlayed, lastPlayed, tags, action) {
+        return {title, artist, timesPlayed, lastPlayed, tags, action}
     }
 
     const headCells = [
@@ -57,9 +48,22 @@ export const Songs = () => {
     ];
 
     const rows = [
-        createData('The Kill', '30 Seconds To Mars', 1, '1 week age', 'tag', 'btn'),
-        createData('Hello', 'Adele', 2, '2 week age', 'tag', 'btn'),
+        createData('The Kill', '30 Seconds To Mars', 1, '1 week age' ),
+        createData('Hello', 'Adele', 2, '2 week age'),
     ]
+
+    const rowsTest = [
+        createData('The Kill', '30 Seconds To Mars', 1, '1 week age',{name: 'Music', handler: () => requestHandler(), type: 'tag'}, { name: 'Request', handler: requestHandler, type: 'btn' } ),
+        createData('Hello', 'Adele', 2, '2 week age',{name: 'Music', handler: () => requestHandler(), type: 'tag'}, { name: 'Request', handler: requestHandler, type: 'btn' }),
+    ]
+
+    const btnRows = [
+        { name: 'Request', handler: requestHandler, type: 'btn' }
+    ]
+
+    function createDataTest(title, artist, timesPlayed, lastPlayed) {
+        return { text: {title: title, artist: artist, timesPlayed: timesPlayed, lastPlayed: lastPlayed}, btn: { name: 'Request', handler: requestHandler, type: 'btn' } }
+    }
     //TODO переписать на массив с типом элемента
 
     return (
@@ -87,7 +91,7 @@ export const Songs = () => {
                     Show inactive
                 </>
             </Card>
-            <TablePagination headCells = {headCells} rowsData = {rows}/>
+            <TablePagination headCells = {headCells} rowsData = {rowsTest} createDataTest = {rowsTest}/>
         </div>
     )
 }
