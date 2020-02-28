@@ -1,25 +1,18 @@
 import React, {useContext} from "react";
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import Checkbox from "@material-ui/core/Checkbox";
 import TablePagination from "@material-ui/core/TablePagination";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import Button from "@material-ui/core/Button";
 import {EditModeContext} from "../../contex/editMode/editNodeContext";
 import {EnhancedTableHead} from "./EnhancedTableHead";
-import {getComparator, stableSort} from "./stableSort";
-import {componentTags} from "./componentTags";
-import EditIcon from "@material-ui/icons/Edit";
-import IconButton from "@material-ui/core/IconButton";
+import {EnhancedTableRows} from "./EnhancedTableRows";
+
 
 
 
@@ -58,8 +51,9 @@ export default function ComponentTablePagination(props) {
     const [editMode, setEditMode] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const {statusEditMode} = useContext(EditModeContext)
+    const {rowsData, headCells} = props
 
-
+    //TODO Рассмотреть возможность переноса всех handler в отдельный файл
     /**
      * Сортировка
      */
@@ -161,83 +155,21 @@ export default function ComponentTablePagination(props) {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={props.rowsData.length}
-                            data={props.headCells}
+                            rowCount={rowsData.length}
+                            data={headCells}
                             editMode = {statusEditMode}
                         />
                         <TableBody>
-
-                            {stableSort(props.rowsData, getComparator(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, index) => {
-                                    const isItemSelected = isSelected(row.title);
-                                    const labelId = `enhanced-table-checkbox-${index}`;
-
-
-                                    return (
-                                        <TableRow
-                                            hover
-                                            onClick={event => handleClick(event, row.title)}
-                                            role="checkbox"
-                                            aria-checked={isItemSelected}
-                                            tabIndex={-1}
-                                            key={row.title}
-                                            selected={isItemSelected}
-
-                                        >
-                                            {statusEditMode
-                                            ? <TableCell padding="checkbox">
-                                                <Checkbox
-                                                    value="secondary"
-                                                    color="primary"
-                                                    checked={isItemSelected}
-                                                    inputProps={{'aria-labelledby': labelId}}
-                                                />
-                                                </TableCell>
-                                            : <></>}
-
-                                            {/*TODO Переписать с типом элемента*/}
-                                            { Object.keys(row).map((item, indexRow) => (
-
-                                                <TableCell align="center" key={indexRow}>
-
-                                                    {
-                                                        row[item].type == 'tag'
-                                                        ? componentTags[row[item].name]
-                                                        : <></>
-                                                    }
-                                                    {
-                                                        row[item].type == 'btn' && statusEditMode
-                                                        ? row[item].data.map((btn, indexBtn) => (
-                                                            btn.type == 'text' ?
-                                                                <Button
-                                                                    type="submit"
-                                                                    color="primary"
-                                                                    variant="outlined"
-                                                                    key={indexBtn}
-                                                                    onClick={() => btn.handler(row.title)}
-                                                                >
-                                                                    {btn.name}
-                                                                </Button>
-                                                            :   <IconButton>
-                                                                    {componentTags[btn.name]}
-                                                                </IconButton>
-                                                            ))
-                                                        : <></>
-                                                    }
-                                                    {
-                                                        row[item].type != 'btn' &&  row[item].type != 'tag'
-                                                        ? <> {row[item]} </>
-                                                        : <></>
-                                                    }
-
-                                                </TableCell>
-                                                )
-                                            )}
-
-                                        </TableRow>
-                                    );
-                            })}
+                            <EnhancedTableRows
+                                order={order}
+                                orderBy={orderBy}
+                                editMode ={statusEditMode}
+                                data={rowsData}
+                                page={page}
+                                rowsPerPage={rowsPerPage}
+                                handleClick={handleClick}
+                                isSelected={isSelected}
+                            />
                             {emptyRows > 0 && (
                                 <TableRow style={{height: (dense ? 33 : 53) * emptyRows}}>
                                     <TableCell colSpan={6}/>
@@ -249,7 +181,7 @@ export default function ComponentTablePagination(props) {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={props.rowsData.length}
+                    count={rowsData.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}

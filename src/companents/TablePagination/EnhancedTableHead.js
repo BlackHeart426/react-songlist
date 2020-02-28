@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 export function EnhancedTableHead(props) {
-    const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+    const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, editMode, data } = props;
     const createSortHandler = property => event => {
         onRequestSort(event, property);
     };
@@ -19,7 +19,7 @@ export function EnhancedTableHead(props) {
     return (
         <TableHead>
             <TableRow>
-                {props.editMode ?
+                {editMode ?
                     <TableCell padding="checkbox">
                         <Checkbox
                             indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -31,7 +31,7 @@ export function EnhancedTableHead(props) {
                         />
                     </TableCell>: <></>
                 }
-                {props.data.map(headCell => (
+                {data.map(headCell => (
                     <TableCell
                         key={headCell.id}
                         align={headCell.numeric ? 'center' : 'center'}
@@ -75,4 +75,6 @@ EnhancedTableHead.propTypes = {
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
     rowCount: PropTypes.number.isRequired,
+    editMode: PropTypes.bool.isRequired,
+    data: PropTypes.array.isRequired
 };
