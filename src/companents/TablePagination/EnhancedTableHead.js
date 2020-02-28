@@ -16,41 +16,6 @@ export function EnhancedTableHead(props) {
         fontSize: 16
     }
 
-    function TableCellData() {
-        return (
-            data.map(headCell => (
-                <TableCell
-                    key={headCell.id}
-                    align={headCell.numeric ? 'center' : 'center'}
-                    padding={headCell.disablePadding ? 'none' : 'default'}
-                    sortDirection={orderBy === headCell.id ? order : false}
-                >
-                    {headCell.order
-                        ?  <TableSortLabel
-                            active={orderBy === headCell.id}
-                            direction={orderBy === headCell.id ? order : 'asc'}
-                            onClick={createSortHandler(headCell.id)}
-                            style={bold}
-                        >
-                            {headCell.label}
-                            {orderBy === headCell.id &&
-                            (
-                                <span className={classes.visuallyHidden}>
-                                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                                        </span>
-                            )
-                            }
-                        </TableSortLabel>
-                        :
-                        <div style={bold}>
-                            {headCell.label}
-                        </div>
-                    }
-
-                </TableCell>
-            ))
-        )
-    }
 
     return (
         <TableHead>
@@ -67,7 +32,37 @@ export function EnhancedTableHead(props) {
                     />
                 </TableCell>
                 }
-                {TableCellData}
+                {data.map(headCell => (
+                    <TableCell
+                        key={headCell.id}
+                        align={headCell.numeric ? 'center' : 'center'}
+                        padding={headCell.disablePadding ? 'none' : 'default'}
+                        sortDirection={orderBy === headCell.id ? order : false}
+                    >
+                        {headCell.order
+                            ?  <TableSortLabel
+                                active={orderBy === headCell.id}
+                                direction={orderBy === headCell.id ? order : 'asc'}
+                                onClick={createSortHandler(headCell.id)}
+                                style={bold}
+                            >
+                                {headCell.label}
+                                {orderBy === headCell.id &&
+                                (
+                                    <span className={classes.visuallyHidden}>
+                                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                        </span>
+                                )
+                                }
+                            </TableSortLabel>
+                            :
+                            <div style={bold}>
+                                {headCell.label}
+                            </div>
+                        }
+
+                    </TableCell>
+                ))}
             </TableRow>
         </TableHead>
     );

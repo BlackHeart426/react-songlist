@@ -92,7 +92,6 @@ export function EnhancedTableRows (props) {
 EnhancedTableRows.propTypes = {
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
-    isSelected: PropTypes.string.isRequired,
     handleClick: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     rowsPerPage: PropTypes.number.isRequired,
