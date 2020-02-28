@@ -47,23 +47,26 @@ export const Songs = () => {
         { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
 
-    const rows = [
-        createData('The Kill', '30 Seconds To Mars', 1, '1 week age' ),
-        createData('Hello', 'Adele', 2, '2 week age'),
-    ]
-
     const rowsTest = [
-        createData('The Kill', '30 Seconds To Mars', 1, '1 week age',{name: 'Music', handler: () => requestHandler(), type: 'tag'}, { name: 'Request', handler: requestHandler, type: 'btn' } ),
-        createData('Hello', 'Adele', 2, '2 week age',{name: 'Music', handler: () => requestHandler(), type: 'tag'}, { name: 'Request', handler: requestHandler, type: 'btn' }),
+        createData(
+            'The Kill',
+            '30 Seconds To Mars',
+            1,
+            '1 week age',
+            { name: 'Music',  type: 'tag' },
+            { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }
+            ),
+        createData(
+            'Hello',
+            'Adele',
+            2,
+            '2 week age',
+            { name: 'Music', type: 'tag' },
+            { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }
+            ),
     ]
 
-    const btnRows = [
-        { name: 'Request', handler: requestHandler, type: 'btn' }
-    ]
 
-    function createDataTest(title, artist, timesPlayed, lastPlayed) {
-        return { text: {title: title, artist: artist, timesPlayed: timesPlayed, lastPlayed: lastPlayed}, btn: { name: 'Request', handler: requestHandler, type: 'btn' } }
-    }
     //TODO переписать на массив с типом элемента
 
     return (
@@ -91,7 +94,7 @@ export const Songs = () => {
                     Show inactive
                 </>
             </Card>
-            <TablePagination headCells = {headCells} rowsData = {rowsTest} createDataTest = {rowsTest}/>
+            <TablePagination headCells = {headCells} rowsData = {rowsTest} />
         </div>
     )
 }

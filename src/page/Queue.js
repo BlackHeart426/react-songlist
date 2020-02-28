@@ -13,15 +13,58 @@ export const Queue = () => {
         marginTop: '10px'
     }
 
-    const btnAction = [
-        { type:'icon', icon:'Detail' },
-        { type:'icon', icon:'Remove' },
-        { type:'icon', icon:'Success' }
-    ]
-
     function createData(position, title, artist, amount, requestBy, note, action) {
         return {position, title, artist, amount, requestBy, note, action}
     }
+
+    function detailHandler(id) {
+        console.log('detail', id)
+    }
+
+    function deleteHandler(id) {
+        console.log('delete', id)
+    }
+
+    function doneHandler(id) {
+        console.log('done', id)
+    }
+
+
+    const rowsTest = [
+        createData(
+            'The Kill',
+            '30 Seconds To Mars',
+            1,
+            '1 week age',
+            'Black',
+            'for me',
+            { type: 'btn', data: [
+                { type: 'icon', name: 'Detail', handler: detailHandler },
+                { type: 'icon', name: 'Delete', handler: deleteHandler },
+                { type: 'icon', name: 'Done', handler: doneHandler },
+                ]
+            }
+        ),
+        createData(
+            'Hello',
+            'Adele',
+            2,
+            '2 week age',
+            'Black',
+            'for me',
+            { type: 'btn', data: [
+                    { type: 'icon', name: 'Detail', handler: detailHandler },
+                    { type: 'icon', name: 'Delete', handler: deleteHandler },
+                    { type: 'icon', name: 'Done', handler: doneHandler },
+                ]
+            }
+        ),
+    ]
+
+    const rows = [
+        createData(1,'The Kill', '30 Seconds To Mars', 5, 'Black', 'for me', 'btn'),
+        createData(2,'Hello', 'Adele', 10, 'Heart', 'for my friends', 'btn'),
+    ]
 
     const headCells = [
         { id: 'position', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Position', type: 'txt' },
@@ -32,12 +75,6 @@ export const Queue = () => {
         { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
         { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
-
-
-    const rows = [
-        createData(1,'The Kill', '30 Seconds To Mars', 5, 'Black', 'for me', 'btn'),
-        createData(2,'Hello', 'Adele', 10, 'Heart', 'for my friends', 'btn'),
-    ]
 
     return (
         <>
@@ -56,7 +93,7 @@ export const Queue = () => {
                     <BlockIcon/>
                 </IconButton>
             </Card>
-            <TablePagination headCells = {headCells} rowsData = {rows}/>
+            <TablePagination headCells = {headCells} rowsData = {rowsTest}/>
         </>
 
     )

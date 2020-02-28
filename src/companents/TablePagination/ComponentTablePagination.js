@@ -18,6 +18,8 @@ import {EditModeContext} from "../../contex/editMode/editNodeContext";
 import {EnhancedTableHead} from "./EnhancedTableHead";
 import {getComparator, stableSort} from "./stableSort";
 import {componentTags} from "./componentTags";
+import EditIcon from "@material-ui/icons/Edit";
+import IconButton from "@material-ui/core/IconButton";
 
 
 
@@ -164,6 +166,7 @@ export default function ComponentTablePagination(props) {
                             editMode = {statusEditMode}
                         />
                         <TableBody>
+
                             {stableSort(props.rowsData, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
@@ -205,14 +208,21 @@ export default function ComponentTablePagination(props) {
                                                     }
                                                     {
                                                         row[item].type == 'btn' && statusEditMode
-                                                        ? <Button
-                                                            type="submit"
-                                                            color="primary"
-                                                            variant="outlined"
-                                                            onClick={() => row[item].handler(row.title)}
-                                                        >
-                                                            request
-                                                        </Button>
+                                                        ? row[item].data.map((btn, indexBtn) => (
+                                                            btn.type == 'text' ?
+                                                                <Button
+                                                                    type="submit"
+                                                                    color="primary"
+                                                                    variant="outlined"
+                                                                    key={indexBtn}
+                                                                    onClick={() => btn.handler(row.title)}
+                                                                >
+                                                                    {btn.name}
+                                                                </Button>
+                                                            :   <IconButton>
+                                                                    {componentTags[btn.name]}
+                                                                </IconButton>
+                                                            ))
                                                         : <></>
                                                     }
                                                     {
