@@ -16,52 +16,58 @@ export function EnhancedTableHead(props) {
         fontSize: 16
     }
 
+    function TableCellData() {
+        return (
+            data.map(headCell => (
+                <TableCell
+                    key={headCell.id}
+                    align={headCell.numeric ? 'center' : 'center'}
+                    padding={headCell.disablePadding ? 'none' : 'default'}
+                    sortDirection={orderBy === headCell.id ? order : false}
+                >
+                    {headCell.order
+                        ?  <TableSortLabel
+                            active={orderBy === headCell.id}
+                            direction={orderBy === headCell.id ? order : 'asc'}
+                            onClick={createSortHandler(headCell.id)}
+                            style={bold}
+                        >
+                            {headCell.label}
+                            {orderBy === headCell.id &&
+                            (
+                                <span className={classes.visuallyHidden}>
+                                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                                        </span>
+                            )
+                            }
+                        </TableSortLabel>
+                        :
+                        <div style={bold}>
+                            {headCell.label}
+                        </div>
+                    }
+
+                </TableCell>
+            ))
+        )
+    }
+
     return (
         <TableHead>
             <TableRow>
-                {editMode ?
-                    <TableCell padding="checkbox">
-                        <Checkbox
-                            indeterminate={numSelected > 0 && numSelected < rowCount}
-                            checked={rowCount > 0 && numSelected === rowCount}
-                            onChange={onSelectAllClick}
-                            value="secondary"
-                            color="primary"
-                            inputProps={{ 'aria-label': 'select all desserts' }}
-                        />
-                    </TableCell>: <></>
+                {editMode &&
+                <TableCell padding="checkbox">
+                    <Checkbox
+                        indeterminate={numSelected > 0 && numSelected < rowCount}
+                        checked={rowCount > 0 && numSelected === rowCount}
+                        onChange={onSelectAllClick}
+                        value="secondary"
+                        color="primary"
+                        inputProps={{ 'aria-label': 'select all desserts' }}
+                    />
+                </TableCell>
                 }
-                {data.map(headCell => (
-                    <TableCell
-                        key={headCell.id}
-                        align={headCell.numeric ? 'center' : 'center'}
-                        padding={headCell.disablePadding ? 'none' : 'default'}
-                        sortDirection={orderBy === headCell.id ? order : false}
-                    >
-                        {headCell.order
-                        ?  <TableSortLabel
-                                active={orderBy === headCell.id}
-                                direction={orderBy === headCell.id ? order : 'asc'}
-                                onClick={createSortHandler(headCell.id)}
-                                style={bold}
-                            >
-                                {headCell.label}
-                                {orderBy === headCell.id
-                                ? (
-                                    <span className={classes.visuallyHidden}>
-                                        {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                                    </span>
-                                )
-                                : null}
-                            </TableSortLabel>
-                        :
-                            <div style={bold}>
-                                {headCell.label}
-                            </div>
-                        }
-
-                    </TableCell>
-                ))}
+                {TableCellData}
             </TableRow>
         </TableHead>
     );
