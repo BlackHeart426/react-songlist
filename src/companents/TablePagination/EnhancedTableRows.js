@@ -31,8 +31,9 @@ export function EnhancedTableRows (props) {
                         selected={isItemSelected}
 
                     >
-                        {editMode
-                            ? <TableCell padding="checkbox">
+                        {
+                            editMode &&
+                             <TableCell padding="checkbox">
                                 <Checkbox
                                     value="secondary"
                                     color="primary"
@@ -40,7 +41,7 @@ export function EnhancedTableRows (props) {
                                     inputProps={{'aria-labelledby': labelId}}
                                 />
                             </TableCell>
-                            : <></>}
+                        }
 
                         {/*TODO Переписать с типом элемента*/}
                         { Object.keys(row).map((item, indexRow) => (
@@ -48,33 +49,33 @@ export function EnhancedTableRows (props) {
                                 <TableCell align="center" key={indexRow}>
 
                                     {
-                                        row[item].type == 'tag'
-                                            ? componentTags[row[item].name]
-                                            : <></>
+                                        row[item].type == 'tag' &&
+                                             componentTags[row[item].name]
+
                                     }
                                     {
-                                        row[item].type == 'btn' && editMode
-                                            ? row[item].data.map((btn, indexBtn) => (
-                                                btn.type == 'text' ?
-                                                    <Button
-                                                        type="submit"
-                                                        color="primary"
-                                                        variant="outlined"
-                                                        key={indexBtn}
-                                                        onClick={() => btn.handler(row.title)}
-                                                    >
-                                                        {btn.name}
-                                                    </Button>
+                                        row[item].type == 'btn' && editMode &&
+                                             row[item].data.map((btn, indexBtn) => (
+                                                btn.type == 'text'
+                                                    ?   <Button
+                                                            type="submit"
+                                                            color="primary"
+                                                            variant="outlined"
+                                                            key={indexBtn}
+                                                            onClick={() => btn.handler(row.title)}
+                                                        >
+                                                            {btn.name}
+                                                        </Button>
                                                     :   <IconButton>
-                                                        {componentTags[btn.name]}
-                                                    </IconButton>
+                                                            {componentTags[btn.name]}
+                                                        </IconButton>
                                             ))
-                                            : <></>
+
                                     }
                                     {
-                                        row[item].type != 'btn' &&  row[item].type != 'tag'
-                                            ? <> {row[item]} </>
-                                            : <></>
+                                        row[item].type != 'btn' &&  row[item].type != 'tag' &&
+                                            <> {row[item]} </>
+
                                     }
 
                                 </TableCell>
