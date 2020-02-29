@@ -1,4 +1,8 @@
-export const SHOW_ALERT = 'SHOW_ALERT'
-export const HIDE_ALERT = 'HIDE_ALERT'
+export const SHOW_ALERT = 'SHOW_ALERT';
+export const HIDE_ALERT = 'HIDE_ALERT';
 
-export const TOGGLE_EDITMODE = 'TOGGLE_EDITMODE'
+export const TOGGLE_EDITMODE = 'TOGGLE_EDITMODE';
+
+export const ADD_ROWS = 'ADD_ROWS';
+
+export const SHOW_DIALOG = 'SHOW_DIALOG';

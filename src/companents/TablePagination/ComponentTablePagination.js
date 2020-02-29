@@ -12,33 +12,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import {EditModeContext} from "../../contex/editMode/editNodeContext";
 import {EnhancedTableHead} from "./EnhancedTableHead";
 import {EnhancedTableRows} from "./EnhancedTableRows";
-
-
-
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-    },
-    paper: {
-        width: '100%',
-        marginBottom: theme.spacing(2),
-    },
-    table: {
-        minWidth: 750,
-    },
-    visuallyHidden: {
-        border: 0,
-        clip: 'rect(0 0 0 0)',
-        height: 1,
-        margin: -1,
-        overflow: 'hidden',
-        padding: 0,
-        position: 'absolute',
-        top: 20,
-        width: 1,
-    },
-}));
+import {useStyles} from "./styles";
+import {SongsContext} from "../../contex/module/songs/songsContext";
 
 
 export default function ComponentTablePagination(props) {
@@ -51,6 +26,7 @@ export default function ComponentTablePagination(props) {
     const [editMode, setEditMode] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const {statusEditMode} = useContext(EditModeContext)
+    const {rowsContext} = useContext(SongsContext)
     const {rowsData, headCells} = props
 
     //TODO Рассмотреть возможность переноса всех handler в отдельный файл
@@ -191,10 +167,6 @@ export default function ComponentTablePagination(props) {
             <FormControlLabel
                 control={<Switch color="primary" checked={dense} onChange={handleChangeDense}/>}
                 label="Dense padding"
-            />
-            <FormControlLabel
-                control={<Switch color="primary" checked={editMode} onChange={handleChangeEditMode}/>}
-                label="Edit mode"
             />
         </div>
     );

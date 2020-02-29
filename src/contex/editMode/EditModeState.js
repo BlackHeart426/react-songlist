@@ -1,6 +1,5 @@
 import React, {useReducer} from "react";
 import {EditModeContext} from "./editNodeContext";
-import {AlertContext} from "../alert/alertContext";
 import {editModeReducer} from "./editModeReducer";
 import {TOGGLE_EDITMODE} from "../types";
 
@@ -13,7 +12,7 @@ export const EditModeState = ({children}) => {
             type: TOGGLE_EDITMODE,
             payload: status
         })
-    )
+    );
 
     return (
         <EditModeContext.Provider value={{
@@ -22,4 +21,4 @@ export const EditModeState = ({children}) => {
             {children}
         </EditModeContext.Provider>
     )
-}
+};

@@ -9,26 +9,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {lighten} from "@material-ui/core";
+import {useToolbarStyles} from "./styles";
 
-const useToolbarStyles = makeStyles(theme => ({
-    root: {
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(1),
-    },
-    highlight:
-        theme.palette.type === 'light'
-            ? {
-                color: theme.palette.secondary.main,
-                backgroundColor: lighten(theme.palette.info.light, 0.85),
-            }
-            : {
-                color: theme.palette.text.primary,
-                backgroundColor: theme.palette.secondary.dark,
-            },
-    title: {
-        flex: '1 1 100%',
-    },
-}));
+
 
 export const EnhancedTableToolbar = props => {
     const classes = useToolbarStyles();

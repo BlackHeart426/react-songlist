@@ -92,6 +92,7 @@ export const Queue = () => {
                 <IconButton>
                     <BlockIcon/>
                 </IconButton>
+
             </Card>
             <TablePagination headCells = {headCells} rowsData = {rowsTest}/>
         </>
