@@ -2,22 +2,22 @@ import React from "react";
 import {SongsContext} from "./songsContext";
 import {useReducer} from "react";
 import {songsReducer} from "./songsReducer";
-import {TOGGLE_EDITMODE} from "../../types";
+import {ADD_ROWS, SET_ROWS} from "../../types";
 
 export const SongsState = ({children}) => {
 
-    const [state, dispatch]  = useReducer(songsReducer, false);
+    const [state, dispatch]  = useReducer(songsReducer, []);
 
-    const toggle = (status) => (
+    const setRows = (state) => (
         dispatch({
-            type: TOGGLE_EDITMODE,
-            payload: status
+            type: SET_ROWS,
+            payload: state
         })
     );
 
     return (
         <SongsContext.Provider value={{
-            rowsContext: state, toggle
+            rowsSongs: state,  setRows
         }}>
             {children}
         </SongsContext.Provider>

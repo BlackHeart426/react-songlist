@@ -13,6 +13,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {AlertCustom} from  './companents/Alert/Alert'
 import {AlertState} from "./contex/alert/AlertState";
+import {SongsState} from "./contex/module/songs/SongsState";
 
 const drawerWidth = 240;
 
@@ -58,7 +59,7 @@ export const App = () => {
                         <div  className={classes.toolbar}>
                             <Switch>
                                 <Route component={Queue} path="/queue"/>
-                                <Route component={Songs} path="/songs" />
+                                <SongsState><Route component={Songs} path="/songs" /></SongsState>
                                 <Route component={SavedQueue} path="/saved-queue" />
                                 <Route component={HistoryQueue} path="/history" />
                                 <Route component={Settings} path="/settings" />

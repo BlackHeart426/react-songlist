@@ -69,7 +69,7 @@ const names = [
 
 export function DialogSongs(props) {
 
-    const {show, onHide} = props
+    const {show, onHide, onAddSongs} = props
 
     const classes = useStyles();
     const theme = useTheme();
@@ -91,9 +91,11 @@ export function DialogSongs(props) {
 
     const handleCreate = () => {
         setDialogOpened(false);
+        onAddSongs()
     };
 
     const handleCreateClose = () => {
+        handleCreate()
         setDialogOpened(false);
     };
 
@@ -164,10 +166,10 @@ export function DialogSongs(props) {
                 <Button onClick={handleClose} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={handleClose} color="primary">
+                <Button onClick={handleCreate} color="primary">
                     Create
                 </Button>
-                <Button onClick={handleClose} color="primary">
+                <Button onClick={handleCreateClose} color="primary">
                     Create and close
                 </Button>
             </DialogActions>

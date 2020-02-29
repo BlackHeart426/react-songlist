@@ -1,15 +1,17 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import TablePagination from '../companents/TablePagination/ComponentTablePagination'
 import {requestHandler} from "../actionPage/Songs/rows";
 import {PTBSongs} from "../companents/PageToolbar/PTBSongs/PTBSongs";
 import {SongsState} from "../contex/module/songs/SongsState";
+import {SongsContext} from "../contex/module/songs/songsContext";
+import {EditModeContext} from "../contex/editMode/editNodeContext";
+
+export function createData(title, artist, timesPlayed, lastPlayed, tags, action, active) {
+    return {title, artist, timesPlayed, lastPlayed, tags, action, active}
+}
 
 export const Songs = () => {
 
-
-    function createData(title, artist, timesPlayed, lastPlayed, tags, action) {
-        return {title, artist, timesPlayed, lastPlayed, tags, action}
-    }
 
     const headCells = [
         { id: 'title', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
@@ -27,26 +29,34 @@ export const Songs = () => {
             1,
             '1 week age',
             { name: 'Music',  type: 'tag' },
-            { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }
-            ),
+            { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
+            false
+        ),
         createData(
             'Hello',
             'Adele',
             2,
             '2 week age',
             { name: 'Music', type: 'tag' },
-            { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }
-            ),
+            { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
+            true
+        ),
     ];
 
-    return (
-        <SongsState>
-            <div>
-                <h1>Songs</h1>
-                <PTBSongs/>
+    const {rowsSongs, setRows} = useContext(SongsContext)
 
-                <TablePagination headCells = {headCells} rowsData = {rowsTest} />
-            </div>
-        </SongsState>
+    useEffect(() => {
+        setRows(rowsTest)
+        localStorage.setItem('rowsSongs', JSON.stringify(rowsTest))
+    },[])
+
+
+
+    return (
+        <div>
+            <h1>Songs</h1>
+            <PTBSongs/>
+            <TablePagination headCells = {headCells} rowsData = {rowsTest} />
+        </div>
     )
 };

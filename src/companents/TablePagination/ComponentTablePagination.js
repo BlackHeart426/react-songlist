@@ -97,10 +97,6 @@ export default function ComponentTablePagination(props) {
         setDense(event.target.checked);
     };
 
-    const handleChangeEditMode = event => {
-        setEditMode(event.target.checked);
-    };
-
     /**
      *  Проверка текущего выбраного элемента
      */
