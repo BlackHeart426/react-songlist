@@ -90,13 +90,13 @@ export function DialogSongs(props) {
     };
 
     const handleCreate = () => {
-        setDialogOpened(false);
+        handleClose();
         onAddSongs()
     };
 
     const handleCreateClose = () => {
-        handleCreate()
-        setDialogOpened(false);
+        handleCreate();
+        handleClose();
     };
 
 

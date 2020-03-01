@@ -15,9 +15,16 @@ export const SongsState = ({children}) => {
         })
     );
 
+    const addRows = (state) => (
+        dispatch({
+            type: ADD_ROWS,
+            payload: state
+        })
+    );
+
     return (
         <SongsContext.Provider value={{
-            rowsSongs: state,  setRows
+              setRows, addRows, rowsSongs: state
         }}>
             {children}
         </SongsContext.Provider>

@@ -8,15 +8,15 @@ import {createData} from "../../../../page/Songs";
 
 export const AddSongs = () => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {rowsSongs, setRows} = useContext(SongsContext)
+    const {rowsSongs, addRows} = useContext(SongsContext)
 
     const openDialog = () => {
         setDialogOpened(true)
     }
 
     const addRowsSong = () => {
-        console.log(rowsSongs)
-        const newSong = [
+        console.log('rowsSongs', rowsSongs)
+        const newSong =
             createData(
                 'The Kill1111111',
                 '30 Seconds To Mars111111111111111',
@@ -25,13 +25,14 @@ export const AddSongs = () => {
                 { name: 'Music',  type: 'tag' },
                 { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] },
                 false
-            ),
-        ]
-        // setRows(prevState => ({
-        //     arrayvar: [...prevState.arrayvar, newSong]
-        // }))
-        setRows(['qwe'])
-        console.log(rowsSongs)
+            )
+
+
+        addRows(newSong)
+        // setRows([])
+        console.log('rowsSongs', rowsSongs)
+        console.log('newSong', newSong)
+
     }
 
     return (

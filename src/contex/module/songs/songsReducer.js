@@ -1,7 +1,8 @@
 import {ADD_ROWS, SET_ROWS} from "../../types";
 
 const handlers = {
-    [SET_ROWS]: (state, action) => action.payload ,
+    [ADD_ROWS]: (state, action) => [...state, action.payload],
+    [SET_ROWS]: (state, action) => action.payload,
     DEFAULT: state => state
 }
 
