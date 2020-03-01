@@ -16,17 +16,17 @@ export const AddSongs = () => {
 
     const addRowsSong = () => {
         console.log('rowsSongs', rowsSongs)
-        const newSong =
-            createData(
+        const newSong = {
+            data: createData(
                 'The Kill1111111',
                 '30 Seconds To Mars111111111111111',
                 11,
                 '11 week age',
                 { name: 'Music',  type: 'tag' },
-                { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] },
-                false
-            )
-
+                { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
+            ),
+            active: true
+        }
 
         addRows(newSong)
         // setRows([])

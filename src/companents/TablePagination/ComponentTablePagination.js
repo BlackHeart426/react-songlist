@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
@@ -18,13 +18,13 @@ import {SongsContext} from "../../contex/module/songs/songsContext";
 
 export default function ComponentTablePagination(props) {
     const classes = useStyles();
-    const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('calories');
-    const [selected, setSelected] = React.useState([]);
-    const [page, setPage] = React.useState(0);
-    const [dense, setDense] = React.useState(false);
-    const [editMode, setEditMode] = React.useState(false);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [order, setOrder] = useState('asc');
+    const [orderBy, setOrderBy] = useState('calories');
+    const [selected, setSelected] = useState([]);
+    const [page, setPage] = useState(0);
+    const [dense, setDense] = useState(false);
+    const [editMode, setEditMode] = useState(false);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
     const {statusEditMode} = useContext(EditModeContext)
     const {rowsContext} = useContext(SongsContext)
     const {rowsData, headCells} = props
@@ -107,12 +107,9 @@ export default function ComponentTablePagination(props) {
      *  Проверка на пустую строку
      */
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.rowsData.length - page * rowsPerPage);
-
-
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                {/*<EnhancedTableToolbar numSelected={selected.length}/>*/}
                 <TableContainer>
                     <Table
                         className={classes.table}
@@ -133,6 +130,7 @@ export default function ComponentTablePagination(props) {
                         />
                         <TableBody>
                             <EnhancedTableRows
+                                classes={classes}
                                 order={order}
                                 orderBy={orderBy}
                                 editMode ={statusEditMode}

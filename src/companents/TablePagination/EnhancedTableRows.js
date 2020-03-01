@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import clsx from 'clsx';
 import {EnhancedTableHead} from "./EnhancedTableHead";
 import {getComparator, stableSort} from "./stableSort";
 import TableRow from "@material-ui/core/TableRow";
@@ -9,8 +10,16 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import React from "react";
 
+const active = {
+    'color': 'rgba(255, 0, 0, 0.87)',
+};
+
+const defaultColor = {
+    'color': 'rgba(0, 0, 0, 0.88)',
+};
+
 export function EnhancedTableRows (props) {
-    const {data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode} = props
+    const {classes, data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode} = props
 
     return (
         stableSort(data, getComparator(order, orderBy))
@@ -18,7 +27,6 @@ export function EnhancedTableRows (props) {
             .map((row, index) => {
                 const isItemSelected = isSelected(row.title);
                 const labelId = `enhanced-table-checkbox-${index}`;
-
 
                 return (
                     <TableRow
@@ -46,7 +54,7 @@ export function EnhancedTableRows (props) {
                         {/*TODO Переписать с типом элемента*/}
                         { Object.keys(row).map((item, indexRow) => (
 
-                                <TableCell align="center" key={indexRow}>
+                                <TableCell align="center" key={indexRow} style={data[index].active == true ? active : defaultColor}>
 
                                     {
                                         row[item].type == 'tag' &&

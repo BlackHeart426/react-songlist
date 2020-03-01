@@ -1,5 +1,8 @@
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {lighten} from "@material-ui/core";
+import {red} from "@material-ui/core/colors";
+//TODO разобрать
+const styledBy = (property, mapping) => props => mapping[props[property]];
 
 export const useStyles = makeStyles(theme => ({
     root: {

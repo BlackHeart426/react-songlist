@@ -6,8 +6,8 @@ import {SongsState} from "../contex/module/songs/SongsState";
 import {SongsContext} from "../contex/module/songs/songsContext";
 import {EditModeContext} from "../contex/editMode/editNodeContext";
 
-export function createData(title, artist, timesPlayed, lastPlayed, tags, action, active) {
-    return {title, artist, timesPlayed, lastPlayed, tags, action, active}
+export function createData(title, artist, timesPlayed, lastPlayed, tags, action) {
+    return {title, artist, timesPlayed, lastPlayed, tags, action}
 }
 
 export const Songs = () => {
@@ -22,41 +22,59 @@ export const Songs = () => {
         { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
 
+    const rows = [
+        createData(
+        'The Kill',
+        '30 Seconds To Mars',
+        1,
+        '1 week age',
+        { name: 'Music',  type: 'tag' },
+        { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }
+        )
+    ]
+
     const rowsTest = [
-        createData(
-            'The Kill',
-            '30 Seconds To Mars',
-            1,
-            '1 week age',
-            { name: 'Music',  type: 'tag' },
-            { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
-            false
-        ),
-        createData(
-            'Hello',
-            'Adele',
-            2,
-            '2 week age',
-            { name: 'Music', type: 'tag' },
-            { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
-            true
-        ),
+        {
+            data: createData(
+                'The Kill',
+                '30 Seconds To Mars',
+                1,
+                '1 week age',
+                { name: 'Music',  type: 'tag' },
+                { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
+            ),
+            active: false
+        },
+        {
+            data: createData(
+                'Hello',
+                'Adele',
+                2,
+                '2 week age',
+                { name: 'Music', type: 'tag' },
+                { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
+            ),
+            active: true
+        },
     ];
 
     const {rowsSongs, setRows} = useContext(SongsContext)
 
     useEffect(() => {
         setRows(rowsTest)
-        localStorage.setItem('rowsSongs', JSON.stringify(rowsTest))
+        localStorage.setItem('rowSongs', JSON.stringify(rowsTest))
     },[])
 
 
+    useEffect(() => {
+        localStorage.setItem('rowSongs', JSON.stringify(rowsSongs))
+    },[rowsSongs])
 
     return (
         <div>
             <h1>Songs</h1>
             <PTBSongs/>
-            <TablePagination headCells = {headCells} rowsData = {rowsTest} />
+            <TablePagination headCells = {headCells} rowsData = {rowsSongs}  rows = {rows} />
         </div>
     )
 };
