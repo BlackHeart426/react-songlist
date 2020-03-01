@@ -45,7 +45,7 @@ export default function ComponentTablePagination(props) {
      */
     const handleSelectAllClick = event => {
         if (event.target.checked) {
-            const newSelecteds = props.rowsData.map(n => n.title);
+            const newSelecteds = rowsData.map(n => n.data.title);
             setSelected(newSelecteds);
             return;
         }

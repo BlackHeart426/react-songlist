@@ -15,6 +15,8 @@ import Dialog from "@material-ui/core/Dialog";
 import React, {useEffect, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import useTheme from "@material-ui/core/styles/useTheme";
+import {createData} from "../../page/Songs";
+import {requestHandler} from "../../actionPage/Songs/rows";
 
 const useStyles = makeStyles(theme => ({
     formControl: {
@@ -68,20 +70,36 @@ const names = [
 ];
 
 export function DialogSongs(props) {
+    const formControl = {
+        title: '',
+        artist: '',
+        active: '',
+        tags: []
+    }
 
     const {show, onHide, onAddSongs} = props
-
     const classes = useStyles();
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
     const [dialogOpened, setDialogOpened] = useState(false);
+    const [newSong, setNewSong] = useState(formControl)
 
     useEffect(() => {
         setDialogOpened(show)
     },[show])
 
-    const handleChange = event => {
+
+    const handleChange = name =>  event => {
+        let statusCopy = Object.assign({}, newSong);
+        statusCopy[name] = event.target.value;
+        setNewSong(statusCopy)
+        console.log('statusCopy', statusCopy)
+    };
+
+    const handleChangeSelect = event => {
+
         setPersonName(event.target.value);
+        handleChange()
     };
 
     const handleClose = () => {
@@ -89,9 +107,9 @@ export function DialogSongs(props) {
         onHide();
     };
 
-    const handleCreate = () => {
+    const handleCreate = property => event => {
         handleClose();
-        onAddSongs()
+        onAddSongs(property)
     };
 
     const handleCreateClose = () => {
@@ -112,6 +130,7 @@ export function DialogSongs(props) {
                             label="Title"
                             type="text"
                             fullWidth
+                            onChange={handleChange('title')}
                         />
                     </FormControl>
                 </div>
@@ -123,13 +142,14 @@ export function DialogSongs(props) {
                             label="Artist"
                             type="text"
                             fullWidth
+                            onChange={handleChange('artist')}
                         />
                     </FormControl>
                 </div>
                 <div>
                     <FormControl className={classes.formControl}>
                         <FormControlLabel
-                            control={<Switch color="primary" checked={true} />}
+                            control={<Switch onChange={handleChange('active')} color="primary" checked={true} />}
                             label="Active"
                         />
                     </FormControl>
@@ -142,7 +162,7 @@ export function DialogSongs(props) {
                             id="demo-mutiple-chip"
                             multiple
                             value={personName}
-                            onChange={handleChange}
+                            onChange={handleChangeSelect}
                             input={<Input id="select-multiple-chip" />}
                             renderValue={selected => (
                                 <div className={classes.chips}>
@@ -166,7 +186,7 @@ export function DialogSongs(props) {
                 <Button onClick={handleClose} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={handleCreate} color="primary">
+                <Button onClick={handleCreate(newSong)} color="primary">
                     Create
                 </Button>
                 <Button onClick={handleCreateClose} color="primary">

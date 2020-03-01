@@ -7,6 +7,7 @@ import {requestHandler} from "../../../../actionPage/Songs/rows";
 import {createData} from "../../../../page/Songs";
 
 export const AddSongs = () => {
+
     const [dialogOpened, setDialogOpened] = useState(false);
     const {rowsSongs, addRows} = useContext(SongsContext)
 
@@ -14,24 +15,22 @@ export const AddSongs = () => {
         setDialogOpened(true)
     }
 
-    const addRowsSong = () => {
-        console.log('rowsSongs', rowsSongs)
-        const newSong = {
-            data: createData(
-                'The Kill1111111',
-                '30 Seconds To Mars111111111111111',
-                11,
-                '11 week age',
-                { name: 'Music',  type: 'tag' },
-                { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
-            ),
-            active: true
-        }
+    const addRowsSong = (property) => {
+        console.log('props', property)
+        // const newSong = {
+        //     data: createData(
+        //         'The Kill1111111',
+        //         '30 Seconds To Mars111111111111111',
+        //         11,
+        //         '11 week age',
+        //         { name: 'Music',  type: 'tag' },
+        //         { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
+        //     ),
+        //     active: true
+        // }
 
-        addRows(newSong)
+        // addRows(newSong)
         // setRows([])
-        console.log('rowsSongs', rowsSongs)
-        console.log('newSong', newSong)
 
     }
 
@@ -40,7 +39,7 @@ export const AddSongs = () => {
             <IconButton onClick={openDialog}>
                 <ControlPointIcon />
             </IconButton>
-            <DialogSongs onAddSongs={ ()=>addRowsSong() } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogSongs onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }
