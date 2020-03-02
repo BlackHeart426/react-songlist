@@ -57,23 +57,14 @@ function getStyles(name, personName, theme) {
 }
 
 const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
+    'Music',
 ];
 
 export function DialogSongs(props) {
     const formControl = {
         title: '',
         artist: '',
-        active: '',
+        active: false,
         tags: []
     }
 
@@ -82,24 +73,35 @@ export function DialogSongs(props) {
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
     const [dialogOpened, setDialogOpened] = useState(false);
+    const [active, setActive] = useState(false);
     const [newSong, setNewSong] = useState(formControl)
 
     useEffect(() => {
         setDialogOpened(show)
     },[show])
 
-
-    const handleChange = name =>  event => {
+    const setProperty = (property, value) => {
         let statusCopy = Object.assign({}, newSong);
-        statusCopy[name] = event.target.value;
+        statusCopy[property] = value;
         setNewSong(statusCopy)
         console.log('statusCopy', statusCopy)
+    }
+
+    const handleChange = name =>  event => {
+        console.log('name', name)
+        setProperty(name, event.target.value)
+
     };
 
     const handleChangeSelect = event => {
-
         setPersonName(event.target.value);
-        handleChange()
+        setProperty('tags', event.target.value)
+    };
+
+    const handleChangeSwitch = event => {
+        console.log('event', event.target.checked)
+        setActive(event.target.checked)
+        setProperty('active', event.target.checked)
     };
 
     const handleClose = () => {
@@ -149,7 +151,7 @@ export function DialogSongs(props) {
                 <div>
                     <FormControl className={classes.formControl}>
                         <FormControlLabel
-                            control={<Switch onChange={handleChange('active')} color="primary" checked={true} />}
+                            control={<Switch  checked={active} onChange={handleChangeSwitch} color="primary" />}
                             label="Active"
                         />
                     </FormControl>

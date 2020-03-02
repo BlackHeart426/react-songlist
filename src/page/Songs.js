@@ -40,7 +40,7 @@ export const Songs = () => {
                 '30 Seconds To Mars',
                 1,
                 '1 week age',
-                { name: 'Music',  type: 'tag' },
+                { type: 'tag', data: [ { name: 'Music' }] },
                 { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
             ),
             active: false
@@ -51,7 +51,7 @@ export const Songs = () => {
                 'Adele',
                 2,
                 '2 week age',
-                { name: 'Music', type: 'tag' },
+                { type: 'tag', data: [ { name: 'Music' }] },
                 { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
             ),
             active: true

@@ -95,6 +95,7 @@ export default function ComponentTablePagination(props) {
      */
     const handleChangeDense = event => {
         setDense(event.target.checked);
+
     };
 
     /**

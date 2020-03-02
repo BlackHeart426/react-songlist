@@ -16,20 +16,21 @@ export const AddSongs = () => {
     }
 
     const addRowsSong = (property) => {
+        const {title, artist, tags, active} = property;
         console.log('props', property)
-        // const newSong = {
-        //     data: createData(
-        //         'The Kill1111111',
-        //         '30 Seconds To Mars111111111111111',
-        //         11,
-        //         '11 week age',
-        //         { name: 'Music',  type: 'tag' },
-        //         { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
-        //     ),
-        //     active: true
-        // }
+        const newSong = {
+            data: createData(
+                title,
+                artist,
+                '',
+                '',
+                { type: 'tag', data: [ { name: 'Music' }] } ,
+                { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
+            ),
+            active: active
+        }
 
-        // addRows(newSong)
+        addRows(newSong)
         // setRows([])
 
     }

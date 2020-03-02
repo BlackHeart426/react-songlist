@@ -58,7 +58,11 @@ export function EnhancedTableRows (props) {
 
                                     {
                                         row[item].type == 'tag' &&
-                                             componentTags[row[item].name]
+                                        row[item].data.map((tag, indexTag) => (
+                                            <div key={indexTag}>
+                                                {componentTags[tag.name]}
+                                            </div>
+                                        ))
 
                                     }
                                     {
