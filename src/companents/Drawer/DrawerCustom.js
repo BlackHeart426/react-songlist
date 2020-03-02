@@ -17,10 +17,19 @@ import {menuDrawerCustom,  subMenuDrawerCustom} from "./menu";
 import {useStylesDrawer} from "./style";
 import {renderLink} from "./render";
 
+const activePage = {
+    HOME: 'home',
+    SONGS: 'songs',
+    QUEUE: 'queue',
+    SAVED_QUEUE: 'savedQueue',
+    BOT_COMMAND: 'botCommand',
+}
+
 export const DrawerCustom  = () => {
     const {toggle, statusEditMode} = useContext(EditModeContext)
     const classes = useStylesDrawer();
     const [open, setOpen] = useState(false);
+    const [activePage, setActivePage] = useState(activePage.HOME);
     const handleClick = () => {
         setOpen(!open);
     };
