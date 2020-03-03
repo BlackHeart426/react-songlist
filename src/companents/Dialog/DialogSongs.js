@@ -84,11 +84,11 @@ export function DialogSongs(props) {
         let statusCopy = Object.assign({}, newSong);
         statusCopy[property] = value;
         setNewSong(statusCopy)
-        console.log('statusCopy', statusCopy)
+
     }
 
     const handleChange = name =>  event => {
-        console.log('name', name)
+
         setProperty(name, event.target.value)
 
     };
@@ -99,7 +99,7 @@ export function DialogSongs(props) {
     };
 
     const handleChangeSwitch = event => {
-        console.log('event', event.target.checked)
+
         setActive(event.target.checked)
         setProperty('active', event.target.checked)
     };
