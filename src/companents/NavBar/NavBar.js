@@ -24,24 +24,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const NavBar = () => {
-    const classes = useStyles();
-         return (
-            <div className={classes.root}>
-                <AppBar position="fixed" className={classes.appBar}>
-                    <Toolbar>
-                        <Typography variant="h6" className={classes.title}>
-                            React stream song-list
-                        </Typography>
-                        <Auth/>
-                    </Toolbar>
-
-
-
-                </AppBar>
-
-            </div>
-
-        )
-
+     const classes = useStyles();
+     return (
+        <div className={classes.root}>
+            <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar>
+                    <Typography variant="h6" className={classes.title}>
+                        React SONG-LIST
+                    </Typography>
+                    <Auth/>
+                </Toolbar>
+            </AppBar>
+        </div>
+    )
 }
 
