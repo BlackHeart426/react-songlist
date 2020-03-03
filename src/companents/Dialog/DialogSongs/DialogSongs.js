@@ -15,46 +15,9 @@ import Dialog from "@material-ui/core/Dialog";
 import React, {useEffect, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import useTheme from "@material-ui/core/styles/useTheme";
-import {createData} from "../../page/Songs";
-import {requestHandler} from "../../actionPage/Songs/rows";
-
-const useStyles = makeStyles(theme => ({
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 350,
-        maxWidth: 350,
-    },
-    chips: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    chip: {
-        margin: 2,
-    },
-    noLabel: {
-        marginTop: theme.spacing(3),
-    },
-}));
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
-
-function getStyles(name, personName, theme) {
-    return {
-        fontWeight:
-            personName.indexOf(name) === -1
-                ? theme.typography.fontWeightRegular
-                : theme.typography.fontWeightMedium,
-    };
-}
+import {createData} from "../../../page/Songs";
+import {requestHandler} from "../../../actionPage/Songs/rows";
+import {getStyles, MenuProps, useStyles} from "./style";
 
 const names = [
     'Music',
@@ -84,13 +47,11 @@ export function DialogSongs(props) {
         let statusCopy = Object.assign({}, newSong);
         statusCopy[property] = value;
         setNewSong(statusCopy)
-        console.log('statusCopy', statusCopy)
+
     }
 
     const handleChange = name =>  event => {
-        console.log('name', name)
         setProperty(name, event.target.value)
-
     };
 
     const handleChangeSelect = event => {
@@ -99,7 +60,7 @@ export function DialogSongs(props) {
     };
 
     const handleChangeSwitch = event => {
-        console.log('event', event.target.checked)
+
         setActive(event.target.checked)
         setProperty('active', event.target.checked)
     };

@@ -6,22 +6,26 @@ export const menuDrawerCustom = [
     {
         title: 'Songs',
         link: 'songs',
-        icon: <LibraryMusic/>
+        icon: <LibraryMusic/>,
+        index: 1
     },
     {
         title: 'Queue',
         link: 'queue',
-        icon: <QueueMusic/>
+        icon: <QueueMusic/>,
+        index: 2
     },
     {
         title: 'Saved queue',
         link: 'saved-queue',
-        icon: <LibraryBooks/>
+        icon: <LibraryBooks/>,
+        index: 3
     },
     {
         title: 'History',
         link: 'history',
-        icon: <History/>
+        icon: <History/>,
+        index: 4
     },
 ]
 
@@ -29,6 +33,7 @@ export const subMenuDrawerCustom = [
     {
         title: 'Bot commands',
         link: 'bot-commands',
-        icon: <Code/>
+        icon: <Code/>,
+        index: 5
     },
 ]

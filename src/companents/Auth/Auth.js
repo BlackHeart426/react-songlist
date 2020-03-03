@@ -37,7 +37,7 @@ class Auth extends Component {
                     type="submit"
                     color="inherit"
                 >
-                    Регистрация
+                    Registration
                 </Button>
                 <Button
                     onClick={this.loginHandler}
@@ -45,14 +45,14 @@ class Auth extends Component {
                     color="inherit"
 
                 >
-                    Вход
+                    Login
                 </Button>
                 <Button
                     onClick={this.logoutHandler}
                     type="submit"
                     color="inherit"
                 >
-                    Выход
+                    Logout
                 </Button>
             </>
         )

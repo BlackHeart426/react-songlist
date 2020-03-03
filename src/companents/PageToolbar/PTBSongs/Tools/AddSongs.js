@@ -1,7 +1,7 @@
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
-import {DialogSongs} from "../../../Dialog/DialogSongs";
+import {DialogSongs} from "../../../Dialog/DialogSongs/DialogSongs";
 import {SongsContext} from "../../../../contex/module/songs/songsContext";
 import {requestHandler} from "../../../../actionPage/Songs/rows";
 import {createData} from "../../../../page/Songs";

@@ -17,26 +17,20 @@ import {menuDrawerCustom,  subMenuDrawerCustom} from "./menu";
 import {useStylesDrawer} from "./style";
 import {renderLink} from "./render";
 
-const activePage = {
-    HOME: 'home',
-    SONGS: 'songs',
-    QUEUE: 'queue',
-    SAVED_QUEUE: 'savedQueue',
-    BOT_COMMAND: 'botCommand',
-}
 
 export const DrawerCustom  = () => {
     const {toggle, statusEditMode} = useContext(EditModeContext)
     const classes = useStylesDrawer();
     const [open, setOpen] = useState(false);
-    const [activePage, setActivePage] = useState(activePage.HOME);
+
     const handleClick = () => {
         setOpen(!open);
     };
     function handlerEditMode() {
         toggle(!statusEditMode)
-        console.log(statusEditMode)
+       // console.log(statusEditMode)
     }
+
     const sideList = () => (
         <div
             className={classes.toolbar}
@@ -51,14 +45,14 @@ export const DrawerCustom  = () => {
                 <ListItemText primary="Black__Heart" secondary="Streamer" />
             </ListItem>
             <List>
-                {menuDrawerCustom.map((link, index) => (
-                   renderLink(link, index)
+                {menuDrawerCustom.map((link) => (
+                   renderLink(link)
                 ))}
             </List>
             <Divider />
             <List>
-                {subMenuDrawerCustom.map((link, index) => (
-                    renderLink(link, index)
+                {subMenuDrawerCustom.map((link) => (
+                    renderLink(link)
                 ))}
             </List>
             <ListItem button onClick={handleClick} >
