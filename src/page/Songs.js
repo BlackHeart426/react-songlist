@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import TablePagination from '../companents/TablePagination/ComponentTablePagination'
 import {requestHandler} from "../actionPage/Songs/rows";
 import {PTBSongs} from "../companents/PageToolbar/PTBSongs/PTBSongs";
@@ -59,6 +59,7 @@ export const Songs = () => {
     ];
 
     const {rowsSongs, setRows} = useContext(SongsContext)
+    const {active, setActive} = useState(false)
 
     useEffect(() => {
         setRows(rowsTest)
@@ -70,11 +71,17 @@ export const Songs = () => {
         localStorage.setItem('rowSongs', JSON.stringify(rowsSongs))
     },[rowsSongs])
 
+    function handlerActive() {
+        console.log(active)
+        //setActive(!active)
+        console.log(active)
+    }
+
     return (
         <div>
             <h1>Songs</h1>
-            <PTBSongs/>
-            <TablePagination headCells = {headCells} rowsData = {rowsSongs}  rows = {rows} />
+            <PTBSongs showActive={active} onActive = {handlerActive}/>
+            <TablePagination headCells = {headCells} rowsData = {rowsSongs} rows = {rows} showActive={active}/>
         </div>
     )
 };

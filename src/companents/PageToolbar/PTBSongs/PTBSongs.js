@@ -13,8 +13,8 @@ let mbt10 = {
     marginTop: '10px'
 }
 
-export const PTBSongs = () => {
-
+export const PTBSongs = (props) => {
+    const {showActive, onActive} = props
 
     return (
         <>
@@ -24,7 +24,7 @@ export const PTBSongs = () => {
                 <RemoveSongs/>
                 <DetailSongs/>
                 <AddInQueueSongs/>
-                <SwitchActiveSongs/>
+                <SwitchActiveSongs showActive={showActive} onActive = {onActive}/>
             </Card>
 
         </>

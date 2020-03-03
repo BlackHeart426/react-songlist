@@ -19,7 +19,7 @@ const defaultColor = {
 };
 
 export function EnhancedTableRows (props) {
-    const {classes, data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode} = props
+    const { data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode, showActive } = props
 
     return (
         stableSort(data, getComparator(order, orderBy))
@@ -29,6 +29,7 @@ export function EnhancedTableRows (props) {
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
+                    data[index].active != showActive &&
                     <TableRow
                         hover
                         onClick={event => handleClick(event, row.title)}
@@ -39,8 +40,7 @@ export function EnhancedTableRows (props) {
                         selected={isItemSelected}
 
                     >
-                        {
-                            editMode &&
+                        {editMode &&
                              <TableCell padding="checkbox">
                                 <Checkbox
                                     value="secondary"

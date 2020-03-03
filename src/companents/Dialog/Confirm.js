@@ -31,15 +31,15 @@ export default function Confirm(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{data.title}</DialogTitle>
+            <DialogTitle id="alert-dialog-title"><strong>{data.title}</strong></DialogTitle>
             <DialogContent>
                     {data.content}
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="primary">
+                <Button variant="outlined" onClick={handleClose} color="primary">
                     Disagree
                 </Button>
-                <Button onClick={handlerAccept} color="secondary" autoFocus>
+                <Button variant="outlined" onClick={handlerAccept} color="secondary" autoFocus>
                     Agree
                 </Button>
             </DialogActions>

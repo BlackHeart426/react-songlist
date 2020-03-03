@@ -27,7 +27,7 @@ export default function ComponentTablePagination(props) {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const {statusEditMode} = useContext(EditModeContext)
     const {rowsContext} = useContext(SongsContext)
-    const {rowsData, headCells} = props
+    const {rowsData, headCells, showActive} = props
 
     //TODO Рассмотреть возможность переноса всех handler в отдельный файл
     /**
@@ -140,6 +140,7 @@ export default function ComponentTablePagination(props) {
                                 rowsPerPage={rowsPerPage}
                                 handleClick={handleClick}
                                 isSelected={isSelected}
+                                showActive={showActive}
                             />
                             {emptyRows > 0 && (
                                 <TableRow style={{height: (dense ? 33 : 53) * emptyRows}}>
