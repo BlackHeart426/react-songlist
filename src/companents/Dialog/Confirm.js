@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function Confirm(props) {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
-    const {show, onHide} = props
+    const {show, onHide, onAccept, data} = props
 
     useEffect(() => {
         setConfirmOpened(show)
@@ -19,6 +19,11 @@ export default function Confirm(props) {
         onHide()
     };
 
+    const handlerAccept = () => {
+        handleClose()
+        onAccept(true)
+    }
+
     return (
         <Dialog
             open={confirmOpened}
@@ -26,18 +31,15 @@ export default function Confirm(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{"Are you sure you want to delete these song?"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{data.title}</DialogTitle>
             <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    Title:
-                    Artist:
-                </DialogContentText>
+                    {data.content}
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">
                     Disagree
                 </Button>
-                <Button onClick={handleClose} color="secondary" autoFocus>
+                <Button onClick={handlerAccept} color="secondary" autoFocus>
                     Agree
                 </Button>
             </DialogActions>
