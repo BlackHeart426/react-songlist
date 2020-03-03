@@ -10,30 +10,31 @@ let paramTest = {
 }
 
 export const RemoveSongs = () => {
-    const {rowsSongs, addRows} = useContext(SongsContext)
+    const {rowsSongs, removeSong} = useContext(SongsContext)
     const [confirmOpened, setConfirmOpened] = React.useState(false);
     const dataToConfirm = {
         title: 'Are you sure you want to delete these song?',
         content: <div><p>Title: <strong>{paramTest.title}</strong></p><p>Artist: <strong>{paramTest.artist}</strong></p></div>
     }
 
-    const openConfirm = () => {
+    const handlerOpenConfirm = () => {
         setConfirmOpened(true)
     }
 
-    const removeSong = (props) => {
+    const handlerRemoveSong = (props) => {
+        removeSong()
         console.log(props)
     }
 
     return (
         <>
-            <IconButton onClick={openConfirm}>
+            <IconButton onClick={handlerOpenConfirm}>
                 <DeleteIcon />
             </IconButton>
             <Confirm
                 show = { confirmOpened }
                 onHide = { () => setConfirmOpened(false) }
-                onAccept = { removeSong }
+                onAccept = { handlerRemoveSong }
                 data = { dataToConfirm }
             />
         </>

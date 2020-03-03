@@ -5,3 +5,4 @@ export const TOGGLE_EDITMODE = 'TOGGLE_EDITMODE';
 
 export const SET_ROWS = 'SET_ROWS';
 export const ADD_ROWS = 'ADD_ROWS';
+export const REMOVE_ROWS = 'ADD_ROWS';
