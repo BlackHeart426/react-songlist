@@ -10,7 +10,13 @@ let paramTest = {
 }
 
 export const RemoveSongs = () => {
-    const {rowsSongs, removeSong} = useContext(SongsContext)
+    const testForm = {
+        data: [],
+        active: false,
+        selected: null
+    }
+    const [test, setTest] = useState(testForm);
+    // const {rowsSongs, removeSong} = useContext(SongsContext)
     const [confirmOpened, setConfirmOpened] = React.useState(false);
     const dataToConfirm = {
         title: 'Are you sure you want to delete these song?',
@@ -19,10 +25,17 @@ export const RemoveSongs = () => {
 
     const handlerOpenConfirm = () => {
         setConfirmOpened(true)
+        const newTestForm = {
+            data: ['asd'],
+            active: true,
+            selected: 1
+        }
+        setTest(newTestForm)
+        console.log(test)
     }
 
     const handlerRemoveSong = (props) => {
-        removeSong()
+        // removeSong()
         console.log(props)
     }
 

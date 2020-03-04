@@ -107,7 +107,7 @@ export default function ComponentTablePagination(props) {
     /**
      *  Проверка на пустую строку
      */
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.rowsData.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rowsData.length - page * rowsPerPage);
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
@@ -125,7 +125,7 @@ export default function ComponentTablePagination(props) {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rowsData.length}
+                            rowCount={rowsData.list.length}
                             data={headCells}
                             editMode = {statusEditMode}
                         />
@@ -135,7 +135,7 @@ export default function ComponentTablePagination(props) {
                                 order={order}
                                 orderBy={orderBy}
                                 editMode ={statusEditMode}
-                                data={rowsData}
+                                data={rowsData.list}
                                 page={page}
                                 rowsPerPage={rowsPerPage}
                                 handleClick={handleClick}
@@ -153,7 +153,7 @@ export default function ComponentTablePagination(props) {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={rowsData.length}
+                    count={rowsData.list.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}

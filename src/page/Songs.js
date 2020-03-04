@@ -33,7 +33,7 @@ export const Songs = () => {
         )
     ]
 
-    const rowsTest = [
+    const songList = [
         {
             data: createData(
                 'The Kill',
@@ -57,19 +57,26 @@ export const Songs = () => {
             active: true
         },
     ];
+    //
+    // const songData = {
+    //     list: songList,
+    //     selected: [],
+    //     active: false
+    // }
 
-    const {rowsSongs, setRows} = useContext(SongsContext)
+    const {songData, setSongData} = useContext(SongsContext)
     const {active, setActive} = useState(false)
 
     useEffect(() => {
-        setRows(rowsTest)
-        localStorage.setItem('rowSongs', JSON.stringify(rowsTest))
+        console.log('songData', songList)
+        setSongData(songList)
+        localStorage.setItem('rowSongs', JSON.stringify(songList))
     },[])
 
 
     useEffect(() => {
-        localStorage.setItem('rowSongs', JSON.stringify(rowsSongs))
-    },[rowsSongs])
+        localStorage.setItem('rowSongs', JSON.stringify(songData))
+    },[songData])
 
     function handlerActive() {
         console.log(active)
@@ -81,7 +88,7 @@ export const Songs = () => {
         <div>
             <h1>Songs</h1>
             <PTBSongs showActive={active} onActive = {handlerActive}/>
-            <TablePagination headCells = {headCells} rowsData = {rowsSongs} rows = {rows} showActive={active}/>
+            <TablePagination headCells = {headCells} rowsData = {songData} rows = {rows} showActive={active}/>
         </div>
     )
 };

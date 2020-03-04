@@ -5,11 +5,13 @@ import Switch from "@material-ui/core/Switch";
 export const SwitchActiveSongs = (props) => {
     const {showActive, onActive} = props
     const [active, setActived] = useState(false);
+    const {songData, toggleActive} = useContext(SongsContext)
 
     const handlerActive = event => {
-        console.log(event.target.checked)
         setActived(event.target.checked)
-        onActive(event.target.checked)
+        // onActive(event.target.checked)
+        console.log(songData.active)
+        toggleActive(!songData.active)
     };
 
     return (
