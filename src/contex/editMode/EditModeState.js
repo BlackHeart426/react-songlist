@@ -5,7 +5,7 @@ import {TOGGLE_EDITMODE} from "../types";
 
 export const EditModeState = ({children}) => {
 
-    const [state, dispatch] = useReducer(editModeReducer, false)
+    const [state, dispatch] = useReducer(editModeReducer, true)
 
     const toggle = (status) => (
         dispatch({

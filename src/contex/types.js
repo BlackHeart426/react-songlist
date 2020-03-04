@@ -6,4 +6,5 @@ export const TOGGLE_ACTIVE = 'TOGGLE_ACTIVE';
 
 export const SET_SONGDATA = 'SET_ROWS';
 export const ADD_SONG = 'ADD_ROWS';
+export const SET_SELECTED = 'SET_SELECTED';
 export const REMOVE_ROWS = 'ADD_ROWS';

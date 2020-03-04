@@ -5,6 +5,7 @@ import {DialogSongs} from "../../../Dialog/DialogSongs/DialogSongs";
 import {SongsContext} from "../../../../contex/module/songs/songsContext";
 import {requestHandler} from "../../../../actionPage/Songs/rows";
 import {createData} from "../../../../page/Songs";
+import * as shortid from "shortid";
 
 export const AddSongs = () => {
 
@@ -19,6 +20,7 @@ export const AddSongs = () => {
         const {title, artist, tags, active} = property;
 
         const newSong = {
+            id: shortid.generate(),
             data: createData(
                 title,
                 artist,

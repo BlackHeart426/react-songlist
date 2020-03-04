@@ -20,12 +20,12 @@ export default function ComponentTablePagination(props) {
     const classes = useStyles();
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
-    const [selected, setSelected] = useState([]);
+    // const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const {statusEditMode} = useContext(EditModeContext)
-    const {songData} = useContext(SongsContext)
+    const {songData, setSelected} = useContext(SongsContext)
     const {rowsData, headCells, showActive} = props
 
     //TODO Рассмотреть возможность переноса всех handler в отдельный файл
@@ -43,7 +43,7 @@ export default function ComponentTablePagination(props) {
      */
     const handleSelectAllClick = event => {
         if (event.target.checked) {
-            const newSelecteds = rowsData.list.map(n => n.data.title);
+            const newSelecteds = rowsData.list.map(n => n.id);
             setSelected(newSelecteds);
             return;
         }
@@ -54,23 +54,26 @@ export default function ComponentTablePagination(props) {
      *  Выбрать элемент
      */
     const handleClick = (event, name) => {
-        const selectedIndex = selected.indexOf(name);
+        console.log(name)
+        console.log(songData.selected)
+        const selectedIndex = songData.selected.indexOf(name);
         let newSelected = [];
 
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, name);
+            newSelected = newSelected.concat(songData.selected, name);
         } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
+            newSelected = newSelected.concat(songData.selected.slice(1));
+        } else if (selectedIndex === songData.selected.length - 1) {
+            newSelected = newSelected.concat(songData.selected.slice(0, -1));
         } else if (selectedIndex > 0) {
             newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1),
+                songData.selected.slice(0, selectedIndex),
+                songData.selected.slice(selectedIndex + 1),
             );
         }
 
         setSelected(newSelected);
+        console.log(newSelected)
     };
 
     /**
@@ -99,7 +102,7 @@ export default function ComponentTablePagination(props) {
     /**
      *  Проверка текущего выбраного элемента
      */
-    const isSelected = name => selected.indexOf(name) !== -1;
+    const isSelected = name => songData.selected.indexOf(name) !== -1;
 
     /**
      *  Проверка на пустую строку
@@ -117,7 +120,7 @@ export default function ComponentTablePagination(props) {
                     >
                         <EnhancedTableHead
                             classes={classes}
-                            numSelected={selected.length}
+                            numSelected={songData.selected.length}
                             order={order}
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}

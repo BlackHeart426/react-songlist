@@ -25,18 +25,18 @@ export function EnhancedTableRows (props) {
         stableSort(data, getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row, index) => {
-                const isItemSelected = isSelected(row.title);
+                const isItemSelected = isSelected(data[index].id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                     data[index].active == showActive == false &&
                     <TableRow
                         hover
-                        onClick={event => handleClick(event, row.title)}
+                        onClick={event => handleClick(event, data[index].id)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={row.title}
+                        key={ data[index].id }
                         selected={isItemSelected}
 
                     >
@@ -74,7 +74,7 @@ export function EnhancedTableRows (props) {
                                                             color="primary"
                                                             variant="outlined"
                                                             key={indexBtn}
-                                                            onClick={() => btn.handler(row.title)}
+                                                            onClick={() => btn.handler(data[index].id)}
                                                         >
                                                             {btn.name}
                                                         </Button>

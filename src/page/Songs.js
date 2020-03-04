@@ -5,6 +5,7 @@ import {PTBSongs} from "../companents/PageToolbar/PTBSongs/PTBSongs";
 import {SongsState} from "../contex/module/songs/SongsState";
 import {SongsContext} from "../contex/module/songs/songsContext";
 import {EditModeContext} from "../contex/editMode/editNodeContext";
+import * as shortid from "shortid";
 
 export function createData(title, artist, timesPlayed, lastPlayed, tags, action) {
     return {title, artist, timesPlayed, lastPlayed, tags, action}
@@ -35,6 +36,7 @@ export const Songs = () => {
 
     const songList = [
         {
+            id: shortid.generate(),
             data: createData(
                 'The Kill',
                 '30 Seconds To Mars',
@@ -46,6 +48,7 @@ export const Songs = () => {
             active: false
         },
         {
+            id: shortid.generate(),
             data: createData(
                 'Hello',
                 'Adele',

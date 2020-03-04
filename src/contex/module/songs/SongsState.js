@@ -2,7 +2,7 @@ import React from "react";
 import {SongsContext} from "./songsContext";
 import {useReducer} from "react";
 import {songsReducer} from "./songsReducer";
-import {ADD_SONG, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
+import {ADD_SONG, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
 
 export const SongsState = ({children}) => {
     const initialState = {
@@ -27,6 +27,13 @@ export const SongsState = ({children}) => {
         })
     );
 
+    const setSelected = (state) => (
+        dispatch({
+            type: SET_SELECTED,
+            newSelect: state
+        })
+    );
+
     const toggleActive = (state) => (
         dispatch({
             type: TOGGLE_ACTIVE,
@@ -43,7 +50,7 @@ export const SongsState = ({children}) => {
 
     return (
         <SongsContext.Provider value={{
-            setSongData, addSong, songData: state, toggleActive
+            setSongData, addSong, songData: state, toggleActive, setSelected
         }}>
             {children}
         </SongsContext.Provider>
