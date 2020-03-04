@@ -23,10 +23,9 @@ export default function ComponentTablePagination(props) {
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
-    const [editMode, setEditMode] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const {statusEditMode} = useContext(EditModeContext)
-    const {rowsContext} = useContext(SongsContext)
+    const {songData} = useContext(SongsContext)
     const {rowsData, headCells, showActive} = props
 
     //TODO Рассмотреть возможность переноса всех handler в отдельный файл
@@ -39,13 +38,12 @@ export default function ComponentTablePagination(props) {
         setOrderBy(property);
     };
 
-
     /**
      * Выбрать все
      */
     const handleSelectAllClick = event => {
         if (event.target.checked) {
-            const newSelecteds = rowsData.map(n => n.data.title);
+            const newSelecteds = rowsData.list.map(n => n.data.title);
             setSelected(newSelecteds);
             return;
         }
@@ -103,7 +101,6 @@ export default function ComponentTablePagination(props) {
      */
     const isSelected = name => selected.indexOf(name) !== -1;
 
-
     /**
      *  Проверка на пустую строку
      */
@@ -140,7 +137,7 @@ export default function ComponentTablePagination(props) {
                                 rowsPerPage={rowsPerPage}
                                 handleClick={handleClick}
                                 isSelected={isSelected}
-                                showActive={showActive}
+                                showActive={songData.active}
                             />
                             {emptyRows > 0 && (
                                 <TableRow style={{height: (dense ? 33 : 53) * emptyRows}}>
