@@ -2,7 +2,7 @@ import React from "react";
 import {SongsContext} from "./songsContext";
 import {useReducer} from "react";
 import {songsReducer} from "./songsReducer";
-import {ADD_ROWS, SET_ROWS, TOGGLE_ACTIVE} from "../../types";
+import {ADD_SONG, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
 
 export const SongsState = ({children}) => {
     const initialState = {
@@ -15,14 +15,14 @@ export const SongsState = ({children}) => {
 
     const setSongData = (state) => (
         dispatch({
-            type: SET_ROWS,
+            type: SET_SONGDATA,
             list: state
         })
     );
 
     const addRows = (state) => (
         dispatch({
-            type: ADD_ROWS,
+            type: ADD_SONG,
             newSong: state
         })
     );

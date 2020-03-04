@@ -1,4 +1,4 @@
-import {ADD_ROWS, REMOVE_ROWS, SET_ROWS, TOGGLE_ACTIVE} from "../../types";
+import {ADD_SONG, REMOVE_ROWS, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
 
 // const handlers = {
 //     [SET_ROWS]: (state, action) =>  action.payload,
@@ -11,11 +11,11 @@ export const songsReducer = (state, action) => {
     // const handler = handlers[action.type]  || handlers.DEFAULT
     // return handler(state, action)
     switch (action.type) {
-        case SET_ROWS:
+        case SET_SONGDATA:
             return {...state, list: action.list}
         case TOGGLE_ACTIVE:
             return {...state, active: action.active}
-        case ADD_ROWS:
+        case ADD_SONG:
             return {
                 state: {...state, list: action.list}
             };
