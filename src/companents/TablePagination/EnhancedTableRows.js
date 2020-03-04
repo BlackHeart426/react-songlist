@@ -29,7 +29,7 @@ export function EnhancedTableRows (props) {
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
-                    data[index].active == showActive == false &&
+                    ( (showActive) || (data[index].active) )&&
                     <TableRow
                         hover
                         onClick={event => handleClick(event, data[index].id)}
