@@ -72,6 +72,7 @@ export function DialogSongs(props) {
 
     const handleCreate = property => event => {
         handleClose();
+        console.log(property)
         onAddSongs(property)
     };
 

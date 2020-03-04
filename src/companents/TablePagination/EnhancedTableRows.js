@@ -11,11 +11,11 @@ import IconButton from "@material-ui/core/IconButton";
 import React from "react";
 
 const active = {
-    'color': 'rgba(255, 0, 0, 0.87)',
+    'color': 'rgba(0, 0, 0, 0.88)',
 };
 
 const defaultColor = {
-    'color': 'rgba(0, 0, 0, 0.88)',
+    'color': 'rgba(255, 0, 0, 0.87)',
 };
 
 export function EnhancedTableRows (props) {
@@ -29,7 +29,7 @@ export function EnhancedTableRows (props) {
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
-                    data[index].active != showActive == false &&
+                    data[index].active == showActive == false &&
                     <TableRow
                         hover
                         onClick={event => handleClick(event, row.title)}
