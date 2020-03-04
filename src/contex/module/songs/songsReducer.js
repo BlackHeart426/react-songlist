@@ -12,16 +12,14 @@ export const songsReducer = (state, action) => {
     // return handler(state, action)
     switch (action.type) {
         case SET_SONGDATA:
-            return {...state, list: action.list}
+            return { ...state, list: action.list }
         case TOGGLE_ACTIVE:
-            return {...state, active: action.active}
+            return { ...state, active: action.active }
         case ADD_SONG:
-            return {
-                state: {...state, list: action.list}
-            };
+            return { ...state, list: [...state.list, action.newSong] };
         default:
             return {
-                state: state
+               state
             }
     }
 }

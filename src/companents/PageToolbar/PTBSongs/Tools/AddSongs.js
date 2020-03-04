@@ -9,7 +9,7 @@ import {createData} from "../../../../page/Songs";
 export const AddSongs = () => {
 
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {songData, addRows} = useContext(SongsContext)
+    const {songData, addSong} = useContext(SongsContext)
 
     const openDialog = () => {
         setDialogOpened(true)
@@ -29,10 +29,10 @@ export const AddSongs = () => {
             ),
             active: active
         }
-        console.log('songData', songData)
+        console.log('newSong', newSong)
         const {list} = songData
         console.log('list', [...list, newSong])
-        // addRows(newSong)
+        addSong(newSong)
 
     }
 
