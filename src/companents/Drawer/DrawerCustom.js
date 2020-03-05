@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -16,10 +16,14 @@ import {DrawerContext} from "../../contex/drawer/drawerContext";
 import {menuDrawerCustom,  subMenuDrawerCustom} from "./menu";
 import {useStylesDrawer} from "./style";
 import {renderLink} from "./render";
+import IconButton from "@material-ui/core/IconButton";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import {Hidden, withWidth} from "@material-ui/core";
 
 
-export const DrawerCustom  = () => {
-    const {toggleEditMode, statusEditMode} = useContext(DrawerContext)
+
+function DrawerCustom(props){
+    const { toggleEditMode, statusEditMode, toggleOpenDrawer, statusOpenDrawer } = props
     const classes = useStylesDrawer();
     const [open, setOpen] = useState(false);
 
@@ -29,12 +33,20 @@ export const DrawerCustom  = () => {
     function handlerEditMode() {
         toggleEditMode(!statusEditMode)
     }
+    function handleDrawerClose() {
+        toggleOpenDrawer(!statusOpenDrawer);
+    }
 
     const sideList = () => (
         <div
             className={classes.toolbar}
             role="presentation"
         >
+            <div className={classes.toolbar}>
+                <IconButton onClick={handleDrawerClose}>
+                    { <ChevronLeftIcon />  }
+                </IconButton>
+            </div>
             <ListItem>
                 <ListItemAvatar>
                     <Avatar>
@@ -77,15 +89,37 @@ export const DrawerCustom  = () => {
     );
 
     return (
-        <Drawer
-            className={classes.drawer}
-            variant="permanent"
-            open={true}
-            classes={{
-                paper: classes.drawerPaper,
-            }}
-        >
-            {sideList()}
-        </Drawer>
+        <>
+            <Hidden lgUp>
+                <Drawer
+                    onClose={handleDrawerClose}
+                    className={classes.drawer}
+                    variant="temporary"
+                    open={ statusOpenDrawer }
+                    anchor="left"
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                >
+                    {sideList()}
+                </Drawer>
+            </Hidden>
+            <Hidden xsDown>
+                <Drawer
+                    className={classes.drawer}
+                    variant="permanent"
+                    open={ statusOpenDrawer }
+                    anchor="left"
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                >
+                    {sideList()}
+                </Drawer>
+            </Hidden>
+        </>
+
     )
 }
+
+export default withWidth() (DrawerCustom);

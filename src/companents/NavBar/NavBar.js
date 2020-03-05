@@ -7,6 +7,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Auth from "../Auth/Auth";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from '@material-ui/icons/Menu';
+import {withWidth} from "@material-ui/core";
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(theme => ({
     list: {
@@ -24,14 +26,20 @@ const useStyles = makeStyles(theme => ({
     title: {
         flexGrow: 1,
     },
+    hide: {
+        display: 'none',
+    },
 }));
 
-export const NavBar = () => {
+function NavBar(props){
+    const { statusOpenDrawer, toggleOpenDrawer } = props;
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
+        toggleOpenDrawer( !statusOpenDrawer )
+        console.log(statusOpenDrawer)
     };
 
     const handleDrawerClose = () => {
@@ -42,22 +50,27 @@ export const NavBar = () => {
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    <Hidden lgUp>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            className={clsx(classes.menuButton, open )}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                    </Hidden>
                     <Typography variant="h6" className={classes.title}>
                         React SONG-LIST
                     </Typography>
-                    <Auth/>
+                    <Hidden xsDown>
+                        <Auth/>
+                    </Hidden>
                 </Toolbar>
             </AppBar>
         </div>
     )
 }
 
+export default withWidth() (NavBar);

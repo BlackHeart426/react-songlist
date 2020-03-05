@@ -14,7 +14,8 @@ export const useStylesDrawer = makeStyles(theme => ({
         padding: theme.spacing(3),
     },
     toolbar: {
-        marginTop: '65px' //TODO не динамичекий
+        marginTop: '15px' //TODO не динамичекий
+
     },
     nested: {
         paddingLeft: theme.spacing(4),
