@@ -71,7 +71,7 @@ export const DrawerCustom  = () => {
                 </List>
             </Collapse>
             <ListItem>
-                <ListItemIcon><Switch onChange={handlerEditMode} color="primary"/></ListItemIcon>
+                <ListItemIcon><Switch onChange={handlerEditMode} checked={statusEditMode} color="primary"/></ListItemIcon>
                 <ListItemText>Edit mode</ListItemText>
             </ListItem>
         </div>
