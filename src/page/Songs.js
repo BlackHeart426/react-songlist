@@ -4,7 +4,7 @@ import {requestHandler} from "../actionPage/Songs/rows";
 import {PTBSongs} from "../companents/PageToolbar/PTBSongs/PTBSongs";
 import {SongsState} from "../contex/module/songs/SongsState";
 import {SongsContext} from "../contex/module/songs/songsContext";
-import {EditModeContext} from "../contex/editMode/editNodeContext";
+import {DrawerContext} from "../contex/drawer/drawerContext";
 import * as shortid from "shortid";
 
 export function createData(title, artist, timesPlayed, lastPlayed, tags, action) {

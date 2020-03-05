@@ -12,14 +12,14 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ImageIcon from '@material-ui/icons/Image';
 import Switch from "@material-ui/core/Switch";
-import {EditModeContext} from "../../contex/editMode/editNodeContext";
+import {DrawerContext} from "../../contex/drawer/drawerContext";
 import {menuDrawerCustom,  subMenuDrawerCustom} from "./menu";
 import {useStylesDrawer} from "./style";
 import {renderLink} from "./render";
 
 
 export const DrawerCustom  = () => {
-    const {toggle, statusEditMode} = useContext(EditModeContext)
+    const {toggleEditMode, statusEditMode} = useContext(DrawerContext)
     const classes = useStylesDrawer();
     const [open, setOpen] = useState(false);
 
@@ -27,8 +27,7 @@ export const DrawerCustom  = () => {
         setOpen(!open);
     };
     function handlerEditMode() {
-        toggle(!statusEditMode)
-       // console.log(statusEditMode)
+        toggleEditMode(!statusEditMode)
     }
 
     const sideList = () => (

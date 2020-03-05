@@ -9,7 +9,7 @@ import {Provider} from 'react-redux'
 import thunk from "redux-thunk";
 import {BrowserRouter} from "react-router-dom";
 import {AlertState} from "./contex/alert/AlertState";
-import {EditModeState} from "./contex/editMode/EditModeState";
+import {DrawerState} from "./contex/drawer/DrawerState";
 
 const composeEnhancers =
     typeof window === 'object' &&
@@ -25,7 +25,7 @@ const store = createStore(
 
 
 const app = (
-    <EditModeState>
+    <DrawerState>
         <AlertState>
             <BrowserRouter>
                 <Provider store={store}>
@@ -33,7 +33,7 @@ const app = (
                 </Provider>
             </BrowserRouter>
         </AlertState>
-    </EditModeState>
+    </DrawerState>
 )
 
 ReactDOM.render(app, document.getElementById('root'));

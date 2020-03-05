@@ -2,6 +2,7 @@ export const SHOW_ALERT = 'SHOW_ALERT';
 export const HIDE_ALERT = 'HIDE_ALERT';
 
 export const TOGGLE_EDITMODE = 'TOGGLE_EDITMODE';
+export const OPEN_DRAWER = 'OPEN_DRAWER';
 export const TOGGLE_ACTIVE = 'TOGGLE_ACTIVE';
 
 export const SET_SONGDATA = 'SET_ROWS';
