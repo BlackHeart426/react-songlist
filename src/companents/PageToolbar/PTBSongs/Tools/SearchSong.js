@@ -8,58 +8,73 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from '@material-ui/icons/Close';
 import SearchIcon from '@material-ui/icons/Search';
+import {blue} from "@material-ui/core/colors";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 const useStyles = makeStyles(theme => ({
     margin: {
-        margin: theme.spacing(2),
+        margin: theme.spacing(1),
     },
     textField: {
         width: 200,
     },
+    searhIcon: {
+        color: 'rgba(152, 152, 152, 0.87)',
+    },
+    pt0: {
+        padding: "6px 0 7px"
+    },
+    root: {
+        padding: "6px 0 7px"
+    }
 }));
 
+const styles = withStyles({
+    root: {
+        padding: "6px 0 7px"
+    }
+});
 
+const defaultColor = {
+    'color': 'rgba(255, 0, 0, 0.87)',
+};
 
-export const SearchSong = () => {
+export const SearchSong = (props) => {
     const classes = useStyles();
-    const [values, setValues] = React.useState({
-        amount: '',
-        password: '',
-        weight: '',
-        weightRange: '',
-        showPassword: false,
-    });
+    const [values, setValues] = React.useState('');
+    const {searchText, setSearchText} = props;
 
-    const handleChange = prop => event => {
-        setValues({ ...values, [prop]: event.target.value });
+    const handleChange = event => {
+        setSearchText( event.target.value );
     };
 
-    const handleClickShowPassword = () => {
-        setValues({ ...values, showPassword: !values.showPassword });
-    };
-
-    const handleMouseDownPassword = event => {
-        event.preventDefault();
+    const handleClearTextField = event => {
+        setSearchText( '' );
     };
 
     return (
-        <FormControl className={clsx(classes.margin, classes.textField)}>
-            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-            <Input
-                id="standard-adornment-password"
-                value={values.password}
-                onChange={handleChange('password')}
+        <FormControl className={classes.margin}>
+
+            <OutlinedInput
+                id="standard-adornment-amount"
+                value={searchText}
+                placeholder="Search"
+                onChange={handleChange}
+                variant="outlined"
+                className={ classes.root }
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton
-                            aria-label="toggle search"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
+                            aria-label="toggle password visibility"
+                            onClick={handleClearTextField}
+                            size="small"
                         >
-                            {values.showPassword ? <CloseIcon /> : <SearchIcon />}
+                           <CloseIcon />
                         </IconButton>
                     </InputAdornment>
                 }
+                startAdornment={ <InputAdornment  position="start"><SearchIcon className={classes.searhIcon}/></InputAdornment>}
             />
         </FormControl>
     )

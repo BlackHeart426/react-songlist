@@ -85,9 +85,9 @@ export const Songs = () => {
         },
     ];
 
-    const {songData, setSongData} = useContext(SongsContext)
+    const {songData, setSongData, searchText} = useContext(SongsContext)
     const {active, setActive} = useState(false)
-
+    let filtered = [];
     useEffect(() => {
         console.log('songData', songList)
         setSongData(songList)
@@ -100,6 +100,32 @@ export const Songs = () => {
         localStorage.setItem('rowSongs', JSON.stringify(songData))
     },[songData])
 
+    // useEffect(() =>{
+    //     if(searchText.length > 0){
+    //         return songData
+    //     } else {
+    //         return songData
+    //     }
+    //     // const newSelecteds = songData.list.map(n => n.data.title);
+    //    //  let filtered = songData;
+    //    //  console.log('filterednew', filtered)
+    //    //  filtered.list = filtered.list.map((user, index) => user =>  user.data.title.indexOf(searchText) !== -1);
+    //    // console.log('filtered', filtered)
+    // },[searchText])
+
+    const handlerFilter = () => {
+        let filteredNew = {...songData};
+        let filtered = [];
+        // console.log('filterednew', filtered);
+        filtered = filteredNew.list.filter(item =>  item.data.title.toUpperCase().indexOf(searchText.toUpperCase()) !== -1);
+        // console.log('songData', songData);
+        filteredNew.list = filtered;
+        console.log('filteredNew', filteredNew);
+        return (
+            filteredNew
+        )
+    }
+
     function handlerActive() {
         console.log(active)
         //setActive(!active)
@@ -110,7 +136,7 @@ export const Songs = () => {
         <div>
             <h1>Songs</h1>
             <PTBSongs showActive={active} onActive = {handlerActive}/>
-            <TablePagination headCells = {headCells} rowsData = {songData} rows = {rows} showActive={active}/>
+            <TablePagination headCells = {headCells} rowsData = {handlerFilter()} rows = {rows} showActive={active}/>
         </div>
     )
 };

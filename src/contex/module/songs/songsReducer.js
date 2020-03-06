@@ -1,4 +1,4 @@
-import {ADD_SONG, REMOVE_SONG, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
+import {ADD_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
 
 // const handlers = {
 //     [SET_ROWS]: (state, action) =>  {...state, list: action.list},
@@ -17,6 +17,8 @@ export const songsReducer = (state, action) => {
     switch (action.type) {
         case SET_SONGDATA:
             return { ...state, list: action.list };
+        case SET_SEARCHTEXT:
+            return { ...state, searchText: action.text };
         case TOGGLE_ACTIVE:
             return { ...state, active: action.active,  selected: [] };
         case ADD_SONG:
