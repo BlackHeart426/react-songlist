@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
@@ -24,9 +24,13 @@ export default function ComponentTablePagination(props) {
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const {statusEditMode} = useContext(DrawerContext)
-    const {setSelected} = useContext(SongsContext)
-    const {rowsData, headCells, showActive} = props
+    const {statusEditMode} = useContext(DrawerContext);
+    const {setSelected} = useContext(SongsContext);
+    const {rowsData, headCells, showActive} = props;
+
+    useEffect(() => {
+        setSelected([])
+    },[statusEditMode])
 
     //TODO Рассмотреть возможность переноса всех handler в отдельный файл
     /**
