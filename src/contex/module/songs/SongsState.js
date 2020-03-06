@@ -50,7 +50,14 @@ export const SongsState = ({children}) => {
 
     return (
         <SongsContext.Provider value={{
-            setSongData, addSong, songData: state, toggleActive, setSelected
+            setSongData,
+            addSong,
+            listSong: state.list,
+            selected: state.selected,
+            active: state.active,
+            songData: state,
+            toggleActive,
+            setSelected
         }}>
             {children}
         </SongsContext.Provider>

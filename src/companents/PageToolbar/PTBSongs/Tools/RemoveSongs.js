@@ -9,15 +9,15 @@ let paramTest = {
     artist: '30 sec'
 }
 
-export const RemoveSongs = () => {
+export const RemoveSongs = (props) => {
     const testForm = {
         data: [],
         active: false,
         selected: null
     }
     const [test, setTest] = useState(testForm);
-    // const {rowsSongs, removeSong} = useContext(SongsContext)
     const [confirmOpened, setConfirmOpened] = React.useState(false);
+    const {selected} = props;
     const dataToConfirm = {
         title: 'Are you sure you want to delete these song?',
         content: <div><p>Title: <strong>{paramTest.title}</strong></p><p>Artist: <strong>{paramTest.artist}</strong></p></div>
@@ -34,6 +34,11 @@ export const RemoveSongs = () => {
         console.log(test)
     }
 
+    function showButton(selected) {
+        return selected != 0 ? false : true
+    }
+
+
     const handlerRemoveSong = (props) => {
         // removeSong()
         console.log(props)
@@ -41,7 +46,7 @@ export const RemoveSongs = () => {
 
     return (
         <>
-            <IconButton onClick={handlerOpenConfirm}>
+            <IconButton onClick={handlerOpenConfirm} disabled={showButton(selected)}>
                 <DeleteIcon />
             </IconButton>
             <Confirm

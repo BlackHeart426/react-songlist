@@ -7,13 +7,19 @@ import {requestHandler} from "../../../../actionPage/Songs/rows";
 import {createData} from "../../../../page/Songs";
 import * as shortid from "shortid";
 
-export const AddSongs = () => {
+export const AddSongs = (props) => {
 
     const [dialogOpened, setDialogOpened] = useState(false);
     const {songData, addSong} = useContext(SongsContext)
+    const {selected} = props;
 
     const openDialog = () => {
         setDialogOpened(true)
+    }
+
+    function showButton(selected) {
+        console.log('lenSelected', selected)
+        return selected == 0 ? false : true
     }
 
     const addRowsSong = (property) => {
@@ -40,7 +46,7 @@ export const AddSongs = () => {
 
     return (
         <>
-            <IconButton onClick={openDialog}>
+            <IconButton onClick={openDialog} disabled={showButton(selected)}>
                 <ControlPointIcon />
             </IconButton>
             <DialogSongs onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
