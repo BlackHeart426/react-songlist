@@ -50,6 +50,30 @@ export const Songs = () => {
         {
             id: shortid.generate(),
             data: createData(
+                'The Kill1',
+                '30 Seconds To Mars',
+                1,
+                '1 week age',
+                { type: 'tag', data: [ { name: 'Music' }] },
+                { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
+            ),
+            active: false
+        },
+        {
+            id: shortid.generate(),
+            data: createData(
+                'Hello1',
+                'Adele',
+                2,
+                '2 week age',
+                { type: 'tag', data: [ { name: 'Music' }] },
+                { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
+            ),
+            active: true
+        },
+        {
+            id: shortid.generate(),
+            data: createData(
                 'Hello',
                 'Adele',
                 2,
@@ -60,12 +84,6 @@ export const Songs = () => {
             active: true
         },
     ];
-    //
-    // const songData = {
-    //     list: songList,
-    //     selected: [],
-    //     active: false
-    // }
 
     const {songData, setSongData} = useContext(SongsContext)
     const {active, setActive} = useState(false)
@@ -78,6 +96,7 @@ export const Songs = () => {
 
 
     useEffect(() => {
+        console.log('songDataEff', songData)
         localStorage.setItem('rowSongs', JSON.stringify(songData))
     },[songData])
 

@@ -2,7 +2,7 @@ import React from "react";
 import {SongsContext} from "./songsContext";
 import {useReducer} from "react";
 import {songsReducer} from "./songsReducer";
-import {ADD_SONG, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
+import {ADD_SONG, REMOVE_SONG, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
 
 export const SongsState = ({children}) => {
     const initialState = {
@@ -41,17 +41,18 @@ export const SongsState = ({children}) => {
         })
     );
 
-    // const removeRows = (state) => (
-    //     dispatch({
-    //         type: ADD_ROWS,
-    //         payload: state
-    //     })
-    // );
+    const removeSong = (state) => (
+        dispatch({
+            type: REMOVE_SONG,
+            row: state
+        })
+    );
 
     return (
         <SongsContext.Provider value={{
             setSongData,
             addSong,
+            removeSong,
             listSong: state.list,
             selected: state.selected,
             active: state.active,

@@ -25,7 +25,7 @@ export default function ComponentTablePagination(props) {
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const {statusEditMode} = useContext(DrawerContext)
-    const {songData, setSelected} = useContext(SongsContext)
+    const {setSelected} = useContext(SongsContext)
     const {rowsData, headCells, showActive} = props
 
     //TODO Рассмотреть возможность переноса всех handler в отдельный файл
@@ -55,25 +55,24 @@ export default function ComponentTablePagination(props) {
      */
     const handleClick = (event, name) => {
         console.log(name)
-        console.log(songData.selected)
-        const selectedIndex = songData.selected.indexOf(name);
+        console.log(rowsData.selected)
+        const selectedIndex = rowsData.selected.indexOf(name);
         let newSelected = [];
 
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(songData.selected, name);
+            newSelected = newSelected.concat(rowsData.selected, name);
         } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(songData.selected.slice(1));
-        } else if (selectedIndex === songData.selected.length - 1) {
-            newSelected = newSelected.concat(songData.selected.slice(0, -1));
+            newSelected = newSelected.concat(rowsData.selected.slice(1));
+        } else if (selectedIndex === rowsData.selected.length - 1) {
+            newSelected = newSelected.concat(rowsData.selected.slice(0, -1));
         } else if (selectedIndex > 0) {
             newSelected = newSelected.concat(
-                songData.selected.slice(0, selectedIndex),
-                songData.selected.slice(selectedIndex + 1),
+                rowsData.selected.slice(0, selectedIndex),
+                rowsData.selected.slice(selectedIndex + 1),
             );
         }
 
         setSelected(newSelected);
-        console.log(newSelected)
     };
 
     /**
@@ -102,7 +101,7 @@ export default function ComponentTablePagination(props) {
     /**
      *  Проверка текущего выбраного элемента
      */
-    const isSelected = name => songData.selected.indexOf(name) !== -1;
+    const isSelected = name => rowsData.selected.indexOf(name) !== -1;
 
     /**
      *  Проверка на пустую строку
@@ -120,7 +119,7 @@ export default function ComponentTablePagination(props) {
                     >
                         <EnhancedTableHead
                             classes={classes}
-                            numSelected={songData.selected.length}
+                            numSelected={rowsData.selected.length}
                             order={order}
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
@@ -140,7 +139,7 @@ export default function ComponentTablePagination(props) {
                                 rowsPerPage={rowsPerPage}
                                 handleClick={handleClick}
                                 isSelected={isSelected}
-                                showActive={songData.active}
+                                showActive={rowsData.active}
                             />
                             {emptyRows > 0 && (
                                 <TableRow style={{height: (dense ? 33 : 53) * emptyRows}}>

@@ -10,21 +10,19 @@ import * as shortid from "shortid";
 export const AddSongs = (props) => {
 
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {songData, addSong} = useContext(SongsContext)
-    const {selected} = props;
+
+    const {lenSelected, songData, addSong} = props;
 
     const openDialog = () => {
         setDialogOpened(true)
     }
 
-    function showButton(selected) {
-        console.log('lenSelected', selected)
-        return selected == 0 ? false : true
+    function showButton(lenSelected) {
+        return lenSelected == 0 ? false : true
     }
 
     const addRowsSong = (property) => {
         const {title, artist, tags, active} = property;
-
         const newSong = {
             id: shortid.generate(),
             data: createData(
@@ -37,16 +35,12 @@ export const AddSongs = (props) => {
             ),
             active: active
         }
-        console.log('newSong', newSong)
-        const {list} = songData
-        console.log('list', [...list, newSong])
         addSong(newSong)
-
     }
 
     return (
         <>
-            <IconButton onClick={openDialog} disabled={showButton(selected)}>
+            <IconButton onClick={ openDialog } disabled={ showButton(lenSelected) }>
                 <ControlPointIcon />
             </IconButton>
             <DialogSongs onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>

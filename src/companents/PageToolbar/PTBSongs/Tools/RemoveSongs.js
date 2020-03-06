@@ -17,7 +17,7 @@ export const RemoveSongs = (props) => {
     }
     const [test, setTest] = useState(testForm);
     const [confirmOpened, setConfirmOpened] = React.useState(false);
-    const {selected} = props;
+    const {removeSong, selected, lenSelected} = props;
     const dataToConfirm = {
         title: 'Are you sure you want to delete these song?',
         content: <div><p>Title: <strong>{paramTest.title}</strong></p><p>Artist: <strong>{paramTest.artist}</strong></p></div>
@@ -38,13 +38,14 @@ export const RemoveSongs = (props) => {
         return selected != 0 ? false : true
     }
 
-    const handlerRemoveSong = (props) => {
-        console.log(props)
+    const handlerRemoveSong = () => {
+        console.log('selected123', selected[0])
+        removeSong(selected[0])
     }
 
     return (
         <>
-            <IconButton onClick={handlerOpenConfirm} disabled={showButton(selected)}>
+            <IconButton onClick={handlerOpenConfirm} disabled={showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
             <Confirm

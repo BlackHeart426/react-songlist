@@ -6,10 +6,10 @@ import EditIcon from "@material-ui/icons/Edit";
 export const EditSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
     const {rowsContext} = useContext(SongsContext)
-    const {selected} = props;
+    const {lenSelected} = props;
 
-    function showButton(selected) {
-        return selected == 1 ? false : true
+    function showButton(lenSelected) {
+        return lenSelected == 1 ? false : true
     }
 
     const addItemToRows = () => {
@@ -18,7 +18,7 @@ export const EditSongs = (props) => {
 
     return (
         <>
-            <IconButton onClick={addItemToRows} disabled={showButton(selected)}>
+            <IconButton onClick={addItemToRows} disabled={showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
         </>
