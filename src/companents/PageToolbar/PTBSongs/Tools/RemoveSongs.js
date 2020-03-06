@@ -38,9 +38,7 @@ export const RemoveSongs = (props) => {
         return selected != 0 ? false : true
     }
 
-
     const handlerRemoveSong = (props) => {
-        // removeSong()
         console.log(props)
     }
 

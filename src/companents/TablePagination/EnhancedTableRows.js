@@ -9,6 +9,10 @@ import {componentTags} from "./componentTags";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import React from "react";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import {blue, orange} from "@material-ui/core/colors";
+import {ThemeProvider} from "@material-ui/styles";
+import {outerTheme} from "./styles";
 
 const active = {
     'color': 'rgba(0, 0, 0, 0.88)',
@@ -30,71 +34,73 @@ export function EnhancedTableRows (props) {
 
                 return (
                     ( (showActive) || (data[index].active) )&&
-                    <TableRow
-                        hover
-                        onClick={event => handleClick(event, data[index].id)}
-                        role="checkbox"
-                        aria-checked={isItemSelected}
-                        tabIndex={-1}
-                        key={ data[index].id }
-                        selected={isItemSelected}
+                    <ThemeProvider theme={outerTheme}  key={ data[index].id }>
+                        <TableRow
+                            hover
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
 
-                    >
-                        {editMode &&
-                             <TableCell padding="checkbox">
-                                <Checkbox
-                                    value="secondary"
-                                    color="primary"
-                                    checked={isItemSelected}
-                                    inputProps={{'aria-labelledby': labelId}}
-                                />
-                            </TableCell>
-                        }
+                            selected={isItemSelected}
 
-                        {/*TODO Переписать с типом элемента*/}
-                        { Object.keys(row).map((item, indexRow) => (
+                        >
+                            {editMode &&
+                                 <TableCell padding="checkbox">
+                                    <Checkbox
+                                        value="secondary"
+                                        color="primary"
+                                        onClick={event => handleClick(event, data[index].id)}
+                                        checked={isItemSelected}
+                                        inputProps={{'aria-labelledby': labelId}}
+                                    />
+                                </TableCell>
+                            }
 
-                                <TableCell align="center" key={indexRow} style={data[index].active == true ? active : defaultColor}>
+                            {/*TODO Переписать с типом элемента*/}
+                            { Object.keys(row).map((item, indexRow) => (
 
-                                    {
-                                        row[item].type == 'tag' &&
-                                        row[item].data.map((tag, indexTag) => (
-                                            <div key={indexTag}>
-                                                {componentTags[tag.name]}
-                                            </div>
-                                        ))
+                                    <TableCell align="center" key={indexRow} style={data[index].active == true ? active : defaultColor}>
 
-                                    }
-                                    {
-                                        row[item].type == 'btn' && editMode &&
-                                             row[item].data.map((btn, indexBtn) => (
-                                                btn.type == 'text'
-                                                    ?   <Button
-                                                            type="submit"
-                                                            color="primary"
-                                                            variant="outlined"
-                                                            key={indexBtn}
-                                                            onClick={() => btn.handler(data[index].id)}
-                                                        >
-                                                            {btn.name}
-                                                        </Button>
-                                                    :   <IconButton>
-                                                            {componentTags[btn.name]}
-                                                        </IconButton>
+                                        {
+                                            row[item].type == 'tag' &&
+                                            row[item].data.map((tag, indexTag) => (
+                                                <div key={indexTag}>
+                                                    {componentTags[tag.name]}
+                                                </div>
                                             ))
 
-                                    }
-                                    {
-                                        row[item].type != 'btn' &&  row[item].type != 'tag' &&
-                                            <> {row[item]} </>
+                                        }
+                                        {
+                                            row[item].type == 'btn' && editMode &&
+                                                 row[item].data.map((btn, indexBtn) => (
+                                                    btn.type == 'text'
+                                                        ?   <Button
+                                                                type="submit"
+                                                                color="primary"
+                                                                variant="outlined"
+                                                                key={indexBtn}
+                                                                onClick={() => btn.handler(data[index].id)}
+                                                            >
+                                                                {btn.name}
+                                                            </Button>
+                                                        :   <IconButton>
+                                                                {componentTags[btn.name]}
+                                                            </IconButton>
+                                                ))
 
-                                    }
+                                        }
+                                        {
+                                            row[item].type != 'btn' &&  row[item].type != 'tag' &&
+                                                <> {row[item]} </>
 
-                                </TableCell>
-                            )
-                        )}
+                                        }
 
-                    </TableRow>
+                                    </TableCell>
+                                )
+                            )}
+
+                        </TableRow>
+                    </ThemeProvider>
                 );
             })
     )

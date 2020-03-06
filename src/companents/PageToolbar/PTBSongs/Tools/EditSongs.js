@@ -8,7 +8,6 @@ export const EditSongs = (props) => {
     const {rowsContext} = useContext(SongsContext)
     const {selected} = props;
 
-
     function showButton(selected) {
         return selected == 1 ? false : true
     }
