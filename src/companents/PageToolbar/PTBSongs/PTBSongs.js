@@ -7,7 +7,9 @@ import {DetailSongs} from "./Tools/DetailSongs";
 import {AddInQueueSongs} from "./Tools/AddInQueueSongs";
 import {SwitchActiveSongs} from "./Tools/SwitchActiveSongs";
 import {SongsContext} from "../../../contex/module/songs/songsContext";
-
+import {SearchSong} from "./Tools/SearchSong"
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
 
 let mbt10 = {
     marginBottom: '10px',
@@ -21,12 +23,15 @@ export const PTBSongs = (props) => {
     return (
         <>
             <Card style={mbt10}>
-                <AddSongs lenSelected={lenSelected} songData={listSong} addSong={addSong}/>
-                <EditSongs lenSelected={lenSelected} />
-                <RemoveSongs lenSelected={lenSelected} selected={selected} removeSong={removeSong}/>
-                <DetailSongs lenSelected={lenSelected}/>
-                <AddInQueueSongs lenSelected={lenSelected}/>
-                <SwitchActiveSongs showActive={showActive} onActive = {onActive}/>
+                <CardActions>
+                    <AddSongs lenSelected={lenSelected} songData={listSong} addSong={addSong}/>
+                    <EditSongs lenSelected={lenSelected} />
+                    <RemoveSongs lenSelected={lenSelected} selected={selected} removeSong={removeSong}/>
+                    <DetailSongs lenSelected={lenSelected}/>
+                    <AddInQueueSongs lenSelected={lenSelected}/>
+                    <SwitchActiveSongs showActive={showActive} onActive = {onActive}/>
+                    <SearchSong />
+                </CardActions>
             </Card>
 
         </>
