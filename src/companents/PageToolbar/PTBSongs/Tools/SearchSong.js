@@ -11,34 +11,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import {blue} from "@material-ui/core/colors";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import withStyles from "@material-ui/core/styles/withStyles";
-
-const useStyles = makeStyles(theme => ({
-    margin: {
-        margin: theme.spacing(1),
-    },
-    textField: {
-        width: 200,
-    },
-    searhIcon: {
-        color: 'rgba(152, 152, 152, 0.87)',
-    },
-    pt0: {
-        padding: "6px 0 7px"
-    },
-    root: {
-        padding: "6px 0 7px"
-    }
-}));
-
-const styles = withStyles({
-    root: {
-        padding: "6px 0 7px"
-    }
-});
-
-const defaultColor = {
-    'color': 'rgba(255, 0, 0, 0.87)',
-};
+import {TextField} from "@material-ui/core";
+import {StyledFormControl, StyledOutlinedInput, useStyles} from "../style";
 
 export const SearchSong = (props) => {
     const classes = useStyles();
@@ -54,15 +28,14 @@ export const SearchSong = (props) => {
     };
 
     return (
-        <FormControl className={classes.margin}>
+        <StyledFormControl className={classes.margin} >
 
-            <OutlinedInput
+            <StyledOutlinedInput
                 id="standard-adornment-amount"
                 value={searchText}
                 placeholder="Search"
                 onChange={handleChange}
                 variant="outlined"
-                className={ classes.root }
                 endAdornment={
                     <InputAdornment position="end">
                         <IconButton
@@ -76,6 +49,6 @@ export const SearchSong = (props) => {
                 }
                 startAdornment={ <InputAdornment  position="start"><SearchIcon className={classes.searhIcon}/></InputAdornment>}
             />
-        </FormControl>
+        </StyledFormControl>
     )
 }
