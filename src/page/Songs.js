@@ -89,7 +89,6 @@ export const Songs = () => {
     const {active, setActive} = useState(false)
     let filtered = [];
     useEffect(() => {
-        console.log('songData', songList)
         setSongData(songList)
         localStorage.setItem('rowSongs', JSON.stringify(songList))
     },[])
@@ -100,18 +99,6 @@ export const Songs = () => {
         localStorage.setItem('rowSongs', JSON.stringify(songData))
     },[songData])
 
-    // useEffect(() =>{
-    //     if(searchText.length > 0){
-    //         return songData
-    //     } else {
-    //         return songData
-    //     }
-    //     // const newSelecteds = songData.list.map(n => n.data.title);
-    //    //  let filtered = songData;
-    //    //  console.log('filterednew', filtered)
-    //    //  filtered.list = filtered.list.map((user, index) => user =>  user.data.title.indexOf(searchText) !== -1);
-    //    // console.log('filtered', filtered)
-    // },[searchText])
 
     const handlerFilter = () => {
         let filteredNew = {...songData};

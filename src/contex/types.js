@@ -10,3 +10,4 @@ export const SET_SEARCHTEXT = 'SET_SEARCHTEXT';
 export const ADD_SONG = 'ADD_ROWS';
 export const SET_SELECTED = 'SET_SELECTED';
 export const REMOVE_SONG = 'REMOVE_SONG';
+export const EDIT_SONG = 'EDIT_SONG';

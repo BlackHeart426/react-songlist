@@ -31,22 +31,28 @@ export function DialogSongs(props) {
         tags: []
     }
 
-    const {show, onHide, onAddSongs} = props
+    const {show, onHide, onAddSongs, dataSong} = props
     const classes = useStyles();
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
     const [dialogOpened, setDialogOpened] = useState(false);
     const [active, setActive] = useState(false);
-    const [newSong, setNewSong] = useState(formControl)
+    const [song, setSong] = useState(formControl)
 
     useEffect(() => {
         setDialogOpened(show)
+        console.log('dataSong', dataSong)
+         let statusCopy = {...dataSong}
+         // const {title, artist} = statusCopy.data
+         // statusCopy.title = dataSong[0].title
+         console.log('statusCopy', statusCopy.data.map((item, indexTag) => (item)))
+         // setSong(prevState =>  song.title.dataSong.title);
     },[show])
 
     const setProperty = (property, value) => {
-        let statusCopy = Object.assign({}, newSong);
+        let statusCopy = Object.assign({}, song);
         statusCopy[property] = value;
-        setNewSong(statusCopy)
+        setSong(statusCopy)
 
     }
 
@@ -150,7 +156,7 @@ export function DialogSongs(props) {
                 <Button onClick={handleClose} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={handleCreate(newSong)} color="primary">
+                <Button onClick={handleCreate(song)} color="primary">
                     Create
                 </Button>
                 <Button onClick={handleCreateClose} color="primary">

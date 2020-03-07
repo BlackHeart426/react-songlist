@@ -2,7 +2,7 @@ import React from "react";
 import {SongsContext} from "./songsContext";
 import {useReducer} from "react";
 import {songsReducer} from "./songsReducer";
-import {ADD_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
+import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
 
 export const SongsState = ({children}) => {
     const initialState = {
@@ -52,6 +52,13 @@ export const SongsState = ({children}) => {
     const removeSong = (state) => (
         dispatch({
             type: REMOVE_SONG,
+            row: state
+        })
+    );
+
+    const editSong = (state) => (
+        dispatch({
+            type: EDIT_SONG,
             row: state
         })
     );
