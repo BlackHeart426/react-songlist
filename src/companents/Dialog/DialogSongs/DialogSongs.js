@@ -39,21 +39,35 @@ export function DialogSongs(props) {
     const [active, setActive] = useState(false);
     const [song, setSong] = useState(formControl)
 
+    //TODO что-то с обьектом dataSong и вложеным data
     useEffect(() => {
         setDialogOpened(show)
-        console.log('dataSong', dataSong)
-         let statusCopy = {...dataSong}
-         // const {title, artist} = statusCopy.data
-         // statusCopy.title = dataSong[0].title
-         console.log('statusCopy', statusCopy.data.map((item, indexTag) => (item)))
+        // console.log('dataSong', dataSong)
+        let copyDataSong = {...dataSong};
+        // console.log('copyDataSong.length', copyDataSong['id'])
+        if(copyDataSong['id']) { //TODO переделать проверка на пустоту обьета
+            let copyDataSongData = {...copyDataSong['data']};
+            const {title, artist} = copyDataSongData;
+            console.log('title', title);
+            let statusCopy = {...song};
+            statusCopy['title'] = title;
+            statusCopy['artist'] = artist;
+            setSong(statusCopy);
+            console.log('statusCopy', statusCopy)
+        }
+
+        // statusCopy.title = dataSong[0].title
+        // Object.keys(statusCopy).map((item, indexRow) => (console.log(item, statusCopy[item])))
+
          // setSong(prevState =>  song.title.dataSong.title);
     },[show])
+
 
     const setProperty = (property, value) => {
         let statusCopy = Object.assign({}, song);
         statusCopy[property] = value;
         setSong(statusCopy)
-
+        console.log('statusCopy', statusCopy)
     }
 
     const handleChange = name =>  event => {
@@ -77,7 +91,6 @@ export function DialogSongs(props) {
     };
 
     const handleCreate = property => event => {
-        handleClose();
         console.log(property)
         onAddSongs(property)
     };
@@ -99,6 +112,7 @@ export function DialogSongs(props) {
                             id="Title"
                             label="Title"
                             type="text"
+                            value={song.title}
                             fullWidth
                             onChange={handleChange('title')}
                         />
@@ -110,6 +124,7 @@ export function DialogSongs(props) {
                             margin="dense"
                             id="Artist"
                             label="Artist"
+                            value={song.artist}
                             type="text"
                             fullWidth
                             onChange={handleChange('artist')}

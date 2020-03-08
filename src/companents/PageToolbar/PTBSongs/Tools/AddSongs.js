@@ -6,6 +6,9 @@ import {SongsContext} from "../../../../contex/module/songs/songsContext";
 import {requestHandler} from "../../../../actionPage/Songs/rows";
 import {createData} from "../../../../page/Songs";
 import * as shortid from "shortid";
+import CustomDialog from "../../../Dialog/CustomDialog";
+import DialogConfirm from "../../../Dialog/DialogConfirm";
+import {TextField} from "@material-ui/core";
 
 export const AddSongs = (props) => {
 
@@ -38,12 +41,18 @@ export const AddSongs = (props) => {
         addSong(newSong)
     }
 
+    const data = {
+        title: 'Create new song',
+        content: <div><p>Title: <TextField/></p><p>Artist: <strong></strong></p></div>
+    }
+
     return (
         <>
             <IconButton onClick={ openDialog } disabled={ showButton(lenSelected) }>
                 <ControlPointIcon />
             </IconButton>
-            <DialogSongs onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <CustomDialog  data = { data } show={ dialogOpened }  onHide={ () => setDialogOpened(false) }/>
+            {/*<DialogSongs onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}
         </>
     )
 }
