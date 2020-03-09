@@ -59,7 +59,7 @@ export const SongsState = ({children}) => {
     const editSong = (state) => (
         dispatch({
             type: EDIT_SONG,
-            row: state
+            song: state
         })
     );
 
@@ -68,6 +68,7 @@ export const SongsState = ({children}) => {
             setSongData,
             setSearchText,
             setSelected,
+            editSong,
             addSong,
             removeSong,
             toggleActive,

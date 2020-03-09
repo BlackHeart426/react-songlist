@@ -19,7 +19,7 @@ const names = [
     'Music',
 ];
 
-export function DialogSongs(props) {
+export function DialogSongsAdd(props) {
     const formControl = {
         title: '',
         artist: '',

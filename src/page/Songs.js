@@ -103,7 +103,7 @@ export const Songs = () => {
     const handlerFilter = () => {
         let filteredNew = {...songData};
         let filtered = [];
-        // console.log('filterednew', filtered);
+        console.log('songData', songData);
         filtered = filteredNew.list.filter(item =>  item.data.title.toUpperCase().indexOf(searchText.toUpperCase()) !== -1);
         // console.log('songData', songData);
         filteredNew.list = filtered;

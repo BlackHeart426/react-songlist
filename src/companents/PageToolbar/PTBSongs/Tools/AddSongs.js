@@ -1,7 +1,7 @@
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
-import {DialogSongs} from "../../../Dialog/DialogSongs/DialogSongs";
+import {DialogSongsAdd} from "../../../Dialog/DialogSongs/DialogSongsAdd";
 import {requestHandler} from "../../../../actionPage/Songs/rows";
 import {createData} from "../../../../page/Songs";
 import * as shortid from "shortid";
@@ -44,7 +44,7 @@ export const AddSongs = (props) => {
             <IconButton onClick={ openDialog } disabled={ showButton(lenSelected) }>
                 <ControlPointIcon />
             </IconButton>
-            <DialogSongs onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogSongsAdd onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }

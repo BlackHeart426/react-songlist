@@ -28,7 +28,10 @@ export const songsReducer = (state, action) => {
         case REMOVE_SONG:
             return { ...state, list: state.list.filter(item => item.id !== action.row), selected: [] };
         case EDIT_SONG:
-            return { ...state, list: [ ...state.list, action.row ] };
+            return { ...state, ...state.list.forEach((item, index) => ((state.list[index].id === action.song.id) &&
+                    (state.list[index].data = action.song.data) &&
+                    (state.list[index].active = action.song.active)))
+            };
         default:
             return {
                state

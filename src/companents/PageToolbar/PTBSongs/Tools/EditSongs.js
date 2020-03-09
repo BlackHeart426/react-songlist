@@ -2,7 +2,7 @@ import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import {SongsContext} from "../../../../contex/module/songs/songsContext";
 import EditIcon from "@material-ui/icons/Edit";
-import {DialogSongs} from "../../../Dialog/DialogSongs/DialogSongs";
+import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
 import * as shortid from "shortid";
 import {createData} from "../../../../page/Songs";
 import {requestHandler} from "../../../../actionPage/Songs/rows";
@@ -23,7 +23,7 @@ export const EditSongs = (props) => {
     const handlerEditRowsSong = (property) => {
         const {title, artist, tags, active} = property;
         const newSong = {
-            id: shortid.generate(),
+            id: selected[0],
             data: createData(
                 title,
                 artist,
@@ -42,7 +42,7 @@ export const EditSongs = (props) => {
             <IconButton onClick={handlerEditRows} disabled={showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
-            <DialogSongs onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }
