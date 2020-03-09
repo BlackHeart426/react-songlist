@@ -9,15 +9,11 @@ import Select from "@material-ui/core/Select";
 import Input from "@material-ui/core/Input";
 import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
-import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
 import React, {useEffect, useState} from "react";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import useTheme from "@material-ui/core/styles/useTheme";
-import {createData} from "../../../page/Songs";
-import {requestHandler} from "../../../actionPage/Songs/rows";
 import {getStyles, MenuProps, useStyles} from "./style";
+import CustomDialog from "../CustomDialog";
 
 const names = [
     'Music',
@@ -42,24 +38,16 @@ export function DialogSongs(props) {
     //TODO что-то с обьектом dataSong и вложеным data
     useEffect(() => {
         setDialogOpened(show)
-        // console.log('dataSong', dataSong)
         let copyDataSong = {...dataSong};
-        // console.log('copyDataSong.length', copyDataSong['id'])
         if(copyDataSong['id']) { //TODO переделать проверка на пустоту обьета
             let copyDataSongData = {...copyDataSong['data']};
             const {title, artist} = copyDataSongData;
-            console.log('title', title);
             let statusCopy = {...song};
             statusCopy['title'] = title;
             statusCopy['artist'] = artist;
             setSong(statusCopy);
-            console.log('statusCopy', statusCopy)
         }
 
-        // statusCopy.title = dataSong[0].title
-        // Object.keys(statusCopy).map((item, indexRow) => (console.log(item, statusCopy[item])))
-
-         // setSong(prevState =>  song.title.dataSong.title);
     },[show])
 
 
@@ -67,7 +55,6 @@ export function DialogSongs(props) {
         let statusCopy = Object.assign({}, song);
         statusCopy[property] = value;
         setSong(statusCopy)
-        console.log('statusCopy', statusCopy)
     }
 
     const handleChange = name =>  event => {
@@ -90,95 +77,94 @@ export function DialogSongs(props) {
         onHide();
     };
 
-    const handleCreate = property => event => {
+    const handleCreate = (property, close = false) => event => {
         console.log(property)
         onAddSongs(property)
+        close && handleClose()
     };
 
-    const handleCreateClose = () => {
-        handleCreate();
-        handleClose();
-    };
-
-
-    return (
-        <Dialog open={ dialogOpened } onClose={handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle  id="form-dialog-title">Create a New Song</DialogTitle>
-            <DialogContent>
-                <div>
-                    <FormControl fullWidth className={classes.formControl}>
-                        <TextField
-                            margin="dense"
-                            id="Title"
-                            label="Title"
-                            type="text"
-                            value={song.title}
-                            fullWidth
-                            onChange={handleChange('title')}
-                        />
-                    </FormControl>
-                </div>
-                <div>
-                    <FormControl fullWidth className={classes.formControl}>
-                        <TextField
-                            margin="dense"
-                            id="Artist"
-                            label="Artist"
-                            value={song.artist}
-                            type="text"
-                            fullWidth
-                            onChange={handleChange('artist')}
-                        />
-                    </FormControl>
-                </div>
-                <div>
-                    <FormControl className={classes.formControl}>
-                        <FormControlLabel
-                            control={<Switch  checked={active} onChange={handleChangeSwitch} color="primary" />}
-                            label="Active"
-                        />
-                    </FormControl>
-                </div>
-                <div>{/*TODO в отдельный компонент*/}
-                    <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-mutiple-chip-label">Attributes</InputLabel>
-                        <Select
-                            labelId="demo-mutiple-chip-label"
-                            id="demo-mutiple-chip"
-                            multiple
-                            value={personName}
-                            onChange={handleChangeSelect}
-                            input={<Input id="select-multiple-chip" />}
-                            renderValue={selected => (
-                                <div className={classes.chips}>
-                                    {selected.map(value => (
-                                        <Chip key={value} label={value} className={classes.chip} />
-                                    ))}
-                                </div>
-                            )}
-                            MenuProps={MenuProps}
-                        >
-                            {names.map(name => (
-                                <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-                                    {name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </div>
-            </DialogContent>
-            <DialogActions className={classes.formControl}>
-                <Button onClick={handleClose} color="primary">
+    const data = {
+        title: 'Create new song',
+        content: <div>
+            <div>
+                <FormControl fullWidth className={classes.formControl}>
+                    <TextField
+                        margin="dense"
+                        id="Title"
+                        label="Title"
+                        type="text"
+                        value={song.title}
+                        fullWidth
+                        onChange={handleChange('title')}
+                    />
+                </FormControl>
+            </div>
+            <div>
+                <FormControl fullWidth className={classes.formControl}>
+                    <TextField
+                        margin="dense"
+                        id="Artist"
+                        label="Artist"
+                        value={song.artist}
+                        type="text"
+                        fullWidth
+                        onChange={handleChange('artist')}
+                    />
+                </FormControl>
+            </div>
+            <div>
+                <FormControl className={classes.formControl}>
+                    <FormControlLabel
+                        control={<Switch  checked={active} onChange={handleChangeSwitch} color="primary" />}
+                        label="Active"
+                    />
+                </FormControl>
+            </div>
+            <div>{/*TODO в отдельный компонент*/}
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-mutiple-chip-label">Attributes</InputLabel>
+                    <Select
+                        labelId="demo-mutiple-chip-label"
+                        id="demo-mutiple-chip"
+                        multiple
+                        value={personName}
+                        onChange={handleChangeSelect}
+                        input={<Input id="select-multiple-chip" />}
+                        renderValue={selected => (
+                            <div className={classes.chips}>
+                                {selected.map(value => (
+                                    <Chip key={value} label={value} className={classes.chip} />
+                                ))}
+                            </div>
+                        )}
+                        MenuProps={MenuProps}
+                    >
+                        {names.map(name => (
+                            <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
+                                {name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            </div>
+        </div>,
+        action:
+            <FormControl fullWidth >
+                <Button onClick={handleClose} color="primary"  className={classes.button}>
                     Cancel
                 </Button>
-                <Button onClick={handleCreate(song)} color="primary">
+                <Button onClick={handleCreate(song)} color="primary"  className={classes.button}>
                     Create
                 </Button>
-                <Button onClick={handleCreateClose} color="primary">
+                <Button onClick={handleCreate(song, true)} color="primary" className={classes.button}>
                     Create and close
                 </Button>
-            </DialogActions>
-        </Dialog>
+            </FormControl>
+
+    }
+
+    return (
+        <CustomDialog  data = { data } show={ dialogOpened }  onHide={ () => setDialogOpened(false) }/>
     )
 
 }
