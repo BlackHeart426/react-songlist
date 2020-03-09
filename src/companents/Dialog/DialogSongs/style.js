@@ -16,6 +16,9 @@ export const useStyles = makeStyles(theme => ({
     noLabel: {
         marginTop: theme.spacing(3),
     },
+    button: {
+        margin: '2px 22px'
+}
 }));
 
 export const ITEM_HEIGHT = 48;
