@@ -2,27 +2,15 @@ import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DialogSongsRemove from "../../../Dialog/DialogSongs/DialogSongsRemove";
+import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
 
 export const RemoveSongs = (props) => {
-    const testForm = {
-        data: [],
-        active: false,
-        selected: null
-    }
-    const [test, setTest] = useState(testForm);
     const [confirmOpened, setConfirmOpened] = React.useState(false);
-    const {removeSong, selected, lenSelected} = props;
+    const {removeSong, selected, lenSelected, songData} = props;
 
 
     const handlerOpenConfirm = () => {
         setConfirmOpened(true)
-        const newTestForm = {
-            data: ['asd'],
-            active: true,
-            selected: 1
-        }
-        setTest(newTestForm)
-        console.log(test)
     }
 
     function showButton(selected) {
@@ -43,6 +31,7 @@ export const RemoveSongs = (props) => {
                 show = { confirmOpened }
                 onHide = { () => setConfirmOpened(false) }
                 onAccept = { handlerRemoveSong }
+                dataSong={ songData.find(item => item.id == selected) }
             />
         </>
     )

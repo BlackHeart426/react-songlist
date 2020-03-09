@@ -13,10 +13,13 @@ let paramTest = {
 
 export default function DialogSongRemove(props) {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {show, onHide, onAccept} = props
+    const { show, onHide, onAccept, dataSong } = props
+    const copyDataSong = {...props.dataSong};
+    const copyDataSongData = {...copyDataSong['data']};
 
     useEffect(() => {
         setDialogOpened(show)
+        console.log('dataSong', copyDataSongData)
     },[show])
 
     const handleClose = () => {
@@ -31,13 +34,13 @@ export default function DialogSongRemove(props) {
 
     const data = {
         title: 'Are you sure you want to delete these song?',
-        content: <div><p>Title: <strong>{paramTest.title}</strong></p><p>Artist: <strong>{paramTest.artist}</strong></p></div>,
+        content: <div><p>Title: <strong>{copyDataSongData.title}</strong></p><p>Artist: <strong>{copyDataSongData.artist}</strong></p></div>,
         action:  <>
             <Button variant="outlined" onClick={handleClose} color="primary">
-                         Disagree
-             </Button>
+                Cancel
+            </Button>
             <Button variant="outlined" onClick={handlerAccept} color="secondary" autoFocus>
-                    Agree
+                Agree
             </Button>
             </>
     }
