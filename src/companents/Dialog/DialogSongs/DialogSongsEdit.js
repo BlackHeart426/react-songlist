@@ -161,7 +161,7 @@ export function DialogSongsEdit(props) {
     }
 
     return (
-        <CustomDialog  data = { data } show={ dialogOpened }  onHide={ () => setDialogOpened(false) }/>
+        <CustomDialog  data = { data } show={ dialogOpened }  onHide={ onHide }/>
     )
 
 }
