@@ -8,8 +8,6 @@ import * as shortid from "shortid";
 import {getStyles, MenuProps, useStyles} from "../../../Dialog/DialogSongs/style";
 
 export const AddSongs = (props) => {
-
-    const classes = useStyles();
     const [dialogOpened, setDialogOpened] = useState(false);
     const {lenSelected, addSong} = props;
 

@@ -19,7 +19,6 @@ export const EditSongs = (props) => {
         setDialogOpened(true)
     }
 
-
     const handlerEditRowsSong = (property) => {
         const {title, artist, tags, active} = property;
         const newSong = {
