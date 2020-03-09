@@ -1,12 +1,7 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
-import DialogConfirm from "../../../Dialog/DialogConfirm";
-
-let paramTest = {
-    title: 'The kill',
-    artist: '30 sec'
-}
+import DialogSongsRemove from "../../../Dialog/DialogSongs/DialogSongsRemove";
 
 export const RemoveSongs = (props) => {
     const testForm = {
@@ -17,10 +12,7 @@ export const RemoveSongs = (props) => {
     const [test, setTest] = useState(testForm);
     const [confirmOpened, setConfirmOpened] = React.useState(false);
     const {removeSong, selected, lenSelected} = props;
-    const dataToConfirm = {
-        title: 'Are you sure you want to delete these song?',
-        content: <div><p>Title: <strong>{paramTest.title}</strong></p><p>Artist: <strong>{paramTest.artist}</strong></p></div>
-    }
+
 
     const handlerOpenConfirm = () => {
         setConfirmOpened(true)
@@ -47,11 +39,10 @@ export const RemoveSongs = (props) => {
             <IconButton onClick={handlerOpenConfirm} disabled={showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
-            <DialogConfirm
+            <DialogSongsRemove
                 show = { confirmOpened }
                 onHide = { () => setConfirmOpened(false) }
                 onAccept = { handlerRemoveSong }
-                data = { dataToConfirm }
             />
         </>
     )
