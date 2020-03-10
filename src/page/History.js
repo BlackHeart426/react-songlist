@@ -34,7 +34,6 @@ export const HistoryQueue = () => {
 
     return (
         <>
-            <h1>History</h1>
             <Card style={mbt10}>
                 <IconButton>
                     <BorderColorIcon/>

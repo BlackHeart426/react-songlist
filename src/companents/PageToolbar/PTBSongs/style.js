@@ -17,8 +17,14 @@ export const useStyles = makeStyles(theme => ({
 
 export const StyledOutlinedInput = withStyles({
     input: {
-        padding: '6px 7px',
+        padding: '6px 0',
     },
+    adornedEnd: {
+        paddingRight: '4px'
+    },
+    adornedStart: {
+        paddingLeft: '4px'
+    }
 })(OutlinedInput);
 
 export const StyledFormControl = withStyles({

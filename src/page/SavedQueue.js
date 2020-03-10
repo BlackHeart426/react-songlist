@@ -37,7 +37,6 @@ export const SavedQueue = () => {
 
     return (
         <>
-            <h1>SavedQueue</h1>
             <Card style={mbt10}>
                 <IconButton>
                     <ControlPointIcon/>

@@ -121,7 +121,6 @@ export const Songs = () => {
 
     return (
         <div>
-            <h1>Songs</h1>
             <PTBSongs showActive={active} onActive = {handlerActive}/>
             <TablePagination headCells = {headCells} rowsData = {handlerFilter()} rows = {rows} showActive={active}/>
         </div>

@@ -78,7 +78,6 @@ export const Queue = () => {
 
     return (
         <>
-            <h1>Queue</h1>
             <Card style={mbt10}>
                 <IconButton>
                     <ControlPointIcon/>

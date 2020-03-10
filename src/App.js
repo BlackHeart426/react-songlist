@@ -38,6 +38,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         marginTop: '40px', //TODO не динамичекий
         padding: theme.spacing(3),
+        paddingTop: '48px'
     },
     toolbar: theme.mixins.toolbar,
 }));
