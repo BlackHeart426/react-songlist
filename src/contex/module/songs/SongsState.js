@@ -2,14 +2,24 @@ import React from "react";
 import {SongsContext} from "./songsContext";
 import {useReducer} from "react";
 import {songsReducer} from "./songsReducer";
-import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
+import {
+    ADD_SONG,
+    EDIT_SONG,
+    REMOVE_SONG,
+    SET_SEARCHTEXT,
+    SET_SELECTED,
+    SET_SONGDATA,
+    SHOW_DETAIl,
+    TOGGLE_ACTIVE
+} from "../../types";
 
 export const SongsState = ({children}) => {
     const initialState = {
         list: [],
         selected: [],
         active: false,
-        searchText: ''
+        searchText: '',
+        detailShow: true
     }
 
     const [state, dispatch]  = useReducer(songsReducer, initialState);
@@ -63,6 +73,13 @@ export const SongsState = ({children}) => {
         })
     );
 
+    const detailShow = (state) => (
+        dispatch({
+            type: SHOW_DETAIl,
+            toggleDetail: state
+        })
+    );
+
     return (
         <SongsContext.Provider value={{
             setSongData,
@@ -72,6 +89,7 @@ export const SongsState = ({children}) => {
             addSong,
             removeSong,
             toggleActive,
+            detailShow,
             listSong: state.list,
             selected: state.selected,
             active: state.active,

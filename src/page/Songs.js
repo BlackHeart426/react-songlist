@@ -6,6 +6,8 @@ import {SongsState} from "../contex/module/songs/SongsState";
 import {SongsContext} from "../contex/module/songs/songsContext";
 import {DrawerContext} from "../contex/drawer/drawerContext";
 import * as shortid from "shortid";
+import {DetailTools} from "../companents/Content/Detail/DetailTools";
+import {DetailInfo} from "../companents/Content/Detail/DetailInfo";
 
 export function createData(title, artist, timesPlayed, lastPlayed, tags, action) {
     return {title, artist, timesPlayed, lastPlayed, tags, action}
@@ -120,9 +122,10 @@ export const Songs = () => {
     }
 
     return (
-        <div>
-            <PTBSongs showActive={active} onActive = {handlerActive}/>
-            <TablePagination headCells = {headCells} rowsData = {handlerFilter()} rows = {rows} showActive={active}/>
-        </div>
+        songData.detailShow
+        ? <><DetailTools/> <DetailInfo/></>
+        : <><PTBSongs showActive={active} onActive = {handlerActive}/><TablePagination headCells = {headCells} rowsData = {handlerFilter()} rows = {rows} showActive={active}/></>
+
+
     )
 };

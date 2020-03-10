@@ -18,18 +18,18 @@ let mbt10 = {
 
 export const PTBSongs = (props) => {
     const {showActive, onActive} = props
-    const {selected, listSong, addSong, removeSong, setSearchText, searchText, editSong} = useContext(SongsContext);
+    const {selected, listSong, addSong, removeSong, setSearchText, searchText, editSong, detailShow} = useContext(SongsContext);
     const lenSelected = selected.length;
     return (
         <>
             <Card style={mbt10}>
-                    <AddSongs lenSelected={lenSelected} songData={listSong} addSong={addSong}/>
-                    <EditSongs lenSelected={lenSelected} songData={listSong} editSong={editSong} selected={selected}/>
-                    <RemoveSongs lenSelected={lenSelected}  songData={listSong} removeSong={removeSong} selected={selected} />
-                    <DetailSongs lenSelected={lenSelected}/>
-                    <AddInQueueSongs lenSelected={lenSelected} songData={listSong} removeSong={removeSong} selected={selected}/>
-                    <SwitchActiveSongs showActive={showActive} onActive = {onActive}/>
-                    <SearchSong setSearchText={setSearchText} searchText={searchText}/>
+                <AddSongs lenSelected={lenSelected} songData={listSong} addSong={addSong}/>
+                <EditSongs lenSelected={lenSelected} songData={listSong} editSong={editSong} selected={selected}/>
+                <RemoveSongs lenSelected={lenSelected} songData={listSong} removeSong={removeSong} selected={selected} />
+                <DetailSongs lenSelected={lenSelected} selected={selected} detailShow={detailShow}/>
+                <AddInQueueSongs lenSelected={lenSelected} songData={listSong} removeSong={removeSong} selected={selected}/>
+                <SwitchActiveSongs showActive={showActive} onActive = {onActive}/>
+                <SearchSong setSearchText={setSearchText} searchText={searchText}/>
             </Card>
 
         </>

@@ -23,7 +23,7 @@ export default function ComponentTablePagination(props) {
     // const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
     const {statusEditMode} = useContext(DrawerContext);
     const {setSelected} = useContext(SongsContext);
     const {rowsData, headCells, showActive} = props;
@@ -154,7 +154,7 @@ export default function ComponentTablePagination(props) {
                     </Table>
                 </TableContainer>
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
+                    rowsPerPageOptions={[5, 10, 25, 50, 100]}
                     component="div"
                     count={rowsData.list.length}
                     rowsPerPage={rowsPerPage}

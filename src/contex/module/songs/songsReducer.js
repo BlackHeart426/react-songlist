@@ -1,4 +1,13 @@
-import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
+import {
+    ADD_SONG,
+    EDIT_SONG,
+    REMOVE_SONG,
+    SET_SEARCHTEXT,
+    SET_SELECTED,
+    SET_SONGDATA,
+    SHOW_DETAIl,
+    TOGGLE_ACTIVE
+} from "../../types";
 
 // const handlers = {
 //     [SET_ROWS]: (state, action) =>  {...state, list: action.list},
@@ -6,10 +15,6 @@ import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONG
 //     // [REMOVE_ROWS]: (state, action) => [...state.items.slice(0, action.payload)],
 //     DEFAULT: state => state
 // }
-function remove(arr, ...args){
-    let set = new Set(args);
-    return arr.filter((v, k) => !set.has(k));
-}
 
 export const songsReducer = (state, action) => {
     // const handler = handlers[action.type]  || handlers.DEFAULT
@@ -25,6 +30,8 @@ export const songsReducer = (state, action) => {
             return { ...state, list: [ ...state.list, action.newSong ] };
         case SET_SELECTED:
             return { ...state, selected: action.newSelect };
+        case SHOW_DETAIl:
+            return { ...state, detailShow: action.toggleDetail };
         case REMOVE_SONG:
             return { ...state, list: state.list.filter(item => item.id !== action.row), selected: [] };
         case EDIT_SONG:

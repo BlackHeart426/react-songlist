@@ -5,13 +5,10 @@ import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import {DetailInfo} from "../../../Content/Detail/DetailInfo";
 
 export const DetailSongs = (props) => {
-    const {rowsContext} = useContext(SongsContext)
-    const {lenSelected} = props;
+    const {lenSelected, detailShow} = props;
 
-    const addItemToRows = () => {
-        return (
-            <DetailInfo/>
-        )
+    const showDetail = () => {
+        detailShow(true)
     }
 
     function showButton(lenSelected) {
@@ -20,7 +17,7 @@ export const DetailSongs = (props) => {
 
     return (
         <>
-            <IconButton onClick={addItemToRows} disabled={showButton(lenSelected)}>
+            <IconButton onClick={showDetail} disabled={showButton(lenSelected)}>
                 <ErrorOutlineIcon />
             </IconButton>
         </>
