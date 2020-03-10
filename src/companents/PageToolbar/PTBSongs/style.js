@@ -17,7 +17,7 @@ export const useStyles = makeStyles(theme => ({
 
 export const StyledOutlinedInput = withStyles({
     input: {
-        padding: '6px 0',
+        padding: '6px 7px',
     },
     adornedEnd: {
         paddingRight: '4px'

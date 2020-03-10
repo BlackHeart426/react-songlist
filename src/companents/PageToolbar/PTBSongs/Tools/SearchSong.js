@@ -38,16 +38,25 @@ export const SearchSong = (props) => {
                 variant="outlined"
                 endAdornment={
                     <InputAdornment position="end">
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClearTextField}
-                            size="small"
-                        >
-                           <CloseIcon />
-                        </IconButton>
+                        {searchText ?
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClearTextField}
+                                size="small"
+                            >
+                                <CloseIcon />
+                            </IconButton> :
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                size="small"
+                            >
+                                <SearchIcon />
+                            </IconButton>
+
+                        }
                     </InputAdornment>
                 }
-                startAdornment={ <InputAdornment  position="start"><SearchIcon className={classes.searhIcon}/></InputAdornment>}
+                // startAdornment={ <InputAdornment  position="start"><SearchIcon className={classes.searhIcon}/></InputAdornment>}
             />
         </StyledFormControl>
     )
