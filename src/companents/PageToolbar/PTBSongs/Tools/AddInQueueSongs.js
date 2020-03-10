@@ -5,11 +5,12 @@ import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import {DialogSongsAdd} from "../../../Dialog/DialogSongs/DialogSongsAdd";
 import {DialogSongsAddQueue} from "../../../Dialog/DialogSongs/DialogSongsAddQueue";
 import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
+import DialogSongsRemove from "../../../Dialog/DialogSongs/DialogSongsRemove";
 
 export const AddInQueueSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
     const {rowsContext} = useContext(SongsContext)
-    const {lenSelected, songData, selected} = props;
+    const {lenSelected, songData, selected, removeSong} = props;
 
     const addItemToRows = () => {
         setDialogOpened(true)
@@ -20,9 +21,11 @@ export const AddInQueueSongs = (props) => {
     }
 
     function addItemToQueue() {
-        return(
-            console.log('asd')
-        )
+        console.log('asd')
+    }
+
+    function handlerRemoveSong() {
+        removeSong(selected[0])
     }
 
     return (
@@ -30,7 +33,11 @@ export const AddInQueueSongs = (props) => {
             <IconButton onClick={addItemToRows} disabled={showButton(lenSelected)}>
                 <PlaylistAddIcon />
             </IconButton>
-            <DialogSongsAddQueue onAddItemToQueue={ addItemToQueue } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogSongsAddQueue
+                onAddItemToQueue={ addItemToQueue }
+                dataSong={songData.find(item => item.id == selected)}
+                onAccept = { handlerRemoveSong }
+                show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }

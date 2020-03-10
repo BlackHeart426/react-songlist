@@ -56,7 +56,7 @@ export function DialogSongsAddQueue(props) {
         amount: '',
     }
 
-    const {show, onHide, onAddSongs, dataSong} = props
+    const {show, onHide, dataSong, onAccept, onAddItemToQueue} = props
     const classes = useStyles();
     const [dialogOpened, setDialogOpened] = useState(false);
     const [song, setSong] = useState(formControl)
@@ -93,10 +93,10 @@ export function DialogSongsAddQueue(props) {
         onHide();
     };
 
-    const handleCreate = (property, close = false) => event => {
+    const handleAdd = (property) => event => {
         console.log(property)
-        onAddSongs(property)
-        close && handleClose()
+        onAccept(property)
+        handleClose()
     };
 
     const data = {
@@ -152,7 +152,7 @@ export function DialogSongsAddQueue(props) {
                 <Button onClick={handleClose} color="primary"  className={classes.button}>
                     Cancel
                 </Button>
-                <Button onClick={handleCreate(song)} color="primary"   className={classes.button}>
+                <Button onClick={handleAdd(song)} color="primary"   className={classes.button}>
                     Add
                 </Button>
             </FormControl>

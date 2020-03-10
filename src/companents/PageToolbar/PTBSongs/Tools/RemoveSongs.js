@@ -18,7 +18,6 @@ export const RemoveSongs = (props) => {
     }
 
     const handlerRemoveSong = () => {
-        console.log('selected123', selected[0])
         removeSong(selected[0])
     }
 
