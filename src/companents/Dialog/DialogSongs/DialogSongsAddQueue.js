@@ -1,52 +1,16 @@
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
 import Input from "@material-ui/core/Input";
-import Chip from "@material-ui/core/Chip";
-import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import React, {useEffect, useState} from "react";
-import useTheme from "@material-ui/core/styles/useTheme";
 import {getStyles, MenuProps, useStyles} from "./style";
 import CustomDialog from "../CustomDialog";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import NumberFormat from 'react-number-format';
-import PropTypes from 'prop-types';
+import {NumberFormatCustom} from "../../inputComponent/NumberFormatCustom/NumberFormatCustom";
 
 const names = [
     'Music',
 ];
-
-function NumberFormatCustom(props) {
-    const { inputRef, onChange, ...other } = props;
-
-    return (
-        <NumberFormat
-            {...other}
-            getInputRef={inputRef}
-            onValueChange={values => {
-                onChange({
-                    target: {
-                        value: values.value,
-                    },
-                });
-            }}
-            thousandSeparator
-            isNumericString
-            prefix="$ "
-        />
-    );
-}
-
-NumberFormatCustom.propTypes = {
-    inputRef: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-};
 
 export function DialogSongsAddQueue(props) {
     const formControl = {
