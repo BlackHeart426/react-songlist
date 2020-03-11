@@ -8,6 +8,7 @@ import {DrawerContext} from "../contex/drawer/drawerContext";
 import * as shortid from "shortid";
 import {DetailTools} from "../companents/Content/Detail/DetailTools";
 import {DetailInfo} from "../companents/Content/Detail/DetailInfo";
+import {DetailSongs} from "../companents/PageToolbar/PTBSongs/Tools/DetailSongs";
 
 export function createData(title, artist, timesPlayed, lastPlayed, tags, action) {
     return {title, artist, timesPlayed, lastPlayed, tags, action}
@@ -87,7 +88,7 @@ export const Songs = () => {
         },
     ];
 
-    const {songData, setSongData, searchText} = useContext(SongsContext)
+    const {songData, setSongData, searchText, listSong, selected} = useContext(SongsContext)
     const {active, setActive} = useState(false)
     let filtered = [];
     useEffect(() => {
@@ -123,7 +124,7 @@ export const Songs = () => {
 
     return (
         songData.detailShow
-        ? <><DetailTools/> <DetailInfo/></>
+        ? <><DetailTools/> <DetailInfo  detailSong={listSong.find(item => item.id == selected)}/></>
         : <><PTBSongs showActive={active} onActive = {handlerActive}/><TablePagination headCells = {headCells} rowsData = {handlerFilter()} rows = {rows} showActive={active}/></>
 
 

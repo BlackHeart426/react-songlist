@@ -19,7 +19,7 @@ export const SongsState = ({children}) => {
         selected: [],
         active: false,
         searchText: '',
-        detailShow: true
+        detailShow: false
     }
 
     const [state, dispatch]  = useReducer(songsReducer, initialState);

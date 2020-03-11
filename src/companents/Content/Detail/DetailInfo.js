@@ -46,10 +46,11 @@ function a11yProps(index) {
     };
 }
 
-export const DetailInfo = () => {
+export const DetailInfo = (props) => {
 
     const classes = useStyles();
     const [tab, setTab] = React.useState(0);
+    const {detailSong} = props;
 
 
     const handleChange = (event, newValue) => {
@@ -60,10 +61,10 @@ export const DetailInfo = () => {
         <Card className={classes.root}>
             <CardContent>
                 <Typography variant="h4" component="h4">
-                    The Kill
+                    {detailSong.data.title}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    30 Second to mars
+                    {detailSong.data.artist}
                 </Typography>
                 <div className={classes.pos}>
                     <Chip label="Basic" />
@@ -74,7 +75,7 @@ export const DetailInfo = () => {
                     label="TIMES PLAYED"
                     type="text"
                     disabled={true}
-                    value={'0'}
+                    value={detailSong.data.timesPlayed}
                     className={classes.textField}
                 />
                 <TextField
@@ -83,7 +84,7 @@ export const DetailInfo = () => {
                     label="LAST PLAYED"
                     type="text"
                     disabled={true}
-                    value={'Never'}
+                    value={detailSong.data.lastPlayed}
                     className={classes.textField}
                 />
 

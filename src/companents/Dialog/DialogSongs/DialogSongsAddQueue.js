@@ -47,6 +47,7 @@ NumberFormatCustom.propTypes = {
     inputRef: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
 };
+
 export function DialogSongsAddQueue(props) {
     const formControl = {
         title: '',

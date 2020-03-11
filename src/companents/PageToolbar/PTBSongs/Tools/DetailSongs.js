@@ -5,7 +5,7 @@ import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import {DetailInfo} from "../../../Content/Detail/DetailInfo";
 
 export const DetailSongs = (props) => {
-    const {lenSelected, detailShow} = props;
+    const {lenSelected, detailShow, dataSong} = props;
 
     const showDetail = () => {
         detailShow(true)
