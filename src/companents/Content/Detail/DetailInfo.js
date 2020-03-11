@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Chip from "@material-ui/core/Chip";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import {TabPanel} from "./TabPanel";
 
 const useStyles = makeStyles({
     root: {
@@ -27,22 +28,32 @@ const useStyles = makeStyles({
         fontSize: 14,
     },
     pos: {
-        marginBottom: 12,
+        marginBottom: 24,
     },
     tabRoot: {
         flexGrow: 1,
     },
+    textField: {
+        marginRight: 10
+    }
+
 });
 
-
+function a11yProps(index) {
+    return {
+        id: `wrapped-tab-${index}`,
+        'aria-controls': `wrapped-tabpanel-${index}`,
+    };
+}
 
 export const DetailInfo = () => {
 
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+    const [tab, setTab] = React.useState(0);
+
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        setTab(newValue);
     };
 
     return (
@@ -54,22 +65,60 @@ export const DetailInfo = () => {
                 <Typography className={classes.pos} color="textSecondary">
                     30 Second to mars
                 </Typography>
-                <div>
+                <div className={classes.pos}>
                     <Chip label="Basic" />
                 </div>
+                <TextField
+                    margin="dense"
+                    id="TIMES_PLAYED"
+                    label="TIMES PLAYED"
+                    type="text"
+                    disabled={true}
+                    value={'0'}
+                    className={classes.textField}
+                />
+                <TextField
+                    margin="dense"
+                    id="LAST_PLAYED"
+                    label="LAST PLAYED"
+                    type="text"
+                    disabled={true}
+                    value={'Never'}
+                    className={classes.textField}
+                />
+
+                <TextField
+                    margin="dense"
+                    id="IN_QUEUE"
+                    label="IN QUEUE"
+                    type="text"
+                    disabled={true}
+                    value={'0'}
+                    className={classes.textField}
+                />
             </CardContent>
             <CardActions>
+                <div className={classes.tabRoot}>
                 <Tabs
-                    value={value}
+                    value={tab}
                     onChange={handleChange}
                     indicatorColor="primary"
                     textColor="primary"
-                    centered
                 >
-                    <Tab label="Item One" >1</Tab>
-                    <Tab label="Item Two" >2</Tab>
-                    <Tab label="Item Three">3</Tab>
+                    <Tab label="Chords" {...a11yProps(0)}/>
+                    <Tab label="Lyrics" {...a11yProps(1)}/>
+                    <Tab label="Tabs" {...a11yProps(2)}/>
                 </Tabs>
+                <TabPanel value={tab} index={0}>
+                    Item One
+                </TabPanel>
+                <TabPanel value={tab} index={1}>
+                    Item Two
+                </TabPanel>
+                <TabPanel value={tab} index={2}>
+                    Item Three
+                </TabPanel>
+                </div>
             </CardActions>
         </Card>
     )
