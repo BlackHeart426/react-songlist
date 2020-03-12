@@ -31,7 +31,6 @@ class Auth extends Component {
     render() {
         return (
             <>
-
                 <Button
                     onClick={this.registerHandler}
                     type="submit"

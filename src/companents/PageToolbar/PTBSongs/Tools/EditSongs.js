@@ -1,11 +1,8 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
-import {SongsContext} from "../../../../contex/module/songs/songsContext";
 import EditIcon from "@material-ui/icons/Edit";
 import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
-import * as shortid from "shortid";
 import {createData} from "../../../../page/Songs/Songs";
-import {requestHandler} from "../../../../actionPage/Songs/rows";
 
 export const EditSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -13,6 +10,11 @@ export const EditSongs = (props) => {
 
     function showButton(lenSelected) {
         return lenSelected == 1 ? false : true
+    }
+
+
+    const requestHandler = () => {
+
     }
 
     const handlerEditRows = () => {

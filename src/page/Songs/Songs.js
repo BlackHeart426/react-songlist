@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
 import TablePagination from '../../companents/TablePagination/ComponentTablePagination'
-import {requestHandler} from "../../actionPage/Songs/rows";
 import {PTBSongs} from "../../companents/PageToolbar/PTBSongs/PTBSongs";
 import {SongsContext} from "../../contex/module/songs/songsContext";
 import * as shortid from "shortid";
@@ -11,6 +10,9 @@ export function createData(title, artist, timesPlayed, lastPlayed, tags, action)
 
 export const Songs = () => {
 
+    const requestHandler = () => {
+
+    }
 
     const headCells = [
         { id: 'title', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
