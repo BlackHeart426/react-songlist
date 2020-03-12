@@ -16,6 +16,7 @@ import {SongsState} from "./contex/module/songs/SongsState";
 import {DrawerContext} from "./contex/drawer/drawerContext";
 import {DetailSong} from "./page/Songs/DetailSong";
 import {EditDetailSong} from "./page/Songs/EditDetailSong";
+import {QueueState} from "./contex/module/queue/QueueState";
 
 const drawerWidth = 240;
 
@@ -54,7 +55,14 @@ export const App = () => {
             <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
             <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
         </Switch>
-    )
+    );
+
+    const QueueRouter = () => (
+        <Switch>
+            <Route exact path="/s/:userId/queue" component={Queue}/>
+            <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
+        </Switch>
+    );
 
     return (
 
@@ -78,8 +86,8 @@ export const App = () => {
                 <main className={classes.content}>
                     <div  className={classes.toolbar}>
                         <Switch>
-                            <Route component={Queue} path="/queue"/>
-                            <SongsState> <Route component={SongsRouter} path="/s/:userId/songs"/></SongsState>
+                            <SongsState><Route component={SongsRouter} path="/s/:userId/songs"/></SongsState>
+                            <QueueState><Route component={QueueRouter} path="/s/:userId/queue"/></QueueState>
                             <Route component={SavedQueue} path="/saved-queue"/>
                             <Route component={HistoryQueue} path="/history"/>
                             <Route component={Settings} path="/settings"/>

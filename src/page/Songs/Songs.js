@@ -113,19 +113,11 @@ export const Songs = () => {
         )
     }
 
-    function handlerActive() {
-        console.log(active)
-        //setActive(!active)
-        console.log(active)
-    }
 
     return (
-        // songData.detailShow
-        // ? <><DetailTools/>
-        // {/*<DetailInfo  detailSong={listSong.find(item => item.id == selected)}/></>*/}
-        // // <DetailEdit detailSong={listSong.find(item => item.id == selected)}/></>
-        // : <><PTBSongs showActive={active} onActive = {handlerActive}/><TablePagination headCells = {headCells} rowsData = {handlerFilter()} rows = {rows} showActive={active}/></>
-        <><PTBSongs showActive={active} onActive = {handlerActive}/><TablePagination headCells = {headCells} rowsData = {handlerFilter()} rows = {rows} showActive={active}/></>
-
+        <>
+            <PTBSongs showActive={active}/>
+            <TablePagination headCells = {headCells} rowsData = {handlerFilter()} showActive={active}/>
+        </>
     )
 };

@@ -25,7 +25,7 @@ export default function ComponentTablePagination(props) {
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const {statusEditMode} = useContext(DrawerContext);
-    const {setSelected} = useContext(SongsContext);
+    const {setSelected} = useContext(SongsContext); //TODO поднять наверх все что зависит
     const {rowsData, headCells, showActive} = props;
 
     useEffect(() => {

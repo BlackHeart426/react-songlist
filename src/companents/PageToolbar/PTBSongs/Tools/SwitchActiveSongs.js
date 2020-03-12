@@ -3,7 +3,6 @@ import {SongsContext} from "../../../../contex/module/songs/songsContext";
 import Switch from "@material-ui/core/Switch";
 
 export const SwitchActiveSongs = (props) => {
-    const {showActive, onActive} = props
     const [active, setActived] = useState(false);
     const {songData, toggleActive} = useContext(SongsContext)
 

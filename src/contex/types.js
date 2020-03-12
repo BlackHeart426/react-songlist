@@ -12,3 +12,5 @@ export const ADD_SONG = 'ADD_ROWS';
 export const SET_SELECTED = 'SET_SELECTED';
 export const REMOVE_SONG = 'REMOVE_SONG';
 export const EDIT_SONG = 'EDIT_SONG';
+export const UPDATE_SONG_QUEUE = 'UPDATE_SONG_QUEUE';
+export const CHANGE_POSITION = 'CHANGE_POSITION';
