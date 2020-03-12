@@ -52,7 +52,7 @@ export const App = () => {
         <Switch>
             <Route exact path="/songs" component={Songs}/>
             <Route path="/songs/detail/:id" component={DetailSong}/>
-            <Route path="/songs/edit-song/:id" component={EditDetailSong}/>
+            <Route path="/songs/edit/:id" component={EditDetailSong}/>
         </Switch>
     )
 

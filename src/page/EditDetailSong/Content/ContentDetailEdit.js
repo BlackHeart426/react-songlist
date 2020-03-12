@@ -37,7 +37,7 @@ export const ContentDetailEdit = (props) => {
                         id="TITLE"
                         label="TITLE"
                         type="text"
-                        // value={detailSong.data.title}
+                        value={detailSong.data.title}
                         className={classes.textField}
                     />
                 </FormControl>
@@ -46,7 +46,7 @@ export const ContentDetailEdit = (props) => {
                         margin="dense"
                         id="ARTIST"
                         label="ARTIST"
-                        // value={detailSong.data.artist}
+                        value={detailSong.data.artist}
                         type="text"
                         className={classes.textField}
                     />

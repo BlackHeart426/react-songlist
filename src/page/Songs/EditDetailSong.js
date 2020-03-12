@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {SongsContext} from "../../contex/module/songs/songsContext";
-import {ToolDetailEditSong} from "../DetailSong/Tools/ToolDetailEditSong";
 import {ContentDetailEdit} from "../EditDetailSong/Content/ContentDetailEdit";
+import {ToolsEditDetail} from "../EditDetailSong/Tools/ToolsEditDetail";
 
 
 
@@ -10,7 +10,7 @@ export const EditDetailSong = props => {
 
     return (
         <>
-            <ToolDetailEditSong/>
+            <ToolsEditDetail/>
             <ContentDetailEdit detailSong={listSong.find(item => item.id == selected)}/>
         </>
     )
