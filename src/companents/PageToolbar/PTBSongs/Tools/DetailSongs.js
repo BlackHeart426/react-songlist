@@ -8,7 +8,7 @@ export const DetailSongs = (props) => {
     const history = useHistory();
 
     const showDetail = () => {
-        history.push("/songs/detail-song/"+2525)
+        history.push("/songs/detail/"+2525)
         // detailShow(true)
     }
 

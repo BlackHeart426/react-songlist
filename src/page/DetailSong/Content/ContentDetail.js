@@ -1,22 +1,16 @@
 import React from "react";
-import {DetailTools} from "../DetailTools";
-import {DetailBack} from "../Tools/DetailBack";
 import {Card} from "@material-ui/core";
-import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
-import {componentTags} from "../../../TablePagination/componentTags";
-import IconButton from "@material-ui/core/IconButton";
 import Chip from "@material-ui/core/Chip";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import {TabPanel} from "../TabPanel";
-import {a11yProps, useStyles} from "./stylesDetailInfo";
+import {TabPanel} from "../../../companents/TabPanel/TabPanel";
+import {a11yProps, useStyles} from "./stylesDetail";
 
-export const DetailInfo = (props) => {
+export const ContentDetail = (props) => {
 
     const classes = useStyles();
     const [tab, setTab] = React.useState(0);

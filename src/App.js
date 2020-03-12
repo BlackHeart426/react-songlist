@@ -12,10 +12,10 @@ import DrawerCustom from "./companents/Drawer/DrawerCustom";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {AlertCustom} from  './companents/Alert/Alert'
-import {AlertState} from "./contex/alert/AlertState";
 import {SongsState} from "./contex/module/songs/SongsState";
 import {DrawerContext} from "./contex/drawer/drawerContext";
-import {DynamicDetail} from "./page/Songs/DynamicDetail";
+import {DetailSong} from "./page/Songs/DetailSong";
+import {EditDetailSong} from "./page/Songs/EditDetailSong";
 
 const drawerWidth = 240;
 
@@ -51,7 +51,8 @@ export const App = () => {
     const SongsRouter = () => (
         <Switch>
             <Route exact path="/songs" component={Songs}/>
-            <Route path="/songs/detail-song/:id" component={DynamicDetail}/>
+            <Route path="/songs/detail/:id" component={DetailSong}/>
+            <Route path="/songs/edit-song/:id" component={EditDetailSong}/>
         </Switch>
     )
 

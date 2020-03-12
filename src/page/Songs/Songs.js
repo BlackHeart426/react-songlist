@@ -2,14 +2,8 @@ import React, {useContext, useEffect, useState} from "react";
 import TablePagination from '../../companents/TablePagination/ComponentTablePagination'
 import {requestHandler} from "../../actionPage/Songs/rows";
 import {PTBSongs} from "../../companents/PageToolbar/PTBSongs/PTBSongs";
-import {SongsState} from "../../contex/module/songs/SongsState";
 import {SongsContext} from "../../contex/module/songs/songsContext";
-import {DrawerContext} from "../../contex/drawer/drawerContext";
 import * as shortid from "shortid";
-import {DetailTools} from "../../companents/Content/Detail/DetailTools";
-import {DetailInfo} from "../../companents/Content/Detail/DetailInfo/DetailInfo";
-import {DetailSongs} from "../../companents/PageToolbar/PTBSongs/Tools/DetailSongs";
-import {DetailEdit} from "../../companents/Content/Detail/DetailEdit/DetailEdit";
 
 export function createData(title, artist, timesPlayed, lastPlayed, tags, action) {
     return {title, artist, timesPlayed, lastPlayed, tags, action}
@@ -124,12 +118,12 @@ export const Songs = () => {
     }
 
     return (
-        songData.detailShow
-        ? <><DetailTools/>
-        {/*<DetailInfo  detailSong={listSong.find(item => item.id == selected)}/></>*/}
-        // <DetailEdit detailSong={listSong.find(item => item.id == selected)}/></>
-        : <><PTBSongs showActive={active} onActive = {handlerActive}/><TablePagination headCells = {headCells} rowsData = {handlerFilter()} rows = {rows} showActive={active}/></>
-
+        // songData.detailShow
+        // ? <><DetailTools/>
+        // {/*<DetailInfo  detailSong={listSong.find(item => item.id == selected)}/></>*/}
+        // // <DetailEdit detailSong={listSong.find(item => item.id == selected)}/></>
+        // : <><PTBSongs showActive={active} onActive = {handlerActive}/><TablePagination headCells = {headCells} rowsData = {handlerFilter()} rows = {rows} showActive={active}/></>
+        <><PTBSongs showActive={active} onActive = {handlerActive}/><TablePagination headCells = {headCells} rowsData = {handlerFilter()} rows = {rows} showActive={active}/></>
 
     )
 };

@@ -6,15 +6,15 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import {TabPanel} from "../TabPanel";
+import {TabPanel} from "../../../companents/TabPanel/TabPanel";
 import {a11yProps, useStyles} from "./stylesDetailEdit";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
-import {NumberFormatCustom} from "../../../inputComponent/NumberFormatCustom/NumberFormatCustom";
+import {NumberFormatCustom} from "../../../companents/inputComponent/NumberFormatCustom/NumberFormatCustom";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
-export const DetailEdit = (props) => {
+export const ContentDetailEdit = (props) => {
 
     const classes = useStyles();
     const [tab, setTab] = React.useState(0);
@@ -23,14 +23,9 @@ export const DetailEdit = (props) => {
     const handleChange = (event, newValue) => {
     };
 
-    // useEffect(() => {
-    //     console.log(detailSong)
-    // },[detailSong]);
 
     const handleChangeSwitch = event => {
 
-        // setActive(event.target.checked)
-        // setProperty('active', event.target.checked)
     };
 
     return (
@@ -42,7 +37,7 @@ export const DetailEdit = (props) => {
                         id="TITLE"
                         label="TITLE"
                         type="text"
-                        value={detailSong.data.title}
+                        // value={detailSong.data.title}
                         className={classes.textField}
                     />
                 </FormControl>
@@ -51,7 +46,7 @@ export const DetailEdit = (props) => {
                         margin="dense"
                         id="ARTIST"
                         label="ARTIST"
-                        value={detailSong.data.artist}
+                        // value={detailSong.data.artist}
                         type="text"
                         className={classes.textField}
                     />
