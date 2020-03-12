@@ -4,6 +4,7 @@ import React, {useContext} from "react";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {SongsContext} from "../../../contex/module/songs/songsContext";
 import {useHistory} from "react-router";
+import {addUserIdAtLink} from "../../../companents/GlobalParamaters/linkWithUserId";
 
 export const ToolDetailBack = () => {
     const {detailShow} = useContext(SongsContext);
@@ -11,7 +12,7 @@ export const ToolDetailBack = () => {
 
     function detailClose() {
         // detailShow(false);
-        history.push("/songs")
+        history.push(addUserIdAtLink("/songs"))
     }
 
     return (

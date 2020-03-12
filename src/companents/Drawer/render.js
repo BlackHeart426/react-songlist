@@ -3,6 +3,7 @@ import ListItem from "@material-ui/core/ListItem";
 import {NavLink} from "react-router-dom";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import {addUserIdAtLink} from "../GlobalParamaters/linkWithUserId";
 
 export function renderLink(props) {
 
@@ -13,7 +14,7 @@ export function renderLink(props) {
             <ListItem
                 button
                 component={NavLink}
-                to={link ? link : '#'}
+                to={addUserIdAtLink(link) ? addUserIdAtLink(link) : '#'}
                 activeClassName="Mui-selected"
             >
                 {icon ? <ListItemIcon>{icon}</ListItemIcon> : <React.Fragment></React.Fragment>}

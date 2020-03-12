@@ -50,9 +50,9 @@ export const App = () => {
 
     const SongsRouter = () => (
         <Switch>
-            <Route exact path="/songs" component={Songs}/>
-            <Route path="/songs/detail/:id" component={DetailSong}/>
-            <Route path="/songs/edit/:id" component={EditDetailSong}/>
+            <Route exact path="/s/:userId/songs" component={Songs}/>
+            <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
+            <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
         </Switch>
     )
 
@@ -79,11 +79,10 @@ export const App = () => {
                     <div  className={classes.toolbar}>
                         <Switch>
                             <Route component={Queue} path="/queue"/>
-                            <SongsState><Route component={SongsRouter} path="/songs" /></SongsState>
-                            <Route component={SavedQueue} path="/saved-queue" />
-                            <Route component={HistoryQueue} path="/history" />
-                            <Route component={Settings} path="/settings" />
-                            <Route component={About} path="/about" />
+                            <SongsState> <Route component={SongsRouter} path="/s/:userId/songs"/></SongsState>
+                            <Route component={SavedQueue} path="/saved-queue"/>
+                            <Route component={HistoryQueue} path="/history"/>
+                            <Route component={Settings} path="/settings"/>
                         </Switch>
                         <AlertCustom text={'Test'}/>
                     </div>
