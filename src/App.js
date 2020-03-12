@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import './App.css';
 import { Route, Switch} from "react-router-dom";
 import {Queue} from "./page/Queue";
-import {Songs} from "./page/Songs";
+import {Songs} from "./page/Songs/Songs";
 import {SavedQueue} from "./page/SavedQueue";
 import {HistoryQueue} from "./page/History";
 import {Settings} from "./page/Settings";
@@ -15,6 +15,7 @@ import {AlertCustom} from  './companents/Alert/Alert'
 import {AlertState} from "./contex/alert/AlertState";
 import {SongsState} from "./contex/module/songs/SongsState";
 import {DrawerContext} from "./contex/drawer/drawerContext";
+import {DynamicDetail} from "./page/Songs/DynamicDetail";
 
 const drawerWidth = 240;
 
@@ -47,6 +48,13 @@ export const App = () => {
     const classes = useStyles();
     const { toggleEditMode, statusEditMode, toggleOpenDrawer, statusOpenDrawer } = useContext(DrawerContext)
 
+    const SongsRouter = () => (
+        <Switch>
+            <Route exact path="/songs" component={Songs}/>
+            <Route path="/songs/detail-song/:id" component={DynamicDetail}/>
+        </Switch>
+    )
+
     return (
 
             <div className={classes.root}>
@@ -70,7 +78,7 @@ export const App = () => {
                     <div  className={classes.toolbar}>
                         <Switch>
                             <Route component={Queue} path="/queue"/>
-                            <SongsState><Route component={Songs} path="/songs" /></SongsState>
+                            <SongsState><Route component={SongsRouter} path="/songs" /></SongsState>
                             <Route component={SavedQueue} path="/saved-queue" />
                             <Route component={HistoryQueue} path="/history" />
                             <Route component={Settings} path="/settings" />

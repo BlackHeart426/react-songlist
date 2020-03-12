@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import {DialogSongsAdd} from "../../../Dialog/DialogSongs/DialogSongsAdd";
 import {requestHandler} from "../../../../actionPage/Songs/rows";
-import {createData} from "../../../../page/Songs";
+import {createData} from "../../../../page/Songs/Songs";
 import * as shortid from "shortid";
 import {getStyles, MenuProps, useStyles} from "../../../Dialog/DialogSongs/style";
 

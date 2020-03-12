@@ -1,25 +1,25 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
-import {SongsContext} from "../../../../contex/module/songs/songsContext";
+import React from "react";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-import {DetailInfo} from "../../../Content/Detail/DetailInfo/DetailInfo";
+import {useHistory} from "react-router";
 
 export const DetailSongs = (props) => {
     const {lenSelected, detailShow, dataSong} = props;
+    const history = useHistory();
 
     const showDetail = () => {
-        detailShow(true)
+        history.push("/songs/detail-song/"+2525)
+        // detailShow(true)
     }
 
     function showButton(lenSelected) {
         return lenSelected == 1 ? false : true
     }
 
+
     return (
-        <>
-            <IconButton onClick={showDetail} disabled={showButton(lenSelected)}>
-                <ErrorOutlineIcon />
-            </IconButton>
-        </>
+        <IconButton onClick={showDetail} disabled={showButton(lenSelected)}>
+            <ErrorOutlineIcon />
+        </IconButton>
     )
 }

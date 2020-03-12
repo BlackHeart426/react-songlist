@@ -4,7 +4,7 @@ import {SongsContext} from "../../../../contex/module/songs/songsContext";
 import EditIcon from "@material-ui/icons/Edit";
 import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
 import * as shortid from "shortid";
-import {createData} from "../../../../page/Songs";
+import {createData} from "../../../../page/Songs/Songs";
 import {requestHandler} from "../../../../actionPage/Songs/rows";
 
 export const EditSongs = (props) => {

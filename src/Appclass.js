@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {Queue} from "./page/Queue";
-import {Songs} from "./page/Songs";
+import {Songs} from "./page/Songs/Songs";
 import {SavedQueue} from "./page/SavedQueue";
 import {HistoryQueue} from "./page/History";
 import {Settings} from "./page/Settings";
