@@ -1,6 +1,6 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
-import EditIcon from "@material-ui/icons/Edit";
+import BlockIcon from "@material-ui/icons/Block";
 import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
 import {createData} from "../../../../page/Songs/Songs";
 
@@ -9,7 +9,7 @@ export const AddSongInHistory = (props) => {
     const {lenSelected, editSong, songData, selected} = props;
 
     function showButton(lenSelected) {
-        return lenSelected == 1 ? false : true
+        return lenSelected >= 1 ? false : true
     }
 
 
@@ -41,7 +41,7 @@ export const AddSongInHistory = (props) => {
     return (
         <>
             <IconButton onClick={handlerEditRows} disabled={showButton(lenSelected)}>
-                <EditIcon />
+                <BlockIcon/>
             </IconButton>
             <DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>

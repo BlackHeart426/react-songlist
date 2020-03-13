@@ -85,18 +85,18 @@ export const Songs = () => {
         },
     ];
 
-    const {songData, setSongData, searchText, listSong, selected} = useContext(SongsContext)
+    const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(SongsContext)
     const {active, setActive} = useState(false)
     let filtered = [];
     useEffect(() => {
         setSongData(songList)
-        localStorage.setItem('rowSongs', JSON.stringify(songList))
+        localStorage.setItem('listSongs', JSON.stringify(songList))
     },[])
 
 
     useEffect(() => {
         console.log('songDataEff', songData)
-        localStorage.setItem('rowSongs', JSON.stringify(songData))
+        localStorage.setItem('listSongs', JSON.stringify(songData))
     },[songData])
 
 
@@ -117,7 +117,7 @@ export const Songs = () => {
     return (
         <>
             <PTBSongs showActive={active}/>
-            <TablePagination headCells = {headCells} rowsData = {handlerFilter()} showActive={active}/>
+            <TablePagination onSelectRow = {setSelected} headCells = {headCells} rowsData = {handlerFilter()} showActive={active}/>
         </>
     )
 };

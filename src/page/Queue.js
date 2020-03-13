@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {Card} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
@@ -9,6 +9,8 @@ import TablePagination from '../companents/TablePagination/ComponentTablePaginat
 import * as shortid from "shortid";
 import {createData} from "./Songs/Songs";
 import {PTBQueue} from "../companents/PageToolbar/PTBQueue/PTBQueue";
+import {SongsContext} from "../contex/module/songs/songsContext";
+import {QueueContext} from "../contex/module/queue/queueContext";
 
 export const Queue = () => {
     let mbt10 = {
@@ -84,10 +86,18 @@ export const Queue = () => {
         { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
 
+    const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(QueueContext);
+
+    useEffect(() => {
+        setSongData(songList);
+        localStorage.setItem('listQueue', JSON.stringify(songList))
+    },[]);
+
+
     return (
         <>
             <PTBQueue/>
-            <TablePagination headCells = {headCells} rowsData = {songList}/>
+            <TablePagination onSelectRow = {setSelected}  headCells = {headCells} rowsData = {songData}/>
         </>
 
     )

@@ -50,18 +50,22 @@ export const App = () => {
     const { toggleEditMode, statusEditMode, toggleOpenDrawer, statusOpenDrawer } = useContext(DrawerContext)
 
     const SongsRouter = () => (
-        <Switch>
-            <Route exact path="/s/:userId/songs" component={Songs}/>
-            <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
-            <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
-        </Switch>
+        <SongsState>
+            <Switch>
+                <Route exact path="/s/:userId/songs" component={Songs}/>
+                <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
+                <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
+            </Switch>
+        </SongsState>
     );
 
     const QueueRouter = () => (
-        <Switch>
-            <Route exact path="/s/:userId/queue" component={Queue}/>
-            <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
-        </Switch>
+        <QueueState>
+            <Switch>
+                <Route exact path="/s/:userId/queue" component={Queue}/>
+                <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
+            </Switch>
+        </QueueState>
     );
 
     return (
@@ -86,8 +90,8 @@ export const App = () => {
                 <main className={classes.content}>
                     <div  className={classes.toolbar}>
                         <Switch>
-                            <SongsState><Route component={SongsRouter} path="/s/:userId/songs"/></SongsState>
-                            <QueueState><Route component={QueueRouter} path="/s/:userId/queue"/></QueueState>
+                            <Route component={QueueRouter} path="/s/:userId/queue"/>
+                            <Route component={SongsRouter} path="/s/:userId/songs"/>
                             <Route component={SavedQueue} path="/saved-queue"/>
                             <Route component={HistoryQueue} path="/history"/>
                             <Route component={Settings} path="/settings"/>

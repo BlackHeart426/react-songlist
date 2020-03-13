@@ -20,16 +20,14 @@ export default function ComponentTablePagination(props) {
     const classes = useStyles();
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
-    // const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const {statusEditMode} = useContext(DrawerContext);
-    const {setSelected} = useContext(SongsContext); //TODO поднять наверх все что зависит
-    const {rowsData, headCells, showActive} = props;
+    const {rowsData, headCells, showActive, onSelectRow} = props;
 
     useEffect(() => {
-        setSelected([])
+        onSelectRow([])
     },[statusEditMode])
 
     //TODO Рассмотреть возможность переноса всех handler в отдельный файл
@@ -48,10 +46,10 @@ export default function ComponentTablePagination(props) {
     const handleSelectAllClick = event => {
         if (event.target.checked) {
             const newSelecteds = rowsData.list.map(n => n.id);
-            setSelected(newSelecteds);
+            onSelectRow(newSelecteds);
             return;
         }
-        setSelected([]);
+        onSelectRow([]);
     };
 
     /**
@@ -76,7 +74,7 @@ export default function ComponentTablePagination(props) {
             );
         }
 
-        setSelected(newSelected);
+        onSelectRow(newSelected);
     };
 
     /**

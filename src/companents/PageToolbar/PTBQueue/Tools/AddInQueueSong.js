@@ -6,10 +6,11 @@ import {DialogSongsAdd} from "../../../Dialog/DialogSongs/DialogSongsAdd";
 import {DialogSongsAddQueue} from "../../../Dialog/DialogSongs/DialogSongsAddQueue";
 import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
 import DialogSongsRemove from "../../../Dialog/DialogSongs/DialogSongsRemove";
+import ControlPointIcon from "@material-ui/icons/ControlPoint";
 
 export const AddInQueueSong = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {rowsContext} = useContext(SongsContext)
+    // const {rowsContext} = useContext(SongsContext)
     const {lenSelected, songData, selected, removeSong} = props;
 
     const addItemToRows = () => {
@@ -17,7 +18,7 @@ export const AddInQueueSong = (props) => {
     }
 
     function showButton(lenSelected) {
-        return lenSelected == 1 ? false : true
+        return lenSelected == 0 ? false : true
     }
 
     function addItemToQueue() {
@@ -31,7 +32,7 @@ export const AddInQueueSong = (props) => {
     return (
         <>
             <IconButton onClick={addItemToRows} disabled={showButton(lenSelected)}>
-                <PlaylistAddIcon />
+                <ControlPointIcon />
             </IconButton>
             <DialogSongsAddQueue
                 onAddItemToQueue={ addItemToQueue }

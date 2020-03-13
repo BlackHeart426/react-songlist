@@ -2,13 +2,10 @@ import React from "react";
 import {useReducer} from "react";
 import {
     ADD_SONG, CHANGE_POSITION,
-    EDIT_SONG,
     REMOVE_SONG,
-    SET_SEARCHTEXT,
     SET_SELECTED,
     SET_SONGDATA,
-    SHOW_DETAIl,
-    TOGGLE_ACTIVE, UPDATE_SONG_QUEUE
+    UPDATE_SONG_QUEUE
 } from "../../types";
 import {queueReducer} from "./queueReducer";
 import {QueueContext} from "./queueContext";

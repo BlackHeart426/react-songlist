@@ -33,7 +33,8 @@ export function EnhancedTableRows (props) {
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
-                    ( (showActive) || (data[index].active) )&&
+
+                    (data[index].active != undefined ? ( (showActive) || (data[index].active) ) : true ) &&
                     <ThemeProvider theme={outerTheme}  key={ data[index].id }>
                         <TableRow
                             hover
@@ -59,7 +60,7 @@ export function EnhancedTableRows (props) {
                             {/*TODO Переписать с типом элемента*/}
                             { Object.keys(row).map((item, indexRow) => (
 
-                                    <TableCell align="center" key={indexRow} style={data[index].active == true ? active : defaultColor}>
+                                    <TableCell align="center" key={indexRow} style={ data[index].active != undefined ? (data[index].active == true ? active : defaultColor) : active }>
 
                                         {
                                             row[item].type == 'tag' &&
@@ -78,12 +79,12 @@ export function EnhancedTableRows (props) {
                                                                 type="submit"
                                                                 color="primary"
                                                                 variant="outlined"
-                                                                key={indexBtn}
+                                                                key={data[index].id}
                                                                 onClick={() => btn.handler(data[index].id)}
                                                             >
                                                                 {btn.name}
                                                             </Button>
-                                                        :   <IconButton>
+                                                        :   <IconButton  key={indexBtn}>
                                                                 {componentTags[btn.name]}
                                                             </IconButton>
                                                 ))
