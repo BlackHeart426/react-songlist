@@ -56,7 +56,7 @@ export const QueueState = ({children}) => {
     const changePosition = (state) => (
         dispatch({
             type: CHANGE_POSITION,
-            song: state
+            position: state
         })
     );
     return (
