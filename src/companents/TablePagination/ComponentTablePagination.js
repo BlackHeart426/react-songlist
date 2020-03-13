@@ -59,7 +59,6 @@ export default function ComponentTablePagination(props) {
         const selectedIndex = rowsData.selected.indexOf(name);
 
         let newSelected = [];
-
         if (selectedIndex === -1) {
             newSelected = newSelected.concat(rowsData.selected, name);
         } else if (selectedIndex === 0) {
@@ -73,8 +72,10 @@ export default function ComponentTablePagination(props) {
             );
         }
 
-        if (typeCheckBox == 'solo') {
+        if (typeCheckBox == 'solo' && selectedIndex === -1) {
             newSelected = [name];
+        } else if (selectedIndex === 0) {
+            newSelected = newSelected.concat(rowsData.selected.slice(1));
         }
 
         onSelectRow(newSelected);
