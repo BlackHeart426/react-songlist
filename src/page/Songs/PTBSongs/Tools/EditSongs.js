@@ -1,10 +1,10 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
-import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
-import {createData} from "../../../../page/Songs/Songs";
-import PublishIcon from '@material-ui/icons/Publish';
+import EditIcon from "@material-ui/icons/Edit";
+import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
+import {createData} from "../../Songs";
 
-export const MoveUpSongQueue = (props) => {
+export const EditSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
     const {lenSelected, editSong, songData, selected} = props;
 
@@ -41,9 +41,9 @@ export const MoveUpSongQueue = (props) => {
     return (
         <>
             <IconButton onClick={handlerEditRows} disabled={showButton(lenSelected)}>
-                <PublishIcon/>
+                <EditIcon />
             </IconButton>
-            {/*<DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}
+            <DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }

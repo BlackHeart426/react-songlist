@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import TablePagination from '../../companents/TablePagination/ComponentTablePagination'
-import {PTBSongs} from "../../companents/PageToolbar/PTBSongs/PTBSongs";
+import {PTBSongs} from "./PTBSongs/PTBSongs";
 import {SongsContext} from "../../contex/module/songs/songsContext";
 import * as shortid from "shortid";
 

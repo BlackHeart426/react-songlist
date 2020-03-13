@@ -3,8 +3,9 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 export const useStyles = makeStyles(theme => ({
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 350,
-        maxWidth: 350,
+    },
+    formControlMargin: {
+        margin: '3px 8px 8px 8px',
     },
     chips: {
         display: 'flex',

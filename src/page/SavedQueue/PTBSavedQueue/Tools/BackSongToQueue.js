@@ -1,8 +1,8 @@
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
-import {DialogSongsAdd} from "../../../Dialog/DialogSongs/DialogSongsAdd";
-import {createData} from "../../../../page/Songs/Songs";
+import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
+import {createData} from "../../../Songs/Songs";
 import * as shortid from "shortid";
 
 export const BackSongToQueue = (props) => {

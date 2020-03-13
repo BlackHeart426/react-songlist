@@ -7,7 +7,7 @@ import {DetailSongs} from "./Tools/DetailSongs";
 import {AddInQueueSongs} from "./Tools/AddInQueueSongs";
 import {SwitchActiveSongs} from "./Tools/SwitchActiveSongs";
 import {SongsContext} from "../../../contex/module/songs/songsContext";
-import {SearchSong} from "./Tools/SearchSong"
+import {SearchSong} from "./Tools/SearchSong";
 
 let mbt10 = {
     marginBottom: '10px',

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import TablePagination from "../../companents/TablePagination/ComponentTablePagination";
-import {PTBHistory} from "../../companents/PageToolbar/PTBHistory/PTBHistory";
+import {PTBHistory} from "./PTBHistory/PTBHistory";
 import * as shortid from "shortid";
 import {QueueContext} from "../../contex/module/queue/queueContext";
 import {HistoryContext} from "../../contex/module/history/historyContext";

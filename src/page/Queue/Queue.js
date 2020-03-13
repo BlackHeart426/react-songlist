@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import TablePagination from '../../companents/TablePagination/ComponentTablePagination'
 import * as shortid from "shortid";
-import {PTBQueue} from "../../companents/PageToolbar/PTBQueue/PTBQueue";
+import {PTBQueue} from "./PTBQueue/PTBQueue";
 import {QueueContext} from "../../contex/module/queue/queueContext";
 
 export const Queue = () => {

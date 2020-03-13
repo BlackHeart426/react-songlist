@@ -1,10 +1,10 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import EditIcon from "@material-ui/icons/Edit";
-import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
-import {createData} from "../../../../page/Songs/Songs";
+import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
+import {createData} from "../../../Songs/Songs";
 
-export const UpdateSongQueue = (props) => {
+export const EditSong = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
     const {lenSelected, editSong, songData, selected} = props;
 

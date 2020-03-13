@@ -1,10 +1,11 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import EditIcon from "@material-ui/icons/Edit";
-import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
-import {createData} from "../../../../page/Songs/Songs";
+import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
+import {createData} from "../../../Songs/Songs";
+import {DialogUpdateSongInQueue} from "../../../../companents/Dialog/DialogQueue/DialogUpdateSongInQueue";
 
-export const EditSongs = (props) => {
+export const UpdateSongQueue = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
     const {lenSelected, editSong, songData, selected} = props;
 
@@ -43,7 +44,7 @@ export const EditSongs = (props) => {
             <IconButton onClick={handlerEditRows} disabled={showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
-            <DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogUpdateSongInQueue onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }

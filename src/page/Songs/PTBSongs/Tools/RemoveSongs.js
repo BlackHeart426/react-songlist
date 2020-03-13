@@ -1,10 +1,10 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
-import DialogSongsRemove from "../../../Dialog/DialogSongs/DialogSongsRemove";
-import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
+import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
+import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
 
-export const RemoveSong = (props) => {
+export const RemoveSongs = (props) => {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
     const {removeSong, selected, lenSelected, songData} = props;
 
@@ -26,12 +26,12 @@ export const RemoveSong = (props) => {
             <IconButton onClick={handlerOpenConfirm} disabled={showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
-            {/*<DialogSongsRemove*/}
-            {/*    show = { confirmOpened }*/}
-            {/*    onHide = { () => setConfirmOpened(false) }*/}
-            {/*    onAccept = { handlerRemoveSong }*/}
-            {/*    dataSong={ songData.find(item => item.id == selected) }*/}
-            {/*/>*/}
+            <DialogSongsRemove
+                show = { confirmOpened }
+                onHide = { () => setConfirmOpened(false) }
+                onAccept = { handlerRemoveSong }
+                dataSong={ songData.find(item => item.id == selected) }
+            />
         </>
     )
 }

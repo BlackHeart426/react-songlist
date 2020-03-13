@@ -2,11 +2,12 @@ import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import {SongsContext} from "../../../../contex/module/songs/songsContext";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-import {DialogSongsAdd} from "../../../Dialog/DialogSongs/DialogSongsAdd";
-import {DialogSongsAddQueue} from "../../../Dialog/DialogSongs/DialogSongsAddQueue";
-import {DialogSongsEdit} from "../../../Dialog/DialogSongs/DialogSongsEdit";
-import DialogSongsRemove from "../../../Dialog/DialogSongs/DialogSongsRemove";
+import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
+import {DialogSongsAddQueue} from "../../../../companents/Dialog/DialogSongs/DialogSongsAddQueue";
+import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
+import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
+import {DialogAddSongToQueue} from "../../../../companents/Dialog/DialogQueue/DialogAddSongToQueue";
 
 export const AddInQueueSong = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -34,11 +35,11 @@ export const AddInQueueSong = (props) => {
             <IconButton onClick={addItemToRows} disabled={showButton(lenSelected)}>
                 <ControlPointIcon />
             </IconButton>
-            {/*<DialogSongsAddQueue*/}
-            {/*    onAddItemToQueue={ addItemToQueue }*/}
-            {/*    dataSong={songData.find(item => item.id == selected)}*/}
-            {/*    onAccept = { handlerRemoveSong }*/}
-            {/*    show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}
+            <DialogAddSongToQueue
+                onAddItemToQueue={ addItemToQueue }
+                dataSong={songData.find(item => item.id == selected)}
+                onAccept = { handlerRemoveSong }
+                show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }

@@ -7,7 +7,7 @@ import TablePagination from "../../companents/TablePagination/ComponentTablePagi
 import {QueueContext} from "../../contex/module/queue/queueContext";
 import {SavedQueueContext} from "../../contex/module/savedQueue/savedQueueContext";
 import * as shortid from "shortid";
-import {PTBSavedQueue} from "../../companents/PageToolbar/PTBSavedQueue/PTBSavedQueue";
+import {PTBSavedQueue} from "./PTBSavedQueue/PTBSavedQueue";
 
 
 export const SavedQueue = () => {
