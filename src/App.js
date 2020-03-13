@@ -4,7 +4,7 @@ import { Route, Switch} from "react-router-dom";
 import {Queue} from "./page/Queue/Queue";
 import {Songs} from "./page/Songs/Songs";
 import {SavedQueue} from "./page/SavedQueue/SavedQueue";
-import {HistoryQueue} from "./page/History/History";
+import {History} from "./page/History/History";
 import {Settings} from "./page/Settings/Settings";
 import NavBar from "./companents/NavBar/NavBar";
 import DrawerCustom from "./companents/Drawer/DrawerCustom";
@@ -16,6 +16,8 @@ import {DrawerContext} from "./contex/drawer/drawerContext";
 import {DetailSong} from "./page/Songs/DetailSong";
 import {EditDetailSong} from "./page/Songs/EditDetailSong";
 import {QueueState} from "./contex/module/queue/QueueState";
+import {SavedQueueState} from "./contex/module/savedQueue/SavedQueueState";
+import {HistoryState} from "./contex/module/history/HistoryState";
 
 const drawerWidth = 240;
 
@@ -48,7 +50,7 @@ export const App = () => {
     const classes = useStyles();
     const { toggleEditMode, statusEditMode, toggleOpenDrawer, statusOpenDrawer } = useContext(DrawerContext)
 
-    const SongsRouter = () => (
+    const SongsRoute = () => (
         <SongsState>
             <Switch>
                 <Route exact path="/s/:userId/songs" component={Songs}/>
@@ -58,13 +60,29 @@ export const App = () => {
         </SongsState>
     );
 
-    const QueueRouter = () => (
+    const QueueRoute = () => (
         <QueueState>
             <Switch>
                 <Route exact path="/s/:userId/queue" component={Queue}/>
                 <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
             </Switch>
         </QueueState>
+    );
+
+    const SavedQueueRoute = () => (
+        <SavedQueueState>
+            <Switch>
+                <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>
+            </Switch>
+        </SavedQueueState>
+    );
+
+    const HistoryRoute = () => (
+        <HistoryState>
+            <Switch>
+                <Route exact path="/s/:userId/history" component={History}/>
+            </Switch>
+        </HistoryState>
     );
 
     return (
@@ -89,10 +107,10 @@ export const App = () => {
                 <main className={classes.content}>
                     <div  className={classes.toolbar}>
                         <Switch>
-                            <Route component={QueueRouter} path="/s/:userId/queue"/>
-                            <Route component={SongsRouter} path="/s/:userId/songs"/>
-                            <Route component={SavedQueue} path="/saved-queue"/>
-                            <Route component={HistoryQueue} path="/history"/>
+                            <Route component={QueueRoute} path="/s/:userId/queue"/>
+                            <Route component={SongsRoute} path="/s/:userId/songs"/>
+                            <Route component={SavedQueueRoute} path="/s/:userId/queue-saved"/>
+                            <Route component={HistoryRoute} path="/s/:userId/history"/>
                             <Route component={Settings} path="/settings"/>
                         </Switch>
                         <AlertCustom text={'Test'}/>

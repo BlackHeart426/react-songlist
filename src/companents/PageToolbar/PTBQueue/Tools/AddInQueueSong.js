@@ -34,11 +34,11 @@ export const AddInQueueSong = (props) => {
             <IconButton onClick={addItemToRows} disabled={showButton(lenSelected)}>
                 <ControlPointIcon />
             </IconButton>
-            <DialogSongsAddQueue
-                onAddItemToQueue={ addItemToQueue }
-                dataSong={songData.find(item => item.id == selected)}
-                onAccept = { handlerRemoveSong }
-                show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            {/*<DialogSongsAddQueue*/}
+            {/*    onAddItemToQueue={ addItemToQueue }*/}
+            {/*    dataSong={songData.find(item => item.id == selected)}*/}
+            {/*    onAccept = { handlerRemoveSong }*/}
+            {/*    show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}
         </>
     )
 }

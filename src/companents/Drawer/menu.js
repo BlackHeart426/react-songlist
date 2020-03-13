@@ -17,7 +17,7 @@ export const menuDrawerCustom = [
     },
     {
         title: 'Saved queue',
-        link: '/saved-queue',
+        link: '/queue-saved',
         icon: <LibraryBooks/>,
         index: 3
     },

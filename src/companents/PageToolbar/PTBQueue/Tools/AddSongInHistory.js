@@ -43,7 +43,7 @@ export const AddSongInHistory = (props) => {
             <IconButton onClick={handlerEditRows} disabled={showButton(lenSelected)}>
                 <BlockIcon/>
             </IconButton>
-            <DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            {/*<DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}
         </>
     )
 }

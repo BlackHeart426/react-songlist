@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {Card} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import DeleteIcon from "@material-ui/icons/Delete";
 import TablePagination from "../../companents/TablePagination/ComponentTablePagination";
+import {QueueContext} from "../../contex/module/queue/queueContext";
+import {SavedQueueContext} from "../../contex/module/savedQueue/savedQueueContext";
+import * as shortid from "shortid";
+import {PTBSavedQueue} from "../../companents/PageToolbar/PTBSavedQueue/PTBSavedQueue";
 
 
 export const SavedQueue = () => {
@@ -21,6 +25,31 @@ export const SavedQueue = () => {
         return { title, artist, amount, requestBy, note}
     }
 
+    const songList = [
+        {
+            id: shortid.generate(),
+            data: createData(
+                1,
+                'The Kill',
+                '30 Seconds To Mars',
+                1,
+                'Black',
+                'note',
+            )
+        },
+        {
+            id: shortid.generate(),
+            data: createData(
+                2,
+                'Hello',
+                'Adele',
+                2,
+                'Black',
+                'Black',
+            )
+        },
+    ]
+
     const headCells = [
         { id: 'title', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
         { id: 'artist', numeric: false, order: true, disablePadding: false, editMode: true, label: 'Artist', type: 'txt' },
@@ -29,23 +58,22 @@ export const SavedQueue = () => {
         { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
     ];
 
+    const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(SavedQueueContext);
 
-    const rows = [
-        createData('The Kill', '30 Seconds To Mars', 5, 'Black', 'for me'),
-        createData('Hello', 'Adele', 10, 'Heart', 'for my friends'),
-    ]
+    useEffect(() => {
+        setSongData(songList);
+        localStorage.setItem('listSavedQueue', JSON.stringify(songList))
+    },[]);
+
+    useEffect(() => {
+        console.log('songDataEff', songData)
+        localStorage.setItem('listSavedQueue', JSON.stringify(songData))
+    },[songData])
 
     return (
         <>
-            <Card style={mbt10}>
-                <IconButton>
-                    <ControlPointIcon/>
-                </IconButton>
-                <IconButton>
-                    <DeleteIcon/>
-                </IconButton>
-            </Card>
-            <TablePagination headCells = {headCells} rowsData = {rows}/>
+            <PTBSavedQueue/>
+            <TablePagination typeCheckBox={'solo'} onSelectRow = {setSelected}   headCells = {headCells} rowsData = {songData}/>
         </>
     )
 }
