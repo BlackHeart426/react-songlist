@@ -3,7 +3,7 @@ import {Card} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import BorderColorIcon from '@material-ui/icons/BorderColor';
-import TablePagination from "../companents/TablePagination/ComponentTablePagination";
+import TablePagination from "../../companents/TablePagination/ComponentTablePagination";
 
 export const HistoryQueue = () => {
 

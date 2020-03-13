@@ -1,16 +1,8 @@
 import React, {useContext, useEffect} from "react";
-import {Card} from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
-import ControlPointIcon from "@material-ui/icons/ControlPoint";
-import EditIcon from '@material-ui/icons/Edit';
-import PublishIcon from '@material-ui/icons/Publish';
-import BlockIcon from '@material-ui/icons/Block';
-import TablePagination from '../companents/TablePagination/ComponentTablePagination'
+import TablePagination from '../../companents/TablePagination/ComponentTablePagination'
 import * as shortid from "shortid";
-import {createData} from "./Songs/Songs";
-import {PTBQueue} from "../companents/PageToolbar/PTBQueue/PTBQueue";
-import {SongsContext} from "../contex/module/songs/songsContext";
-import {QueueContext} from "../contex/module/queue/queueContext";
+import {PTBQueue} from "../../companents/PageToolbar/PTBQueue/PTBQueue";
+import {QueueContext} from "../../contex/module/queue/queueContext";
 
 export const Queue = () => {
     let mbt10 = {

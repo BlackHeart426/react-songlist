@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {Queue} from "./page/Queue";
+import {Queue} from "./page/Queue/Queue";
 import {Songs} from "./page/Songs/Songs";
-import {SavedQueue} from "./page/SavedQueue";
-import {HistoryQueue} from "./page/History";
-import {Settings} from "./page/Settings";
-import {About} from "./page/About";
+import {SavedQueue} from "./page/SavedQueue/SavedQueue";
+import {HistoryQueue} from "./page/History/History";
+import {Settings} from "./page/Settings/Settings";
 import {connect} from 'react-redux'
 import {autoLogin} from "./store/action/auth";
 import {NavBar} from "./companents/NavBar/NavBar";
@@ -56,7 +55,6 @@ class App extends Component {
                         <Route component={SavedQueue} path="/saved-queue" />
                         <Route component={HistoryQueue} path="/history" />
                         <Route component={Settings} path="/settings" />
-                        <Route component={About} path="/about" />
                     </Switch>
                 </div>
             </div>
