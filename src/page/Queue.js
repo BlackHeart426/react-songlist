@@ -93,11 +93,16 @@ export const Queue = () => {
         localStorage.setItem('listQueue', JSON.stringify(songList))
     },[]);
 
+    useEffect(() => {
+        console.log('songDataEff', songData)
+        localStorage.setItem('listQueue', JSON.stringify(songData))
+    },[songData])
+
 
     return (
         <>
             <PTBQueue/>
-            <TablePagination onSelectRow = {setSelected}  headCells = {headCells} rowsData = {songData}/>
+            <TablePagination typeCheckBox={'solo'} onSelectRow = {setSelected}  headCells = {headCells} rowsData = {songData}/>
         </>
 
     )

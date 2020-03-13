@@ -9,7 +9,7 @@ export const AddSongInHistory = (props) => {
     const {lenSelected, editSong, songData, selected} = props;
 
     function showButton(lenSelected) {
-        return lenSelected >= 1 ? false : true
+        return lenSelected == 1 ? false : true
     }
 
 

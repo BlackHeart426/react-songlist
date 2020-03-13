@@ -24,7 +24,7 @@ export default function ComponentTablePagination(props) {
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const {statusEditMode} = useContext(DrawerContext);
-    const {rowsData, headCells, showActive, onSelectRow} = props;
+    const {rowsData, headCells, showActive, onSelectRow, typeCheckBox} = props;
 
     useEffect(() => {
         onSelectRow([])
@@ -56,9 +56,8 @@ export default function ComponentTablePagination(props) {
      *  Выбрать элемент
      */
     const handleClick = (event, name) => {
-        console.log(name)
-        console.log(rowsData.selected)
         const selectedIndex = rowsData.selected.indexOf(name);
+
         let newSelected = [];
 
         if (selectedIndex === -1) {
@@ -72,6 +71,10 @@ export default function ComponentTablePagination(props) {
                 rowsData.selected.slice(0, selectedIndex),
                 rowsData.selected.slice(selectedIndex + 1),
             );
+        }
+
+        if (typeCheckBox == 'solo') {
+            newSelected = [name];
         }
 
         onSelectRow(newSelected);
