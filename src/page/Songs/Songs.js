@@ -106,17 +106,6 @@ export const Songs = () => {
         firebaseRef.set({
             text : 'bbb'
         });
-        var firebaseConfig = {
-            apiKey: "api-key",
-            authDomain: "project-id.firebaseapp.com",
-            databaseURL: "https://project-id.firebaseio.com",
-            projectId: "project-id",
-            storageBucket: "project-id.appspot.com",
-            messagingSenderId: "sender-id",
-            appId: "app-id",
-            measurementId: "G-measurement-id",
-        };
-        firebase.initializeApp(firebaseConfig);
         Axios.post('https://song-list-95d78.firebaseio.com/listSongsTest.json', name )
         .then(response => {
             console.log(response)
