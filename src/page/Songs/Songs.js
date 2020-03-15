@@ -4,15 +4,8 @@ import {PTBSongs} from "./PTBSongs/PTBSongs";
 import {SongsContext} from "../../contex/module/songs/songsContext";
 import * as shortid from "shortid";
 import Axios, {AxiosInstance as axios} from "axios";
-// Firebase App (the core Firebase SDK) is always required and must be listed first
+import * as FirestoreService from '../../firebase';
 import * as firebase from "firebase/app";
-
-// If you enabled Analytics in your project, add the Firebase SDK for Analytics
-import "firebase/analytics";
-
-// Add the Firebase products that you want to use
-import "firebase/auth";
-import "firebase/firestore";
 
 export function createData(title, artist, timesPlayed, lastPlayed, tags, action) {
     return {title, artist, timesPlayed, lastPlayed, tags, action}
@@ -95,21 +88,18 @@ export const Songs = () => {
         },
     ];
 
-    const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(SongsContext)
+    const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(SongsContext);
     const {active, setActive} = useState(false)
     let filtered = [];
     useEffect(() => {
         setSongData(songList)
         const name = {name:'fghfghfg', data:[]};
         localStorage.setItem('listSongs', JSON.stringify(songList))
-        const firebaseRef = firebase.database().ref("chat").child('aaa').child('ccc');
-        firebaseRef.set({
-            text : 'bbb'
-        });
-        Axios.post('https://song-list-95d78.firebaseio.com/listSongsTest.json', name )
-        .then(response => {
-            console.log(response)
-        })
+        const groceryListId = '12';
+        const userId = '123';
+        const firebaseRef = FirestoreService.getGroceryList();
+        const setfirebaseRef = FirestoreService.setGroceryList();
+        console.log('firebaseRef' ,firebaseRef)
     },[])
 
 
