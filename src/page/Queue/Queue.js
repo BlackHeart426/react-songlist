@@ -27,7 +27,7 @@ export const Queue = () => {
         {
             id: shortid.generate(),
             data: createData(
-            1,
+            {type: 'position'},
             'The Kill',
             '30 Seconds To Mars',
             1,
@@ -46,7 +46,7 @@ export const Queue = () => {
         {
             id: shortid.generate(),
             data: createData(
-                2,
+                {type: 'position'},
                 'Hello',
                 'Adele',
                 2,
