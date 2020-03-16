@@ -72,6 +72,11 @@ export function EnhancedTableRows (props) {
 
                                         }
                                         {
+                                            row[item].type == 'position' &&
+                                            <>{index+1}</>
+
+                                        }
+                                        {
                                             row[item].type == 'btn' && !editMode &&
                                                  row[item].data.map((btn, indexBtn) => (
                                                     btn.type == 'text'
@@ -91,7 +96,7 @@ export function EnhancedTableRows (props) {
 
                                         }
                                         {
-                                            row[item].type != 'btn' &&  row[item].type != 'tag' &&
+                                            row[item].type != 'btn' && row[item].type != 'position' &&  row[item].type != 'tag' &&
                                                 <> {row[item]} </>
 
                                         }

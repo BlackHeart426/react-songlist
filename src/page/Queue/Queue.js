@@ -5,10 +5,6 @@ import {PTBQueue} from "./PTBQueue/PTBQueue";
 import {QueueContext} from "../../contex/module/queue/queueContext";
 
 export const Queue = () => {
-    let mbt10 = {
-        marginBottom: '10px',
-        marginTop: '10px'
-    }
 
     function createData(position, title, artist, amount, requestBy, note, action) {
         return {position, title, artist, amount, requestBy, note, action}
@@ -31,7 +27,7 @@ export const Queue = () => {
         {
             id: shortid.generate(),
             data: createData(
-            1,
+            {type: 'position'},
             'The Kill',
             '30 Seconds To Mars',
             1,
@@ -50,7 +46,7 @@ export const Queue = () => {
         {
             id: shortid.generate(),
             data: createData(
-                2,
+                {type: 'position'},
                 'Hello',
                 'Adele',
                 2,
@@ -78,7 +74,7 @@ export const Queue = () => {
         { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
 
-    const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(QueueContext);
+    const {songData, setSongData, setSelected} = useContext(QueueContext);
 
     useEffect(() => {
         setSongData(songList);
@@ -86,9 +82,9 @@ export const Queue = () => {
     },[]);
 
     useEffect(() => {
-        console.log('songDataEff', songData)
+        console.log('songDataEff', songData);
         localStorage.setItem('listQueue', JSON.stringify(songData))
-    },[songData])
+    },[songData]);
 
 
     return (

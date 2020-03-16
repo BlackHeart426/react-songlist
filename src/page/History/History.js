@@ -2,16 +2,9 @@ import React, {useContext, useEffect} from "react";
 import TablePagination from "../../companents/TablePagination/ComponentTablePagination";
 import {PTBHistory} from "./PTBHistory/PTBHistory";
 import * as shortid from "shortid";
-import {QueueContext} from "../../contex/module/queue/queueContext";
 import {HistoryContext} from "../../contex/module/history/historyContext";
 
 export const History = () => {
-
-    let mbt10 = {
-        marginBottom: '10px',
-        marginTop: '10px'
-    }
-
 
     function createData( title, artist, amount, requestBy, played, note) {
         return { title, artist, amount, requestBy, played, note}
@@ -40,7 +33,7 @@ export const History = () => {
                 'Black',
             )
         },
-    ]
+    ];
 
     const headCells = [
         { id: 'title', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
@@ -51,7 +44,7 @@ export const History = () => {
         { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
 
-    const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(HistoryContext);
+    const {songData, setSongData, setSelected} = useContext(HistoryContext);
 
     useEffect(() => {
         setSongData(songList);
@@ -59,9 +52,9 @@ export const History = () => {
     },[]);
 
     useEffect(() => {
-        console.log('songDataEff', songData)
+        console.log('songDataEff', songData);
         localStorage.setItem('listHistory', JSON.stringify(songData))
-    },[songData])
+    },[songData]);
 
 
     return (

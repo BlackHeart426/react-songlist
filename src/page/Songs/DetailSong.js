@@ -9,7 +9,7 @@ export const DetailSong = props => {
     return (
         <>
             <ToolsDetail/>
-            <ContentDetail detailSong = { listSong.find(item => item.id == selected) }/>
+            <ContentDetail detailSong = { listSong.find(item => item.id === selected) }/>
         </>
     )
 }

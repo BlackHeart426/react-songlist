@@ -4,13 +4,11 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import React, {useEffect, useState} from "react";
-import {getStyles, MenuProps, useStyles} from "./style";
+import {useStyles} from "./style";
 import CustomDialog from "../CustomDialog";
 import {NumberFormatCustom} from "../../inputComponent/NumberFormatCustom/NumberFormatCustom";
 
-const names = [
-    'Music',
-];
+
 
 export function DialogSongsAddQueue(props) {
     const formControl = {
@@ -21,10 +19,10 @@ export function DialogSongsAddQueue(props) {
         amount: '',
     }
 
-    const {show, onHide, dataSong, onAccept, onAddItemToQueue} = props
+    const {show, onHide, dataSong, onAccept} = props;
     const classes = useStyles();
     const [dialogOpened, setDialogOpened] = useState(false);
-    const [song, setSong] = useState(formControl)
+    const [song, setSong] = useState(formControl);
 
     //TODO что-то с обьектом dataSong и вложеным data
     useEffect(() => {
@@ -40,14 +38,14 @@ export function DialogSongsAddQueue(props) {
             setSong(statusCopy);
             console.log('statusCopy', statusCopy)
         }
-    },[show])
+    },[show]);
 
 
     const setProperty = (property, value) => {
         let statusCopy = Object.assign({}, song);
         statusCopy[property] = value;
         setSong(statusCopy)
-    }
+    };
 
     const handleChange = name =>  event => {
         setProperty(name, event.target.value)
@@ -59,8 +57,8 @@ export function DialogSongsAddQueue(props) {
     };
 
     const handleAdd = (property) => event => {
-        console.log(property)
-        onAccept(property)
+        console.log(property);
+        onAccept(property);
         handleClose()
     };
 
@@ -122,7 +120,7 @@ export function DialogSongsAddQueue(props) {
                 </Button>
             </FormControl>
 
-    }
+    };
 
     return (
         <CustomDialog  data = { data } show={ dialogOpened }  onHide={ onHide }/>

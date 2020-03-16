@@ -6,7 +6,7 @@ import {
     UPDATE_SONG_QUEUE
 } from "../../types";
 
-const moveArrayItemToNewIndex = (arr, old_index, new_index) => {
+export const moveArrayItemToNewIndex = (arr, old_index, new_index) => {
     if (new_index >= arr.length) {
         var k = new_index - arr.length + 1;
         while (k--) {
@@ -17,12 +17,29 @@ const moveArrayItemToNewIndex = (arr, old_index, new_index) => {
     return arr;
 };
 
+const changePosition = (arr, position, newPosition) => {
+    const uuid = position;
+    console.log('arr', arr)
+    const selected = arr.find(item => item.id === position)
+    console.log('arr', selected)
+    //
+    // const positionInArr =  selected.data.position;
+    // return (
+    //     moveArrayItemToNewIndex(arr, positionInArr-1, positionInArr)
+    // )
+}
+
 export const queueReducer = (state, action) => {
     switch (action.type) {
         case SET_SONGDATA:
             return { ...state, list: action.list };
         case CHANGE_POSITION:
-            return { ...state, list: action.list };
+            return { ...state, list: moveArrayItemToNewIndex(
+                state.list,
+                state.list.findIndex(item => item.id === action.position),
+                state.list.findIndex(item => item.id === action.position)-1
+            )};
+            // return { ...state, list: changePosition(state.list, action.position)};
         case ADD_SONG:
             return { ...state, list: [ ...state.list, action.newSong ] };
         case SET_SELECTED:

@@ -8,12 +8,10 @@ import TableCell from "@material-ui/core/TableCell";
 import TablePagination from "@material-ui/core/TablePagination";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import {DrawerContext} from "../../contex/drawer/drawerContext";
 import {EnhancedTableHead} from "./EnhancedTableHead";
 import {EnhancedTableRows} from "./EnhancedTableRows";
 import {useStyles} from "./styles";
-import {SongsContext} from "../../contex/module/songs/songsContext";
 
 
 export default function ComponentTablePagination(props) {
@@ -24,7 +22,7 @@ export default function ComponentTablePagination(props) {
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const {statusEditMode} = useContext(DrawerContext);
-    const {rowsData, headCells, showActive, onSelectRow, typeCheckBox} = props;
+    const {rowsData, headCells,  onSelectRow, typeCheckBox} = props;
 
     useEffect(() => {
         onSelectRow([])

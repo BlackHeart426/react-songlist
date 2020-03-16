@@ -1,7 +1,6 @@
 import {Card} from "@material-ui/core";
 import React, {useContext} from "react";
 import {AddInQueueSong} from "./Tools/AddInQueueSong";
-import {SongsContext} from "../../../contex/module/songs/songsContext";
 import {UpdateSongQueue} from "./Tools/UpdateSongQueue";
 import {MoveUpSongQueue} from "./Tools/MoveUpSongQueue";
 import {AddSongInHistory} from "./Tools/AddSongInHistory";
@@ -13,8 +12,7 @@ let mbt10 = {
 }
 
 export const PTBQueue = (props) => {
-    const {showActive, onActive} = props
-    const {selected, listSong, addSong, removeSong, changePosition,  editSong} = useContext(QueueContext);
+    const {selected, listSong, addSong, removeSong, changePosition} = useContext(QueueContext);
     const lenSelected = selected.length;
     return (
         <>

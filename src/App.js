@@ -18,6 +18,7 @@ import {EditDetailSong} from "./page/Songs/EditDetailSong";
 import {QueueState} from "./contex/module/queue/QueueState";
 import {SavedQueueState} from "./contex/module/savedQueue/SavedQueueState";
 import {HistoryState} from "./contex/module/history/HistoryState";
+import {Test} from "./page/Test";
 
 const drawerWidth = 240;
 
@@ -112,6 +113,7 @@ export const App = () => {
                             <Route component={SavedQueueRoute} path="/s/:userId/queue-saved"/>
                             <Route component={HistoryRoute} path="/s/:userId/history"/>
                             <Route component={Settings} path="/settings"/>
+                            <Route component={Test} path="/s/:userId/test"/>
                         </Switch>
                         <AlertCustom text={'Test'}/>
                     </div>
