@@ -1,9 +1,6 @@
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
-import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
-import {createData} from "../../../Songs/Songs";
-import * as shortid from "shortid";
+import React, {useState} from "react";
 
 export const BackSongToQueue = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -11,34 +8,15 @@ export const BackSongToQueue = (props) => {
 
     const openDialog = () => {
         setDialogOpened(true)
-    }
+    };
 
     const requestHandler = () => {
 
-    }
+    };
 
     function showButton(lenSelected) {
         return lenSelected == 1 ? false : true
     }
-
-    // const addRowsSong = (property) => {
-    //     console.log('property', property)
-    //     const {title, artist, tags, active} = property;
-    //     const newSong = {
-    //         id: shortid.generate(),
-    //         data: createData(
-    //             title,
-    //             artist,
-    //             '',
-    //             '',
-    //             { type: 'tag', data: [ { name: 'Music' }] } ,
-    //             { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
-    //         ),
-    //         active: active
-    //     }
-    //     addSong(newSong)
-    // }
-
     return (
         <>
             <IconButton onClick={ openDialog } disabled={ showButton(lenSelected) }>
@@ -47,4 +25,4 @@ export const BackSongToQueue = (props) => {
             {/*<DialogSongsAdd onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}
         </>
     )
-}
+};

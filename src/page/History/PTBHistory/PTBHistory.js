@@ -10,8 +10,7 @@ let mbt10 = {
 }
 
 export const PTBHistory = (props) => {
-    const {showActive, onActive} = props
-    const {selected, listSong, addSong, removeSong, setSearchText, searchText, editSong, detailShow} = useContext(HistoryContext);
+    const {selected, listSong, addSong, removeSong} = useContext(HistoryContext);
     const lenSelected = selected.length;
     return (
         <>

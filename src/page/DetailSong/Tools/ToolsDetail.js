@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 import {Card} from "@material-ui/core";
 import {ToolDetailBack} from "./ToolDetailBack";
 import {ToolDetailEditSong} from "./ToolDetailEditSong";
@@ -17,7 +17,6 @@ let btnRight = {
 }
 
 export const ToolsDetail = (props) => {
-    const {showActive, onActive} = props
     return (
         <>
             <Card style={mbt10}>

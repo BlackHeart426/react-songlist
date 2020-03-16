@@ -3,14 +3,10 @@ import TextField from "@material-ui/core/TextField";
 import clsx from 'clsx';
 import Button from "@material-ui/core/Button";
 import React, {useEffect, useState} from "react";
-import {getStyles, MenuProps, useStyles} from "../DialogSongs/style";
+import {useStyles} from "../DialogSongs/style";
 import CustomDialog from "../CustomDialog";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Typography from "@material-ui/core/Typography";
-
-const names = [
-    'Music',
-];
 
 export function DialogUpdateSongInQueue(props) {
     const formControl = {
@@ -21,7 +17,7 @@ export function DialogUpdateSongInQueue(props) {
         amount: '',
     }
 
-    const {show, onHide, dataSong, onAccept, onAddItemToQueue} = props
+    const {show, onHide, dataSong, onAccept} = props
     const classes = useStyles();
     const [dialogOpened, setDialogOpened] = useState(false);
     const [song, setSong] = useState(formControl)
@@ -48,14 +44,14 @@ export function DialogUpdateSongInQueue(props) {
             setSong(statusCopy);
             console.log('statusCopy', statusCopy)
         }
-    },[show])
+    },[show]);
 
 
     const setProperty = (property, value) => {
         let statusCopy = Object.assign({}, song);
         statusCopy[property] = value;
         setSong(statusCopy)
-    }
+    };
 
     const handleChange = name =>  event => {
         setProperty(name, event.target.value)
@@ -67,8 +63,8 @@ export function DialogUpdateSongInQueue(props) {
     };
 
     const handleAdd = (property) => event => {
-        console.log(property)
-        onAccept(property)
+        console.log(property);
+        onAccept(property);
         handleClose()
     };
 
@@ -140,7 +136,7 @@ export function DialogUpdateSongInQueue(props) {
                 </Button>
             </FormControl>
 
-    }
+    };
 
     return (
         <CustomDialog  data = { data } show={ dialogOpened }  onHide={ onHide }/>
