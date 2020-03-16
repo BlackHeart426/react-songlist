@@ -1,7 +1,5 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
-import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
-import {createData} from "../../../Songs/Songs";
+import React, {useState} from "react";
 import PublishIcon from '@material-ui/icons/Publish';
 
 export const MoveUpSongQueue = (props) => {
