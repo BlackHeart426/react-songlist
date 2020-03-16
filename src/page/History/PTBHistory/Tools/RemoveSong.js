@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
 import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
+import {DialogRemoveSongHistory} from "../../../../companents/Dialog/DialogHistory/DialogRemoveSongHistory";
 
 export const RemoveSong = (props) => {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
@@ -26,12 +27,12 @@ export const RemoveSong = (props) => {
             <IconButton onClick={handlerOpenConfirm} disabled={showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
-            {/*<DialogSongsRemove*/}
-            {/*    show = { confirmOpened }*/}
-            {/*    onHide = { () => setConfirmOpened(false) }*/}
-            {/*    onAccept = { handlerRemoveSong }*/}
-            {/*    dataSong={ songData.find(item => item.id == selected) }*/}
-            {/*/>*/}
+            <DialogRemoveSongHistory
+                show = { confirmOpened }
+                onHide = { () => setConfirmOpened(false) }
+                onAccept = { handlerRemoveSong }
+                dataSong={ songData.find(item => item.id == selected) }
+            />
         </>
     )
 }

@@ -73,7 +73,7 @@ export const SavedQueue = () => {
     return (
         <>
             <PTBSavedQueue/>
-            <TablePagination typeCheckBox={'solo'} onSelectRow = {setSelected}   headCells = {headCells} rowsData = {songData}/>
+            <TablePagination onSelectRow = {setSelected}   headCells = {headCells} rowsData = {songData}/>
         </>
     )
 }

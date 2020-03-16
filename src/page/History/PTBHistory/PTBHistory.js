@@ -16,7 +16,7 @@ export const PTBHistory = (props) => {
         <>
             <Card style={mbt10}>
                 <EditSong lenSelected={lenSelected} songData={listSong} removeSong={removeSong} selected={selected}/>
-                <RemoveSong lenSelected={lenSelected} songData={listSong} addSong={addSong}/>
+                <RemoveSong lenSelected={lenSelected} songData={listSong} addSong={addSong} selected={selected}/>
             </Card>
 
         </>

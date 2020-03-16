@@ -14,10 +14,10 @@ export const History = () => {
         {
             id: shortid.generate(),
             data: createData(
-                1,
                 'The Kill',
                 '30 Seconds To Mars',
                 1,
+                'Black',
                 'Black',
                 'note',
             )
@@ -25,10 +25,10 @@ export const History = () => {
         {
             id: shortid.generate(),
             data: createData(
-                2,
                 'Hello',
                 'Adele',
                 2,
+                'Black',
                 'Black',
                 'Black',
             )
@@ -40,8 +40,8 @@ export const History = () => {
         { id: 'artist', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Artist', type: 'txt' },
         { id: 'amount', numeric: true, order: false, disablePadding: false, editMode: true, label: 'Amount', type: 'txt' },
         { id: 'request-by', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Request by', type: 'txt' },
+        { id: 'played', numeric: false, order: false, disablePadding: false, editMode: true, label: 'played', type: 'txt' },
         { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
-        { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
 
     const {songData, setSongData, setSelected} = useContext(HistoryContext);
@@ -60,7 +60,7 @@ export const History = () => {
     return (
         <>
             <PTBHistory/>
-            <TablePagination  typeCheckBox={'solo'} onSelectRow = {setSelected}   headCells = {headCells} rowsData = {songData}/>
+            <TablePagination onSelectRow = {setSelected}   headCells = {headCells} rowsData = {songData}/>
         </>
     )
 }
