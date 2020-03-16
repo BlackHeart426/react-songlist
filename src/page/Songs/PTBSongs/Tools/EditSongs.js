@@ -12,6 +12,9 @@ export const EditSongs = (props) => {
         return lenSelected == 1 ? false : true
     }
 
+    function createData(title, artist, timesPlayed, lastPlayed, tags) {
+        return {title, artist, timesPlayed, lastPlayed, tags }
+    }
 
     const requestHandler = () => {
 

@@ -19,7 +19,6 @@ export const SongsState = ({children}) => {
         selected: [],
         active: false,
         searchText: '',
-        detailShow: false
     }
 
     const [state, dispatch]  = useReducer(songsReducer, initialState);
@@ -73,12 +72,6 @@ export const SongsState = ({children}) => {
         })
     );
 
-    const detailShow = (state) => (
-        dispatch({
-            type: SHOW_DETAIl,
-            toggleDetail: state
-        })
-    );
 
     return (
         <SongsContext.Provider value={{
@@ -89,7 +82,6 @@ export const SongsState = ({children}) => {
             addSong,
             removeSong,
             toggleActive,
-            detailShow,
             listSong: state.list,
             selected: state.selected,
             active: state.active,

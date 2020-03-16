@@ -15,7 +15,7 @@ const config = {
 firebase.initializeApp(config);
 const db = firebase.database();
 
-export const getGroceryList = () => {
+export const getData = () => {
     const ref = db.ref('listSongsTest')
         .on('value', snapshot => {
             const state = snapshot.val();
@@ -24,9 +24,11 @@ export const getGroceryList = () => {
     return (ref)
 }
 
-export const setGroceryList = () => {
-    const ref = db.ref('listSongsTest');
-    ref.child('BlackHeart').set({ first: 'Ada', last: 'Lovelace' }).then(console.log('s'));
+export const setData = (list) => {
+    console.log('list', list)
+    const ref = db.ref('Songs');
+    ref.child('BlackHeart').set(list).then(console.log('s'));
+    ref.child('frecklesx').set(list).then(console.log('s'));
 
     //TODO ошибки
     return (ref)

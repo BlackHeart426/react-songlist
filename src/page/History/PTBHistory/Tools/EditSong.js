@@ -1,8 +1,6 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import EditIcon from "@material-ui/icons/Edit";
-import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
-import {createData} from "../../../Songs/Songs";
 import {DialogEditSongHistory} from "../../../../companents/Dialog/DialogHistory/DialogEditSongHistory";
 
 export const EditSong = (props) => {
@@ -13,6 +11,9 @@ export const EditSong = (props) => {
         return lenSelected == 1 ? false : true
     }
 
+    function createData(title, artist, timesPlayed, lastPlayed, tags) {
+        return {title, artist, timesPlayed, lastPlayed, tags, action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
+    }
 
     const requestHandler = () => {
 
