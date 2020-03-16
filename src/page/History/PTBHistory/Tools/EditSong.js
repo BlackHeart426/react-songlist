@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
 import {createData} from "../../../Songs/Songs";
+import {DialogEditSongHistory} from "../../../../companents/Dialog/DialogHistory/DialogEditSongHistory";
 
 export const EditSong = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -43,7 +44,7 @@ export const EditSong = (props) => {
             <IconButton onClick={handlerEditRows} disabled={showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
-            {/*<DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}
+            <DialogEditSongHistory onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }
