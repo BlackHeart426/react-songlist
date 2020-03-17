@@ -31,7 +31,7 @@ export const menuDrawerCustom = [
         title: 'Test',
         link: '/test',
         icon: <History/>,
-        index: 4
+        index: 5
     },
 ]
 

@@ -13,26 +13,7 @@ const config = {
 };
 
 firebase.initializeApp(config);
-const db = firebase.database();
 
-export const getData = () => {
-    const ref = db.ref('listSongsTest')
-        .on('value', snapshot => {
-            const state = snapshot.val();
-    });
-    //TODO ошибки
-    return (ref)
-}
-
-export const setData = (list) => {
-    console.log('list', list)
-    const ref = db.ref('Songs');
-    ref.child('BlackHeart').set(list).then(console.log('s'));
-    ref.child('frecklesx').set(list).then(console.log('s'));
-
-    //TODO ошибки
-    return (ref)
-}
 
 // class Firebase {
 //     constructor() {

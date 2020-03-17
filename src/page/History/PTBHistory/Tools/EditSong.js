@@ -32,8 +32,9 @@ export const EditSong = (props) => {
                 artist,
                 '',
                 '',
-                { type: 'tag', data: [ { name: 'Music' }] } ,
-                { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
+                tags
+                // { type: 'tag', data: [ { name: 'Music' }] } ,
+                // { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
             ),
             active: active
         }

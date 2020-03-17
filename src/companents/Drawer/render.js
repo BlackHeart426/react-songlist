@@ -5,7 +5,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import {addUserIdAtLink} from "../GlobalParamaters/linkWithUserId";
 
-export function renderLink(props) {
+export const renderLink = (props) => {
 
     const {index, link, icon, title} = props
 

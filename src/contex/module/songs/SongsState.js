@@ -12,6 +12,7 @@ import {
     SHOW_DETAIl,
     TOGGLE_ACTIVE
 } from "../../types";
+import {Firebase} from "../../../firebase";
 
 export const SongsState = ({children}) => {
     const initialState = {

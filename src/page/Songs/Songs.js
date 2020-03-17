@@ -3,9 +3,9 @@ import TablePagination from '../../companents/TablePagination/ComponentTablePagi
 import {PTBSongs} from "./PTBSongs/PTBSongs";
 import {SongsContext} from "../../contex/module/songs/songsContext";
 import * as shortid from "shortid";
-import * as Firebaseservice from "../../firebase";
 import {headCells} from "./headTable";
-
+import {SongAPI} from "../../API/SongAPI";
+// import * as SongAPI from "../../API/SongAPI";
 
 export const Songs = () => {
 
@@ -76,13 +76,20 @@ export const Songs = () => {
         },
     ];
 
+    const wrapperSong = (song) => song.list.map(item => createData(item));
+
     const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(SongsContext);
     const {active, setActive} = useState(false)
     let newSongData = [];
+
     useEffect(() => {
-        setSongData(songList);
-        localStorage.setItem('songs', JSON.stringify(songList));
-        Firebaseservice.setData(songList);
+        // SongAPI.setData();
+        // const songData = SongAPI.getData();
+        console.log('songData', songData);
+        // wrapperSong(songData);
+        // localStorage.setItem('songs', JSON.stringify(songData));
+        // setSongData(songList);
+        // Firebaseservice.setData(songList);
     },[]);
 
     const updateItem = item => createData(item);
@@ -91,16 +98,15 @@ export const Songs = () => {
     useEffect(() => {
         console.log('songDataEff', songData)
         localStorage.setItem('songs', JSON.stringify(songData));
-        Firebaseservice.setData(songData);
-        newSongData = { ...songData };
-        newSongData.list.map(item => updateItem(item))
+        // Firebaseservice.setData(songData);
+        // newSongData = { ...songData };
+        // newSongData.list.map(item => updateItem(item))
     },[songData])
 
 
     const handlerFilter = () => {
         let filteredNew = {...songData};
         let filtered = [];
-        console.log('songData', songData);
         filtered = filteredNew.list.filter(item =>  item.data.title.toUpperCase().indexOf(searchText.toUpperCase()) !== -1);
         // console.log('songData', songData);
         filteredNew.list = filtered;

@@ -3,6 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
 import * as shortid from "shortid";
+import SongAPI from "../../../../API/SongAPI";
 
 export const AddSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -10,7 +11,7 @@ export const AddSongs = (props) => {
 
     const openDialog = () => {
         setDialogOpened(true)
-    }
+    };
 
     function showButton(lenSelected) {
         return lenSelected == 0 ? false : true
@@ -29,9 +30,9 @@ export const AddSongs = (props) => {
                 tags: tags
             },
             active: active
-        }
+        };
         addSong(newSong)
-    }
+    };
 
     return (
         <>
@@ -41,4 +42,4 @@ export const AddSongs = (props) => {
             <DialogSongsAdd onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
-}
+};
