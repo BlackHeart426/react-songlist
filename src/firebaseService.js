@@ -29,14 +29,15 @@ export const setData = (list, callback) => {
 
 export const getData = (callback) => {
     const data = [];
-
-        ref.on('value', snapshot => {
+    ref.once('value')
+        .then( snapshot => {
             snapshot.forEach(childSnapshot => {
                 data.push(childSnapshot.val());
-                console.log("snapshot.node_.children_.root_.value.value_: ", data)
             });
             return callback(data)
+            console.log('alert recording')
         })
+        .catch(console.log('alert error'))
 };
 
 
