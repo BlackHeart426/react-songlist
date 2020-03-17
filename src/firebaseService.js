@@ -29,13 +29,14 @@ export const setData = (list, callback) => {
 
 export const getData = (callback) => {
     const data = [];
-    ref.on('value',  snapshot => {
-        snapshot.forEach(childSnapshot => {
-            data.push(childSnapshot.val());
-            console.log("snapshot.node_.children_.root_.value.value_: ", data)
-        });
-    })
-    return callback(data)
+
+        ref.on('value', snapshot => {
+            snapshot.forEach(childSnapshot => {
+                data.push(childSnapshot.val());
+                console.log("snapshot.node_.children_.root_.value.value_: ", data)
+            });
+            return callback(data)
+        })
 };
 
 

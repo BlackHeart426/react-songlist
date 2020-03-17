@@ -24,12 +24,11 @@ export const SongsState = ({children}) => {
 
     const [state, dispatch]  = useReducer(songsReducer, initialState);
 
-    const setSongData = (state) => (
-
-        dispatch({
+    const setSongData = () => (
+        firebaseService.getData((data) =>  dispatch({
             type: SET_SONGDATA,
-            list: state
-        })
+            list: data
+        }))
     );
 
     const addSong = (state) => (

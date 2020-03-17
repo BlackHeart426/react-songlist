@@ -30,7 +30,7 @@ export const Songs = () => {
                 1,
                 '1 week age',
                 { type: 'tag', data: [ { name: 'Music' }] },
-                { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
+                // { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
                 // { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
             ),
             active: false
@@ -43,7 +43,7 @@ export const Songs = () => {
                 1,
                 '1 week age',
                 { type: 'tag', data: [ { name: 'Music' }] },
-                { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
+                // { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
                 // { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
             ),
             active: false
@@ -56,7 +56,7 @@ export const Songs = () => {
                 2,
                 '2 week age',
                 { type: 'tag', data: [ { name: 'Music' }] },
-                { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
+                // { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
                 // { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
             ),
             active: true
@@ -69,7 +69,7 @@ export const Songs = () => {
                 2,
                 '2 week age',
                 { type: 'tag', data: [ { name: 'Music' }] },
-                { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
+                // { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
                 // { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
             ),
             active: true
@@ -83,13 +83,12 @@ export const Songs = () => {
     let newSongData = [];
 
     useEffect(() => {
-        // SongAPI.setData();
+        setSongData();
         // const songData = SongAPI.getData();
         console.log('songData', songData);
         // wrapperSong(songData);
         // localStorage.setItem('songs', JSON.stringify(songData));
         // setSongData(songList);
-        // Firebaseservice.setData(songList);
     },[]);
 
     const updateItem = item => createData(item);
