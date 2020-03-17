@@ -4,6 +4,10 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import FormControl from "@material-ui/core/FormControl";
 
 export const useStyles = makeStyles(theme => ({
+    formControl: {
+        width: 350,
+        maxWidth: 350,
+    },
     margin: {
         margin: theme.spacing(1),
     },

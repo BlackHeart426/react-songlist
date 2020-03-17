@@ -1,4 +1,6 @@
-import firebase from 'firebase/app';
+import * as firebase from "firebase/app";
+import "firebase/database";
+import "firebase/auth";
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -10,6 +12,57 @@ const config = {
     appId: process.env.REACT_APP_ID
 };
 
-firebase.initializeApp (config);
-const databaseRef = firebase.database().ref();
-export const todosRef = databaseRef.child("todos")
+firebase.initializeApp(config);
+const db = firebase.database();
+
+export const getData = () => {
+    const ref = db.ref('listSongsTest')
+        .on('value', snapshot => {
+            const state = snapshot.val();
+    });
+    //TODO ошибки
+    return (ref)
+}
+
+export const setData = (list) => {
+    console.log('list', list)
+    const ref = db.ref('Songs');
+    ref.child('BlackHeart').set(list).then(console.log('s'));
+    ref.child('frecklesx').set(list).then(console.log('s'));
+
+    //TODO ошибки
+    return (ref)
+}
+
+// class Firebase {
+//     constructor() {
+//         firebase.initializeApp(config);
+//         this.auth = firebase.auth();
+//         this.db = firebase.database();
+//     }
+//
+//     // *** Auth API ***
+//
+//     doCreateUserWithEmailAndPassword = (email, password) =>
+//         this.auth.createUserWithEmailAndPassword(email, password);
+//
+//     doSignInWithEmailAndPassword = (email, password) =>
+//         this.auth.signInWithEmailAndPassword(email, password);
+//
+//     doSignOut = () => this.auth.signOut();
+//
+//     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+//
+//     doPasswordUpdate = password =>
+//         this.auth.currentUser.updatePassword(password);
+//
+//     // *** User API ***
+//
+//     user = uid => this.db.ref(`users/${uid}`);
+//
+//     listSong = () => this.db.ref('listSongsTest');
+//
+// }
+// export default Firebase;
+
+//https://github.com/briandesousa/firebase-with-react-hooks/tree/logrocket-blog

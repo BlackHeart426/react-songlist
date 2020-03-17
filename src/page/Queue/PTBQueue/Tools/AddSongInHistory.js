@@ -1,8 +1,6 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import BlockIcon from "@material-ui/icons/Block";
-import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
-import {createData} from "../../../Songs/Songs";
 
 export const AddSongInHistory = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -12,6 +10,9 @@ export const AddSongInHistory = (props) => {
         return lenSelected == 1 ? false : true
     }
 
+    function createData(title, artist, timesPlayed, lastPlayed, tags) {
+        return {title, artist, timesPlayed, lastPlayed, tags, action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
+    }
 
     const requestHandler = () => {
 

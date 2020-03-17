@@ -2,7 +2,6 @@ import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
-import {createData} from "../../Songs";
 import * as shortid from "shortid";
 
 export const AddSongs = (props) => {
@@ -11,10 +10,6 @@ export const AddSongs = (props) => {
 
     const openDialog = () => {
         setDialogOpened(true)
-    }
-
-    const requestHandler = () => {
-
     }
 
     function showButton(lenSelected) {
@@ -26,14 +21,13 @@ export const AddSongs = (props) => {
         const {title, artist, tags, active} = property;
         const newSong = {
             id: shortid.generate(),
-            data: createData(
-                title,
-                artist,
-                '',
-                '',
-                { type: 'tag', data: [ { name: 'Music' }] } ,
-                { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
-            ),
+            data: {
+                title: title,
+                artist: artist,
+                timesPlayed: '0',
+                lastPlayed: 'never',
+                tags: tags
+            },
             active: active
         }
         addSong(newSong)

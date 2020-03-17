@@ -3,10 +3,9 @@ import TablePagination from '../../companents/TablePagination/ComponentTablePagi
 import {PTBSongs} from "./PTBSongs/PTBSongs";
 import {SongsContext} from "../../contex/module/songs/songsContext";
 import * as shortid from "shortid";
+import * as Firebaseservice from "../../firebase";
+import {headCells} from "./headTable";
 
-export function createData(title, artist, timesPlayed, lastPlayed, tags, action) {
-    return {title, artist, timesPlayed, lastPlayed, tags, action}
-}
 
 export const Songs = () => {
 
@@ -14,14 +13,13 @@ export const Songs = () => {
 
     };
 
-    const headCells = [
-        { id: 'title', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
-        { id: 'artist', numeric: false, order: true, disablePadding: false, editMode: true, label: 'Artist', type: 'txt' },
-        { id: 'times-played', numeric: true, order: true, disablePadding: false, editMode: true, label: 'Times played', type: 'txt' },
-        { id: 'last-played', numeric: false, order: true, disablePadding: false, editMode: true, label: 'Last Played', type: 'txt' },
-        { id: 'tags', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'tag' },
-        { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
-    ];
+    function createData(title, artist, timesPlayed, lastPlayed, tags) {
+        return {title, artist, timesPlayed, lastPlayed, tags, action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
+    }
+
+    const song = {
+        id: shortid.generate(),
+    };
 
     const songList = [
         {
@@ -32,7 +30,8 @@ export const Songs = () => {
                 1,
                 '1 week age',
                 { type: 'tag', data: [ { name: 'Music' }] },
-                { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
+                { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
+                // { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
             ),
             active: false
         },
@@ -44,7 +43,8 @@ export const Songs = () => {
                 1,
                 '1 week age',
                 { type: 'tag', data: [ { name: 'Music' }] },
-                { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
+                { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
+                // { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
             ),
             active: false
         },
@@ -56,7 +56,8 @@ export const Songs = () => {
                 2,
                 '2 week age',
                 { type: 'tag', data: [ { name: 'Music' }] },
-                { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
+                { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
+                // { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
             ),
             active: true
         },
@@ -68,25 +69,32 @@ export const Songs = () => {
                 2,
                 '2 week age',
                 { type: 'tag', data: [ { name: 'Music' }] },
-                { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
+                { type: 'btn', data: [ { type: 'text', name: 'Request' }] },
+                // { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] },
             ),
             active: true
         },
     ];
 
-    const {songData, setSongData, searchText, setSelected} = useContext(SongsContext);
-    const {active, setActive} = useState(false);
+    const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(SongsContext);
+    const {active, setActive} = useState(false)
+    let newSongData = [];
     useEffect(() => {
         setSongData(songList);
-        const name = {name:'fghfghfg', data:[]};
-        localStorage.setItem('listSongs', JSON.stringify(songList))
+        localStorage.setItem('songs', JSON.stringify(songList));
+        Firebaseservice.setData(songList);
     },[]);
+
+    const updateItem = item => createData(item);
 
 
     useEffect(() => {
-        console.log('songDataEff', songData);
-        localStorage.setItem('listSongs', JSON.stringify(songData))
-    },[songData]);
+        console.log('songDataEff', songData)
+        localStorage.setItem('songs', JSON.stringify(songData));
+        Firebaseservice.setData(songData);
+        newSongData = { ...songData };
+        newSongData.list.map(item => updateItem(item))
+    },[songData])
 
 
     const handlerFilter = () => {
@@ -100,7 +108,7 @@ export const Songs = () => {
         return (
             filteredNew
         )
-    };
+    }
 
 
     return (
