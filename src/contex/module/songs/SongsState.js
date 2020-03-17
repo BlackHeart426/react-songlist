@@ -12,7 +12,7 @@ import {
     SHOW_DETAIl,
     TOGGLE_ACTIVE
 } from "../../types";
-import {Firebase} from "../../../firebase";
+import * as firebaseService from "../../../firebaseService";
 
 export const SongsState = ({children}) => {
     const initialState = {
@@ -25,6 +25,7 @@ export const SongsState = ({children}) => {
     const [state, dispatch]  = useReducer(songsReducer, initialState);
 
     const setSongData = (state) => (
+
         dispatch({
             type: SET_SONGDATA,
             list: state
@@ -32,10 +33,10 @@ export const SongsState = ({children}) => {
     );
 
     const addSong = (state) => (
-        dispatch({
+        firebaseService.setData(state, () =>  dispatch({
             type: ADD_SONG,
             newSong: state
-        })
+        }))
     );
 
     const setSelected = (state) => (

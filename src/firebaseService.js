@@ -1,6 +1,7 @@
-import * as firebase from "firebase/app";
+import * as app from "firebase/app";
 import "firebase/database";
 import "firebase/auth";
+import * as firebase from "firebase";
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -12,7 +13,30 @@ const config = {
     appId: process.env.REACT_APP_ID
 };
 
-firebase.initializeApp(config);
+app.initializeApp(config);
+
+const db = app.database();
+const userId = localStorage.getItem('userId');
+const ref = db.ref('songs').child(userId);
+
+export const setData = (list, callback) => {
+    ref.push(list)
+        .then(console.log('alert recording'))
+        .catch(console.log('alert error'));
+    //TODO ошибки
+    return callback()
+};
+
+export const getData = (callback) => {
+    const data = [];
+    ref.on('value',  snapshot => {
+        snapshot.forEach(childSnapshot => {
+            data.push(childSnapshot.val());
+            console.log("snapshot.node_.children_.root_.value.value_: ", data)
+        });
+    })
+    return callback(data)
+};
 
 
 // class Firebase {
