@@ -111,7 +111,23 @@ export const Songs = () => {
         let songList = {...songData};
         if(songList.list.length > 0) {
             let songListTest = wrapperSong(songList.list);
-            const filtered = songListTest.filter(item =>  item.data.title.toUpperCase().indexOf(searchText.toUpperCase()) !== -1);
+            const filtered = songListTest.filter(item =>  {
+
+                const values = Object.values(item.data);
+                const search = searchText.toLowerCase();
+                let flag = false;
+                values.forEach(val => {
+                    if(typeof val == "string") {
+                        if (val.toLowerCase().indexOf(search) > -1) {
+                            flag = true;
+                            return;
+                        }
+                    }
+                })
+                if (flag) return item
+                // return item.data.title.toUpperCase().indexOf(search) !== -1
+            });
+            console.log('filtered', filtered);
             songList.list = filtered;
             console.log('songList', songList);
         }
