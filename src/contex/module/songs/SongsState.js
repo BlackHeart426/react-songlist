@@ -32,7 +32,7 @@ export const SongsState = ({children}) => {
     );
 
     const addSong = (state) => (
-        SongAPI.setData(state, () =>  dispatch({
+        SongAPI.setData( state,(state) => dispatch({
             type: ADD_SONG,
             newSong: state
         }))
@@ -60,17 +60,17 @@ export const SongsState = ({children}) => {
     );
 
     const removeSong = (state) => (
-        dispatch({
+        SongAPI.removeData(state, () => dispatch({
             type: REMOVE_SONG,
             row: state
-        })
+        }))
     );
 
     const editSong = (state) => (
-        dispatch({
+        SongAPI.updateData(state, () => dispatch({
             type: EDIT_SONG,
             song: state
-        })
+        }))
     );
 
 
