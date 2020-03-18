@@ -21,3 +21,13 @@ export const getData = (callback) => {
         return callback(data)
     })
 };
+
+export const updateData = (callback) => {
+    const data = [];
+    ref.update('value', snapshot => {
+        snapshot.forEach(childSnapshot => {
+            data.push(childSnapshot.val());
+        });
+        return callback(data)
+    })
+};

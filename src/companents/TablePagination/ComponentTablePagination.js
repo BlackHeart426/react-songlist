@@ -70,10 +70,12 @@ export default function ComponentTablePagination(props) {
             );
         }
 
-        if (typeCheckBox === 'solo' && selectedIndex === -1) {
-            newSelected = [name];
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(rowsData.selected.slice(1));
+        if (typeCheckBox === 'solo') {
+            if (selectedIndex === -1) {
+                newSelected = [name];
+            } else if (selectedIndex === 0) {
+                newSelected = newSelected.concat(rowsData.selected.slice(1));
+            }
         }
 
         onSelectRow(newSelected);
@@ -131,6 +133,7 @@ export default function ComponentTablePagination(props) {
                             rowCount={rowsData.list.length}
                             data={headCells}
                             editMode = {statusEditMode}
+                            typeCheckBox={typeCheckBox}
                         />
                         <TableBody>
                             <EnhancedTableRows
