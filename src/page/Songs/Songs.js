@@ -90,7 +90,7 @@ export const Songs = () => {
     const wrapperSong = (song) => (
         song.map(item => {
             const {title, artist, timesPlayed, lastPlayed, tags} = item.data;
-            return createData(title, artist, timesPlayed, lastPlayed,  tags)
+            return {id: item.id, data: createData(title, artist, timesPlayed, lastPlayed,  tags), active: item.active}
         })
     );
 
@@ -110,16 +110,10 @@ export const Songs = () => {
 
     const handlerFilter = () => {
         let songList = {...songData};
-        console.log('songList', songList.list);
         if(songList.list.length > 0) {
-            let filtered = [];
-            // let filteredNew = songList;
-            let filteredNew = wrapperSong(songList.list);
-            console.log('filteredNew', filteredNew);
-            filtered = filteredNew.filter(item =>  item.data.title.toUpperCase().indexOf(searchText.toUpperCase()) !== -1);
-            // console.log('songData', songData);
+            let songListTest = wrapperSong(songList.list);
+            const filtered = songListTest.filter(item =>  item.data.title.toUpperCase().indexOf(searchText.toUpperCase()) !== -1);
             songList.list = filtered;
-            console.log('songList.list', songList.list);
         }
         return (
             songList
