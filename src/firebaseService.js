@@ -15,30 +15,30 @@ const config = {
 
 app.initializeApp(config);
 
-const db = app.database();
-const userId = localStorage.getItem('userId');
-const ref = db.ref('songs').child(userId);
-
-export const setData = (list, callback) => {
-    ref.push(list)
-        .then(console.log('alert recording'))
-        .catch(console.log('alert error'));
-    //TODO ошибки
-    return callback()
-};
-
-export const getData = (callback) => {
-    const data = [];
-    ref.once('value')
-        .then( snapshot => {
-            snapshot.forEach(childSnapshot => {
-                data.push(childSnapshot.val());
-            });
-            return callback(data)
-            console.log('alert recording')
-        })
-        .catch(console.log('alert error'))
-};
+export const database = app.database();
+// const userId = localStorage.getItem('userId');
+// const ref = db.ref('songs').child(userId);
+//
+// export const setData = (list, callback) => {
+//     ref.push(list)
+//         .then(console.log('alert recording'))
+//         .catch(console.log('alert error'));
+//     //TODO ошибки
+//     return callback()
+// };
+//
+// export const getData = (callback) => {
+//     const data = [];
+//     ref.once('value')
+//         .then( snapshot => {
+//             snapshot.forEach(childSnapshot => {
+//                 data.push(childSnapshot.val());
+//             });
+//             return callback(data)
+//             console.log('alert recording')
+//         })
+//         .catch(console.log('alert error'))
+// };
 
 
 // class Firebase {

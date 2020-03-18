@@ -12,7 +12,7 @@ import {
     SHOW_DETAIl,
     TOGGLE_ACTIVE
 } from "../../types";
-import * as firebaseService from "../../../firebaseService";
+import * as SongAPI from "../../../API/SongAPI";
 
 export const SongsState = ({children}) => {
     const initialState = {
@@ -25,14 +25,14 @@ export const SongsState = ({children}) => {
     const [state, dispatch]  = useReducer(songsReducer, initialState);
 
     const setSongData = () => (
-        firebaseService.getData((data) =>  dispatch({
+        SongAPI.getData((data) =>  dispatch({
             type: SET_SONGDATA,
             list: data
         }))
     );
 
     const addSong = (state) => (
-        firebaseService.setData(state, () =>  dispatch({
+        SongAPI.setData(state, () =>  dispatch({
             type: ADD_SONG,
             newSong: state
         }))
