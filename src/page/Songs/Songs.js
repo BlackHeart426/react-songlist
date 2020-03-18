@@ -7,8 +7,8 @@ import {headCells} from "./headTable";
 
 export const Songs = () => {
 
-    const requestHandler = () => {
-
+    const requestHandler = (id) => {
+        console.log('request', id)
     };
     // { type: 'tag', data: [ { name: 'Music' }] },
     const createTags = (tags) => {
@@ -103,7 +103,6 @@ export const Songs = () => {
     },[]);
 
     useEffect(() => {
-        console.log('songDataEff', songData);
         localStorage.setItem('songs', JSON.stringify(songData));
     },[songData]);
 
@@ -114,6 +113,7 @@ export const Songs = () => {
             let songListTest = wrapperSong(songList.list);
             const filtered = songListTest.filter(item =>  item.data.title.toUpperCase().indexOf(searchText.toUpperCase()) !== -1);
             songList.list = filtered;
+            console.log('songList', songList);
         }
         return (
             songList

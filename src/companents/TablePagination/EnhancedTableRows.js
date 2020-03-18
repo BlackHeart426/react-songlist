@@ -41,7 +41,7 @@ export function EnhancedTableRows (props) {
                             role="checkbox"
                             aria-checked={isItemSelected}
                             tabIndex={-1}
-                            onClick={ editMode && (event => handleClick(event, data[index].id))}
+                            onClick={ editMode ? event => handleClick(event, data[index].id) : undefined}
                             selected={isItemSelected}
 
                         >
@@ -89,7 +89,8 @@ export function EnhancedTableRows (props) {
                                                             >
                                                                 {btn.name}
                                                             </Button>
-                                                        :   <IconButton  key={indexBtn}>
+                                                        :
+                                                        <IconButton  key={indexBtn}>
                                                                 {componentTags[btn.name]}
                                                             </IconButton>
                                                 ))
