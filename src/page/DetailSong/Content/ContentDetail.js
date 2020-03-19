@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Card} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import CardContent from "@material-ui/core/CardContent";
@@ -30,7 +30,9 @@ export const ContentDetail = (props) => {
                     {detailSong.data.artist}
                 </Typography>
                 <div className={classes.pos}>
-                    <Chip label="Basic" />
+                    {detailSong.data.tags.map(value => (
+                        <Chip key={value} label={value} className={classes.chip} />
+                    ))}
                 </div>
                 <TextField
                     margin="dense"

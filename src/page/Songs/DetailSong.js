@@ -5,11 +5,11 @@ import {ToolsDetail} from "../DetailSong/Tools/ToolsDetail";
 
 export const DetailSong = props => {
     const {listSong, selected} = useContext(SongsContext);
-
+    // let listSong = {...songData};
     return (
         <>
             <ToolsDetail/>
-            <ContentDetail detailSong = { listSong.find(item => item.id === selected) }/>
+            <ContentDetail detailSong = { listSong.find(item => item.id == selected) }/>
         </>
     )
 }
