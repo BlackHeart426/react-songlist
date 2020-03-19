@@ -2,6 +2,7 @@ import React from "react";
 import {SongsContext} from "./songsContext";
 import {useReducer} from "react";
 import {songsReducer} from "./songsReducer";
+import useThunkReducer from "react-hook-thunk-reducer"
 import {
     ADD_SONG,
     EDIT_SONG,
@@ -22,17 +23,26 @@ export const SongsState = ({children}) => {
         searchText: '',
     }
 
-    const [state, dispatch]  = useReducer(songsReducer, initialState);
+    const [state, dispatch]  = useThunkReducer(songsReducer, initialState);
 
     const setSongData = () => (
         SongAPI.getData((data) =>  dispatch({
             type: SET_SONGDATA,
             list: data
         }))
+    // return dispatch => {
+    //     const data = [];
+    //     ref.once('value', snapshot => {
+    //         snapshot.forEach(childSnapshot => {
+    //             data.push(childSnapshot.val());
+    //         });
+    //     }).then(() => dispatch(
+    //         getTasks(data)
+    //     ))
     );
 
     const addSong = (state) => (
-        SongAPI.setData( state,(state) => dispatch({
+        SongAPI.setData(state, (state) => dispatch({
             type: ADD_SONG,
             newSong: state
         }))

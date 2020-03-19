@@ -6,20 +6,18 @@ const ref = database.ref('songs').child(userId);
 
 export const setData = (list, callback) => {
     ref.child(list.id).set(list)
-        .then(console.log('alert recording'))
+        .then(callback(list))
         .catch(console.log('alert error'));
-    //TODO ошибки
-    return callback(list)
 };
 
 export const getData = (callback) => {
     const data = [];
-    ref.on('value', snapshot => {
+    ref.once('value', snapshot => {
         snapshot.forEach(childSnapshot => {
             data.push(childSnapshot.val());
-        });
+        })
         return callback(data)
-    })
+    }).then(console.log('alert recording')).catch(console.log('alert error'));
 };
 
 export const updateData = (dataSong, callback) => {
@@ -30,7 +28,6 @@ export const updateData = (dataSong, callback) => {
     return callback()
 };
 
-export const removeData = (uuid, callback) => {
-    ref.child(uuid).remove().then(console.log('alert recording')).catch(console.log('alert error'));
-    return callback()
-};
+export const removeData = (uuid, callback) => (
+    ref.child(uuid).remove().then(callback()).catch(console.log('alert error'))
+);
