@@ -24,7 +24,7 @@ export const PTBSongs = (props) => {
                 <AddSongs lenSelected={lenSelected} songData={listSong} addSong={addSong}/>
                 <EditSongs lenSelected={lenSelected} songData={listSong} editSong={editSong} selected={selected}/>
                 <RemoveSongs lenSelected={lenSelected} songData={listSong} removeSong={removeSong} selected={selected} />
-                <DetailSongs lenSelected={lenSelected} selected={selected} detailShow={detailShow}/>
+                <DetailSongs lenSelected={lenSelected} selected={selected} songData={listSong}/>
                 <AddInQueueSongs lenSelected={lenSelected} songData={listSong} removeSong={removeSong} selected={selected}/>
                 <SwitchActiveSongs showActive={showActive} onActive = {onActive}/>
                 <SearchSong setSearchText={setSearchText} searchText={searchText}/>
