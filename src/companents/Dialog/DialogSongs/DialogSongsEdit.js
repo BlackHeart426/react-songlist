@@ -41,13 +41,15 @@ export function DialogSongsEdit(props) {
         let copyDataSong = {...dataSong};
         let active = copyDataSong['active'];
         let copyDataSongData = {...copyDataSong['data']};
-        const {title, artist, timePlayed, lastPlayed, tags} = copyDataSongData;
+        const {title, artist, timesPlayed, lastPlayed, tags} = copyDataSongData;
         let statusCopy = {...song};
         if(copyDataSong['id']) {
             statusCopy['title'] = title;
             statusCopy['artist'] = artist;
-            statusCopy['timePlayed'] = timePlayed;
+            statusCopy['timesPlayed'] = timesPlayed;
             statusCopy['lastPlayed'] = lastPlayed;
+            statusCopy['tags'] = tags;
+            statusCopy['active'] = active;
             setSong(statusCopy);
             setActiveSong(active)
             setPersonName(tags)
@@ -82,8 +84,8 @@ export function DialogSongsEdit(props) {
     };
 
     const handleSave = property => event => {
-        console.log(property)
-        onAddSongs(property)
+        console.log('property',property);
+        onAddSongs(property);
         handleClose()
     };
 
