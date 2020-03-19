@@ -25,16 +25,15 @@ export const EditSongs = (props) => {
     }
 
     const handlerEditRowsSong = (property) => {
-        const {title, artist, tags, active} = property;
+        const {title, artist, tags, active, timesPlayed, lastPlayed} = property;
         const newSong = {
             id: selected[0],
             data: createData(
                 title,
                 artist,
-                '',
-                '',
-                { type: 'tag', data: [ { name: 'Music' }] } ,
-                { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
+                timesPlayed,
+                lastPlayed,
+                tags ,
             ),
             active: active
         }

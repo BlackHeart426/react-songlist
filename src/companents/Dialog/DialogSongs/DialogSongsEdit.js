@@ -14,9 +14,9 @@ import React, {useEffect, useState} from "react";
 import useTheme from "@material-ui/core/styles/useTheme";
 import {getStyles, MenuProps, useStyles} from "./style";
 import CustomDialog from "../CustomDialog";
-
+//TODO общий список тегов
 const names = [
-    'Music',
+    "Music",
 ];
 
 export function DialogSongsEdit(props) {
@@ -27,28 +27,32 @@ export function DialogSongsEdit(props) {
         tags: []
     }
 
-    const {show, onHide, onAddSongs, dataSong} = props
+    const {show, onHide, onAddSongs, dataSong} = props;
     const classes = useStyles();
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
     const [dialogOpened, setDialogOpened] = useState(false);
-    const [active, setActive] = useState(false);
-    const [song, setSong] = useState(formControl)
+    const [activeSong, setActiveSong] = useState(false);
+    const [song, setSong] = useState(formControl);
 
     //TODO что-то с обьектом dataSong и вложеным data
     useEffect(() => {
-        setDialogOpened(show)
+        setDialogOpened(show);
         let copyDataSong = {...dataSong};
-        if(copyDataSong['id']) { //TODO переделать проверка на пустоту обьета
-            let copyDataSongData = {...copyDataSong['data']};
-            const {title, artist} = copyDataSongData;
-            let statusCopy = {...song};
+        let active = copyDataSong['active'];
+        let copyDataSongData = {...copyDataSong['data']};
+        const {title, artist, timePlayed, lastPlayed, tags} = copyDataSongData;
+        let statusCopy = {...song};
+        if(copyDataSong['id']) {
             statusCopy['title'] = title;
             statusCopy['artist'] = artist;
+            statusCopy['timePlayed'] = timePlayed;
+            statusCopy['lastPlayed'] = lastPlayed;
             setSong(statusCopy);
+            setActiveSong(active)
+            setPersonName(tags)
         }
-
-    },[show])
+    },[show]);
 
 
     const setProperty = (property, value) => {
@@ -68,7 +72,7 @@ export function DialogSongsEdit(props) {
 
     const handleChangeSwitch = event => {
 
-        setActive(event.target.checked)
+        setActiveSong(event.target.checked)
         setProperty('active', event.target.checked)
     };
 
@@ -115,7 +119,7 @@ export function DialogSongsEdit(props) {
             <div>
                 <FormControl className={classes.formControl}>
                     <FormControlLabel
-                        control={<Switch  checked={active} onChange={handleChangeSwitch} color="primary" />}
+                        control={<Switch  checked={activeSong} onChange={handleChangeSwitch} color="primary" />}
                         label="Active"
                     />
                 </FormControl>
@@ -130,9 +134,9 @@ export function DialogSongsEdit(props) {
                         value={personName}
                         onChange={handleChangeSelect}
                         input={<Input id="select-multiple-chip" />}
-                        renderValue={selected => (
+                        renderValue={select => (
                             <div className={classes.chips}>
-                                {selected.map(value => (
+                                {select.map(value => (
                                     <Chip key={value} label={value} className={classes.chip} />
                                 ))}
                             </div>
