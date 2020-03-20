@@ -15,14 +15,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const AlertCustom = () =>{
+export const AlertCustom = ({ text }) =>{
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
-    const {alert} = useContext(AlertContext)
     if(!alert) return null
-
-
-
     return (
         <div className={classes.root}>
             <Collapse in={open}>
@@ -40,7 +36,7 @@ export const AlertCustom = () =>{
                         </IconButton>
                     }
                 >
-                    {alert.text}
+                    {text}
                 </Alert>
             </Collapse>
         </div>
