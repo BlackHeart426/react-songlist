@@ -9,15 +9,22 @@ import {
     SET_SONGDATA,
     TOGGLE_ACTIVE
 } from "../../contex/types";
+import {showAlert} from "./app";
 
 export const setSongData = (data) => {
     // SongAPI.getData((data) =>  dispatch({
     //     type: SET_SONGDATA,
     //     list: data
     // }))
-    return {
-        type: SET_SONGDATA,
-        list: data
+    return async dispatch => {
+        try {
+            // dispatch(showLoader())
+            const response = await SongAPI.getData();
+            dispatch({ type: SET_SONGDATA, list: response });
+        } catch (e) {
+            dispatch(showAlert('Что-то пошло не так'))
+            // dispatch(hideLoader())
+        }
     }
 };
 

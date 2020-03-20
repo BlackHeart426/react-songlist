@@ -12,7 +12,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {AlertCustom} from  './companents/Alert/Alert'
 import {SongsState} from "./contex/module/songs/SongsState";
-import {DrawerContext} from "./contex/drawer/drawerContext";
 import {DetailSong} from "./page/Songs/DetailSong";
 import {EditDetailSong} from "./page/Songs/EditDetailSong";
 import {QueueState} from "./contex/module/queue/QueueState";
@@ -49,7 +48,6 @@ const useStyles = makeStyles(theme => ({
 
 export const App = () => {
     const classes = useStyles();
-    // const { toggleEditMode, statusEditMode, toggleOpenDrawer, statusOpenDrawer } = useContext(DrawerContext)
 
     const SongsRoute = () => (
         <SongsState>
@@ -91,19 +89,13 @@ export const App = () => {
             <div className={classes.root}>
                 <CssBaseline />
                 <NavBar
-                    // toggleOpenDrawer = {toggleOpenDrawer}
-                    // statusOpenDrawer = {statusOpenDrawer}
                     className={classes.appBar}
                 />
                 <DrawerCustom
-                    // toggleEditMode = {toggleEditMode}
-                    // statusEditMode = {statusEditMode}
-                    // toggleOpenDrawer = {toggleOpenDrawer}
-                    // statusOpenDrawer = {statusOpenDrawer}
                     className={classes.drawer}
                     classes={{
-                    paper: classes.drawerPaper,
-                     }}
+                        paper: classes.drawerPaper,
+                    }}
                 />
                 <main className={classes.content}>
                     <div  className={classes.toolbar}>
