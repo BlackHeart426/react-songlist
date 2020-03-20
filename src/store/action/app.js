@@ -33,7 +33,7 @@ export const toggleEditModeActionCreator = (status) => {
     }
 };
 
-export const toggleOpenDrawer = (status) => {
+export const toggleOpenDrawerActionCreator = (status) => {
     return {
         type: OPEN_DRAWER,
         payload: status

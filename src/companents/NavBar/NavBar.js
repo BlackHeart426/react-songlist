@@ -9,6 +9,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from '@material-ui/icons/Menu';
 import {withWidth} from "@material-ui/core";
 import Hidden from '@material-ui/core/Hidden';
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {toggleEditModeActionCreator, toggleOpenDrawerActionCreator} from "../../store/action/app";
 
 const useStyles = makeStyles(theme => ({
     list: {
@@ -32,14 +35,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function NavBar(props){
-    const { statusOpenDrawer, toggleOpenDrawer } = props;
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
-        toggleOpenDrawer( !statusOpenDrawer )
-        console.log(statusOpenDrawer)
+        props.action.toggleOpenDrawer( !props.statusOpenDrawer )
     };
 
     const handleDrawerClose = () => {
@@ -73,4 +74,21 @@ function NavBar(props){
     )
 }
 
-export default withWidth() (NavBar);
+const mapStateToProps = state => {
+    return {
+        statusOpenDrawer: state.app.openDrawer
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        action: {
+            toggleOpenDrawer: (data) => dispatch(toggleOpenDrawerActionCreator(data))
+        }
+    }
+};
+
+export default compose(
+    withWidth(),
+    connect(mapStateToProps, mapDispatchToProps))
+(NavBar);

@@ -20,13 +20,12 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {Hidden, withWidth} from "@material-ui/core";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import { toggleEditModeActionCreator, toggleOpenDrawer} from "../../store/action/app";
+import {toggleEditModeActionCreator, toggleOpenDrawerActionCreator} from "../../store/action/app";
 
 
 const DrawerCustom = (props) => {
     const classes = useStylesDrawer();
     const [open, setOpen] = useState(false);
-    const [editMode, setEditMode] = useState(props.statusEditMode);
 
     const handleClick = () => {
         setOpen(!open);
@@ -35,7 +34,7 @@ const DrawerCustom = (props) => {
         props.action.toggleEditMode(event.target.checked)
     };
     const handleDrawerClose = (event) => {
-        toggleOpenDrawer(!props.statusOpenDrawer);
+        props.action.toggleOpenDrawer(!props.statusOpenDrawer);
     };
 
     const sideList = () => (
@@ -133,7 +132,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         action: {
-            toggleEditMode: (data) => dispatch(toggleEditModeActionCreator(data))
+            toggleEditMode: (data) => dispatch(toggleEditModeActionCreator(data)),
+            toggleOpenDrawer: (data) => dispatch(toggleOpenDrawerActionCreator(data)),
         }
     }
 };
