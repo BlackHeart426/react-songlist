@@ -1,10 +1,9 @@
-import React, {useContext} from "react";
+import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from '@material-ui/icons/Close';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Collapse from "@material-ui/core/Collapse";
 import Alert from '@material-ui/lab/Alert';
-import {AlertContext} from "../../contex/alert/alertContext";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -17,8 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 export const AlertCustom = ({ text }) =>{
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
-    if(!alert) return null
+    const [open, setOpen] = React.useState(false);
     return (
         <div className={classes.root}>
             <Collapse in={open}>
@@ -41,4 +39,4 @@ export const AlertCustom = ({ text }) =>{
             </Collapse>
         </div>
     )
-}
+};
