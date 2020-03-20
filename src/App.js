@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import './App.css';
 import { Route, Switch} from "react-router-dom";
 import {Queue} from "./page/Queue/Queue";
-import {Songs} from "./page/Songs/Songs";
 import {SavedQueue} from "./page/SavedQueue/SavedQueue";
 import {History} from "./page/History/History";
 import {Settings} from "./page/Settings/Settings";
@@ -18,6 +17,8 @@ import {QueueState} from "./contex/module/queue/QueueState";
 import {SavedQueueState} from "./contex/module/savedQueue/SavedQueueState";
 import {HistoryState} from "./contex/module/history/HistoryState";
 import {Test} from "./page/Test";
+import Songs from "./page/Songs/Songs";
+import {connect} from "react-redux";
 
 const drawerWidth = 240;
 
@@ -46,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     toolbar: theme.mixins.toolbar,
 }));
 
-export const App = () => {
+const App = (props) => {
     const classes = useStyles();
 
     const SongsRoute = () => (
@@ -107,9 +108,16 @@ export const App = () => {
                             <Route component={Settings} path="/settings"/>
                             <Route component={Test} path="/s/:userId/test"/>
                         </Switch>
-                        <AlertCustom text={'Test'}/>
+                        {props.alert && <AlertCustom text={props.alert} />}
+
                     </div>
                 </main>
             </div>
     );
-}
+};
+
+const mapStateToProps = state => ({
+    alert: state.app.alert
+});
+
+export default connect(mapStateToProps)(App)

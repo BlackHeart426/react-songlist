@@ -19,7 +19,7 @@ export const AlertCustom = ({ text }) =>{
     const [open, setOpen] = React.useState(false);
     return (
         <div className={classes.root}>
-            <Collapse in={open}>
+            {/*<Collapse >*/}
                 <Alert
                     action={
                         <IconButton
@@ -36,7 +36,7 @@ export const AlertCustom = ({ text }) =>{
                 >
                     {text}
                 </Alert>
-            </Collapse>
+            {/*</Collapse>*/}
         </div>
     )
 };

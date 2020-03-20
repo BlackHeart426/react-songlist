@@ -14,9 +14,20 @@ export const hideLoader = () => {
 };
 
 export const showAlert = text => {
-    return {
-        type: SHOW_ALERT,
-        payload: text
+    // return {
+    //     type: SHOW_ALERT,
+    //     payload: text
+    // }
+    return dispatch => {
+        console.log('vvvvvvvvvv')
+        dispatch({
+            type: SHOW_ALERT,
+            payload: text
+        })
+
+        // setTimeout(() => {
+        //     dispatch(hideAlert())
+        // }, 3000)
     }
 };
 

@@ -16,7 +16,7 @@ const initialState = {
     searchText: '',
 };
 
-export const songsReducer = (state, action) => {
+export const songsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_SONGDATA:
             return { ...state, list: action.list };
@@ -36,6 +36,6 @@ export const songsReducer = (state, action) => {
                     (state.list[index].active = action.song.active)))
             };
         default:
-            return  {state}
+            return  state
     }
 };

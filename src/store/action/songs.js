@@ -11,18 +11,22 @@ import {
 } from "../../contex/types";
 import {showAlert} from "./app";
 
-export const setSongData = (data) => {
+export const getSongDataActionCreator = () => {
+
     // SongAPI.getData((data) =>  dispatch({
     //     type: SET_SONGDATA,
     //     list: data
     // }))
     return async dispatch => {
+
         try {
+            console.log('wwwwwwwwwwwwwwwww')
             // dispatch(showLoader())
-            const response = await SongAPI.getData();
-            dispatch({ type: SET_SONGDATA, list: response });
-        } catch (e) {
             dispatch(showAlert('Что-то пошло не так'))
+            // const response = await SongAPI.getData();
+            // return dispatch({ type: SET_SONGDATA, list: response });
+        } catch (e) {
+            // dispatch(showAlert('Что-то пошло не так'))
             // dispatch(hideLoader())
         }
     }
@@ -39,7 +43,7 @@ export const addSong = (state) => {
     }
 };
 
-export const setSelected = (state) => {
+export const setSelectedActionCreator = (state) => {
     return {
         type: SET_SELECTED,
         newSelect: state

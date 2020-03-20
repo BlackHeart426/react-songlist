@@ -1,10 +1,11 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import TablePagination from '../../companents/TablePagination/ComponentTablePagination'
 import {PTBSongs} from "./PTBSongs/PTBSongs";
-import {SongsContext} from "../../contex/module/songs/songsContext";
 import {headCells} from "./headTable";
+import {connect} from "react-redux";
+import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/songs";
 
-export const Songs = () => {
+const Songs = (props) => {
 
     const requestHandler = (id) => {
         console.log('request', id)
@@ -24,26 +25,28 @@ export const Songs = () => {
         })
     );
 
-    const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(SongsContext);
-    const {active, setActive} = useState(false)
+    const {active, setActive} = useState(false);
 
     useEffect(() => {
-        setSongData(); //Заполнение таблицы с песнями
+        console.log('qqqqqqqqqqqqqqqq')
+        props.action.getSongData(); //Заполнение таблицы с песнями
     },[]);
 
     useEffect(() => {
-        localStorage.setItem('songs', JSON.stringify(songData));
-    },[songData]);
+        console.log('props.songData', props.songData);
+        localStorage.setItem('songs', JSON.stringify(props.songData));
+    },[props.songData]);
 
 
     const handlerFilter = () => {
-        let songList = {...songData};
+        let songList = {...props.songData};
+        // console.log('songList', songList)
         if(songList.list.length > 0) {
             let songListTest = wrapperSong(songList.list);
             const filtered = songListTest.filter(item =>  {
 
                 const values = Object.values(item.data);
-                const search = searchText.toLowerCase();
+                const search = props.searchText.toLowerCase();
                 let flag = false;
                 values.forEach(val => {
                     if(typeof val == "string") {
@@ -56,9 +59,7 @@ export const Songs = () => {
                 if (flag) return item
                 // return item.data.title.toUpperCase().indexOf(search) !== -1
             });
-            console.log('filtered', filtered);
             songList.list = filtered;
-            console.log('songList', songList);
         }
         return (
             songList
@@ -69,7 +70,27 @@ export const Songs = () => {
     return (
         <>
             <PTBSongs showActive={active}/>
-            <TablePagination onSelectRow = {setSelected} headCells = {headCells} rowsData = {handlerFilter()} showActive={active}/>
+            <TablePagination onSelectRow = {() => props.action.setSelected} headCells = {headCells} rowsData = {handlerFilter()} showActive={active}/>
         </>
     )
 };
+
+
+const mapStateToProps = state => {
+    console.log('state.songs', state.songs)
+    return {
+        searchText: state.songs.searchText,
+        songData: state.songs,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        action: {
+            getSongData: getSongDataActionCreator(),
+            setSelected: (data) => dispatch(setSelectedActionCreator(data)),
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Songs);

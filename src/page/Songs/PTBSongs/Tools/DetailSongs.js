@@ -9,12 +9,12 @@ export const DetailSongs = (props) => {
     const history = useHistory();
 
     const showDetail = () => {
-        const uuidSong = songData.find(item => item.id == selected);
+        const uuidSong = songData.find(item => item.id === selected);
         history.push(addUserIdAtLink("/songs/detail/"+uuidSong.id))
     }
 
     function showButton(lenSelected) {
-        return lenSelected == 1 ? false : true
+        return lenSelected === 1 ? false : true
     }
 
 
