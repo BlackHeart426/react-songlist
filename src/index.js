@@ -25,7 +25,6 @@ const store = createStore(
 
 
 const app = (
-    <DrawerState>
         <AlertState>
             <BrowserRouter>
                 <Provider store={store}>
@@ -33,7 +32,6 @@ const app = (
                 </Provider>
             </BrowserRouter>
         </AlertState>
-    </DrawerState>
 )
 
 ReactDOM.render(app, document.getElementById('root'));

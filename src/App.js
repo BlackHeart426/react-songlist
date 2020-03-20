@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 
 export const App = () => {
     const classes = useStyles();
-    const { toggleEditMode, statusEditMode, toggleOpenDrawer, statusOpenDrawer } = useContext(DrawerContext)
+    // const { toggleEditMode, statusEditMode, toggleOpenDrawer, statusOpenDrawer } = useContext(DrawerContext)
 
     const SongsRoute = () => (
         <SongsState>
@@ -91,15 +91,15 @@ export const App = () => {
             <div className={classes.root}>
                 <CssBaseline />
                 <NavBar
-                    toggleOpenDrawer = {toggleOpenDrawer}
-                    statusOpenDrawer = {statusOpenDrawer}
+                    // toggleOpenDrawer = {toggleOpenDrawer}
+                    // statusOpenDrawer = {statusOpenDrawer}
                     className={classes.appBar}
                 />
                 <DrawerCustom
-                    toggleEditMode = {toggleEditMode}
-                    statusEditMode = {statusEditMode}
-                    toggleOpenDrawer = {toggleOpenDrawer}
-                    statusOpenDrawer = {statusOpenDrawer}
+                    // toggleEditMode = {toggleEditMode}
+                    // statusEditMode = {statusEditMode}
+                    // toggleOpenDrawer = {toggleOpenDrawer}
+                    // statusOpenDrawer = {statusOpenDrawer}
                     className={classes.drawer}
                     classes={{
                     paper: classes.drawerPaper,

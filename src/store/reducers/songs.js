@@ -36,6 +36,6 @@ export const songsReducer = (state, action) => {
                     (state.list[index].active = action.song.active)))
             };
         default:
-            return  state
+            return  {state}
     }
 };

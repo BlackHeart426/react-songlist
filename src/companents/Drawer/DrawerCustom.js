@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React,{useState} from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -12,31 +12,31 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ImageIcon from '@material-ui/icons/Image';
 import Switch from "@material-ui/core/Switch";
-import {DrawerContext} from "../../contex/drawer/drawerContext";
 import {menuDrawerCustom,  subMenuDrawerCustom} from "./menu";
 import {useStylesDrawer} from "./style";
 import {renderLink} from "./render";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {Hidden, withWidth} from "@material-ui/core";
-import {SongsContext} from "../../contex/module/songs/songsContext";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import { toggleEditModeActionCreator, toggleOpenDrawer} from "../../store/action/app";
 
 
-
-function DrawerCustom(props){
-    const { toggleEditMode, statusEditMode, toggleOpenDrawer, statusOpenDrawer } = props
+const DrawerCustom = (props) => {
     const classes = useStylesDrawer();
     const [open, setOpen] = useState(false);
+    const [editMode, setEditMode] = useState(props.statusEditMode);
 
     const handleClick = () => {
         setOpen(!open);
     };
-    function handlerEditMode() {
-        toggleEditMode(!statusEditMode)
-    }
-    function handleDrawerClose() {
-        toggleOpenDrawer(!statusOpenDrawer);
-    }
+    const handlerEditMode= (event) => {
+        props.action.toggleEditMode(event.target.checked)
+    };
+    const handleDrawerClose = (event) => {
+        toggleOpenDrawer(!props.statusOpenDrawer);
+    };
 
     const sideList = () => (
         <div
@@ -83,7 +83,7 @@ function DrawerCustom(props){
                 </List>
             </Collapse>
             <ListItem>
-                <ListItemIcon><Switch onChange={handlerEditMode} checked={statusEditMode} color="primary"/></ListItemIcon>
+                <ListItemIcon><Switch onChange={handlerEditMode} checked={props.statusEditMode} color="primary"/></ListItemIcon>
                 <ListItemText>Edit mode</ListItemText>
             </ListItem>
         </div>
@@ -96,7 +96,7 @@ function DrawerCustom(props){
                     onClose={handleDrawerClose}
                     className={classes.drawer}
                     variant="temporary"
-                    open={ statusOpenDrawer }
+                    open={ props.statusOpenDrawer }
                     anchor="left"
                     classes={{
                         paper: classes.drawerPaper,
@@ -109,7 +109,7 @@ function DrawerCustom(props){
                 <Drawer
                     className={classes.drawer}
                     variant="permanent"
-                    open={ statusOpenDrawer }
+                    open={ props.statusOpenDrawer }
                     anchor="left"
                     classes={{
                         paper: classes.drawerPaper,
@@ -121,6 +121,24 @@ function DrawerCustom(props){
         </>
 
     )
-}
+};
 
-export default withWidth() (DrawerCustom);
+const mapStateToProps = state => {
+    return {
+        statusEditMode: state.app.editMode,
+        statusOpenDrawer: state.app.openDrawer
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        action: {
+            toggleEditMode: (data) => dispatch(toggleEditModeActionCreator(data))
+        }
+    }
+};
+
+export default compose(
+    withWidth(),
+    connect(mapStateToProps, mapDispatchToProps))
+(DrawerCustom);

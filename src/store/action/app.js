@@ -1,4 +1,5 @@
-import {HIDE_ALERT, HIDE_LOADER, SHOW_ALERT, SHOW_LOADER} from "../types";
+import {HIDE_ALERT, HIDE_LOADER, OPEN_DRAWER, SHOW_ALERT, SHOW_LOADER, TOGGLE_EDITMODE} from "../types";
+
 
 export const showLoader = () => {
     return {
@@ -23,4 +24,18 @@ export const hideAlert = () => {
     return {
         type: HIDE_ALERT
     }
-}
+};
+
+export const toggleEditModeActionCreator = (status) => {
+    return {
+        type: TOGGLE_EDITMODE,
+        payload: status
+    }
+};
+
+export const toggleOpenDrawer = (status) => {
+    return {
+        type: OPEN_DRAWER,
+        payload: status
+    }
+};

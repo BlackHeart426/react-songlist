@@ -1,8 +1,11 @@
-import {HIDE_ALERT, HIDE_LOADER, SHOW_ALERT, SHOW_LOADER} from "../types";
+import {HIDE_ALERT, HIDE_LOADER, OPEN_DRAWER, SHOW_ALERT, SHOW_LOADER, TOGGLE_EDITMODE} from "../types";
+
 
 const initialState = {
     loading: false,
-    alert: null
+    alert: null,
+    editMode: true,
+    openDrawer: false
 };
 
 export const appReducer = (state  = initialState, action) => {
@@ -15,6 +18,10 @@ export const appReducer = (state  = initialState, action) => {
             return {...state, alert: action.payload};
         case HIDE_ALERT:
             return {...state, alert: null};
+        case TOGGLE_EDITMODE:
+            return { ...state, editMode: action.payload };
+        case OPEN_DRAWER:
+            return { ...state, openDrawer: action.payload };
         default: return state
     }
 }

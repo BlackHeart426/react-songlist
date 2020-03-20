@@ -12,21 +12,23 @@ import {DrawerContext} from "../../contex/drawer/drawerContext";
 import {EnhancedTableHead} from "./EnhancedTableHead";
 import {EnhancedTableRows} from "./EnhancedTableRows";
 import {useStyles} from "./styles";
+import {connect} from "react-redux";
 
 
-export default function ComponentTablePagination(props) {
+const ComponentTablePagination = (props) => {
     const classes = useStyles();
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const {statusEditMode} = useContext(DrawerContext);
+    // const {statusEditMode} = useContext(DrawerContext);
     const {rowsData, headCells,  onSelectRow, typeCheckBox} = props;
 
     useEffect(() => {
         onSelectRow([])
-    },[statusEditMode])
+        console.log('editMode',props.statusEditMode)
+    },[props.statusEditMode])
 
     //TODO Рассмотреть возможность переноса всех handler в отдельный файл
     /**
@@ -132,7 +134,7 @@ export default function ComponentTablePagination(props) {
                             onRequestSort={handleRequestSort}
                             rowCount={rowsData.list.length}
                             data={headCells}
-                            editMode = {statusEditMode}
+                            editMode = {props.statusEditMode}
                             typeCheckBox={typeCheckBox}
                         />
                         <TableBody>
@@ -140,7 +142,7 @@ export default function ComponentTablePagination(props) {
                                 classes={classes}
                                 order={order}
                                 orderBy={orderBy}
-                                editMode ={statusEditMode}
+                                editMode ={props.statusEditMode}
                                 data={rowsData.list}
                                 page={page}
                                 rowsPerPage={rowsPerPage}
@@ -172,4 +174,12 @@ export default function ComponentTablePagination(props) {
             />
         </div>
     );
-}
+};
+
+const mapStateToProps = state => {
+    return {
+        statusEditMode: state.app.editMode
+    }
+};
+
+export default connect(mapStateToProps)(ComponentTablePagination)

@@ -22,7 +22,7 @@ const defaultColor = {
     'color': 'rgba(255, 0, 0, 0.87)',
 };
 
-export function EnhancedTableRows (props) {
+export const EnhancedTableRows = (props) => {
     const { data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode, showActive } = props
 
     return (
