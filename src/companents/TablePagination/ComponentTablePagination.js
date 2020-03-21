@@ -11,7 +11,8 @@ import Switch from "@material-ui/core/Switch";
 import {EnhancedTableHead} from "./EnhancedTableHead";
 import {EnhancedTableRows} from "./EnhancedTableRows";
 import {useStyles} from "./styles";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 
 const ComponentTablePagination = (props) => {
@@ -22,7 +23,7 @@ const ComponentTablePagination = (props) => {
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const {rowsData, headCells,  onSelectRow, typeCheckBox} = props;
-
+    const loading = useSelector(state => state.app.loading)
     useEffect(() => {
         onSelectRow([])
         console.log('editMode',props.statusEditMode)
@@ -117,12 +118,14 @@ const ComponentTablePagination = (props) => {
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <TableContainer>
+                    {loading && <LinearProgress className={classes.root}/>}
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
                         size={dense ? 'small' : 'medium'}
                         aria-label="enhanced table"
                     >
+
                         <EnhancedTableHead
                             classes={classes}
                             numSelected={rowsData.selected.length}
@@ -135,6 +138,7 @@ const ComponentTablePagination = (props) => {
                             editMode = {props.statusEditMode}
                             typeCheckBox={typeCheckBox}
                         />
+
                         <TableBody>
                             <EnhancedTableRows
                                 classes={classes}

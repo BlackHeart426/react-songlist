@@ -9,19 +9,53 @@ import {
     SET_SONGDATA,
     TOGGLE_ACTIVE
 } from "../../contex/types";
-import {showAlert} from "./app";
+import {hideLoader, showAlert, showLoader} from "./app";
 import {database} from "../../firebaseService";
+import Axios from "axios";
+
+export const getItem = () => {
+    const userId = localStorage.getItem('userId');
+    const ref = database.ref('songs').child(userId);
+    const data = [];
+    return async dispatch => {
+        // dispatch(showLoader())
+        // dispatch(showAlert('Что-то пошло не так'))
+        await ref.once('value')
+            .then(snapshot => {
+                snapshot.forEach(childSnapshot => {
+                    data.push(childSnapshot.val())
+                })
+                // dispatch({ type: SET_SONGDATA, list: data })
+                // dispatch(hideLoader())
+
+            })
+            .catch(error => {
+                // dispatch(showAlert('Что-то пошло не так'))
+                // dispatch(hideLoader())
+            })
+    }
+}
 
 export const getSongDataActionCreator = () => async dispatch => {
-    // const userId = localStorage.getItem('userId');
-    // const ref = database.ref('songs').child(userId);
-    // ref.on('value', snapshot => {
-    //     snapshot.forEach(childSnapshot => {
-    //         // data.push(childSnapshot.val());
-    //         dispatch({ type: SET_SONGDATA, list: childSnapshot.val() })
-    //     });
-    // })
-    await SongAPI.getData((response) => dispatch({ type: SET_SONGDATA, list: response }))
+    const userId = localStorage.getItem('userId');
+    const ref = database.ref('songs').child(userId);
+    const data = [];
+    dispatch(showLoader())
+    try {
+
+        await ref.on('value', snapshot => {
+            snapshot.forEach(childSnapshot => {
+                data.push(childSnapshot.val());
+            });
+            dispatch({ type: SET_SONGDATA, list: data })
+            dispatch(hideLoader())
+        })
+    } catch (e) {
+        dispatch(showAlert('Что-то пошло не так'))
+        dispatch(hideLoader())
+    }
+
+    // await SongAPI.getData((response) => dispatch({ type: SET_SONGDATA, list: response }))
 
     //.then(console.log('getData error',data)).catch(console.log('getData error'));
 //     return (

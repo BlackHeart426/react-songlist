@@ -24,13 +24,11 @@ const store = createStore(
 
 
 const app = (
-    <AlertState>
-        <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </BrowserRouter>
-    </AlertState>
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>
 )
 
 ReactDOM.render(app, document.getElementById('root'));

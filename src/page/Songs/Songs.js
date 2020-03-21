@@ -2,12 +2,12 @@ import React, { useEffect, useState} from "react";
 import TablePagination from '../../companents/TablePagination/ComponentTablePagination'
 import {PTBSongs} from "./PTBSongs/PTBSongs";
 import {headCells} from "./headTable";
-import {connect} from "react-redux";
-import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/songs";
-import {showAlert} from "../../store/action/app";
+import {connect, useDispatch} from "react-redux";
+import {getItem, getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/songs";
+import {showAlert, showLoader} from "../../store/action/app";
 
 const Songs = (props) => {
-
+    const dispatch = useDispatch()
     const requestHandler = (id) => {
         console.log('request', id)
     };
@@ -28,15 +28,13 @@ const Songs = (props) => {
     );
 
     const {active, setActive} = useState(false);
-
+    console.log('123')
     useEffect(() => {
-        console.log('qqqqqqqqqqqqqqqq')
-        // props.action.alert('Hi')
-        // props.showAlert('hi')
         props.action.getSongData(); //Заполнение таблицы с песнями
+            // dispatch(showLoader())
 
     },[]);
-
+    //
     useEffect(() => {
         console.log('props.songData', props.songData);
         localStorage.setItem('songs', JSON.stringify(props.songData));
@@ -45,16 +43,15 @@ const Songs = (props) => {
 
     const handlerFilter = () => {
         let songList = {...props.songData};
-        console.log('songList', songList.list)
-        if(songList.list.length > 0) {
+        if (Object.keys(songList).length > 0) {
             let songListTest = wrapperSong(songList.list);
-            const filtered = songListTest.filter(item =>  {
+            const filtered = songListTest.filter(item => {
 
                 const values = Object.values(item.data);
                 const search = props.searchText.toLowerCase();
                 let flag = false;
                 values.forEach(val => {
-                    if(typeof val == "string") {
+                    if (typeof val == "string") {
                         if (val.toLowerCase().indexOf(search) > -1) {
                             flag = true;
                             return;
@@ -65,10 +62,14 @@ const Songs = (props) => {
                 // return item.data.title.toUpperCase().indexOf(search) !== -1
             });
             songList.list = filtered;
+            return (
+                songList
+            )
+        } else {
+            console.log('songList', {...props.songData});
+            return songList
         }
-        return (
-            songList
-        )
+
     };
 
 
@@ -89,12 +90,18 @@ const mapStateToProps = state => {
     }
 };
 
+// const mapDispatchToProps = {
+//     showAlert
+// }
+
 const mapDispatchToProps = dispatch => {
     return {
         action: {
             getSongData: () => dispatch(getSongDataActionCreator()),
+            getItem: () => dispatch(getItem()),
             setSelected: (data) => dispatch(setSelectedActionCreator(data)),
-            alert: (text) => dispatch(showAlert(text))
+            alert: (text) => dispatch(showAlert(text)),
+            loader: () => dispatch(showLoader())
         }
     }
 };

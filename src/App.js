@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import './App.css';
 import { Route, Switch} from "react-router-dom";
 import {Queue} from "./page/Queue/Queue";
@@ -18,7 +18,10 @@ import {SavedQueueState} from "./contex/module/savedQueue/SavedQueueState";
 import {HistoryState} from "./contex/module/history/HistoryState";
 import {Test} from "./page/Test";
 import Songs from "./page/Songs/Songs";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
+import {Loader} from "./companents/Loader/Loader";
+import {getItem, getSongDataActionCreator, setSelectedActionCreator} from "./store/action/songs";
+import {showAlert, showLoader} from "./store/action/app";
 
 const drawerWidth = 240;
 
@@ -50,40 +53,53 @@ const useStyles = makeStyles(theme => ({
 const App = (props) => {
     const classes = useStyles();
 
-    const SongsRoute = () => (
-        <SongsState>
-            <Switch>
-                <Route exact path="/s/:userId/songs" component={Songs}/>
-                <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
-                <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
-            </Switch>
-        </SongsState>
-    );
+    // let loading = true
+    // setTimeout(()=>{loading = false},3000)
+    // const SongsRoute = () => {
+    //     // <SongsState>
+    //     // console.log('switch')
+    //     return <Switch>
+    //         <Route exact path="/s/:userId/songs/" component={Songs}/>
+    //         <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
+    //         <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
+    //     </Switch>
+    //     // </SongsState>
+    // };
+    //
+    // const QueueRoute = () => (
+    //     <QueueState>
+    //         <Switch>
+    //             <Route exact path="/s/:userId/queue" component={Queue}/>
+    //             <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
+    //         </Switch>
+    //     </QueueState>
+    // );
+    //
+    // const SavedQueueRoute = () => (
+    //     <SavedQueueState>
+    //         <Switch>
+    //             <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>
+    //         </Switch>
+    //     </SavedQueueState>
+    // );
+    //
+    // const HistoryRoute = () => (
+    //     <HistoryState>
+    //         <Switch>
+    //             <Route exact path="/s/:userId/history" component={History}/>
+    //         </Switch>
+    //     </HistoryState>
+    // );
 
-    const QueueRoute = () => (
-        <QueueState>
-            <Switch>
-                <Route exact path="/s/:userId/queue" component={Queue}/>
-                <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
-            </Switch>
-        </QueueState>
-    );
+    useEffect(() => {
+        console.log('qqqqqqqqqqqqqqqq')
+        // props.action.alert('asd')
+        // props.action.alert('Hi')
+        // props.showAlert('hi')
+        // props.action.getSongData(); //Заполнение таблицы с песнями
+        // dispatch(showLoader())
 
-    const SavedQueueRoute = () => (
-        <SavedQueueState>
-            <Switch>
-                <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>
-            </Switch>
-        </SavedQueueState>
-    );
-
-    const HistoryRoute = () => (
-        <HistoryState>
-            <Switch>
-                <Route exact path="/s/:userId/history" component={History}/>
-            </Switch>
-        </HistoryState>
-    );
+    },[]);
 
     return (
 
@@ -101,14 +117,22 @@ const App = (props) => {
                 <main className={classes.content}>
                     <div  className={classes.toolbar}>
                         <Switch>
-                            <Route component={QueueRoute} path="/s/:userId/queue"/>
-                            <Route component={SongsRoute} path="/s/:userId/songs"/>
-                            <Route component={SavedQueueRoute} path="/s/:userId/queue-saved"/>
-                            <Route component={HistoryRoute} path="/s/:userId/history"/>
+                            {/*<Route component={QueueRoute} path="/s/:userId/queue"/>*/}
+                            <Route exact path="/s/:userId/queue" component={Queue}/>
+                                <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
+                            <Route exact path="/s/:userId/songs" component={Songs}/>
+                                <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
+                                <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
+                            {/*<Route component={SongsRoute} path="/s/:userId/songs"/>*/}
+                            {/*<Route component={SavedQueueRoute} path="/s/:userId/queue-saved"/>*/}
+                            <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>
+                            {/*<Route component={HistoryRoute} path="/s/:userId/history"/>*/}
+                            <Route exact path="/s/:userId/history" component={History}/>
                             <Route component={Settings} path="/settings"/>
                             <Route component={Test} path="/s/:userId/test"/>
                         </Switch>
                         {props.alert && <AlertCustom text={props.alert} />}
+
 
                     </div>
                 </main>
@@ -120,4 +144,16 @@ const mapStateToProps = state => ({
     alert: state.app.alert
 });
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => {
+    return {
+        action: {
+            getSongData: () => dispatch(getSongDataActionCreator()),
+            getItem: () => dispatch(getItem()),
+            // setSelected: (data) => dispatch(setSelectedActionCreator(data)),
+            alert: (text) => dispatch(showAlert(text)),
+            // loader: () => dispatch(showLoader())
+        }
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(App)

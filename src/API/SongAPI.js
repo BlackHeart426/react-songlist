@@ -12,14 +12,23 @@ export const setData = (list, callback) => (
         .catch(console.log('setData error'))
 );
 
-export const getData = (callback) => {
+export const getData = () => {
+    // const data = [];
+    // ref.on('value', snapshot => {
+    //     snapshot.forEach(childSnapshot => {
+    //         data.push(childSnapshot.val());
+    //     });
+    //     callback(data)
+    // })
     const data = [];
-    ref.on('value', snapshot => {
+    ref.once('value', snapshot => {
         snapshot.forEach(childSnapshot => {
             data.push(childSnapshot.val());
         });
-        callback(data)
+
     })
+
+    return data
 
 };
 

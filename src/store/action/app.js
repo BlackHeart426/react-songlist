@@ -13,13 +13,8 @@ export const hideLoader = () => {
     }
 };
 
-export const showAlert = text => {
-    // return {
-    //     type: SHOW_ALERT,
-    //     payload: text
-    // }
+export function showAlert(text) {
     return dispatch => {
-        console.log('vvvvvvvvvv')
         dispatch({
             type: SHOW_ALERT,
             payload: text
@@ -29,7 +24,9 @@ export const showAlert = text => {
             dispatch(hideAlert())
         }, 3000)
     }
-};
+}
+
+
 
 export const hideAlert = () => {
     return {

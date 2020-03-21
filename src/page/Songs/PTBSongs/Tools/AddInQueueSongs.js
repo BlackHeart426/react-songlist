@@ -6,10 +6,10 @@ import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSo
 import {DialogSongsAddQueue} from "../../../../companents/Dialog/DialogSongs/DialogSongsAddQueue";
 import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
 import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
+import {useSelector} from "react-redux";
 
 export const AddInQueueSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {rowsContext} = useContext(SongsContext)
     const {lenSelected, songData, selected, removeSong} = props;
 
     const addItemToRows = () => {
