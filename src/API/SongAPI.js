@@ -1,4 +1,6 @@
 import {database} from "../firebaseService";
+import {useDispatch} from "react-redux";
+import {SET_SONGDATA} from "../contex/types";
 //
 // const db = app.database();
 const userId = localStorage.getItem('userId');
@@ -10,14 +12,15 @@ export const setData = (list, callback) => (
         .catch(console.log('setData error'))
 );
 
-export const getData = () => {
+export const getData = (callback) => {
     const data = [];
-    ref.once('value', snapshot => {
+    ref.on('value', snapshot => {
         snapshot.forEach(childSnapshot => {
             data.push(childSnapshot.val());
         });
-    }).then(console.log('getData error')).catch(console.log('getData error'));
-    return data;
+        callback(data)
+    })
+
 };
 
 export const updateData = (dataSong, callback) => {

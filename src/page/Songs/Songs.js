@@ -4,6 +4,7 @@ import {PTBSongs} from "./PTBSongs/PTBSongs";
 import {headCells} from "./headTable";
 import {connect} from "react-redux";
 import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/songs";
+import {showAlert} from "../../store/action/app";
 
 const Songs = (props) => {
 
@@ -13,6 +14,7 @@ const Songs = (props) => {
 
     const nameArr = nameTag => ( {name: nameTag} )
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
+        console.log(title, artist, timesPlayed, lastPlayed, tags)
         return {title, artist, timesPlayed, lastPlayed,
             tags: { type: 'tag', data: Object.values(tags).map((tag, index) => nameArr(tag)) },
             action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
@@ -29,7 +31,10 @@ const Songs = (props) => {
 
     useEffect(() => {
         console.log('qqqqqqqqqqqqqqqq')
+        // props.action.alert('Hi')
+        // props.showAlert('hi')
         props.action.getSongData(); //Заполнение таблицы с песнями
+
     },[]);
 
     useEffect(() => {
@@ -40,7 +45,7 @@ const Songs = (props) => {
 
     const handlerFilter = () => {
         let songList = {...props.songData};
-        // console.log('songList', songList)
+        console.log('songList', songList.list)
         if(songList.list.length > 0) {
             let songListTest = wrapperSong(songList.list);
             const filtered = songListTest.filter(item =>  {
@@ -87,8 +92,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         action: {
-            getSongData: getSongDataActionCreator(),
+            getSongData: () => dispatch(getSongDataActionCreator()),
             setSelected: (data) => dispatch(setSelectedActionCreator(data)),
+            alert: (text) => dispatch(showAlert(text))
         }
     }
 };

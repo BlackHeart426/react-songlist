@@ -25,9 +25,9 @@ export const showAlert = text => {
             payload: text
         })
 
-        // setTimeout(() => {
-        //     dispatch(hideAlert())
-        // }, 3000)
+        setTimeout(() => {
+            dispatch(hideAlert())
+        }, 3000)
     }
 };
 

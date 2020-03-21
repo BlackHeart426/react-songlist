@@ -10,26 +10,51 @@ import {
     TOGGLE_ACTIVE
 } from "../../contex/types";
 import {showAlert} from "./app";
+import {database} from "../../firebaseService";
 
-export const getSongDataActionCreator = () => {
+export const getSongDataActionCreator = () => async dispatch => {
+    // const userId = localStorage.getItem('userId');
+    // const ref = database.ref('songs').child(userId);
+    // ref.on('value', snapshot => {
+    //     snapshot.forEach(childSnapshot => {
+    //         // data.push(childSnapshot.val());
+    //         dispatch({ type: SET_SONGDATA, list: childSnapshot.val() })
+    //     });
+    // })
+    await SongAPI.getData((response) => dispatch({ type: SET_SONGDATA, list: response }))
 
+    //.then(console.log('getData error',data)).catch(console.log('getData error'));
+//     return (
+//         SongAPI.getData((response) => dispatch({ type: SET_SONGDATA, list: response }))
+// )
     // SongAPI.getData((data) =>  dispatch({
     //     type: SET_SONGDATA,
     //     list: data
     // }))
-    return async dispatch => {
-
-        try {
-            console.log('wwwwwwwwwwwwwwwww')
-            // dispatch(showLoader())
-            dispatch(showAlert('Что-то пошло не так'))
-            // const response = await SongAPI.getData();
-            // return dispatch({ type: SET_SONGDATA, list: response });
-        } catch (e) {
-            // dispatch(showAlert('Что-то пошло не так'))
-            // dispatch(hideLoader())
-        }
-    }
+    // return dispatch => {
+        // dispatch(showLoader())
+        //     const response = await SongAPI.getData();
+        // console.log('wwwwwwwwwwwwwwwww', response.length)
+        // const json = await response.json()
+        // let response = await SongAPI.getData();
+        // let user = await response;
+        // dispatch({ type: SET_SONGDATA, list: response });
+        // dispatch(showAlert('Что-то пошло не так'))
+        // try {
+        //     console.log('wwwwwwwwwwwwwwwww')
+        //     let promise = new Promise((resolve, reject) => {
+        //         SongAPI.getData();
+        //     });
+        //     let result = await promise;
+        //     // dispatch(showLoader())
+        //     console.log('response', result)
+        //     dispatch(showAlert('Что-то пошло не так'))
+        //     // return dispatch({ type: SET_SONGDATA, list: response });
+        // } catch (e) {
+        //     // dispatch(showAlert('Что-то пошло не так'))
+        //     // dispatch(hideLoader())
+        // }
+    // }
 };
 
 export const addSong = (state) => {
