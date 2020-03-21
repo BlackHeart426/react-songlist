@@ -25,79 +25,79 @@ export const SongsState = ({children}) => {
 
     const [state, dispatch]  = useThunkReducer(songsReducer, initialState);
 
-    const setSongData = () => (
-        SongAPI.getData((data) =>  dispatch({
-            type: SET_SONGDATA,
-            list: data
-        }))
-    // return dispatch => {
-    //     const data = [];
-    //     ref.once('value', snapshot => {
-    //         snapshot.forEach(childSnapshot => {
-    //             data.push(childSnapshot.val());
-    //         });
-    //     }).then(() => dispatch(
-    //         getTasks(data)
-    //     ))
-    );
-
-    const addSong = (state) => (
-        SongAPI.setData(state, (state) => dispatch({
-            type: ADD_SONG,
-            newSong: state
-        }))
-    );
-
-    const setSelected = (state) => (
-        dispatch({
-            type: SET_SELECTED,
-            newSelect: state
-        })
-    );
-
-    const setSearchText = (state) => (
-        dispatch({
-            type: SET_SEARCHTEXT,
-            text: state
-        })
-    );
-
-    const toggleActive = (state) => (
-        dispatch({
-            type: TOGGLE_ACTIVE,
-            active: state
-        })
-    );
-
-    const removeSong = (state) => (
-        SongAPI.removeData(state, () => dispatch({
-            type: REMOVE_SONG,
-            row: state
-        }))
-    );
-
-    const editSong = (state) => (
-        SongAPI.updateData(state, () => dispatch({
-            type: EDIT_SONG,
-            song: state
-        }))
-    );
+    // const setSongData = () => (
+    //     SongAPI.getData((data) =>  dispatch({
+    //         type: SET_SONGDATA,
+    //         list: data
+    //     }))
+    // // return dispatch => {
+    // //     const data = [];
+    // //     ref.once('value', snapshot => {
+    // //         snapshot.forEach(childSnapshot => {
+    // //             data.push(childSnapshot.val());
+    // //         });
+    // //     }).then(() => dispatch(
+    // //         getTasks(data)
+    // //     ))
+    // );
+    //
+    // const addSong = (state) => (
+    //     SongAPI.setData(state, (state) => dispatch({
+    //         type: ADD_SONG,
+    //         newSong: state
+    //     }))
+    // );
+    //
+    // const setSelected = (state) => (
+    //     dispatch({
+    //         type: SET_SELECTED,
+    //         newSelect: state
+    //     })
+    // );
+    //
+    // const setSearchText = (state) => (
+    //     dispatch({
+    //         type: SET_SEARCHTEXT,
+    //         text: state
+    //     })
+    // );
+    //
+    // const toggleActive = (state) => (
+    //     dispatch({
+    //         type: TOGGLE_ACTIVE,
+    //         active: state
+    //     })
+    // );
+    //
+    // const removeSong = (state) => (
+    //     SongAPI.removeData(state, () => dispatch({
+    //         type: REMOVE_SONG,
+    //         row: state
+    //     }))
+    // );
+    //
+    // const editSong = (state) => (
+    //     SongAPI.updateData(state, () => dispatch({
+    //         type: EDIT_SONG,
+    //         song: state
+    //     }))
+    // );
 
 
     return (
         <SongsContext.Provider value={{
-            setSongData,
-            setSearchText,
-            setSelected,
-            editSong,
-            addSong,
-            removeSong,
-            toggleActive,
-            listSong: state.list,
-            selected: state.selected,
-            active: state.active,
-            searchText: state.searchText,
-            songData: state
+            // setSongData,
+            // setSearchText,
+            // setSelected,
+            // editSong,
+            // addSong,
+            // removeSong,
+            // toggleActive,
+            // listSong: state.list,
+            // selected: state.selected,
+            // active: state.active,
+            // searchText: state.searchText,
+            // songData: state
         }}>
             {children}
         </SongsContext.Provider>

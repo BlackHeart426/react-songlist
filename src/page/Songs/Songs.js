@@ -3,11 +3,10 @@ import TablePagination from '../../companents/TablePagination/ComponentTablePagi
 import {PTBSongs} from "./PTBSongs/PTBSongs";
 import {headCells} from "./headTable";
 import {connect, useDispatch} from "react-redux";
-import {getItem, getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/songs";
+import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/songs";
 import {showAlert, showLoader} from "../../store/action/app";
 
 const Songs = (props) => {
-    const dispatch = useDispatch()
     const requestHandler = (id) => {
         console.log('request', id)
     };
@@ -98,7 +97,6 @@ const mapDispatchToProps = dispatch => {
     return {
         action: {
             getSongData: () => dispatch(getSongDataActionCreator()),
-            getItem: () => dispatch(getItem()),
             setSelected: (data) => dispatch(setSelectedActionCreator(data)),
             alert: (text) => dispatch(showAlert(text)),
             loader: () => dispatch(showLoader())

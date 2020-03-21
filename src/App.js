@@ -20,7 +20,7 @@ import {Test} from "./page/Test";
 import Songs from "./page/Songs/Songs";
 import {connect, useSelector} from "react-redux";
 import {Loader} from "./companents/Loader/Loader";
-import {getItem, getSongDataActionCreator, setSelectedActionCreator} from "./store/action/songs";
+import {getSongDataActionCreator, setSelectedActionCreator} from "./store/action/songs";
 import {showAlert, showLoader} from "./store/action/app";
 
 const drawerWidth = 240;
@@ -148,7 +148,6 @@ const mapDispatchToProps = dispatch => {
     return {
         action: {
             getSongData: () => dispatch(getSongDataActionCreator()),
-            getItem: () => dispatch(getItem()),
             // setSelected: (data) => dispatch(setSelectedActionCreator(data)),
             alert: (text) => dispatch(showAlert(text)),
             // loader: () => dispatch(showLoader())

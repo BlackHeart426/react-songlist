@@ -4,10 +4,13 @@ import React, {useContext, useEffect, useState} from "react";
 import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
 import * as shortid from "shortid";
 import SongAPI from "../../../../API/SongAPI";
+import {useDispatch} from "react-redux";
+import {addSong} from "../../../../store/action/songs";
 
 export const AddSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, addSong} = props;
+    const {lenSelected} = props;
+    const dispatch = useDispatch()
 
     const openDialog = () => {
         setDialogOpened(true)
@@ -31,7 +34,7 @@ export const AddSongs = (props) => {
             },
             active: active
         };
-        addSong(newSong)
+        dispatch(addSong(newSong))
     };
 
     return (
