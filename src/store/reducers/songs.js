@@ -18,7 +18,7 @@ export const songsReducer = (state = initialState, action) => {
         case TOGGLE_ACTIVE:
             return { ...state, active: action.active,  selected: [] };
         case ADD_SONG:
-            return { ...state, list: state.list.concat(action.newSong) };
+            return { ...state, list: Object.values(state.list).concat(action.newSong) };
         case SET_SELECTED:
             return { ...state, selected: action.newSelect };
         case REMOVE_SONG:

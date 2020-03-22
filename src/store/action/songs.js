@@ -27,28 +27,28 @@ export const getSongDataActionCreator = () => async dispatch => {
     }
 };
 
-// export const addSong = (state) => async dispatch => {
-//
-//     dispatch(showLoader())
-//     try {
-//         await SongAPI.getRef().child(state.id).set(state)
-//              .then(dispatch({ type: ADD_SONG, newSong: state }))
-//             .catch(console.log('setData error'))
-//     } catch (e) {
-//         dispatch(showAlert('Что-то пошло не так'))
-//         dispatch(hideLoader())
-//     }
-//     debugger
-// };
 export const addSong = (state) => async dispatch => {
-    console.log('state',state)
+
     dispatch(showLoader())
-    debugger
-    await SongAPI.getRef().child(state.id).set(state)
-     // .then(dispatch({ type: ADD_SONG, newSong: state }))
-        .catch(console.log('setData error'))
-//     await dispatch({ type: ADD_SONG, newSong: state })
+    try {
+        await SongAPI.getRef().child(state.id).set(state)
+             .then(dispatch({ type: ADD_SONG, newSong: state }))
+            .catch(console.log('setData error'))
+        dispatch(hideLoader())
+    } catch (e) {
+        dispatch(showAlert('Что-то пошло не так'))
+        dispatch(hideLoader())
+    }
 };
+// export const addSong = (state) => async dispatch => {
+//     console.log('state',state)
+//     dispatch(showLoader())
+//     debugger
+//     await SongAPI.getRef().child(state.id).set(state)
+//      .then(dispatch({ type: ADD_SONG, newSong: state }))
+//         .catch(console.log('setData error'))
+// //     await dispatch({ type: ADD_SONG, newSong: state })
+// };
 
 export const setSelectedActionCreator = (state) => {
     return {
