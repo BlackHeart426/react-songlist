@@ -4,7 +4,6 @@ import {AddInQueueSong} from "./Tools/AddInQueueSong";
 import {UpdateSongQueue} from "./Tools/UpdateSongQueue";
 import {MoveUpSongQueue} from "./Tools/MoveUpSongQueue";
 import {AddSongInHistory} from "./Tools/AddSongInHistory";
-import {QueueContext} from "../../../contex/module/queue/queueContext";
 
 let mbt10 = {
     marginBottom: '10px',
@@ -12,15 +11,15 @@ let mbt10 = {
 }
 
 export const PTBQueue = (props) => {
-    const {selected, listSong, addSong, removeSong, changePosition} = useContext(QueueContext);
-    const lenSelected = selected.length;
+    // const {selected, listSong, addSong, removeSong, changePosition} = useContext(QueueContext);
+    // const lenSelected = selected.length;
     return (
         <>
             <Card style={mbt10}>
-                <AddInQueueSong lenSelected={lenSelected} songData={listSong} removeSong={removeSong} selected={selected}/>
-                <UpdateSongQueue lenSelected={lenSelected} songData={listSong} addSong={addSong}/>
-                <MoveUpSongQueue lenSelected={lenSelected} songData={listSong} changePosition={changePosition} selected={selected}/>
-                <AddSongInHistory lenSelected={lenSelected} songData={listSong} removeSong={removeSong} selected={selected} />
+                {/*<AddInQueueSong lenSelected={lenSelected} songData={listSong} removeSong={removeSong} selected={selected}/>*/}
+                {/*<UpdateSongQueue lenSelected={lenSelected} songData={listSong} addSong={addSong}/>*/}
+                {/*<MoveUpSongQueue lenSelected={lenSelected} songData={listSong} changePosition={changePosition} selected={selected}/>*/}
+                {/*<AddSongInHistory lenSelected={lenSelected} songData={listSong} removeSong={removeSong} selected={selected} />*/}
             </Card>
 
         </>

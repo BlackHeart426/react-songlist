@@ -6,7 +6,6 @@ import {RemoveSongs} from "./Tools/RemoveSongs";
 import {DetailSongs} from "./Tools/DetailSongs";
 import {AddInQueueSongs} from "./Tools/AddInQueueSongs";
 import {SwitchActiveSongs} from "./Tools/SwitchActiveSongs";
-import {SongsContext} from "../../../contex/module/songs/songsContext";
 import {SearchSong} from "./Tools/SearchSong";
 import {useDispatch, useSelector} from "react-redux";
 import {addSong, removeSong, setSearchText} from "../../../store/action/songs";

@@ -16,7 +16,6 @@ export default function CustomDialog(props) {
 
     const handleClose = () => {
         setDialogOpened(false);
-        console.log('close')
         onHide()
     };
 

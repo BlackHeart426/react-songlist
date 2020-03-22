@@ -13,7 +13,6 @@ const Songs = (props) => {
 
     const nameArr = nameTag => ( {name: nameTag} )
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
-        console.log(title, artist, timesPlayed, lastPlayed, tags)
         return {title, artist, timesPlayed, lastPlayed,
             tags: { type: 'tag', data: Object.values(tags).map((tag, index) => nameArr(tag)) },
             action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
@@ -27,7 +26,6 @@ const Songs = (props) => {
     );
 
     const {active, setActive} = useState(false);
-    console.log('123')
     useEffect(() => {
         props.action.getSongData(); //Заполнение таблицы с песнями
             // dispatch(showLoader())
@@ -35,7 +33,7 @@ const Songs = (props) => {
     },[]);
     //
     useEffect(() => {
-        console.log('props.songData', props.songData);
+        console.log('props.songData',props.songData)
         localStorage.setItem('songs', JSON.stringify(props.songData));
     },[props.songData]);
 
@@ -64,7 +62,6 @@ const Songs = (props) => {
                 songList
             )
         } else {
-            console.log('songList', {...props.songData});
             return songList
         }
 
@@ -81,7 +78,6 @@ const Songs = (props) => {
 
 
 const mapStateToProps = state => {
-    console.log('state.songs', state.songs)
     return {
         searchText: state.songs.searchText,
         songData: state.songs,

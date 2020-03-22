@@ -82,7 +82,6 @@ export const Queue = () => {
     },[]);
 
     useEffect(() => {
-        console.log('songDataEff', songData);
         localStorage.setItem('listQueue', JSON.stringify(songData))
     },[songData]);
 

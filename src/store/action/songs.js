@@ -23,13 +23,12 @@ export const getSongDataActionCreator = () => async dispatch => {
 };
 
 export const addSong = (state) => async dispatch => {
+    dispatch(showLoader())
     try {
-        console.log('state', state)
         await SongAPI.getRef().child(state.id).set(state)
             .then(dispatch({ type: ADD_SONG, newSong: state }))
             .catch(console.log('setData error'))
     } catch (e) {
-        console.log(e)
         dispatch(showAlert('Что-то пошло не так'))
         dispatch(hideLoader())
     }
@@ -65,6 +64,7 @@ export const removeSong = (uuid) => async dispatch => {
     SongAPI.getRef().child(uuid).remove()
         .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
         .catch(console.log('removeData error'))
+    debugger
     // return {
     //     type: REMOVE_SONG,
     //     row: state

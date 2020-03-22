@@ -19,7 +19,6 @@ export default function DialogSongRemove(props) {
 
     useEffect(() => {
         setDialogOpened(show)
-        console.log('dataSong', copyDataSongData)
     },[show])
 
     const handleClose = () => {

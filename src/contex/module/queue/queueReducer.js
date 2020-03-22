@@ -19,9 +19,7 @@ export const moveArrayItemToNewIndex = (arr, old_index, new_index) => {
 
 const changePosition = (arr, position, newPosition) => {
     const uuid = position;
-    console.log('arr', arr)
     const selected = arr.find(item => item.id === position)
-    console.log('arr', selected)
     //
     // const positionInArr =  selected.data.position;
     // return (

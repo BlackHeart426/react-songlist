@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from "react";
-import {SongsContext} from "../../../../contex/module/songs/songsContext";
 import Switch from "@material-ui/core/Switch";
 import {useDispatch, useSelector} from "react-redux";
 import {toggleActive} from "../../../../store/action/songs";

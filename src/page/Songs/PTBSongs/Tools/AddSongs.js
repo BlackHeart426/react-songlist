@@ -3,7 +3,6 @@ import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
 import * as shortid from "shortid";
-import SongAPI from "../../../../API/SongAPI";
 import {useDispatch} from "react-redux";
 import {addSong} from "../../../../store/action/songs";
 

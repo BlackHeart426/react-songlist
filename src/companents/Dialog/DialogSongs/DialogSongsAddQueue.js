@@ -28,7 +28,6 @@ export function DialogSongsAddQueue(props) {
     useEffect(() => {
         setDialogOpened(show);
         let copyDataSong = {...dataSong};
-        console.log('copyDataSong', copyDataSong)
         if(copyDataSong['id']) { //TODO переделать проверка на пустоту обьета
             let copyDataSongData = {...copyDataSong['data']};
             const {title, artist} = copyDataSongData;
@@ -36,7 +35,6 @@ export function DialogSongsAddQueue(props) {
             statusCopy['title'] = title;
             statusCopy['artist'] = artist;
             setSong(statusCopy);
-            console.log('statusCopy', statusCopy)
         }
     },[show]);
 
@@ -57,7 +55,6 @@ export function DialogSongsAddQueue(props) {
     };
 
     const handleAdd = (property) => event => {
-        console.log(property);
         onAccept(property);
         handleClose()
     };

@@ -29,8 +29,6 @@ export function DialogRemoveSongHistory(props) {
 
     useEffect(() => {
         setDialogOpened(show);
-        console.log('copyDataSong', copyDataSongData)
-        console.log('dataSong', dataSong)
     },[show])
 
     const handlerAccept = () => {

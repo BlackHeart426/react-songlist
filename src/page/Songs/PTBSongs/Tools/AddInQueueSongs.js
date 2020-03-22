@@ -1,12 +1,7 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
-import {SongsContext} from "../../../../contex/module/songs/songsContext";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
 import {DialogSongsAddQueue} from "../../../../companents/Dialog/DialogSongs/DialogSongsAddQueue";
-import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
-import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
-import {useSelector} from "react-redux";
 
 export const AddInQueueSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);

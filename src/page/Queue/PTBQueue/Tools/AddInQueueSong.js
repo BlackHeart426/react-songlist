@@ -1,17 +1,10 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
-import {SongsContext} from "../../../../contex/module/songs/songsContext";
-import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
-import {DialogSongsAddQueue} from "../../../../companents/Dialog/DialogSongs/DialogSongsAddQueue";
-import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
-import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import {DialogAddSongToQueue} from "../../../../companents/Dialog/DialogQueue/DialogAddSongToQueue";
 
 export const AddInQueueSong = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    // const {rowsContext} = useContext(SongsContext)
     const {lenSelected, songData, selected, removeSong} = props;
 
     const addItemToRows = () => {
@@ -23,7 +16,6 @@ export const AddInQueueSong = (props) => {
     }
 
     function addItemToQueue() {
-        console.log('asd')
     }
 
     function handlerRemoveSong() {

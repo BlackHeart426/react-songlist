@@ -10,16 +10,11 @@ import DrawerCustom from "./companents/Drawer/DrawerCustom";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {AlertCustom} from  './companents/Alert/Alert'
-import {SongsState} from "./contex/module/songs/SongsState";
 import {DetailSong} from "./page/Songs/DetailSong";
 import {EditDetailSong} from "./page/Songs/EditDetailSong";
-import {QueueState} from "./contex/module/queue/QueueState";
-import {SavedQueueState} from "./contex/module/savedQueue/SavedQueueState";
-import {HistoryState} from "./contex/module/history/HistoryState";
 import {Test} from "./page/Test";
 import Songs from "./page/Songs/Songs";
 import {connect, useSelector} from "react-redux";
-import {Loader} from "./companents/Loader/Loader";
 import {getSongDataActionCreator, setSelectedActionCreator} from "./store/action/songs";
 import {showAlert, showLoader} from "./store/action/app";
 
@@ -92,7 +87,6 @@ const App = (props) => {
     // );
 
     useEffect(() => {
-        console.log('qqqqqqqqqqqqqqqq')
         // props.action.alert('asd')
         // props.action.alert('Hi')
         // props.showAlert('hi')

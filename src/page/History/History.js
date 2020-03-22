@@ -52,7 +52,6 @@ export const History = () => {
     },[]);
 
     useEffect(() => {
-        console.log('songDataEff', songData);
         localStorage.setItem('listHistory', JSON.stringify(songData))
     },[songData]);
 

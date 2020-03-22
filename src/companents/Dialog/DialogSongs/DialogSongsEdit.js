@@ -84,7 +84,6 @@ export function DialogSongsEdit(props) {
     };
 
     const handleSave = property => event => {
-        console.log('property',property);
         onAddSongs(property);
         handleClose()
     };

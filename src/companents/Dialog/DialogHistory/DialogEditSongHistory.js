@@ -30,7 +30,6 @@ export function DialogEditSongHistory(props) {
     useEffect(() => {
         setDialogOpened(show);
         let copyDataSong = {...dataSong};
-        console.log('copyDataSong', copyDataSong)
     },[show])
 
     const handleDateChange = date => {

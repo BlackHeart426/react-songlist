@@ -9,14 +9,12 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import {TabPanel} from "../../../companents/TabPanel/TabPanel";
 import {a11yProps, useStyles} from "./stylesDetail";
-import {SongsContext} from "../../../contex/module/songs/songsContext";
 
 export const ContentDetail = (props) => {
 
     const classes = useStyles();
     const [tab, setTab] = React.useState(0);
     const {detailSong} = props;
-    // const {listSong, selected} = useContext(SongsContext);
 
 
     const handleChange = (event, newValue) => {
@@ -24,7 +22,6 @@ export const ContentDetail = (props) => {
     };
 
     useEffect(() => {
-        console.log('detailSong',detailSong)
     },[]);
 
     return (
