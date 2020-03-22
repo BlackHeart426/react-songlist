@@ -88,20 +88,15 @@ export const removeSong = (uuid) => async dispatch => {
     SongAPI.getRef().child(uuid).remove()
         .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
         .catch(console.log('removeData error'))
-    debugger
-    // return {
-    //     type: REMOVE_SONG,
-    //     row: state
-    // }
 };
 
-export const editSong = (state) => {
-    // SongAPI.updateData(state, () => dispatch({
+export const editSong = (state) => async dispatch => {
+    const updates = {};
+    updates['/'+state.id+'/'] = state;
+    SongAPI.getRef().update(updates)
+        .then(dispatch({ type: EDIT_SONG,    song: state }))
+    // return {
     //     type: EDIT_SONG,
     //     song: state
-    // }))
-    return {
-        type: EDIT_SONG,
-        song: state
-    }
+    // }
 };

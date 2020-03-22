@@ -27,12 +27,12 @@ export const RemoveSongs = (props) => {
             <IconButton onClick={handlerOpenConfirm} disabled={showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
-            {/*<DialogSongsRemove*/}
-            {/*    show = { confirmOpened }*/}
-            {/*    onHide = { () => setConfirmOpened(false) }*/}
-            {/*    onAccept = { handlerRemoveSong }*/}
-            {/*    dataSong={ songData.find(item => item.id == selected) }*/}
-            {/*/>*/}
+            <DialogSongsRemove
+                show = { confirmOpened }
+                onHide = { () => setConfirmOpened(false) }
+                onAccept = { handlerRemoveSong }
+                dataSong={ songData.find(item => item.id == selected) }
+            />
         </>
     )
 }
