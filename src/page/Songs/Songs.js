@@ -18,12 +18,12 @@ const Songs = (props) => {
             action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
     }
 
-    const wrapperSong = (song) => (
-        song.map(item => {
+    const wrapperSong = (song) => {
+        return song.map(item => {
             const {title, artist, timesPlayed, lastPlayed, tags} = item.data;
-            return {id: item.id, data: createData(title, artist, timesPlayed, lastPlayed,  tags), active: item.active}
+            return {id: item.id, data: createData(title, artist, timesPlayed, lastPlayed, tags), active: item.active}
         })
-    );
+    };
 
     const {active, setActive} = useState(false);
     useEffect(() => {
@@ -38,9 +38,11 @@ const Songs = (props) => {
     },[props.songData]);
 
     const handlerFilter = () => {
+
         let songList = {...props.songData};
-        if (Object.keys(songList).length > 0) {
-            let songListTest = wrapperSong(songList.list);
+        if (Object.keys(songList.list).length > 0) {
+            debugger
+            let songListTest = wrapperSong(Object.values(songList.list));
             const filtered = songListTest.filter(item => {
 
                 const values = Object.values(item.data);
@@ -78,6 +80,7 @@ const Songs = (props) => {
 
 
 const mapStateToProps = state => {
+    console.log('songData', state.songs)
     return {
         searchText: state.songs.searchText,
         songData: state.songs,

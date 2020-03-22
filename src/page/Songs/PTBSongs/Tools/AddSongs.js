@@ -5,6 +5,7 @@ import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSo
 import * as shortid from "shortid";
 import {useDispatch} from "react-redux";
 import {addSong} from "../../../../store/action/songs";
+import * as SongAPI from "../../../../API/SongAPI";
 
 export const AddSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -33,6 +34,7 @@ export const AddSongs = (props) => {
             },
             active: active
         };
+        // SongAPI.getRef().child(newSong.id).set(newSong)
         dispatch(addSong(newSong))
     };
 
