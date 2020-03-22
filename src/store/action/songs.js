@@ -1,15 +1,8 @@
 import React from "react";
 import * as SongAPI from "../../API/SongAPI";
-import {
-    ADD_SONG,
-    EDIT_SONG,
-    REMOVE_SONG,
-    SET_SEARCHTEXT,
-    SET_SELECTED,
-    SET_SONGDATA,
-    TOGGLE_ACTIVE
-} from "../../contex/types";
+
 import {hideLoader, showAlert, showLoader} from "./app";
+import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../types";
 
 export const getSongDataActionCreator = () => async dispatch => {
     const data = [];
@@ -64,15 +57,18 @@ export const toggleActive = (state) => {
     }
 };
 
-export const removeSong = (state) => {
+export const removeSong = (uuid) => async dispatch => {
     // SongAPI.removeData(state, () => dispatch({
     //     type: REMOVE_SONG,
     //     row: state
     // }))
-    return {
-        type: REMOVE_SONG,
-        row: state
-    }
+    SongAPI.getRef().child(uuid).remove()
+        .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
+        .catch(console.log('removeData error'))
+    // return {
+    //     type: REMOVE_SONG,
+    //     row: state
+    // }
 };
 
 export const editSong = (state) => {

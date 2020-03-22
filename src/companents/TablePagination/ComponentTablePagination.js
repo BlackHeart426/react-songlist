@@ -11,7 +11,7 @@ import Switch from "@material-ui/core/Switch";
 import {EnhancedTableHead} from "./EnhancedTableHead";
 import {EnhancedTableRows} from "./EnhancedTableRows";
 import {useStyles} from "./styles";
-import {connect, useSelector} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 
@@ -24,9 +24,10 @@ const ComponentTablePagination = (props) => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const {rowsData, headCells,  onSelectRow, typeCheckBox} = props;
     const loading = useSelector(state => state.app.loading)
+    const dispatch = useDispatch();
     useEffect(() => {
-        onSelectRow([])
-        console.log('editMode',props.statusEditMode)
+
+        dispatch(onSelectRow([]))
     },[props.statusEditMode])
 
     //TODO Рассмотреть возможность переноса всех handler в отдельный файл
@@ -45,10 +46,10 @@ const ComponentTablePagination = (props) => {
     const handleSelectAllClick = event => {
         if (event.target.checked) {
             const newSelecteds = rowsData.list.map(n => n.id);
-            onSelectRow(newSelecteds);
+            dispatch(onSelectRow(newSelecteds));
             return;
         }
-        onSelectRow([]);
+        dispatch(onSelectRow([]));
     };
 
     /**
@@ -78,8 +79,7 @@ const ComponentTablePagination = (props) => {
                 newSelected = newSelected.concat(rowsData.selected.slice(1));
             }
         }
-
-        onSelectRow(newSelected);
+        dispatch(onSelectRow(newSelected));
     };
 
     /**

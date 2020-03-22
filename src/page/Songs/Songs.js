@@ -39,7 +39,6 @@ const Songs = (props) => {
         localStorage.setItem('songs', JSON.stringify(props.songData));
     },[props.songData]);
 
-
     const handlerFilter = () => {
         let songList = {...props.songData};
         if (Object.keys(songList).length > 0) {
@@ -75,7 +74,7 @@ const Songs = (props) => {
     return (
         <>
             <PTBSongs showActive={active}/>
-            <TablePagination onSelectRow = {() => props.action.setSelected} headCells = {headCells} rowsData = {handlerFilter()} showActive={active}/>
+            <TablePagination onSelectRow = {(data) => props.action.setSelected(data)} headCells = {headCells} rowsData = {handlerFilter()} showActive={active}/>
         </>
     )
 };
@@ -97,7 +96,7 @@ const mapDispatchToProps = dispatch => {
     return {
         action: {
             getSongData: () => dispatch(getSongDataActionCreator()),
-            setSelected: (data) => dispatch(setSelectedActionCreator(data)),
+            setSelected: (data) => setSelectedActionCreator(data),
             alert: (text) => dispatch(showAlert(text)),
             loader: () => dispatch(showLoader())
         }
