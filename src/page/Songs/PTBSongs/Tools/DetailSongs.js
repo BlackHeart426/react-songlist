@@ -8,8 +8,10 @@ export const DetailSongs = (props) => {
     const {lenSelected, songData, selected} = props;
     const history = useHistory();
 
+
     const showDetail = () => {
-        const uuidSong = songData.find(item => item.id === selected);
+        debugger
+        const uuidSong = songData.find(item => item.id === selected[0]);
         history.push(addUserIdAtLink("/songs/detail/"+uuidSong.id))
     }
 

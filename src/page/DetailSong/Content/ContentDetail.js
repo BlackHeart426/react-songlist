@@ -14,6 +14,9 @@ export const ContentDetail = (props) => {
 
     const classes = useStyles();
     const [tab, setTab] = React.useState(0);
+    const [timesPlayed, setTimesPlayed] = React.useState(0);
+    const [lastPlayed, setLastPlayed] = React.useState('never');
+    const [queue, setQueue] = React.useState(0);
     const {detailSong} = props;
 
 
@@ -22,19 +25,22 @@ export const ContentDetail = (props) => {
     };
 
     useEffect(() => {
+        detailSong && setTimesPlayed(detailSong.data.timesPlayed)
+            && setLastPlayed(detailSong.data.lastPlayed)
+            && setQueue(0)
     },[]);
 
     return (
         <Card className={classes.root}>
             <CardContent>
                 <Typography variant="h4" component="h4">
-                    {detailSong.data.title}
+                    {detailSong && detailSong.data.title}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    {detailSong.data.artist}
+                    {detailSong && detailSong.data.artist}
                 </Typography>
                 <div className={classes.pos}>
-                    {detailSong.data.tags.map(value => (
+                    {detailSong && detailSong.data.tags.map(value => (
                         <Chip key={value} label={value} className={classes.chip} />
                     ))}
                 </div>
@@ -44,7 +50,7 @@ export const ContentDetail = (props) => {
                     label="TIMES PLAYED"
                     type="text"
                     disabled={true}
-                    value={detailSong.data.timesPlayed}
+                    value={timesPlayed}
                     className={classes.textField}
                 />
                 <TextField
@@ -53,7 +59,7 @@ export const ContentDetail = (props) => {
                     label="LAST PLAYED"
                     type="text"
                     disabled={true}
-                    value={detailSong.data.lastPlayed}
+                    value={lastPlayed}
                     className={classes.textField}
                 />
 
@@ -63,7 +69,7 @@ export const ContentDetail = (props) => {
                     label="IN QUEUE"
                     type="text"
                     disabled={true}
-                    value={'0'}
+                    value={queue}
                     className={classes.textField}
                 />
             </CardContent>
