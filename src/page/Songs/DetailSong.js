@@ -7,11 +7,11 @@ import {getSongDataActionCreator} from "../../store/action/songs";
 export const DetailSong = props => {
     const listSong = useSelector(state => state.songs.list)
     const dispatch = useDispatch()
-    useEffect(() => {
-        debugger
-        console.log(props.match.params.id)
-        dispatch(getSongDataActionCreator()); //Заполнение таблицы с песнями
-    },[]);
+    // useEffect(() => {
+    //     debugger
+    //     console.log(props.match.params.id)
+    //     dispatch(getSongDataActionCreator()); //Заполнение таблицы с песнями
+    // },[]);
 
     //TODO для открытия по сылке при загрузке сайта добавить loading при загрузке с firebase
 

@@ -27,7 +27,7 @@ const Songs = (props) => {
 
     const {active, setActive} = useState(false);
     useEffect(() => {
-        props.action.getSongData(); //Заполнение таблицы с песнями
+        // props.action.getSongData(); //Заполнение таблицы с песнями
             // dispatch(showLoader())
 
     },[]);

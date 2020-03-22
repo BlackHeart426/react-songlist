@@ -9,6 +9,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import {TabPanel} from "../../../companents/TabPanel/TabPanel";
 import {a11yProps, useStyles} from "./stylesDetail";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 export const ContentDetail = (props) => {
 
@@ -44,34 +45,41 @@ export const ContentDetail = (props) => {
                         <Chip key={value} label={value} className={classes.chip} />
                     ))}
                 </div>
-                <TextField
-                    margin="dense"
-                    id="TIMES_PLAYED"
-                    label="TIMES PLAYED"
-                    type="text"
-                    disabled={true}
-                    value={timesPlayed}
-                    className={classes.textField}
-                />
-                <TextField
-                    margin="dense"
-                    id="LAST_PLAYED"
-                    label="LAST PLAYED"
-                    type="text"
-                    disabled={true}
-                    value={lastPlayed}
-                    className={classes.textField}
-                />
 
-                <TextField
-                    margin="dense"
-                    id="IN_QUEUE"
-                    label="IN QUEUE"
-                    type="text"
-                    disabled={true}
-                    value={queue}
-                    className={classes.textField}
-                />
+                {detailSong
+                    ? <TextField
+                        margin="dense"
+                        id="TIMES_PLAYED"
+                        label="TIMES PLAYED"
+                        type="text"
+                        disabled={true}
+                        value={timesPlayed}
+                        className={classes.textField}
+                    />
+                    : <Skeleton variant="rect" width={200} height={40} /> }
+                {detailSong
+                    ? <TextField
+                            margin="dense"
+                            id="LAST_PLAYED"
+                            label="LAST PLAYED"
+                            type="text"
+                            disabled={true}
+                            value={lastPlayed}
+                            className={classes.textField}
+                        />
+                    :  <Skeleton variant="text" width={200} /> }
+
+                {detailSong
+                    ? <TextField
+                        margin="dense"
+                        id="IN_QUEUE"
+                        label="IN QUEUE"
+                        type="text"
+                        disabled={true}
+                        value={queue}
+                        className={classes.textField}
+                    />
+                    :  <Skeleton className={classes.textField} variant="rect" width={200} height={40}/> }
             </CardContent>
             <CardActions>
                 <div className={classes.tabRoot}>

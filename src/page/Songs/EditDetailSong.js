@@ -9,11 +9,11 @@ import {getSongDataActionCreator} from "../../store/action/songs";
 export const EditDetailSong = props => {
     const listSong = useSelector(state => state.songs.list)
     const dispatch = useDispatch()
-    useEffect(() => {
-        debugger
-        console.log(props.match.params.id)
-        dispatch(getSongDataActionCreator()); //Заполнение таблицы с песнями
-    },[]);
+    // useEffect(() => {
+    //     debugger
+    //     console.log(props.match.params.id)
+    //     dispatch(getSongDataActionCreator()); //Заполнение таблицы с песнями
+    // },[]);
 
     return (
         <>
