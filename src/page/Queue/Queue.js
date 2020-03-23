@@ -6,8 +6,14 @@ import {QueueContext} from "../../contex/module/queue/queueContext";
 
 export const Queue = () => {
 
-    function createData(position, title, artist, amount, requestBy, note, action) {
-        return {position, title, artist, amount, requestBy, note, action}
+    function createData(position, title, artist, amount, requestBy, note) {
+        return {position, title, artist, amount, requestBy, note,
+            action: { type: 'btn', data: [
+                    { type: 'icon', name: 'Detail', handler: handlerDetail },
+                    { type: 'icon', name: 'Delete', handler: handlerDelete },
+                    { type: 'icon', name: 'Done', handler: handlerDone },
+                ]
+            }}
     }
 
     function handlerDetail(id) {
@@ -22,48 +28,6 @@ export const Queue = () => {
         console.log('done', id)
     }
 
-
-    const songList = [
-        {
-            id: shortid.generate(),
-            data: createData(
-            {type: 'position'},
-            'The Kill',
-            '30 Seconds To Mars',
-            1,
-            'Black',
-            'note',
-            {
-                type: 'btn',
-                data: [
-                { type: 'icon', name: 'Detail', handler: handlerDetail },
-                { type: 'icon', name: 'Delete', handler: handlerDelete },
-                { type: 'icon', name: 'Done', handler: handlerDone },
-                ]
-            }
-            )
-        },
-        {
-            id: shortid.generate(),
-            data: createData(
-                {type: 'position'},
-                'Hello',
-                'Adele',
-                2,
-                'Black',
-                'Black',
-                {
-                    type: 'btn',
-                    data: [
-                        { type: 'icon', name: 'Detail', handler: handlerDetail },
-                        { type: 'icon', name: 'Delete', handler: handlerDelete },
-                        { type: 'icon', name: 'Done', handler: handlerDone },
-                    ]
-                }
-            )
-        },
-    ]
-
     const headCells = [
         { id: 'position', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Position', type: 'txt' },
         { id: 'title', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
@@ -74,7 +38,7 @@ export const Queue = () => {
         { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
 
-    const {songData, setSongData, setSelected} = useContext(QueueContext);
+    // const {songData, setSongData, setSelected} = useContext(QueueContext);
 
     useEffect(() => {
         setSongData(songList);
