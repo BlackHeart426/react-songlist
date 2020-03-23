@@ -1,8 +1,8 @@
 import React from "react";
-import * as SongAPI from "../../API/SongAPI";
+import * as SongAPI from "../../../API/SongAPI";
 
-import {hideLoader, showAlert, showLoader} from "./app";
-import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../types";
+import {hideLoader, showAlert, showLoader} from "../app";
+import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
 import Axios from "axios";
 
 export const getSongDataActionCreator = () => async dispatch => {
@@ -23,7 +23,6 @@ export const getSongDataActionCreator = () => async dispatch => {
         // })
         await SongAPI.getRef().once('value')
             .then((snapshot) => {
-                debugger
                     snapshot.forEach(childSnapshot => {
                         data.push(childSnapshot.val());
                     });

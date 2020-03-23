@@ -1,14 +1,29 @@
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 import TablePagination from '../../companents/TablePagination/ComponentTablePagination'
-import * as shortid from "shortid";
 import {PTBQueue} from "./PTBQueue/PTBQueue";
-import {QueueContext} from "../../contex/module/queue/queueContext";
+import {connect} from "react-redux";
+import {showLoader} from "../../store/action/app";
+import {setSelectedQueueActionCreator} from "../../store/action/modules/queue";
 
-export const Queue = () => {
+const Queue = (props) => {
 
-    function createData(position, title, artist, amount, requestBy, note, action) {
-        return {position, title, artist, amount, requestBy, note, action}
+    function createData(position, title, artist, amount, requestBy, note) {
+        return {position, title, artist, amount, requestBy, note,
+            action: { type: 'btn', data: [
+                    { type: 'icon', name: 'Detail', handler: handlerDetail },
+                    { type: 'icon', name: 'Delete', handler: handlerDelete },
+                    { type: 'icon', name: 'Done', handler: handlerDone },
+                ]
+            }}
     }
+
+
+    const wrapperSong = (song) => {
+        return song.map(item => {
+            const {position, title, artist, amount, requestBy, note} = item.data;
+            return {id: item.id, data: createData(position, title, artist, amount, requestBy, note), active: item.active}
+        })
+    };
 
     function handlerDetail(id) {
         console.log('detail', id)
@@ -22,47 +37,18 @@ export const Queue = () => {
         console.log('done', id)
     }
 
-
-    const songList = [
-        {
-            id: shortid.generate(),
-            data: createData(
-            {type: 'position'},
-            'The Kill',
-            '30 Seconds To Mars',
-            1,
-            'Black',
-            'note',
-            {
-                type: 'btn',
-                data: [
-                { type: 'icon', name: 'Detail', handler: handlerDetail },
-                { type: 'icon', name: 'Delete', handler: handlerDelete },
-                { type: 'icon', name: 'Done', handler: handlerDone },
-                ]
-            }
+    const updateQueueData = () => {
+        let queueList = {...props.queueData};
+        if (Object.keys(queueList.list).length > 0) {
+            let queueListTest = wrapperSong(Object.values(queueList.list));
+            queueList.list = queueListTest;
+            return (
+                queueList
             )
-        },
-        {
-            id: shortid.generate(),
-            data: createData(
-                {type: 'position'},
-                'Hello',
-                'Adele',
-                2,
-                'Black',
-                'Black',
-                {
-                    type: 'btn',
-                    data: [
-                        { type: 'icon', name: 'Detail', handler: handlerDetail },
-                        { type: 'icon', name: 'Delete', handler: handlerDelete },
-                        { type: 'icon', name: 'Done', handler: handlerDone },
-                    ]
-                }
-            )
-        },
-    ]
+        } else {
+            return queueList
+        }
+    }
 
     const headCells = [
         { id: 'position', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Position', type: 'txt' },
@@ -74,23 +60,40 @@ export const Queue = () => {
         { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
 
-    const {songData, setSongData, setSelected} = useContext(QueueContext);
 
     useEffect(() => {
-        setSongData(songList);
-        localStorage.setItem('listQueue', JSON.stringify(songList))
-    },[]);
-
-    useEffect(() => {
-        localStorage.setItem('listQueue', JSON.stringify(songData))
-    },[songData]);
+        localStorage.setItem('listQueue', JSON.stringify(props.songData))
+    },[props.songData]);
 
 
     return (
         <>
             <PTBQueue/>
-            <TablePagination typeCheckBox={'solo'} onSelectRow = {setSelected}  headCells = {headCells} rowsData = {songData}/>
+            <TablePagination
+                typeCheckBox={'solo'}
+                onSelectRow = {(data) => props.action.setSelected(data)}
+                headCells = {headCells}
+                rowsData = {updateQueueData()}
+            />
         </>
 
     )
 }
+
+
+const mapStateToProps = state => {
+    return {
+        queueData: state.queue,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        action: {
+            setSelected: (data) => setSelectedQueueActionCreator(data),
+            loader: () => dispatch(showLoader())
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Queue);

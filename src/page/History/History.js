@@ -1,39 +1,17 @@
-import React, {useContext, useEffect} from "react";
+import React from "react";
 import TablePagination from "../../companents/TablePagination/ComponentTablePagination";
 import {PTBHistory} from "./PTBHistory/PTBHistory";
-import * as shortid from "shortid";
-import {HistoryContext} from "../../contex/module/history/historyContext";
+import {showAlert, showLoader} from "../../store/action/app";
+import {connect} from "react-redux";
+import {setSelectedHistoryActionCreator} from "../../store/action/modules/history";
 
-export const History = () => {
+
+const History = (props) => {
+
 
     function createData( title, artist, amount, requestBy, played, note) {
         return { title, artist, amount, requestBy, played, note}
     }
-
-    const songList = [
-        {
-            id: shortid.generate(),
-            data: createData(
-                'The Kill',
-                '30 Seconds To Mars',
-                1,
-                'Black',
-                'Black',
-                'note',
-            )
-        },
-        {
-            id: shortid.generate(),
-            data: createData(
-                'Hello',
-                'Adele',
-                2,
-                'Black',
-                'Black',
-                'Black',
-            )
-        },
-    ];
 
     const headCells = [
         { id: 'title', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
@@ -44,22 +22,65 @@ export const History = () => {
         { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
     ];
 
-    const {songData, setSongData, setSelected} = useContext(HistoryContext);
+    const handlerFilter = () => {
+        let songList = {...props.songData};
+        if (Object.keys(songList.list).length > 0) {
+            const filtered = songList.filter(item => {
 
-    useEffect(() => {
-        setSongData(songList);
-        localStorage.setItem('listHistory', JSON.stringify(songList))
-    },[]);
+                const values = Object.values(item.data);
+                const search = props.searchText.toLowerCase();
+                let flag = false;
+                values.forEach(val => {
+                    if (typeof val == "string") {
+                        if (val.toLowerCase().indexOf(search) > -1) {
+                            flag = true;
+                            return;
+                        }
+                    }
+                })
+                if (flag) return item
+                // return item.data.title.toUpperCase().indexOf(search) !== -1
+            });
+            songList.list = filtered;
+            return (
+                songList
+            )
+        } else {
+            return songList
+        }
 
-    useEffect(() => {
-        localStorage.setItem('listHistory', JSON.stringify(songData))
-    },[songData]);
+    };
 
 
     return (
         <>
             <PTBHistory/>
-            <TablePagination onSelectRow = {setSelected}   headCells = {headCells} rowsData = {songData}/>
+            <TablePagination
+                onSelectRow = {(data) => props.action.setSelected(data)}
+                headCells = {headCells}
+                rowsData = {handlerFilter()}
+            />
         </>
     )
 }
+
+
+const mapStateToProps = state => {
+    console.log('songData', state.songs)
+    return {
+        filter: state.history.filterData,
+        songData: state.history,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        action: {
+            setSelected: (data) => setSelectedHistoryActionCreator(data),
+            alert: (text) => dispatch(showAlert(text)),
+            loader: () => dispatch(showLoader())
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(History);
