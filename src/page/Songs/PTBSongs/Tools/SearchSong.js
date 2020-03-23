@@ -4,14 +4,18 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from '@material-ui/icons/Close';
 import SearchIcon from '@material-ui/icons/Search';
 import {StyledFormControl, StyledOutlinedInput, useStyles} from "../style";
+import {useDispatch} from "react-redux";
+import {setSearchTextActionCreator} from "../../../../store/action/modules/songs";
 
 export const SearchSong = (props) => {
     const classes = useStyles();
-    const [values, setValues] = React.useState('');
-    const {searchText, setSearchText} = props;
+    const [searchText, setSearchText] = React.useState('');
+    const dispatch = useDispatch()
+    // const {searchText, setSearchText} = props;
 
     const handleChange = event => {
-        setSearchText( event.target.value );
+        setSearchText(event.target.value);
+        dispatch(setSearchTextActionCreator( event.target.value ));
     };
 
     const handleClearTextField = event => {

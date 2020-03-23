@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
 import {useDispatch} from "react-redux";
-import {removeSong} from "../../../../store/action/modules/songs";
+import {removeSongActionCreator} from "../../../../store/action/modules/songs";
 
 export const RemoveSongs = (props) => {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
@@ -19,7 +19,7 @@ export const RemoveSongs = (props) => {
     }
 
     const handlerRemoveSong = () => {
-        dispatch(removeSong(selected[0]))
+        dispatch(removeSongActionCreator(selected[0]))
     }
 
     return (

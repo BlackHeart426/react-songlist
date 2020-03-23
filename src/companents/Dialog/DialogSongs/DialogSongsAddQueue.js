@@ -14,7 +14,7 @@ export function DialogSongsAddQueue(props) {
     const formControl = {
         title: '',
         artist: '',
-        requested: '',
+        requestedBy: '',
         note: '',
         amount: '',
     }

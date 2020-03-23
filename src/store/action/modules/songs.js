@@ -4,6 +4,7 @@ import * as SongAPI from "../../../API/SongAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
 import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
 import Axios from "axios";
+import {addSongInQueueActionCreator} from "./queue";
 
 export const getSongDataActionCreator = () => async dispatch => {
     const data = [];
@@ -65,21 +66,26 @@ export const setSelectedActionCreator = (state) => {
     }
 };
 
-export const setSearchText = (state) => {
+export const setSearchTextActionCreator = (state) => {
     return {
         type: SET_SEARCHTEXT,
         text: state
     }
 };
 
-export const toggleActive = (state) => {
+export const toggleActiveActionCreator = (state) => {
     return {
         type: TOGGLE_ACTIVE,
         active: state
     }
 };
 
-export const removeSong = (uuid) => async dispatch => {
+export const moveSongInQueueActionCreator = (state, id) => async dispatch => {
+    dispatch(addSongInQueueActionCreator(state, id))
+    dispatch(removeSongActionCreator(id))
+}
+
+export const removeSongActionCreator = (uuid) => async dispatch => {
     // SongAPI.removeData(state, () => dispatch({
     //     type: REMOVE_SONG,
     //     row: state
