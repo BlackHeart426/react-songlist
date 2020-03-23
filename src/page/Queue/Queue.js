@@ -7,9 +7,11 @@ import {setSelectedQueueActionCreator} from "../../store/action/modules/queue";
 
 const Queue = (props) => {
 
-    function createData(position, title, artist, amount, requestBy, note) {
-        return {position, title, artist, amount, requestBy, note,
-            action: { type: 'btn', data: [
+    function createData(position, title, artist, amount, requestedBy, note) {
+        return {position, title, artist, amount, requestedBy, note,
+            action: {
+                type: 'btn',
+                data: [
                     { type: 'icon', name: 'Detail', handler: handlerDetail },
                     { type: 'icon', name: 'Delete', handler: handlerDelete },
                     { type: 'icon', name: 'Done', handler: handlerDone },
@@ -19,9 +21,10 @@ const Queue = (props) => {
 
 
     const wrapperSong = (song) => {
+
         return song.map(item => {
-            const {position, title, artist, amount, requestBy, note} = item.data;
-            return {id: item.id, data: createData(position, title, artist, amount, requestBy, note), active: item.active}
+            const {position, title, artist, amount, requestedBy, note} = item.data;
+            return {id: item.id, data: createData(position, title, artist, amount, requestedBy, note), active: item.active}
         })
     };
 
