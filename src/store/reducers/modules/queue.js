@@ -6,7 +6,7 @@ import {
     SET_QUEUEDATA,
     SET_SELECTED,
     UPDATE_SONG_QUEUE
-} from "../types";
+} from "../../types";
 
 const initialState = {
     list: [],

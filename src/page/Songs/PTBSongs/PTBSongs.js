@@ -8,7 +8,7 @@ import {AddInQueueSongs} from "./Tools/AddInQueueSongs";
 import {SwitchActiveSongs} from "./Tools/SwitchActiveSongs";
 import {SearchSong} from "./Tools/SearchSong";
 import {useDispatch, useSelector} from "react-redux";
-import {addSong, removeSong, setSearchText} from "../../../store/action/songs";
+import {addSong, removeSong, setSearchText} from "../../../store/action/modules/songs";
 
 let mbt10 = {
     marginBottom: '10px',

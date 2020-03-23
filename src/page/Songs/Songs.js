@@ -3,7 +3,7 @@ import TablePagination from '../../companents/TablePagination/ComponentTablePagi
 import {PTBSongs} from "./PTBSongs/PTBSongs";
 import {headCells} from "./headTable";
 import {connect, useDispatch} from "react-redux";
-import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/songs";
+import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/modules/songs";
 import {showAlert, showLoader} from "../../store/action/app";
 
 const Songs = (props) => {
@@ -71,7 +71,12 @@ const Songs = (props) => {
     return (
         <>
             <PTBSongs showActive={active}/>
-            <TablePagination onSelectRow = {(data) => props.action.setSelected(data)} headCells = {headCells} rowsData = {handlerFilter()} showActive={active}/>
+            <TablePagination
+                onSelectRow = {(data) => props.action.setSelected(data)}
+                headCells = {headCells}
+                rowsData = {handlerFilter()}
+                showActive={active}
+            />
         </>
     )
 };

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import Switch from "@material-ui/core/Switch";
 import {useDispatch, useSelector} from "react-redux";
-import {toggleActive} from "../../../../store/action/songs";
+import {toggleActive} from "../../../../store/action/modules/songs";
 
 export const SwitchActiveSongs = (props) => {
     const [active, setActived] = useState(false);

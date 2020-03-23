@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
 import {useDispatch} from "react-redux";
-import {editSong} from "../../../../store/action/songs";
+import {editSong} from "../../../../store/action/modules/songs";
 
 export const EditSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);

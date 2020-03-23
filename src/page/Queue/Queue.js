@@ -3,7 +3,7 @@ import TablePagination from '../../companents/TablePagination/ComponentTablePagi
 import {PTBQueue} from "./PTBQueue/PTBQueue";
 import {connect} from "react-redux";
 import {showLoader} from "../../store/action/app";
-import {setSelectedQueueActionCreator} from "../../store/action/queue";
+import {setSelectedQueueActionCreator} from "../../store/action/modules/queue";
 
 const Queue = (props) => {
 
@@ -38,7 +38,6 @@ const Queue = (props) => {
     }
 
     const updateQueueData = () => {
-        debugger
         let queueList = {...props.queueData};
         if (Object.keys(queueList.list).length > 0) {
             let queueListTest = wrapperSong(Object.values(queueList.list));

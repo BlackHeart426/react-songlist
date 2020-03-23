@@ -1,7 +1,7 @@
 import React from "react";
-import * as HistoryAPI from "../../API/HistoryAPI";
-import {hideLoader, showAlert, showLoader} from "./app";
-import {REMOVE_SONG_HISTORY, SET_HISTORYDATA, SET_SELECTED} from "../types";
+import * as HistoryAPI from "../../../API/HistoryAPI";
+import {hideLoader, showAlert, showLoader} from "../app";
+import {REMOVE_SONG_HISTORY, SET_HISTORYDATA, SET_SELECTED} from "../../types";
 
 
 export const getHistoryDataActionCreator = () => async dispatch => {
@@ -10,7 +10,6 @@ export const getHistoryDataActionCreator = () => async dispatch => {
     try {
         await HistoryAPI.getRef().once('value')
             .then((snapshot) => {
-                debugger
                     snapshot.forEach(childSnapshot => {
                         data.push(childSnapshot.val());
                     });
@@ -37,7 +36,7 @@ export const addSongInSavedQueueActionCreator = (state) => async dispatch => {
     }
 };
 
-export const setSelectedQueueActionCreator = (state) => {
+export const setSelectedHistoryActionCreator = (state) => {
     return {
         type: SET_SELECTED,
         newSelect: state

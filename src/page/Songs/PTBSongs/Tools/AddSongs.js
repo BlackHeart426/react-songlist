@@ -4,7 +4,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
 import * as shortid from "shortid";
 import {useDispatch} from "react-redux";
-import {addSong} from "../../../../store/action/songs";
+import {addSong} from "../../../../store/action/modules/songs";
 import * as SongAPI from "../../../../API/SongAPI";
 
 export const AddSongs = (props) => {

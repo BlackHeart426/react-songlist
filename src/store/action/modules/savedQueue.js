@@ -1,7 +1,7 @@
 import React from "react";
-import * as SavedQueueAPI from "../../API/SavedQueueAPI";
-import {hideLoader, showAlert, showLoader} from "./app";
-import {ADD_SONG_IN_SAVEDQUEUE, SET_SAVEDQUEUEDATA, SET_SELECTED} from "../types";
+import * as SavedQueueAPI from "../../../API/SavedQueueAPI";
+import {hideLoader, showAlert, showLoader} from "../app";
+import {ADD_SONG_IN_SAVEDQUEUE, SET_SAVEDQUEUEDATA, SET_SELECTED} from "../../types";
 
 
 export const getSavedQueueDataActionCreator = () => async dispatch => {
@@ -10,10 +10,9 @@ export const getSavedQueueDataActionCreator = () => async dispatch => {
     try {
         await SavedQueueAPI.getRef().once('value')
             .then((snapshot) => {
-                debugger
-                    snapshot.forEach(childSnapshot => {
-                        data.push(childSnapshot.val());
-                    });
+                snapshot.forEach(childSnapshot => {
+                    data.push(childSnapshot.val());
+                });
                 dispatch({ type: SET_SAVEDQUEUEDATA, list: data });
                 dispatch(hideLoader())
             })
@@ -37,7 +36,7 @@ export const addSongInSavedQueueActionCreator = (state) => async dispatch => {
     }
 };
 
-export const setSelectedQueueActionCreator = (state) => {
+export const setSelectedSavedQueueActionCreator = (state) => {
     return {
         type: SET_SELECTED,
         newSelect: state

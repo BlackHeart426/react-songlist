@@ -1,12 +1,12 @@
 import React from "react";
-import * as QueueAPI from "../../API/QueueAPI";
-import {hideLoader, showAlert, showLoader} from "./app";
+import * as QueueAPI from "../../../API/QueueAPI";
+import {hideLoader, showAlert, showLoader} from "../app";
 import {
 
-} from "../types";
-import {SET_QUEUEDATA} from "../types";
-import {ADD_SONG_IN_QUEUE} from "../types";
-import {SET_SELECTED} from "../types";
+} from "../../types";
+import {SET_QUEUEDATA} from "../../types";
+import {ADD_SONG_IN_QUEUE} from "../../types";
+import {SET_SELECTED} from "../../types";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
@@ -14,7 +14,6 @@ export const getQueueDataActionCreator = () => async dispatch => {
     try {
         await QueueAPI.getRef().once('value')
             .then((snapshot) => {
-                debugger
                     snapshot.forEach(childSnapshot => {
                         data.push(childSnapshot.val());
                     });
