@@ -90,7 +90,7 @@ const App = (props) => {
         // props.action.alert('asd')
         // props.action.alert('Hi')
         // props.showAlert('hi')
-        // props.action.getSongData(); //Заполнение таблицы с песнями
+        props.action.getSongData(); //Заполнение таблицы с песнями
         // dispatch(showLoader())
 
     },[]);

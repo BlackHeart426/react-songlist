@@ -11,8 +11,9 @@ export const ToolDetailEditSong = () => {
 
     function handlerDetailEdit() {
 
-        // detailShow(false);
         const uuidSong = listSong.find(item => item.id === selected[0]);
+        // detailShow(false);
+        console.log(uuidSong, listSong)
         history.push(addUserIdAtLink("/songs/edit/"+uuidSong.id))
     }
 
