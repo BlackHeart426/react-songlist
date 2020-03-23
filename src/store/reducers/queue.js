@@ -8,7 +8,6 @@ import {
     UPDATE_SONG_QUEUE
 } from "../types";
 
-
 const initialState = {
     list: [],
     selected: []
@@ -36,9 +35,7 @@ export const queueReducer = (state = initialState, action) => {
                     (state.list[index].active = action.song.active)))
             };
         default:
-            return {
-                state
-            }
+            return {...state}
     }
 };
 

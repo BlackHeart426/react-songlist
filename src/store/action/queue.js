@@ -41,7 +41,7 @@ export const addSongInQueueActionCreator = (state) => async dispatch => {
     }
 };
 
-export const setSelectedActionCreator = (state) => {
+export const setSelectedQueueActionCreator = (state) => {
     return {
         type: SET_SELECTED,
         newSelect: state
