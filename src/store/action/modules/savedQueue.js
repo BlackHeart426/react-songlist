@@ -30,6 +30,7 @@ export const addSongInSavedQueueActionCreator = (state) => async dispatch => {
             .then(dispatch({ type: ADD_SONG_IN_SAVEDQUEUE, newSong: state }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
+        dispatch(showAlert('Song move to Saved Queue'))
     } catch (e) {
         dispatch(showAlert('Что-то пошло не так'))
         dispatch(hideLoader())

@@ -1,5 +1,11 @@
 import React from "react";
-import {REMOVE_SONG_SAVEDQUEUE, SET_SAVEDQUEUEDATA, SET_SELECTED} from "../../types";
+import {
+    ADD_SONG_IN_QUEUE,
+    ADD_SONG_IN_SAVEDQUEUE,
+    REMOVE_SONG_SAVEDQUEUE,
+    SET_SAVEDQUEUEDATA,
+    SET_SELECTED
+} from "../../types";
 
 
 const initialState = {
@@ -15,6 +21,8 @@ export const savedQueueReducer = (state = initialState, action) => {
             return { ...state, list: action.list };
         case SET_SELECTED:
             return { ...state, selected: action.newSelect };
+        case ADD_SONG_IN_SAVEDQUEUE:
+            return { ...state, list: [ ...state.list, action.newSong ] };
         case REMOVE_SONG_SAVEDQUEUE:
             return { ...state, list: state.list.filter(item => item.id !== action.row), selected: [] };
         default:
