@@ -22,7 +22,7 @@ export const ContentDetailEdit = (props) => {
     const [artist, setArtist] = React.useState('');
     const {detailSong} = props;
 
-    const handleChange = (event, newValue) => {
+    const handlerChange = (event, newValue) => {
     };
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export const ContentDetailEdit = (props) => {
             && setArtist(detailSong.data.artist)
     },[])
 
-    const handleChangeSwitch = event => {
+    const handlerChangeSwitch = event => {
 
     };
 
@@ -70,7 +70,7 @@ export const ContentDetailEdit = (props) => {
                 <div>
                     <FormControl className={classes.formControl}>
                         <FormControlLabel
-                            control={<Switch  checked={true} onChange={handleChangeSwitch} color="primary" />}
+                            control={<Switch  checked={true} onChange={handlerChangeSwitch} color="primary" />}
                             label="Active"
                         />
                     </FormControl>
@@ -81,7 +81,7 @@ export const ContentDetailEdit = (props) => {
                 <div>
                     <FormControl className={classes.formControl}>
                         <FormControlLabel
-                            control={<Switch  checked={true} onChange={handleChangeSwitch} color="primary" />}
+                            control={<Switch  checked={true} onChange={handlerChangeSwitch} color="primary" />}
                             label="Bypass Request Limits?"
                         />
                     </FormControl>
@@ -91,7 +91,7 @@ export const ContentDetailEdit = (props) => {
                         <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
                         <Input
                             id="standard-adornment-amount"
-                            onChange={handleChange('amount')}
+                            onChange={handlerChange('amount')}
                             inputComponent={NumberFormatCustom}
                         />
                     </FormControl>
@@ -113,7 +113,7 @@ export const ContentDetailEdit = (props) => {
                 <div className={classes.tabRoot}>
                     <Tabs
                         value={tab}
-                        onChange={handleChange}
+                        onChange={handlerChange}
                         indicatorColor="primary"
                         textColor="primary"
                     >

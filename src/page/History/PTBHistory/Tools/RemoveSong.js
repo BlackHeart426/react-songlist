@@ -1,8 +1,6 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
-import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
-import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
 import {DialogRemoveSongHistory} from "../../../../companents/Dialog/DialogHistory/DialogRemoveSongHistory";
 
 export const RemoveSong = (props) => {

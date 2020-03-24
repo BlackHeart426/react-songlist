@@ -8,6 +8,12 @@ import {SET_QUEUEDATA} from "../../types";
 import {ADD_SONG_IN_QUEUE} from "../../types";
 import {SET_SELECTED} from "../../types";
 import {CHANGE_POSITION} from "../../types";
+import {SET_SEARCHTEXT} from "../../types";
+import {addSongInHistoryActionCreator} from "./history";
+import * as SongAPI from "../../../API/SongAPI";
+import {REMOVE_SONG} from "../../types";
+import {REMOVE_SONG_IN_QUEUE} from "../../types";
+import {addSongInSavedQueueActionCreator} from "./savedQueue";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
@@ -15,9 +21,9 @@ export const getQueueDataActionCreator = () => async dispatch => {
     try {
         await QueueAPI.getRef().once('value')
             .then((snapshot) => {
-                    snapshot.forEach(childSnapshot => {
-                        data.push(childSnapshot.val());
-                    });
+                snapshot.forEach(childSnapshot => {
+                    data.push(childSnapshot.val());
+                });
                 dispatch({ type: SET_QUEUEDATA, list: data });
                 dispatch(hideLoader())
             })
@@ -39,19 +45,53 @@ export const addSongInQueueActionCreator = (state, id) => async dispatch => {
                 });
             })
             .catch(console.log('setData error'))
-        state.position = length+1;
-        let song = {};
+        state.position = length;
+        const song = {};
         song.data = {...state};
         song.id = id;
         await QueueAPI.getRef().child(id).set(song)
-             .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: song }))
+            .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: song }))
             .catch(console.log('setData error'))
-        dispatch(hideLoader());
+        dispatch(hideLoader())
         dispatch(showAlert('Song move to q'))
     } catch (e) {
         dispatch(showAlert('Что-то пошло не так'))
         dispatch(hideLoader())
     }
+};
+
+export const editSongInQueueActionCreator = (state) => async dispatch => {
+    // const updates = {};
+    // updates['/'+state.id+'/'] = state;
+    // SongAPI.getRef().update(updates)
+    //     .then(dispatch({ type: EDIT_SONG,    song: state }))
+    // return {
+    //     type: EDIT_SONG,
+    //     song: state
+    // }
+};
+
+export const movePositionInQueue = (state) => async dispatch => {
+    dispatch({
+        type: CHANGE_POSITION,
+        position: state
+    })
+}
+
+export const addSongInSavedQueue = (state) => async dispatch => {
+    await dispatch(addSongInSavedQueueActionCreator(state))
+    await dispatch(removeSongInQueueActionCreator(state.id))
+}
+
+export const successSongActionCreator = (stateSong) => async dispatch => {
+    await dispatch(addSongInHistoryActionCreator(stateSong))
+    await dispatch(removeSongInQueueActionCreator(stateSong.id))
+}
+
+export const removeSongInQueueActionCreator = (uuid) => async dispatch => {
+    QueueAPI.getRef().child(uuid).remove()
+        .then(dispatch({ type: REMOVE_SONG_IN_QUEUE,  row: uuid }))
+        .catch(console.log('removeData error'))
 };
 
 export const setSelectedQueueActionCreator = (state) => {
@@ -61,34 +101,9 @@ export const setSelectedQueueActionCreator = (state) => {
     }
 };
 
-export const MoveSongInSavedQueue = (state) => async dispatch => {
-    dispatch({
-        type: CHANGE_POSITION,
-        position: state
-    })
-}
-
-export const successSong = () => async dispatch => {
-
-}
-
-export const removeSongActionCreator = (uuid) => async dispatch => {
-    // SongAPI.removeData(state, () => dispatch({
-    //     type: REMOVE_SONG,
-    //     row: state
-    // }))
-    // SongAPI.getRef().child(uuid).remove()
-    //     .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
-    //     .catch(console.log('removeData error'))
-};
-
-export const editSong = (state) => async dispatch => {
-    // const updates = {};
-    // updates['/'+state.id+'/'] = state;
-    // SongAPI.getRef().update(updates)
-    //     .then(dispatch({ type: EDIT_SONG,    song: state }))
-    // return {
-    //     type: EDIT_SONG,
-    //     song: state
-    // }
+export const setSearchTextQueueActionCreator = (state) => {
+    return {
+        type: SET_SEARCHTEXT,
+        text: state
+    }
 };

@@ -14,17 +14,18 @@ export const MoveUpSongQueue = (props) => {
 
     }
 
-    const handlerEditRows = () => {
+    const handleEditRows = () => {
         setDialogOpened(true)
     }
 
-    const handlerMoveUpSong = () => {
+    const handleMoveUpSong = () => {
         changePosition(selected)
+
     }
 
     return (
         <>
-            <IconButton onClick={handlerMoveUpSong} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handleMoveUpSong} disabled={showButton(lenSelected)}>
                 <PublishIcon/>
             </IconButton>
         </>

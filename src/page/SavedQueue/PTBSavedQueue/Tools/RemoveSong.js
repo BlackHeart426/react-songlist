@@ -29,7 +29,7 @@ export const RemoveSong = (props) => {
             {/*<DialogSongsRemove*/}
             {/*    show = { confirmOpened }*/}
             {/*    onHide = { () => setConfirmOpened(false) }*/}
-            {/*    onAccept = { handlerRemoveSong }*/}
+            {/*    onAccept = { handleRemoveSong }*/}
             {/*    dataSong={ songData.find(item => item.id == selected) }*/}
             {/*/>*/}
         </>

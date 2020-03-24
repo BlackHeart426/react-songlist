@@ -3,15 +3,17 @@ import TablePagination from '../../companents/TablePagination/ComponentTablePagi
 import {PTBQueue} from "./PTBQueue/PTBQueue";
 import {connect} from "react-redux";
 import {showLoader} from "../../store/action/app";
-import {setSelectedQueueActionCreator} from "../../store/action/modules/queue";
+import {
+    removeSongInQueueActionCreator,
+    setSelectedQueueActionCreator,
+    successSongActionCreator
+} from "../../store/action/modules/queue";
 
 const Queue = (props) => {
 
-    function createData(position, title, artist, amount, requestedBy, note) {
-        return {position, title, artist, amount, requestedBy, note,
-            action: {
-                type: 'btn',
-                data: [
+    function createData(position, title, artist, amount, requestBy, note) {
+        return {position, title, artist, amount, requestBy, note,
+            action: { type: 'btn', data: [
                     { type: 'icon', name: 'Detail', handler: handlerDetail },
                     { type: 'icon', name: 'Delete', handler: handlerDelete },
                     { type: 'icon', name: 'Done', handler: handlerDone },
@@ -21,22 +23,27 @@ const Queue = (props) => {
 
 
     const wrapperSong = (song) => {
-
         return song.map(item => {
             const {position, title, artist, amount, requestedBy, note} = item.data;
             return {id: item.id, data: createData(position, title, artist, amount, requestedBy, note), active: item.active}
         })
     };
 
-    function handlerDetail(id) {
+    function handleDetail(id) {
         console.log('detail', id)
     }
 
-    function handlerDelete(id) {
+    function handleDelete(id) {
+        props.action.deleteSong(id);
         console.log('delete', id)
     }
 
-    function handlerDone(id) {
+    function handleDone(id) {
+        var today = new Date();
+        const songState = props.queueData.list.find(item => item.id == id);
+        delete songState.data.position
+        songState.data.played = 'today';//today;
+        props.action.songPerformed(songState);
         console.log('done', id)
     }
 
@@ -93,6 +100,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         action: {
+            deleteSong: (uuid) => dispatch(removeSongInQueueActionCreator()),
+            songPerformed: (song) => dispatch(successSongActionCreator(song)),
             setSelected: (data) => setSelectedQueueActionCreator(data),
             loader: () => dispatch(showLoader())
         }

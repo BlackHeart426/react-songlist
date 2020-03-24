@@ -51,44 +51,6 @@ const useStyles = makeStyles(theme => ({
 const App = (props) => {
     const classes = useStyles();
 
-    // let loading = true
-    // setTimeout(()=>{loading = false},3000)
-    // const SongsRoute = () => {
-    //     // <SongsState>
-    //     // console.log('switch')
-    //     return <Switch>
-    //         <Route exact path="/s/:userId/songs/" component={Songs}/>
-    //         <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
-    //         <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
-    //     </Switch>
-    //     // </SongsState>
-    // };
-    //
-    // const QueueRoute = () => (
-    //     <QueueState>
-    //         <Switch>
-    //             <Route exact path="/s/:userId/queue" component={Queue}/>
-    //             <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
-    //         </Switch>
-    //     </QueueState>
-    // );
-    //
-    // const SavedQueueRoute = () => (
-    //     <SavedQueueState>
-    //         <Switch>
-    //             <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>
-    //         </Switch>
-    //     </SavedQueueState>
-    // );
-    //
-    // const HistoryRoute = () => (
-    //     <HistoryState>
-    //         <Switch>
-    //             <Route exact path="/s/:userId/history" component={History}/>
-    //         </Switch>
-    //     </HistoryState>
-    // );
-
     useEffect(() => {
         props.action.getSongData(); //Заполнение таблицы с песнями
         props.action.getQueueData(); //Заполнение таблицы с очередью

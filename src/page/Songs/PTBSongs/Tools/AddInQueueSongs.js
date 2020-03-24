@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import {DialogSongsAddQueue} from "../../../../companents/Dialog/DialogSongs/DialogSongsAddQueue";
 import {useDispatch} from "react-redux";
-import {moveSongInQueueActionCreator} from "../../../../store/action/modules/songs";
+import {addSongInQueueActionCreator} from "../../../../store/action/modules/queue";
 
 export const AddInQueueSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -22,8 +22,8 @@ export const AddInQueueSongs = (props) => {
         console.log('asd')
     }
 
-    const handlerMoveSongInQueue = (song) => {
-        dispatch(moveSongInQueueActionCreator(song, selected[0]))
+    const handleMoveSongInQueue = (song) => {
+        dispatch(addSongInQueueActionCreator(song, selected[0]))
     }
 
     return (
@@ -34,7 +34,7 @@ export const AddInQueueSongs = (props) => {
             <DialogSongsAddQueue
                 onAddItemToQueue={ addItemToQueue }
                 dataSong={songData.find(item => item.id == selected[0])}
-                onAccept = { handlerMoveSongInQueue }
+                onAccept = { handleMoveSongInQueue }
                 show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )

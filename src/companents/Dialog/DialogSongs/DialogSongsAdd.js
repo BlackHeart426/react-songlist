@@ -55,29 +55,29 @@ export function DialogSongsAdd(props) {
         setSong(statusCopy)
     }
 
-    const handleChange = name =>  event => {
+    const handlerChange = name =>  event => {
         setProperty(name, event.target.value)
     };
 
-    const handleChangeSelect = event => {
+    const handlerChangeSelect = event => {
         setPersonName(event.target.value);
         setProperty('tags', event.target.value)
     };
 
-    const handleChangeSwitch = event => {
+    const handlerChangeSwitch = event => {
 
         setActive(event.target.checked)
         setProperty('active', event.target.checked)
     };
 
-    const handleClose = () => {
+    const handlerClose = () => {
         setDialogOpened(false);
         onHide();
     };
 
-    const handleCreate = (property, close = false) => event => {
+    const handlerCreate = (property, close = false) => event => {
         onAddSongs(property)
-        close && handleClose()
+        close && handlerClose()
     };
 
     const data = {
@@ -92,7 +92,7 @@ export function DialogSongsAdd(props) {
                         type="text"
                         value={song.title}
                         fullWidth
-                        onChange={handleChange('title')}
+                        onChange={handlerChange('title')}
                     />
                 </FormControl>
             </div>
@@ -105,14 +105,14 @@ export function DialogSongsAdd(props) {
                         value={song.artist}
                         type="text"
                         fullWidth
-                        onChange={handleChange('artist')}
+                        onChange={handlerChange('artist')}
                     />
                 </FormControl>
             </div>
             <div>
                 <FormControl className={classes.formControl}>
                     <FormControlLabel
-                        control={<Switch  checked={active} onChange={handleChangeSwitch} color="primary" />}
+                        control={<Switch  checked={active} onChange={handlerChangeSwitch} color="primary" />}
                         label="Active"
                     />
                 </FormControl>
@@ -125,7 +125,7 @@ export function DialogSongsAdd(props) {
                         id="demo-mutiple-chip"
                         multiple
                         value={personName}
-                        onChange={handleChangeSelect}
+                        onChange={handlerChangeSelect}
                         input={<Input id="select-multiple-chip" />}
                         renderValue={selected => (
                             <div className={classes.chips}>
@@ -147,13 +147,13 @@ export function DialogSongsAdd(props) {
         </div>,
         action:
             <FormControl fullWidth >
-                <Button onClick={handleClose} color="primary"  className={classes.button}>
+                <Button onClick={handlerClose} color="primary"  className={classes.button}>
                     Cancel
                 </Button>
-                <Button onClick={handleCreate(song)} color="primary"  className={classes.button}>
+                <Button onClick={handlerCreate(song)} color="primary"  className={classes.button}>
                     Create
                 </Button>
-                <Button onClick={handleCreate(song, true)} color="primary" className={classes.button}>
+                <Button onClick={handlerCreate(song, true)} color="primary" className={classes.button}>
                     Create and close
                 </Button>
             </FormControl>

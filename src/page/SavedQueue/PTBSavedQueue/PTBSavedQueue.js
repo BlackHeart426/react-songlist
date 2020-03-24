@@ -11,9 +11,9 @@ let mbt10 = {
 }
 
 export const PTBSavedQueue = (props) => {
-    const selected = useSelector(state => state.songs.selected)
-    const listSong = useSelector(state => state.songs.list)
-    const searchText = useSelector(state => state.songs.searchText)
+    const selected = useSelector(state => state.savedQueue.selected)
+    const listSong = useSelector(state => state.savedQueue.list)
+    const searchText = useSelector(state => state.savedQueue.searchText)
     const dispatch = useDispatch()
     const lenSelected = selected.length;
     return (
