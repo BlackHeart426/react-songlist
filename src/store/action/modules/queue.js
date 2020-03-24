@@ -9,6 +9,10 @@ import {ADD_SONG_IN_QUEUE} from "../../types";
 import {SET_SELECTED} from "../../types";
 import {CHANGE_POSITION} from "../../types";
 import {SET_SEARCHTEXT} from "../../types";
+import {addSongInHistoryActionCreator} from "./history";
+import * as SongAPI from "../../../API/SongAPI";
+import {REMOVE_SONG} from "../../types";
+import {REMOVE_SONG_IN_QUEUE} from "../../types";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
@@ -70,18 +74,15 @@ export const moveSongInSavedQueue = (state) => async dispatch => {
     })
 }
 
-export const successSongActionCreator = () => async dispatch => {
-
+export const successSongActionCreator = (song) => async dispatch => {
+    dispatch(removeSongInQueueActionCreator(song.id))
+    dispatch(addSongInHistoryActionCreator(song))
 }
 
 export const removeSongInQueueActionCreator = (uuid) => async dispatch => {
-    // SongAPI.removeData(state, () => dispatch({
-    //     type: REMOVE_SONG,
-    //     row: state
-    // }))
-    // SongAPI.getRef().child(uuid).remove()
-    //     .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
-    //     .catch(console.log('removeData error'))
+    QueueAPI.getRef().child(uuid).remove()
+        .then(dispatch({ type: REMOVE_SONG_IN_QUEUE,  row: uuid }))
+        .catch(console.log('removeData error'))
 };
 
 export const setSelectedQueueActionCreator = (state) => {

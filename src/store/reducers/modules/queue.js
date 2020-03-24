@@ -2,7 +2,7 @@ import React from "react";
 import {
     ADD_SONG_IN_QUEUE,
     CHANGE_POSITION,
-    REMOVE_SONG,
+    REMOVE_SONG, REMOVE_SONG_IN_QUEUE,
     SET_QUEUEDATA,
     SET_SELECTED,
     UPDATE_SONG_QUEUE
@@ -27,7 +27,7 @@ export const queueReducer = (state = initialState, action) => {
             return { ...state, list: [ ...state.list, action.newSong ] };
         case SET_SELECTED:
             return { ...state, selected: action.newSelect };
-        case REMOVE_SONG:
+        case REMOVE_SONG_IN_QUEUE:
             return { ...state, list: state.list.filter(item => item.id !== action.row), selected: [] };
         case UPDATE_SONG_QUEUE:
             return { ...state, ...state.list.forEach((item, index) => ((state.list[index].id === action.song.id) &&

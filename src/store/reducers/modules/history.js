@@ -1,11 +1,12 @@
 import React from "react";
-import {REMOVE_SONG_HISTORY, SET_HISTORYDATA, SET_SELECTED} from "../../types";
+import {ADD_SONG_IN_HISTORY, REMOVE_SONG_HISTORY, SET_HISTORYDATA, SET_SELECTED} from "../../types";
 
 
 
 const initialState = {
     list: [],
     selected: [],
+    searchText: '',
     filterData: '',
 };
 
@@ -13,6 +14,8 @@ export const historyReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_HISTORYDATA:
             return { ...state, list: action.list };
+        case ADD_SONG_IN_HISTORY:
+            return { ...state, list: Object.values(state.list).concat(action.newSong) };
         case SET_SELECTED:
             return { ...state, selected: action.newSelect };
         case REMOVE_SONG_HISTORY:
