@@ -4,7 +4,7 @@ import {
     ADD_SONG_IN_SAVEDQUEUE,
     REMOVE_SONG_SAVEDQUEUE,
     SET_SAVEDQUEUEDATA,
-    SET_SELECTED
+    SET_SELECTED, SET_SELECTED_SAVEDQUEUE
 } from "../../types";
 
 
@@ -19,7 +19,7 @@ export const savedQueueReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_SAVEDQUEUEDATA:
             return { ...state, list: action.list };
-        case SET_SELECTED:
+        case SET_SELECTED_SAVEDQUEUE:
             return { ...state, selected: action.newSelect };
         case ADD_SONG_IN_SAVEDQUEUE:
             return { ...state, list: [ ...state.list, action.newSong ] };

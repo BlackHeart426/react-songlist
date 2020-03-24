@@ -1,7 +1,13 @@
 import React from "react";
 import * as SavedQueueAPI from "../../../API/SavedQueueAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
-import {ADD_SONG_IN_SAVEDQUEUE, SET_SAVEDQUEUEDATA, SET_SEARCHTEXT, SET_SELECTED} from "../../types";
+import {
+    ADD_SONG_IN_SAVEDQUEUE,
+    SET_SAVEDQUEUEDATA,
+    SET_SEARCHTEXT,
+    SET_SELECTED,
+    SET_SELECTED_SAVEDQUEUE
+} from "../../types";
 
 
 export const getSavedQueueDataActionCreator = () => async dispatch => {
@@ -53,7 +59,7 @@ export const removeSongActionCreator = (uuid) => async dispatch => {
 
 export const setSelectedSavedQueueActionCreator = (state) => {
     return {
-        type: SET_SELECTED,
+        type: SET_SELECTED_SAVEDQUEUE,
         newSelect: state
     }
 };

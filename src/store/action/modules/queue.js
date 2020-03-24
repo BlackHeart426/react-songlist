@@ -14,6 +14,7 @@ import * as SongAPI from "../../../API/SongAPI";
 import {REMOVE_SONG} from "../../types";
 import {REMOVE_SONG_IN_QUEUE} from "../../types";
 import {addSongInSavedQueueActionCreator} from "./savedQueue";
+import {SET_SELECTED_QUEUE} from "../../types";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
@@ -80,7 +81,7 @@ export const movePositionInQueue = (state) => async dispatch => {
 
 export const addSongInSavedQueue = (state) => async dispatch => {
     await dispatch(addSongInSavedQueueActionCreator(state))
-    await dispatch(removeSongInQueueActionCreator(state.id))
+    // await dispatch(removeSongInQueueActionCreator(state.id))
 }
 
 export const successSongActionCreator = (stateSong) => async dispatch => {
@@ -96,7 +97,7 @@ export const removeSongInQueueActionCreator = (uuid) => async dispatch => {
 
 export const setSelectedQueueActionCreator = (state) => {
     return {
-        type: SET_SELECTED,
+        type: SET_SELECTED_QUEUE,
         newSelect: state
     }
 };

@@ -7,7 +7,7 @@ import {
     REMOVE_SONG_HISTORY,
     SET_HISTORYDATA,
     SET_SEARCHTEXT,
-    SET_SELECTED
+    SET_SELECTED, SET_SELECTED_HISTORY
 } from "../../types";
 import * as QueueAPI from "../../../API/QueueAPI";
 
@@ -67,7 +67,7 @@ export const addSongInHistoryActionCreator = (state) => async dispatch => {
 
 export const setSelectedHistoryActionCreator = (state) => {
     return {
-        type: SET_SELECTED,
+        type: SET_SELECTED_HISTORY,
         newSelect: state
     }
 };

@@ -29,16 +29,16 @@ const Queue = (props) => {
         })
     };
 
-    function handleDetail(id) {
+    function handlerDetail(id) {
         console.log('detail', id)
     }
 
-    function handleDelete(id) {
+    function handlerDelete(id) {
         props.action.deleteSong(id);
         console.log('delete', id)
     }
 
-    function handleDone(id) {
+    function handlerDone(id) {
         var today = new Date();
         const songState = props.queueData.list.find(item => item.id == id);
         delete songState.data.position
@@ -49,6 +49,7 @@ const Queue = (props) => {
 
     const updateQueueData = () => {
         let queueList = {...props.queueData};
+        //debugger
         if (Object.keys(queueList.list).length > 0) {
             let queueListTest = wrapperSong(Object.values(queueList.list));
             queueList.list = queueListTest;

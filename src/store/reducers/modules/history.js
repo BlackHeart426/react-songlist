@@ -1,5 +1,11 @@
 import React from "react";
-import {ADD_SONG_IN_HISTORY, REMOVE_SONG_HISTORY, SET_HISTORYDATA, SET_SELECTED} from "../../types";
+import {
+    ADD_SONG_IN_HISTORY,
+    REMOVE_SONG_HISTORY,
+    SET_HISTORYDATA,
+    SET_SELECTED,
+    SET_SELECTED_HISTORY
+} from "../../types";
 
 
 
@@ -16,7 +22,7 @@ export const historyReducer = (state = initialState, action) => {
             return { ...state, list: action.list };
         case ADD_SONG_IN_HISTORY:
             return { ...state, list: Object.values(state.list).concat(action.newSong) };
-        case SET_SELECTED:
+        case SET_SELECTED_HISTORY:
             return { ...state, selected: action.newSelect };
         case REMOVE_SONG_HISTORY:
             return { ...state, list: state.list.filter(item => item.id !== action.row), selected: [] };

@@ -4,7 +4,7 @@ import {
     CHANGE_POSITION,
     REMOVE_SONG, REMOVE_SONG_IN_QUEUE,
     SET_QUEUEDATA,
-    SET_SELECTED,
+    SET_SELECTED, SET_SELECTED_QUEUE,
     UPDATE_SONG_QUEUE
 } from "../../types";
 
@@ -25,7 +25,7 @@ export const queueReducer = (state = initialState, action) => {
                 )};
         case ADD_SONG_IN_QUEUE:
             return { ...state, list: [ ...state.list, action.newSong ] };
-        case SET_SELECTED:
+        case SET_SELECTED_QUEUE:
             return { ...state, selected: action.newSelect };
         case REMOVE_SONG_IN_QUEUE:
             return { ...state, list: state.list.filter(item => item.id !== action.row), selected: [] };

@@ -1,5 +1,14 @@
 import React from "react";
-import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
+import {
+    ADD_SONG,
+    EDIT_SONG,
+    REMOVE_SONG,
+    SET_SEARCHTEXT,
+    SET_SELECTED,
+    SET_SELECTED_SONG,
+    SET_SONGDATA,
+    TOGGLE_ACTIVE
+} from "../../types";
 
 
 const initialState = {
@@ -19,7 +28,7 @@ export const songsReducer = (state = initialState, action) => {
             return { ...state, active: action.active,  selected: [] };
         case ADD_SONG:
             return { ...state, list: Object.values(state.list).concat(action.newSong) };
-        case SET_SELECTED:
+        case SET_SELECTED_SONG:
             return { ...state, selected: action.newSelect };
         case REMOVE_SONG:
             return { ...state, list: state.list.filter(item => item.id !== action.row), selected: [] };

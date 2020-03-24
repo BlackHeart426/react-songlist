@@ -2,7 +2,16 @@ import React from "react";
 import * as SongAPI from "../../../API/SongAPI";
 
 import {hideLoader, showAlert, showLoader} from "../app";
-import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
+import {
+    ADD_SONG,
+    EDIT_SONG,
+    REMOVE_SONG,
+    SET_SEARCHTEXT,
+    SET_SELECTED,
+    SET_SELECTED_SONG,
+    SET_SONGDATA,
+    TOGGLE_ACTIVE
+} from "../../types";
 import {addSongInQueueActionCreator} from "./queue";
 
 export const getSongDataActionCreator = () => async dispatch => {
@@ -72,7 +81,7 @@ export const removeSongActionCreator = (uuid) => async dispatch => {
 
 export const setSelectedActionCreator = (state) => {
     return {
-        type: SET_SELECTED,
+        type: SET_SELECTED_SONG,
         newSelect: state
     }
 };
