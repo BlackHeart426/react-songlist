@@ -70,11 +70,6 @@ export const removeSongActionCreator = (uuid) => async dispatch => {
         .catch(console.log('removeData error'))
 };
 
-export const moveSongInQueueActionCreator = (state, id) => async dispatch => {
-    dispatch(addSongInQueueActionCreator(state, id))
-    dispatch(removeSongActionCreator(id))
-}
-
 export const setSelectedActionCreator = (state) => {
     return {
         type: SET_SELECTED,

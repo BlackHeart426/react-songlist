@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import {DialogSongsAddQueue} from "../../../../companents/Dialog/DialogSongs/DialogSongsAddQueue";
 import {useDispatch} from "react-redux";
-import {moveSongInQueueActionCreator} from "../../../../store/action/modules/songs";
+import {addSongInQueueActionCreator} from "../../../../store/action/modules/queue";
 
 export const AddInQueueSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -23,7 +23,7 @@ export const AddInQueueSongs = (props) => {
     }
 
     const handlerMoveSongInQueue = (song) => {
-        dispatch(moveSongInQueueActionCreator(song, selected[0]))
+        dispatch(addSongInQueueActionCreator(song, selected[0]))
     }
 
     return (
