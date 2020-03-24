@@ -7,10 +7,13 @@ import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '100%',
+        width: 'auto',
         '& > * + *': {
             marginTop: theme.spacing(2),
         },
+        position: 'fixed',
+        bottom: 10,
+        left: '50%'
     },
 }));
 
