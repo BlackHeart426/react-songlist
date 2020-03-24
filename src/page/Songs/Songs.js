@@ -37,7 +37,7 @@ const Songs = (props) => {
         localStorage.setItem('songs', JSON.stringify(props.songData));
     },[props.songData]);
 
-    const handleFilter = () => {
+    const handlerFilter = () => {
         let songList = {...props.songData};
         if (Object.keys(songList.list).length > 0) {
             let songListTest = wrapperSong(Object.values(songList.list));
@@ -74,7 +74,7 @@ const Songs = (props) => {
             <TablePagination
                 onSelectRow = {(data) => props.action.setSelected(data)}
                 headCells = {headCells}
-                rowsData = {handleFilter()}
+                rowsData = {handlerFilter()}
                 showActive={active}
             />
         </>

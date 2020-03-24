@@ -80,13 +80,13 @@ export const movePositionInQueue = (state) => async dispatch => {
 }
 
 export const addSongInSavedQueue = (state) => async dispatch => {
+    await dispatch(removeSongInQueueActionCreator(state.id))
     await dispatch(addSongInSavedQueueActionCreator(state))
-    // await dispatch(removeSongInQueueActionCreator(state.id))
 }
 
 export const successSongActionCreator = (stateSong) => async dispatch => {
-    await dispatch(addSongInHistoryActionCreator(stateSong))
     await dispatch(removeSongInQueueActionCreator(stateSong.id))
+    await dispatch(addSongInHistoryActionCreator(stateSong))
 }
 
 export const removeSongInQueueActionCreator = (uuid) => async dispatch => {

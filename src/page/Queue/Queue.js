@@ -25,7 +25,7 @@ const Queue = (props) => {
     const wrapperSong = (song) => {
         return song.map(item => {
             const {position, title, artist, amount, requestedBy, note} = item.data;
-            return {id: item.id, data: createData(position, title, artist, amount, requestedBy, note), active: item.active}
+            return {id: item.id, data: createData(position, title, artist, amount, requestedBy, note)}
         })
     };
 
@@ -49,7 +49,6 @@ const Queue = (props) => {
 
     const updateQueueData = () => {
         let queueList = {...props.queueData};
-        //debugger
         if (Object.keys(queueList.list).length > 0) {
             let queueListTest = wrapperSong(Object.values(queueList.list));
             queueList.list = queueListTest;
