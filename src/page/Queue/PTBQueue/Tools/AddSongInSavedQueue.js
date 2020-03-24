@@ -11,7 +11,7 @@ export const AddSongInSavedQueue = (props) => {
     }
 
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
-        return {title, artist, timesPlayed, lastPlayed, tags, action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: requestHandler }] }}
+        return {title, artist, timesPlayed, lastPlayed, tags, action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
     }
 
     const requestHandler = () => {
@@ -32,7 +32,7 @@ export const AddSongInSavedQueue = (props) => {
                 '',
                 '',
                 { type: 'tag', data: [ { name: 'Music' }] } ,
-                { type: 'btn', data: [ { type: 'text', name: 'Request11', handle: requestHandler }] }
+                { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
             ),
             active: active
         }

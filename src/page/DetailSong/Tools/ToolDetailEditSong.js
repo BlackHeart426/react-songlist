@@ -9,7 +9,7 @@ export const ToolDetailEditSong = () => {
     const listSong = useSelector(state => state.songs.list)
     const selected = useSelector(state => state.songs.selected)
 
-    function handleDetailEdit() {
+    function handlerDetailEdit() {
 
         const uuidSong = listSong.find(item => item.id === selected[0]);
         // detailShow(false);

@@ -14,9 +14,9 @@ const Queue = (props) => {
     function createData(position, title, artist, amount, requestedBy, note) {
         return {position, title, artist, amount, requestedBy, note,
             action: { type: 'btn', data: [
-                    { type: 'icon', name: 'Detail', handle: handleDetail },
-                    { type: 'icon', name: 'Delete', handle: handleDelete },
-                    { type: 'icon', name: 'Done', handle: handleDone },
+                    { type: 'icon', name: 'Detail', handler: handleDetail },
+                    { type: 'icon', name: 'Delete', handler: handleDelete },
+                    { type: 'icon', name: 'Done', handler: handleDone },
                 ]
             }}
     }

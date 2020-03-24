@@ -15,7 +15,7 @@ const Songs = (props) => {
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
         return {title, artist, timesPlayed, lastPlayed,
             tags: { type: 'tag', data: Object.values(tags).map((tag, index) => nameArr(tag)) },
-            action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: requestHandler }] }}
+            action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
     }
 
     const wrapperSong = (song) => {

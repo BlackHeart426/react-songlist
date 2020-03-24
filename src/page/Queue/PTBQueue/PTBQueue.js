@@ -3,7 +3,7 @@ import React, {useContext} from "react";
 import {AddInQueueSong} from "./Tools/AddInQueueSong";
 import {UpdateSongQueue} from "./Tools/UpdateSongQueue";
 import {MoveUpSongQueue} from "./Tools/MoveUpSongQueue";
-import {AddSongInSavedQueue} from "./Tools/AddSongInHistory";
+import {AddSongInSavedQueue} from "./Tools/AddSongInSavedQueue";
 import {useDispatch, useSelector} from "react-redux";
 import {moveSongInSavedQueue, removeSongInQueueActionCreator} from "../../../store/action/modules/queue";
 

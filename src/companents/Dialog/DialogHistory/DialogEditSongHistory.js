@@ -32,20 +32,20 @@ export function DialogEditSongHistory(props) {
         let copyDataSong = {...dataSong};
     },[show])
 
-    const handleDateChange = date => {
+    const handlerDateChange = date => {
         setSelectedDate(date);
     };
 
-    const handleTimeChange = time => {
+    const handlerTimeChange = time => {
         setSelectedTime(time);
     };
 
-    const handleSave = () => {
+    const handlerSave = () => {
         setDialogOpened(false);
         onHide();
     };
 
-    const handleClose = () => {
+    const handlerClose = () => {
         setDialogOpened(false);
         onHide();
     };
@@ -65,7 +65,7 @@ export function DialogEditSongHistory(props) {
                                 id="date-picker-inline"
                                 label="Played date"
                                 value={selectedDate}
-                                onChange={handleDateChange}
+                                onChange={handlerDateChange}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',
                                 }}
@@ -81,7 +81,7 @@ export function DialogEditSongHistory(props) {
                                 id="time-picker"
                                 label="Played time"
                                 value={selectedTime}
-                                onChange={handleTimeChange}
+                                onChange={handlerTimeChange}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change time',
                                 }}
@@ -93,10 +93,10 @@ export function DialogEditSongHistory(props) {
             </div>,
         action:
             <FormControl fullWidth >
-                <Button onClick={handleClose} color="primary"  className={classes.button}>
+                <Button onClick={handlerClose} color="primary"  className={classes.button}>
                     Cancel
                 </Button>
-                <Button onClick={handleSave} color="primary"   className={classes.button}>
+                <Button onClick={handlerSave} color="primary"   className={classes.button}>
                     Save
                 </Button>
             </FormControl>
