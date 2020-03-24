@@ -22,7 +22,7 @@ export const AddInQueueSongs = (props) => {
         console.log('asd')
     }
 
-    const handlerMoveSongInQueue = (song) => {
+    const handleMoveSongInQueue = (song) => {
         dispatch(addSongInQueueActionCreator(song, selected[0]))
     }
 
@@ -34,7 +34,7 @@ export const AddInQueueSongs = (props) => {
             <DialogSongsAddQueue
                 onAddItemToQueue={ addItemToQueue }
                 dataSong={songData.find(item => item.id == selected[0])}
-                onAccept = { handlerMoveSongInQueue }
+                onAccept = { handleMoveSongInQueue }
                 show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )

@@ -2,7 +2,7 @@ import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import BlockIcon from "@material-ui/icons/Block";
 
-export const AddSongInHistory = (props) => {
+export const AddSongInSavedQueue = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
     const {lenSelected, editSong, songData, selected} = props;
 
@@ -11,18 +11,18 @@ export const AddSongInHistory = (props) => {
     }
 
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
-        return {title, artist, timesPlayed, lastPlayed, tags, action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
+        return {title, artist, timesPlayed, lastPlayed, tags, action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: requestHandler }] }}
     }
 
     const requestHandler = () => {
 
     }
 
-    const handlerEditRows = () => {
+    const handleAddInSavedQueue = () => {
         setDialogOpened(true)
     }
 
-    const handlerEditRowsSong = (property) => {
+    const handleEditRowsSong = (property) => {
         const {title, artist, tags, active} = property;
         const newSong = {
             id: selected[0],
@@ -32,7 +32,7 @@ export const AddSongInHistory = (props) => {
                 '',
                 '',
                 { type: 'tag', data: [ { name: 'Music' }] } ,
-                { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
+                { type: 'btn', data: [ { type: 'text', name: 'Request11', handle: requestHandler }] }
             ),
             active: active
         }
@@ -41,10 +41,9 @@ export const AddSongInHistory = (props) => {
 
     return (
         <>
-            <IconButton onClick={handlerEditRows} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handleEditRowsSong} disabled={showButton(lenSelected)}>
                 <BlockIcon/>
             </IconButton>
-            {/*<DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}
         </>
     )
 }

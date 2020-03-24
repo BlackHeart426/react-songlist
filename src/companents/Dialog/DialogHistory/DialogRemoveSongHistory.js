@@ -31,7 +31,7 @@ export function DialogRemoveSongHistory(props) {
         setDialogOpened(show);
     },[show])
 
-    const handlerAccept = () => {
+    const handleAccept = () => {
         setDialogOpened(false);
         onHide();
     };
@@ -61,7 +61,7 @@ export function DialogRemoveSongHistory(props) {
                 <Button onClick={handleClose} color="primary"  className={classes.button}>
                     Cancel
                 </Button>
-                <Button variant="outlined" onClick={handlerAccept} color="secondary" autoFocus className={classes.button}>
+                <Button variant="outlined" onClick={handleAccept} color="secondary" autoFocus className={classes.button}>
                     Agree
                 </Button>
             </FormControl>

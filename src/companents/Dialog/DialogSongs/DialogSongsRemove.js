@@ -26,7 +26,7 @@ export default function DialogSongRemove(props) {
         onHide()
     };
 
-    const handlerAccept = () => {
+    const handleAccept = () => {
         handleClose()
         onAccept(true)
     }
@@ -38,7 +38,7 @@ export default function DialogSongRemove(props) {
             <Button variant="outlined" onClick={handleClose} color="primary">
                 Cancel
             </Button>
-            <Button variant="outlined" onClick={handlerAccept} color="secondary" autoFocus>
+            <Button variant="outlined" onClick={handleAccept} color="secondary" autoFocus>
                 Agree
             </Button>
             </>

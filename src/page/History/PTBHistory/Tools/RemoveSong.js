@@ -10,7 +10,7 @@ export const RemoveSong = (props) => {
     const {removeSong, selected, lenSelected, songData} = props;
 
 
-    const handlerOpenConfirm = () => {
+    const handleOpenConfirm = () => {
         setConfirmOpened(true)
     }
 
@@ -18,19 +18,19 @@ export const RemoveSong = (props) => {
         return selected != 0 ? false : true
     }
 
-    const handlerRemoveSong = () => {
+    const handleRemoveSong = () => {
         removeSong(selected[0])
     }
 
     return (
         <>
-            <IconButton onClick={handlerOpenConfirm} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handleOpenConfirm} disabled={showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
             <DialogRemoveSongHistory
                 show = { confirmOpened }
                 onHide = { () => setConfirmOpened(false) }
-                onAccept = { handlerRemoveSong }
+                onAccept = { handleRemoveSong }
                 dataSong={ songData.find(item => item.id == selected) }
             />
         </>

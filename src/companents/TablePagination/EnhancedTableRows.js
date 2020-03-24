@@ -88,7 +88,7 @@ export const EnhancedTableRows = (props) => {
                                                             color="primary"
                                                             variant="outlined"
                                                             key={data[index].id}
-                                                            onClick={() => btn.handler(data[index].id)}
+                                                            onClick={() => btn.handle(data[index].id)}
                                                         >
                                                             {btn.name}
                                                         </Button>
@@ -97,7 +97,7 @@ export const EnhancedTableRows = (props) => {
                                                             type="submit"
                                                             color="primary"
                                                             key={btn.name}
-                                                            onClick={() => btn.handler(data[index].id)}>
+                                                            onClick={() => btn.handle(data[index].id)}>
                                                             {componentTags[btn.name]}
                                                         </IconButton>
                                                 ))

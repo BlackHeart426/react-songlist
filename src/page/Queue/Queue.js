@@ -3,16 +3,20 @@ import TablePagination from '../../companents/TablePagination/ComponentTablePagi
 import {PTBQueue} from "./PTBQueue/PTBQueue";
 import {connect} from "react-redux";
 import {showLoader} from "../../store/action/app";
-import {setSelectedQueueActionCreator, successSongActionCreator} from "../../store/action/modules/queue";
+import {
+    removeSongInQueueActionCreator,
+    setSelectedQueueActionCreator,
+    successSongActionCreator
+} from "../../store/action/modules/queue";
 
 const Queue = (props) => {
 
     function createData(position, title, artist, amount, requestedBy, note) {
         return {position, title, artist, amount, requestedBy, note,
             action: { type: 'btn', data: [
-                    { type: 'icon', name: 'Detail', handler: handlerDetail },
-                    { type: 'icon', name: 'Delete', handler: handlerDelete },
-                    { type: 'icon', name: 'Done', handler: handlerDone },
+                    { type: 'icon', name: 'Detail', handle: handleDetail },
+                    { type: 'icon', name: 'Delete', handle: handleDelete },
+                    { type: 'icon', name: 'Done', handle: handleDone },
                 ]
             }}
     }
@@ -25,15 +29,16 @@ const Queue = (props) => {
         })
     };
 
-    function handlerDetail(id) {
+    function handleDetail(id) {
         console.log('detail', id)
     }
 
-    function handlerDelete(id) {
+    function handleDelete(id) {
+        props.action.deleteSong(id);
         console.log('delete', id)
     }
 
-    function handlerDone(id) {
+    function handleDone(id) {
         const songState = props.queueData.list.find(item => item.id == id);
         props.action.songPerformed(songState);
         console.log('done', id)
@@ -92,6 +97,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         action: {
+            deleteSong: (uuid) => dispatch(removeSongInQueueActionCreator()),
             songPerformed: (song) => dispatch(successSongActionCreator(song)),
             setSelected: (data) => setSelectedQueueActionCreator(data),
             loader: () => dispatch(showLoader())

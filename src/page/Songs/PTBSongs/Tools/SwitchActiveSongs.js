@@ -9,7 +9,7 @@ export const SwitchActiveSongs = (props) => {
     const songData = useSelector(state => state.songs)
     const dispatch = useDispatch()
 
-    const handlerActive = event => {
+    const handleActive = event => {
         setActived(event.target.checked)
         // onActive(event.target.checked)
         console.log(songData.active)
@@ -18,7 +18,7 @@ export const SwitchActiveSongs = (props) => {
 
     return (
         <>
-            <Switch color="primary" checked={active} onChange={handlerActive}/>
+            <Switch color="primary" checked={active} onChange={handleActive}/>
             Show inactive
         </>
     )

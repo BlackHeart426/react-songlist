@@ -22,11 +22,11 @@ export const EditSongs = (props) => {
 
     }
 
-    const handlerEditRows = () => {
+    const handleEditRows = () => {
         setDialogOpened(true)
     }
 
-    const handlerEditRowsSong = (property) => {
+    const handleEditRowsSong = (property) => {
         const {title, artist, tags, active, timesPlayed, lastPlayed} = property;
         const newSong = {
             id: selected[0],
@@ -44,10 +44,10 @@ export const EditSongs = (props) => {
 
     return (
         <>
-            <IconButton onClick={handlerEditRows} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handleEditRows} disabled={showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
-            <DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogSongsEdit onAddSongs={ handleEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }

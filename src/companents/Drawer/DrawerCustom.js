@@ -30,7 +30,7 @@ const DrawerCustom = (props) => {
     const handleClick = () => {
         setOpen(!open);
     };
-    const handlerEditMode= (event) => {
+    const handleEditMode= (event) => {
         props.action.toggleEditMode(event.target.checked)
     };
     const handleDrawerClose = (event) => {
@@ -82,7 +82,7 @@ const DrawerCustom = (props) => {
                 </List>
             </Collapse>
             <ListItem>
-                <ListItemIcon><Switch onChange={handlerEditMode} checked={props.statusEditMode} color="primary"/></ListItemIcon>
+                <ListItemIcon><Switch onChange={handleEditMode} checked={props.statusEditMode} color="primary"/></ListItemIcon>
                 <ListItemText>Edit mode</ListItemText>
             </ListItem>
         </div>

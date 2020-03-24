@@ -30,7 +30,7 @@ const ComponentTablePagination = (props) => {
         dispatch(onSelectRow([]))
     },[props.statusEditMode])
 
-    //TODO Рассмотреть возможность переноса всех handler в отдельный файл
+    //TODO Рассмотреть возможность переноса всех handle в отдельный файл
     /**
      * Сортировка
      */

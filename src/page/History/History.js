@@ -22,7 +22,7 @@ const History = (props) => {
         { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
     ];
 
-    const handlerFilter = () => {
+    const handleFilter = () => {
         let songList = {...props.songData};
         if (Object.keys(songList.list).length > 0) {
             const filtered = songList.list.filter(item => {
@@ -58,7 +58,7 @@ const History = (props) => {
             <TablePagination
                 onSelectRow = {(data) => props.action.setSelected(data)}
                 headCells = {headCells}
-                rowsData = {handlerFilter()}
+                rowsData = {handleFilter()}
             />
         </>
     )

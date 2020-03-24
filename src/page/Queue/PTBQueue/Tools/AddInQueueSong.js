@@ -18,7 +18,7 @@ export const AddInQueueSong = (props) => {
     function addItemToQueue() {
     }
 
-    function handlerRemoveSong() {
+    function handleRemoveSong() {
         removeSong(selected[0])
     }
 
@@ -30,7 +30,7 @@ export const AddInQueueSong = (props) => {
             <DialogAddSongToQueue
                 onAddItemToQueue={ addItemToQueue }
                 dataSong={songData.find(item => item.id == selected)}
-                onAccept = { handlerRemoveSong }
+                onAccept = { handleRemoveSong }
                 show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
