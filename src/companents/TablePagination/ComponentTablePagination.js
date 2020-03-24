@@ -57,7 +57,6 @@ const ComponentTablePagination = (props) => {
      */
     const handlerClick = (event, name) => {
         const selectedIndex = rowsData.selected.indexOf(name);
-
         let newSelected = [];
         if (selectedIndex === -1) {
             newSelected = newSelected.concat(rowsData.selected, name);

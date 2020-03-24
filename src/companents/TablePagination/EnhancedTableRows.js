@@ -52,7 +52,6 @@ export const EnhancedTableRows = (props) => {
                                     <Checkbox
                                         value="secondary"
                                         color="primary"
-                                        onClick={event => handlerClick(event, data[index].id)}
                                         checked={isItemSelected}
                                         inputProps={{'aria-labelledby': labelId}}
                                     />
