@@ -8,6 +8,7 @@ import {SET_QUEUEDATA} from "../../types";
 import {ADD_SONG_IN_QUEUE} from "../../types";
 import {SET_SELECTED} from "../../types";
 import {CHANGE_POSITION} from "../../types";
+import {SET_SEARCHTEXT} from "../../types";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
@@ -15,9 +16,9 @@ export const getQueueDataActionCreator = () => async dispatch => {
     try {
         await QueueAPI.getRef().once('value')
             .then((snapshot) => {
-                    snapshot.forEach(childSnapshot => {
-                        data.push(childSnapshot.val());
-                    });
+                snapshot.forEach(childSnapshot => {
+                    data.push(childSnapshot.val());
+                });
                 dispatch({ type: SET_QUEUEDATA, list: data });
                 dispatch(hideLoader())
             })
@@ -41,7 +42,7 @@ export const addSongInQueueActionCreator = (state, id) => async dispatch => {
             .catch(console.log('setData error'))
         state.position = length
         await QueueAPI.getRef().child(id).set(state)
-             .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: state }))
+            .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: state }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
         dispatch(showAlert('Song move to q'))
@@ -51,25 +52,29 @@ export const addSongInQueueActionCreator = (state, id) => async dispatch => {
     }
 };
 
-export const setSelectedQueueActionCreator = (state) => {
-    return {
-        type: SET_SELECTED,
-        newSelect: state
-    }
+export const editSongInQueueActionCreator = (state) => async dispatch => {
+    // const updates = {};
+    // updates['/'+state.id+'/'] = state;
+    // SongAPI.getRef().update(updates)
+    //     .then(dispatch({ type: EDIT_SONG,    song: state }))
+    // return {
+    //     type: EDIT_SONG,
+    //     song: state
+    // }
 };
 
-export const MoveSongInSavedQueue = (state) => async dispatch => {
+export const moveSongInSavedQueue = (state) => async dispatch => {
     dispatch({
         type: CHANGE_POSITION,
         position: state
     })
 }
 
-export const successSong = () => async dispatch => {
+export const successSongActionCreator = () => async dispatch => {
 
 }
 
-export const removeSongActionCreator = (uuid) => async dispatch => {
+export const removeSongInQueueActionCreator = (uuid) => async dispatch => {
     // SongAPI.removeData(state, () => dispatch({
     //     type: REMOVE_SONG,
     //     row: state
@@ -79,13 +84,16 @@ export const removeSongActionCreator = (uuid) => async dispatch => {
     //     .catch(console.log('removeData error'))
 };
 
-export const editSong = (state) => async dispatch => {
-    // const updates = {};
-    // updates['/'+state.id+'/'] = state;
-    // SongAPI.getRef().update(updates)
-    //     .then(dispatch({ type: EDIT_SONG,    song: state }))
-    // return {
-    //     type: EDIT_SONG,
-    //     song: state
-    // }
+export const setSelectedQueueActionCreator = (state) => {
+    return {
+        type: SET_SELECTED,
+        newSelect: state
+    }
+};
+
+export const setSearchTextQueueActionCreator = (state) => {
+    return {
+        type: SET_SEARCHTEXT,
+        text: state
+    }
 };

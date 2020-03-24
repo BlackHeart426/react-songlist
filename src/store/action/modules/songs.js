@@ -3,7 +3,6 @@ import * as SongAPI from "../../../API/SongAPI";
 
 import {hideLoader, showAlert, showLoader} from "../app";
 import {ADD_SONG, EDIT_SONG, REMOVE_SONG, SET_SEARCHTEXT, SET_SELECTED, SET_SONGDATA, TOGGLE_ACTIVE} from "../../types";
-import Axios from "axios";
 import {addSongInQueueActionCreator} from "./queue";
 
 export const getSongDataActionCreator = () => async dispatch => {
@@ -24,9 +23,9 @@ export const getSongDataActionCreator = () => async dispatch => {
         // })
         await SongAPI.getRef().once('value')
             .then((snapshot) => {
-                    snapshot.forEach(childSnapshot => {
-                        data.push(childSnapshot.val());
-                    });
+                snapshot.forEach(childSnapshot => {
+                    data.push(childSnapshot.val());
+                });
                 dispatch({ type: SET_SONGDATA, list: data });
                 dispatch(hideLoader())
             })
@@ -36,12 +35,12 @@ export const getSongDataActionCreator = () => async dispatch => {
     }
 };
 
-export const addSong = (state) => async dispatch => {
+export const addSongActionCreator = (state) => async dispatch => {
 
     dispatch(showLoader())
     try {
         await SongAPI.getRef().child(state.id).set(state)
-             .then(dispatch({ type: ADD_SONG, newSong: state }))
+            .then(dispatch({ type: ADD_SONG, newSong: state }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
     } catch (e) {
@@ -49,15 +48,32 @@ export const addSong = (state) => async dispatch => {
         dispatch(hideLoader())
     }
 };
-// export const addSong = (state) => async dispatch => {
-//     console.log('state',state)
-//     dispatch(showLoader())
-//     debugger
-//     await SongAPI.getRef().child(state.id).set(state)
-//      .then(dispatch({ type: ADD_SONG, newSong: state }))
-//         .catch(console.log('setData error'))
-// //     await dispatch({ type: ADD_SONG, newSong: state })
-// };
+
+export const editSongActionCreator = (state) => async dispatch => {
+    const updates = {};
+    updates['/'+state.id+'/'] = state;
+    SongAPI.getRef().update(updates)
+        .then(dispatch({ type: EDIT_SONG,    song: state }))
+    // return {
+    //     type: EDIT_SONG,
+    //     song: state
+    // }
+};
+
+export const removeSongActionCreator = (uuid) => async dispatch => {
+    // SongAPI.removeData(state, () => dispatch({
+    //     type: REMOVE_SONG,
+    //     row: state
+    // }))
+    SongAPI.getRef().child(uuid).remove()
+        .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
+        .catch(console.log('removeData error'))
+};
+
+export const moveSongInQueueActionCreator = (state, id) => async dispatch => {
+    dispatch(addSongInQueueActionCreator(state, id))
+    dispatch(removeSongActionCreator(id))
+}
 
 export const setSelectedActionCreator = (state) => {
     return {
@@ -78,30 +94,4 @@ export const toggleActiveActionCreator = (state) => {
         type: TOGGLE_ACTIVE,
         active: state
     }
-};
-
-export const moveSongInQueueActionCreator = (state, id) => async dispatch => {
-    dispatch(addSongInQueueActionCreator(state, id))
-    dispatch(removeSongActionCreator(id))
-}
-
-export const removeSongActionCreator = (uuid) => async dispatch => {
-    // SongAPI.removeData(state, () => dispatch({
-    //     type: REMOVE_SONG,
-    //     row: state
-    // }))
-    SongAPI.getRef().child(uuid).remove()
-        .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
-        .catch(console.log('removeData error'))
-};
-
-export const editSong = (state) => async dispatch => {
-    const updates = {};
-    updates['/'+state.id+'/'] = state;
-    SongAPI.getRef().update(updates)
-        .then(dispatch({ type: EDIT_SONG,    song: state }))
-    // return {
-    //     type: EDIT_SONG,
-    //     song: state
-    // }
 };

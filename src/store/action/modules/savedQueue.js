@@ -1,7 +1,7 @@
 import React from "react";
 import * as SavedQueueAPI from "../../../API/SavedQueueAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
-import {ADD_SONG_IN_SAVEDQUEUE, SET_SAVEDQUEUEDATA, SET_SELECTED} from "../../types";
+import {ADD_SONG_IN_SAVEDQUEUE, SET_SAVEDQUEUEDATA, SET_SEARCHTEXT, SET_SELECTED} from "../../types";
 
 
 export const getSavedQueueDataActionCreator = () => async dispatch => {
@@ -27,7 +27,7 @@ export const addSongInSavedQueueActionCreator = (state) => async dispatch => {
     dispatch(showLoader())
     try {
         await SavedQueueAPI.getRef().child(state.id).set(state)
-             .then(dispatch({ type: ADD_SONG_IN_SAVEDQUEUE, newSong: state }))
+            .then(dispatch({ type: ADD_SONG_IN_SAVEDQUEUE, newSong: state }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
     } catch (e) {
@@ -36,17 +36,9 @@ export const addSongInSavedQueueActionCreator = (state) => async dispatch => {
     }
 };
 
-export const setSelectedSavedQueueActionCreator = (state) => {
-    return {
-        type: SET_SELECTED,
-        newSelect: state
-    }
-};
-
-export const MoveSongInQueue = () => async dispatch => {
+export const moveSongInQueueActionCreator = () => async dispatch => {
 
 }
-
 
 export const removeSongActionCreator = (uuid) => async dispatch => {
     // SongAPI.removeData(state, () => dispatch({
@@ -57,3 +49,18 @@ export const removeSongActionCreator = (uuid) => async dispatch => {
     //     .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
     //     .catch(console.log('removeData error'))
 };
+
+export const setSelectedSavedQueueActionCreator = (state) => {
+    return {
+        type: SET_SELECTED,
+        newSelect: state
+    }
+};
+
+export const setSearchTextSavedQueueActionCreator = (state) => {
+    return {
+        type: SET_SEARCHTEXT,
+        text: state
+    }
+};
+

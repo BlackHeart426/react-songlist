@@ -4,8 +4,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
 import * as shortid from "shortid";
 import {useDispatch} from "react-redux";
-import {addSong} from "../../../../store/action/modules/songs";
-import * as SongAPI from "../../../../API/SongAPI";
+import {addSong, addSongActionCreator} from "../../../../store/action/modules/songs";
 
 export const AddSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -35,7 +34,7 @@ export const AddSongs = (props) => {
             active: active
         };
         // SongAPI.getRef().child(newSong.id).set(newSong)
-        dispatch(addSong(newSong))
+        dispatch(addSongActionCreator(newSong))
     };
 
     return (
