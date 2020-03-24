@@ -1,7 +1,14 @@
 import React from "react";
 import * as HistoryAPI from "../../../API/HistoryAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
-import {ADD_SONG_IN_QUEUE, REMOVE_SONG_HISTORY, SET_HISTORYDATA, SET_SEARCHTEXT, SET_SELECTED} from "../../types";
+import {
+    ADD_SONG_IN_HISTORY,
+    ADD_SONG_IN_QUEUE,
+    REMOVE_SONG_HISTORY,
+    SET_HISTORYDATA,
+    SET_SEARCHTEXT,
+    SET_SELECTED
+} from "../../types";
 import * as QueueAPI from "../../../API/QueueAPI";
 
 
@@ -48,7 +55,7 @@ export const addSongInHistoryActionCreator = (state) => async dispatch => {
     dispatch(showLoader())
     try {
         await HistoryAPI.getRef().child(state.id).set(state)
-            .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: state }))
+            .then(dispatch({ type: ADD_SONG_IN_HISTORY, newSong: state }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
         dispatch(showAlert('Song move to q'))

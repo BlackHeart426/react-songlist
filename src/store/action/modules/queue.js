@@ -44,9 +44,12 @@ export const addSongInQueueActionCreator = (state, id) => async dispatch => {
                 });
             })
             .catch(console.log('setData error'))
-        state.position = length
-        await QueueAPI.getRef().child(id).set(state)
-            .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: state }))
+        state.position = length;
+        const song = {};
+        song.data = {...state};
+        song.id = id;
+        await QueueAPI.getRef().child(id).set(song)
+            .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: song }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
         dispatch(showAlert('Song move to q'))
@@ -74,9 +77,9 @@ export const moveSongInSavedQueue = (state) => async dispatch => {
     })
 }
 
-export const successSongActionCreator = (song) => async dispatch => {
-    dispatch(removeSongInQueueActionCreator(song.id))
-    dispatch(addSongInHistoryActionCreator(song))
+export const successSongActionCreator = (stateSong) => async dispatch => {
+    await dispatch(addSongInHistoryActionCreator(stateSong))
+    await dispatch(removeSongInQueueActionCreator(stateSong.id))
 }
 
 export const removeSongInQueueActionCreator = (uuid) => async dispatch => {

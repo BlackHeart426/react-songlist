@@ -93,7 +93,11 @@ export const EnhancedTableRows = (props) => {
                                                             {btn.name}
                                                         </Button>
                                                         :
-                                                        <IconButton key={indexBtn}>
+                                                        <IconButton
+                                                            type="submit"
+                                                            color="primary"
+                                                            key={btn.name}
+                                                            onClick={() => btn.handler(data[index].id)}>
                                                             {componentTags[btn.name]}
                                                         </IconButton>
                                                 ))

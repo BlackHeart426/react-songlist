@@ -3,7 +3,7 @@ import TablePagination from '../../companents/TablePagination/ComponentTablePagi
 import {PTBQueue} from "./PTBQueue/PTBQueue";
 import {connect} from "react-redux";
 import {showLoader} from "../../store/action/app";
-import {setSelectedQueueActionCreator} from "../../store/action/modules/queue";
+import {setSelectedQueueActionCreator, successSongActionCreator} from "../../store/action/modules/queue";
 
 const Queue = (props) => {
 
@@ -34,6 +34,8 @@ const Queue = (props) => {
     }
 
     function handlerDone(id) {
+        const songState = props.queueData.list.find(item => item.id == id);
+        props.action.songPerformed(songState);
         console.log('done', id)
     }
 
@@ -90,6 +92,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         action: {
+            songPerformed: (song) => dispatch(successSongActionCreator(song)),
             setSelected: (data) => setSelectedQueueActionCreator(data),
             loader: () => dispatch(showLoader())
         }

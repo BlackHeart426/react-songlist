@@ -25,7 +25,7 @@ const History = (props) => {
     const handlerFilter = () => {
         let songList = {...props.songData};
         if (Object.keys(songList.list).length > 0) {
-            const filtered = songList.filter(item => {
+            const filtered = songList.list.filter(item => {
 
                 const values = Object.values(item.data);
                 const search = props.searchText.toLowerCase();
@@ -69,6 +69,7 @@ const mapStateToProps = state => {
     console.log('songData', state.songs)
     return {
         filter: state.history.filterData,
+        searchText: state.history.searchText,
         songData: state.history,
     }
 };
