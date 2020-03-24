@@ -13,6 +13,7 @@ import {addSongInHistoryActionCreator} from "./history";
 import * as SongAPI from "../../../API/SongAPI";
 import {REMOVE_SONG} from "../../types";
 import {REMOVE_SONG_IN_QUEUE} from "../../types";
+import {addSongInSavedQueueActionCreator} from "./savedQueue";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
@@ -70,11 +71,16 @@ export const editSongInQueueActionCreator = (state) => async dispatch => {
     // }
 };
 
-export const moveSongInSavedQueue = (state) => async dispatch => {
+export const movePositionInQueue = (state) => async dispatch => {
     dispatch({
         type: CHANGE_POSITION,
         position: state
     })
+}
+
+export const addSongInSavedQueue = (state) => async dispatch => {
+    await dispatch(addSongInSavedQueueActionCreator(state))
+    await dispatch(removeSongInQueueActionCreator(state.id))
 }
 
 export const successSongActionCreator = (stateSong) => async dispatch => {

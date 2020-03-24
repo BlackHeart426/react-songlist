@@ -20,6 +20,7 @@ export const MoveUpSongQueue = (props) => {
 
     const handleMoveUpSong = () => {
         changePosition(selected)
+
     }
 
     return (

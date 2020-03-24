@@ -1,11 +1,13 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import BlockIcon from "@material-ui/icons/Block";
+import {useDispatch} from "react-redux";
+import {addSongInSavedQueue} from "../../../../store/action/modules/queue";
 
 export const AddSongInSavedQueue = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, editSong, songData, selected} = props;
-
+    const {songData, lenSelected, selected} = props;
+    const dispatch = useDispatch()
     function showButton(lenSelected) {
         return lenSelected == 1 ? false : true
     }
@@ -18,30 +20,14 @@ export const AddSongInSavedQueue = (props) => {
 
     }
 
-    const handleAddInSavedQueue = () => {
-        setDialogOpened(true)
-    }
-
-    const handleEditRowsSong = (property) => {
-        const {title, artist, tags, active} = property;
-        const newSong = {
-            id: selected[0],
-            data: createData(
-                title,
-                artist,
-                '',
-                '',
-                { type: 'tag', data: [ { name: 'Music' }] } ,
-                { type: 'btn', data: [ { type: 'text', name: 'Request11', handler: requestHandler }] }
-            ),
-            active: active
-        }
-        editSong(newSong)
+    const handlerAddSongInQueue = () => {
+        const songState = songData.find(item => item.id == selected);
+        dispatch(addSongInSavedQueue(songState))
     }
 
     return (
         <>
-            <IconButton onClick={handleEditRowsSong} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handlerAddSongInQueue} disabled={showButton(lenSelected)}>
                 <BlockIcon/>
             </IconButton>
         </>

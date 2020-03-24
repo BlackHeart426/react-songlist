@@ -26,7 +26,7 @@ const defaultColor = {
 };
 
 export const EnhancedTableRows = (props) => {
-    const { data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode, showActive } = props
+    const { data, order, isSelected, handlerClick, rowsPerPage, page, orderBy, editMode, showActive } = props
     return (
         stableSort(data, getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -43,7 +43,7 @@ export const EnhancedTableRows = (props) => {
                                 role="checkbox"
                                 aria-checked={isItemSelected}
                                 tabIndex={-1}
-                                onClick={editMode ? event => handleClick(event, data[index].id) : undefined}
+                                onClick={editMode ? event => handlerClick(event, data[index].id) : undefined}
                                 selected={isItemSelected}
 
                             >
@@ -52,7 +52,7 @@ export const EnhancedTableRows = (props) => {
                                     <Checkbox
                                         value="secondary"
                                         color="primary"
-                                        onClick={event => handleClick(event, data[index].id)}
+                                        onClick={event => handlerClick(event, data[index].id)}
                                         checked={isItemSelected}
                                         inputProps={{'aria-labelledby': labelId}}
                                     />
@@ -124,7 +124,7 @@ export const EnhancedTableRows = (props) => {
 EnhancedTableRows.propTypes = {
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
-    handleClick: PropTypes.func.isRequired,
+    handlerClick: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     rowsPerPage: PropTypes.number.isRequired,
     editMode: PropTypes.bool.isRequired,
