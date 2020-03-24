@@ -8,16 +8,22 @@ import {setSelectedHistoryActionCreator} from "../../store/action/modules/histor
 
 const History = (props) => {
 
+    const wrapperSong = (song) => {
+        return song.map(item => {
+            const {title, artist, amount, requestedBy, played, note} = item.data;
+            return {id: item.id, data: createData(title, artist, amount, requestedBy, played, note), active: item.active}
+        })
+    };
 
-    function createData( title, artist, amount, requestBy, played, note) {
-        return { title, artist, amount, requestBy, played, note}
+    function createData( title, artist, amount, requestedBy, played, note) {
+        return { title, artist, amount, requestedBy, played, note}
     }
 
     const headCells = [
         { id: 'title', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
         { id: 'artist', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Artist', type: 'txt' },
         { id: 'amount', numeric: true, order: false, disablePadding: false, editMode: true, label: 'Amount', type: 'txt' },
-        { id: 'request-by', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Request by', type: 'txt' },
+        { id: 'requested-by', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Requested by', type: 'txt' },
         { id: 'played', numeric: false, order: false, disablePadding: false, editMode: true, label: 'played', type: 'txt' },
         { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
     ];
@@ -25,7 +31,9 @@ const History = (props) => {
     const handlerFilter = () => {
         let songList = {...props.songData};
         if (Object.keys(songList.list).length > 0) {
-            const filtered = songList.list.filter(item => {
+            debugger
+            let songListTest = wrapperSong(Object.values(songList.list));
+            const filtered = songListTest.filter(item => {
 
                 const values = Object.values(item.data);
                 const search = props.searchText.toLowerCase();

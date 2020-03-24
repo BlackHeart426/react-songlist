@@ -11,9 +11,9 @@ let mbt10 = {
 }
 
 export const PTBHistory = (props) => {
-    const selected = useSelector(state => state.songs.selected)
-    const listSong = useSelector(state => state.songs.list)
-    const searchText = useSelector(state => state.songs.searchText)
+    const selected = useSelector(state => state.history.selected)
+    const listSong = useSelector(state => state.history.list)
+    const searchText = useSelector(state => state.history.searchText)
     const dispatch = useDispatch()
     const lenSelected = selected.length;
     return (

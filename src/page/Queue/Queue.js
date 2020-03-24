@@ -39,7 +39,10 @@ const Queue = (props) => {
     }
 
     function handleDone(id) {
+        var today = new Date();
         const songState = props.queueData.list.find(item => item.id == id);
+        delete songState.data.position
+        songState.data.played = 'today';//today;
         props.action.songPerformed(songState);
         console.log('done', id)
     }

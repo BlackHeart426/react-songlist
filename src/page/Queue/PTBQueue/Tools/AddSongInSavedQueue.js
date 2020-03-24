@@ -12,9 +12,6 @@ export const AddSongInSavedQueue = (props) => {
         return lenSelected == 1 ? false : true
     }
 
-    function createData(title, artist, timesPlayed, lastPlayed, tags) {
-        return {title, artist, timesPlayed, lastPlayed, tags, action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
-    }
 
     const requestHandler = () => {
 
@@ -22,6 +19,7 @@ export const AddSongInSavedQueue = (props) => {
 
     const handlerAddSongInQueue = () => {
         const songState = songData.find(item => item.id == selected);
+        delete songState.data.position;
         dispatch(addSongInSavedQueue(songState))
     }
 
