@@ -6,10 +6,8 @@ import {RemoveSongs} from "./Tools/RemoveSongs";
 import {DetailSongs} from "./Tools/DetailSongs";
 import {AddInQueueSongs} from "./Tools/AddInQueueSongs";
 import {SwitchActiveSongs} from "./Tools/SwitchActiveSongs";
-import {SearchSong} from "./Tools/SearchSong";
 import {useDispatch, useSelector} from "react-redux";
-import {addSong, removeSong, setSearchText, setSearchTextActionCreator} from "../../../store/action/modules/songs";
-import {RemoveSong} from "../../SavedQueue/PTBSavedQueue/Tools/RemoveSong";
+import {setSearchTextActionCreator} from "../../../store/action/modules/songs";
 import {SearchField} from "../../../companents/SearchField/SearchField";
 
 let mbt10 = {
@@ -19,7 +17,6 @@ let mbt10 = {
 
 export const PTBSongs = (props) => {
     const {showActive, onActive} = props
-    // const {selected, listSong, addSong, removeSong, setSearchText, searchText, editSong, detailShow} = useContext(SongsContext);
     const selected = useSelector(state => state.songs.selected)
     const listSong = useSelector(state => state.songs.list)
     const searchText = useSelector(state => state.songs.searchText)
