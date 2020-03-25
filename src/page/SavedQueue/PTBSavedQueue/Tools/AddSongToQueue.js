@@ -1,17 +1,22 @@
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import IconButton from "@material-ui/core/IconButton";
 import React, {useState} from "react";
+import {useDispatch} from "react-redux";
+import {moveSongInQueueActionCreator} from "../../../../store/action/modules/savedQueue";
 
-export const BackSongToQueue = (props) => {
+export const AddSongToQueue = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, addSong} = props;
+    const {lenSelected, songData, selected} = props;
+    const dispatch = useDispatch();
 
     const openDialog = () => {
         setDialogOpened(true)
     };
 
-    const requestHandler = () => {
-
+    const handlerAddSongInQueue = () => {
+        debugger
+        const stateSong = songData.find(item => item.id == selected[0]);
+        dispatch(moveSongInQueueActionCreator(stateSong))
     };
 
     function showButton(lenSelected) {
@@ -19,7 +24,7 @@ export const BackSongToQueue = (props) => {
     }
     return (
         <>
-            <IconButton onClick={ openDialog } disabled={ showButton(lenSelected) }>
+            <IconButton onClick={ handlerAddSongInQueue } disabled={ showButton(lenSelected) }>
                 <ControlPointIcon />
             </IconButton>
             {/*<DialogSongsAdd onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}

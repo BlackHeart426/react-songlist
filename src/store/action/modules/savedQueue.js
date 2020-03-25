@@ -8,7 +8,7 @@ import {
     SET_SELECTED,
     SET_SELECTED_SAVEDQUEUE
 } from "../../types";
-import * as QueueAPI from "../../../API/QueueAPI";
+import {addSongInQueueActionCreator} from "./queue";
 
 
 export const getSavedQueueDataActionCreator = () => async dispatch => {
@@ -44,9 +44,10 @@ export const addSongInSavedQueueActionCreator = (state) => async dispatch => {
     }
 };
 
-export const moveSongInQueueActionCreator = () => async dispatch => {
-
-}
+export const moveSongInQueueActionCreator = (stateSong) => async dispatch => {
+    await dispatch(removeSongSavedQueueActionCreator(stateSong.id));
+    await dispatch(addSongInQueueActionCreator(stateSong.data, stateSong.id));
+};
 
 export const removeSongSavedQueueActionCreator = (uuid) => async dispatch => {
     SavedQueueAPI.getRef().child(uuid).remove()

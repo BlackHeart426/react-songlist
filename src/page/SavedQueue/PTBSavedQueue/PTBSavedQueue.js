@@ -1,9 +1,8 @@
 import {Card} from "@material-ui/core";
 import React, {useContext} from "react";
-import {SavedQueueContext} from "../../../contex/module/savedQueue/savedQueueContext";
-import {BackSongToQueue} from "./Tools/BackSongToQueue";
 import {RemoveSong} from "./Tools/RemoveSong";
 import {useDispatch, useSelector} from "react-redux";
+import {AddSongToQueue} from "./Tools/AddSongToQueue";
 
 let mbt10 = {
     marginBottom: '10px',
@@ -17,7 +16,7 @@ export const PTBSavedQueue = (props) => {
     return (
         <>
             <Card style={mbt10}>
-                <BackSongToQueue lenSelected={lenSelected} songData={listSong} />
+                <AddSongToQueue lenSelected={lenSelected} songData={listSong} selected={selected}/>
                 <RemoveSong lenSelected={lenSelected} songData={listSong} selected={selected} />
             </Card>
 
