@@ -8,8 +8,11 @@ import {
     setSelectedQueueActionCreator,
     successSongActionCreator
 } from "../../store/action/modules/queue";
+import {addUserIdAtLink} from "../../companents/GlobalParamaters/linkWithUserId";
+import {useHistory} from "react-router";
 
 const Queue = (props) => {
+    const history = useHistory();
 
     function createData(position, title, artist, amount, requestBy, note) {
         return {position, title, artist, amount, requestBy, note,
@@ -30,6 +33,10 @@ const Queue = (props) => {
     };
 
     function handlerDetail(id) {
+        debugger
+        let queueList = {...props.queueData};
+        const uuidSong = queueList.list.find(item => item.id == id);
+        history.push(addUserIdAtLink("/songs/detail/"+uuidSong.id))
         console.log('detail', id)
     }
 
@@ -94,6 +101,7 @@ const Queue = (props) => {
 const mapStateToProps = state => {
     return {
         queueData: state.queue,
+
     }
 };
 
