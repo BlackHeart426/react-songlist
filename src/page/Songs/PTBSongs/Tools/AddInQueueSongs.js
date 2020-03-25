@@ -23,7 +23,7 @@ export const AddInQueueSongs = (props) => {
     }
 
     const handleMoveSongInQueue = (song) => {
-        dispatch(addSongInQueueActionCreator(song, selected[0]))
+        dispatch(addSongInQueueActionCreator(song))
     }
 
     return (

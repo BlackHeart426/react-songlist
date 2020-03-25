@@ -1,20 +1,15 @@
 import React from "react";
 import * as QueueAPI from "../../../API/QueueAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
-import {
-
-} from "../../types";
 import {SET_QUEUEDATA} from "../../types";
 import {ADD_SONG_IN_QUEUE} from "../../types";
-import {SET_SELECTED} from "../../types";
 import {CHANGE_POSITION} from "../../types";
 import {SET_SEARCHTEXT} from "../../types";
 import {addSongInHistoryActionCreator} from "./history";
-import * as SongAPI from "../../../API/SongAPI";
-import {REMOVE_SONG} from "../../types";
 import {REMOVE_SONG_IN_QUEUE} from "../../types";
 import {addSongInSavedQueueActionCreator} from "./savedQueue";
 import {SET_SELECTED_QUEUE} from "../../types";
+import * as shortid from "shortid";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
@@ -34,11 +29,11 @@ export const getQueueDataActionCreator = () => async dispatch => {
     }
 };
 
-export const addSongInQueueActionCreator = (state, id) => async dispatch => {
+export const addSongInQueueActionCreator = (state) => async dispatch => {
 
     dispatch(showLoader())
     try {
-        let length = 0;
+        let length = 1;
         await QueueAPI.getRef().once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
@@ -49,8 +44,8 @@ export const addSongInQueueActionCreator = (state, id) => async dispatch => {
         state.position = length;
         const song = {};
         song.data = {...state};
-        song.id = id;
-        await QueueAPI.getRef().child(id).set(song)
+        song.id = shortid.generate();
+        await QueueAPI.getRef().child(song.id).set(song)
             .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: song }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
