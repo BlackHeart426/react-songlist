@@ -14,7 +14,6 @@ export const AddSongToQueue = (props) => {
     };
 
     const handlerAddSongInQueue = () => {
-        debugger
         const stateSong = songData.find(item => item.id == selected[0]);
         dispatch(moveSongInQueueActionCreator(stateSong))
     };

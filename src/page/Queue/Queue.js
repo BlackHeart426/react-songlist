@@ -33,7 +33,6 @@ const Queue = (props) => {
     };
 
     function handlerDetail(id) {
-        debugger
         let queueList = {...props.queueData};
         const uuidSong = queueList.list.find(item => item.id == id);
         history.push(addUserIdAtLink("/songs/detail/"+uuidSong.id))

@@ -2,10 +2,13 @@ import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {DialogRemoveSongHistory} from "../../../../companents/Dialog/DialogHistory/DialogRemoveSongHistory";
+import {useDispatch} from "react-redux";
+import {removeSongHistoryActionCreator} from "../../../../store/action/modules/history";
 
 export const RemoveSong = (props) => {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
-    const {removeSong, selected, lenSelected, songData} = props;
+    const {selected, lenSelected, songData} = props;
+    const dispatch = useDispatch();
 
 
     const handlerOpenConfirm = () => {
@@ -17,7 +20,7 @@ export const RemoveSong = (props) => {
     }
 
     const handlerRemoveSong = () => {
-        removeSong(selected[0])
+        dispatch(removeSongHistoryActionCreator(selected[0]))
     }
 
     return (

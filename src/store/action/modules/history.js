@@ -4,7 +4,7 @@ import {hideLoader, showAlert, showLoader} from "../app";
 import {
     ADD_SONG_IN_HISTORY,
     ADD_SONG_IN_QUEUE,
-    REMOVE_SONG_HISTORY,
+    REMOVE_SONG_HISTORY, REMOVE_SONG_IN_QUEUE,
     SET_HISTORYDATA,
     SET_SEARCHTEXT,
     SET_SELECTED, SET_SELECTED_HISTORY
@@ -30,14 +30,10 @@ export const getHistoryDataActionCreator = () => async dispatch => {
     }
 };
 
-export const removeSongActionCreator = (uuid) => async dispatch => {
-    // SongAPI.removeData(state, () => dispatch({
-    //     type: REMOVE_SONG,
-    //     row: state
-    // }))
-    // SongAPI.getRef().child(uuid).remove()
-    //     .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
-    //     .catch(console.log('removeData error'))
+export const removeSongHistoryActionCreator = (uuid) => async dispatch => {
+    HistoryAPI.getRef().child(uuid).remove()
+        .then(dispatch({ type: REMOVE_SONG_HISTORY,  row: uuid }))
+        .catch(console.log('removeData error'))
 };
 
 export const editSongInHistoryActionCreator = (state) => async dispatch => {

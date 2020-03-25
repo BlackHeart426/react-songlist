@@ -31,7 +31,6 @@ const History = (props) => {
     const handlerFilter = () => {
         let songList = {...props.songData};
         if (Object.keys(songList.list).length > 0) {
-            debugger
             let songListTest = wrapperSong(Object.values(songList.list));
             const filtered = songListTest.filter(item => {
 
