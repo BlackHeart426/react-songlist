@@ -4,7 +4,7 @@ import {hideLoader, showAlert, showLoader} from "../app";
 import {
     ADD_SONG_IN_SAVEDQUEUE, REMOVE_SONG_IN_QUEUE, REMOVE_SONG_SAVEDQUEUE,
     SET_SAVEDQUEUEDATA,
-    SET_SEARCHTEXT,
+    SET_SEARCHTEXT, SET_SEARCHTEXT_HISTORY, SET_SEARCHTEXT_SAVEDQUEUE,
     SET_SELECTED,
     SET_SELECTED_SAVEDQUEUE
 } from "../../types";
@@ -64,7 +64,7 @@ export const setSelectedSavedQueueActionCreator = (state) => {
 
 export const setSearchTextSavedQueueActionCreator = (state) => {
     return {
-        type: SET_SEARCHTEXT,
+        type: SET_SEARCHTEXT_SAVEDQUEUE,
         text: state
     }
 };
