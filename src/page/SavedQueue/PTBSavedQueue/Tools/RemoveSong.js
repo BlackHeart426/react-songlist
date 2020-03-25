@@ -3,10 +3,13 @@ import React, {useContext, useEffect, useState} from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
 import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
+import {removeSongSavedQueueActionCreator} from "../../../../store/action/modules/savedQueue";
+import {useDispatch} from "react-redux";
 
 export const RemoveSong = (props) => {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
-    const {removeSong, selected, lenSelected, songData} = props;
+    const {selected, lenSelected, songData} = props;
+    const dispatch = useDispatch()
 
 
     const handlerOpenConfirm = () => {
@@ -18,12 +21,12 @@ export const RemoveSong = (props) => {
     }
 
     const handlerRemoveSong = () => {
-        removeSong(selected[0])
+        dispatch(removeSongSavedQueueActionCreator(selected[0]))
     }
 
     return (
         <>
-            <IconButton onClick={handlerOpenConfirm} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handlerRemoveSong} disabled={showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
             {/*<DialogSongsRemove*/}

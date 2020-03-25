@@ -2,12 +2,13 @@ import React from "react";
 import * as SavedQueueAPI from "../../../API/SavedQueueAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
 import {
-    ADD_SONG_IN_SAVEDQUEUE,
+    ADD_SONG_IN_SAVEDQUEUE, REMOVE_SONG_IN_QUEUE, REMOVE_SONG_SAVEDQUEUE,
     SET_SAVEDQUEUEDATA,
     SET_SEARCHTEXT,
     SET_SELECTED,
     SET_SELECTED_SAVEDQUEUE
 } from "../../types";
+import * as QueueAPI from "../../../API/QueueAPI";
 
 
 export const getSavedQueueDataActionCreator = () => async dispatch => {
@@ -47,14 +48,10 @@ export const moveSongInQueueActionCreator = () => async dispatch => {
 
 }
 
-export const removeSongActionCreator = (uuid) => async dispatch => {
-    // SongAPI.removeData(state, () => dispatch({
-    //     type: REMOVE_SONG,
-    //     row: state
-    // }))
-    // SongAPI.getRef().child(uuid).remove()
-    //     .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
-    //     .catch(console.log('removeData error'))
+export const removeSongSavedQueueActionCreator = (uuid) => async dispatch => {
+    SavedQueueAPI.getRef().child(uuid).remove()
+        .then(dispatch({ type: REMOVE_SONG_SAVEDQUEUE,  row: uuid }))
+        .catch(console.log('removeData error'))
 };
 
 export const setSelectedSavedQueueActionCreator = (state) => {
