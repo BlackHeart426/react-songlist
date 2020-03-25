@@ -8,6 +8,7 @@ import {SwitchActiveSongs} from "../../Songs/PTBSongs/Tools/SwitchActiveSongs";
 import {SearchField} from "../../../companents/SearchField/SearchField";
 import {setSearchTextHistoryActionCreator} from "../../../store/action/modules/history";
 import {AddSongs} from "../../Songs/PTBSongs/Tools/AddSongs";
+import {FilterSong} from "./Tools/FilterSong";
 
 let mbt10 = {
     marginBottom: '10px',
@@ -26,6 +27,7 @@ export const PTBHistory = (props) => {
             <Card style={mbt10}>
                 <EditSong loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
                 <RemoveSong loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
+                <FilterSong loading={loading}/>
                 <SearchField loading={loading} searchText={searchText} moduleActionCreator={setSearchTextHistoryActionCreator}/>
             </Card>
 
