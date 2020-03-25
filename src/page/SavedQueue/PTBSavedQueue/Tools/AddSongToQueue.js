@@ -6,7 +6,7 @@ import {moveSongInQueueActionCreator} from "../../../../store/action/modules/sav
 
 export const AddSongToQueue = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, songData, selected} = props;
+    const {lenSelected, songData, selected, loading} = props;
     const dispatch = useDispatch();
 
     const openDialog = () => {
@@ -23,7 +23,7 @@ export const AddSongToQueue = (props) => {
     }
     return (
         <>
-            <IconButton onClick={ handlerAddSongInQueue } disabled={ showButton(lenSelected) }>
+            <IconButton onClick={ handlerAddSongInQueue } disabled={loading === true ? true :  showButton(lenSelected) }>
                 <ControlPointIcon />
             </IconButton>
             {/*<DialogSongsAdd onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}

@@ -5,7 +5,7 @@ import {useHistory} from "react-router";
 import {addUserIdAtLink} from "../../../../companents/GlobalParamaters/linkWithUserId";
 
 export const DetailSongs = (props) => {
-    const {lenSelected, songData, selected} = props;
+    const {lenSelected, songData, selected, loading} = props;
     const history = useHistory();
 
 
@@ -20,7 +20,7 @@ export const DetailSongs = (props) => {
 
 
     return (
-        <IconButton onClick={showDetail} disabled={showButton(lenSelected)}>
+        <IconButton onClick={showDetail} disabled={loading === true ? true : showButton(lenSelected)}>
             <ErrorOutlineIcon />
         </IconButton>
     )

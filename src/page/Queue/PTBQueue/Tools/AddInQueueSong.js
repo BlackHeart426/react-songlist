@@ -5,7 +5,7 @@ import {DialogAddSongToQueue} from "../../../../companents/Dialog/DialogQueue/Di
 
 export const AddInQueueSong = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, songData, selected, removeSong} = props;
+    const {lenSelected, songData, selected, removeSong, loading} = props;
 
     const addItemToRows = () => {
         setDialogOpened(true)
@@ -24,7 +24,7 @@ export const AddInQueueSong = (props) => {
 
     return (
         <>
-            <IconButton onClick={addItemToRows} disabled={showButton(lenSelected)}>
+            <IconButton onClick={addItemToRows} disabled={loading === true ? true : showButton(lenSelected)}>
                 <ControlPointIcon />
             </IconButton>
             <DialogAddSongToQueue

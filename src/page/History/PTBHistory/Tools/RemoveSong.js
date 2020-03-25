@@ -7,7 +7,7 @@ import {removeSongHistoryActionCreator} from "../../../../store/action/modules/h
 
 export const RemoveSong = (props) => {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
-    const {selected, lenSelected, songData} = props;
+    const {selected, lenSelected, songData, loading} = props;
     const dispatch = useDispatch();
 
 
@@ -25,7 +25,7 @@ export const RemoveSong = (props) => {
 
     return (
         <>
-            <IconButton onClick={handlerOpenConfirm} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handlerOpenConfirm} disabled={loading === true ? true : showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
             <DialogRemoveSongHistory

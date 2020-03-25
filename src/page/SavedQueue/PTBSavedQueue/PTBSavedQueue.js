@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AddSongToQueue} from "./Tools/AddSongToQueue";
 import {SearchField} from "../../../companents/SearchField/SearchField";
 import {setSearchTextSavedQueueActionCreator} from "../../../store/action/modules/savedQueue";
+import {AddSongs} from "../../Songs/PTBSongs/Tools/AddSongs";
 
 let mbt10 = {
     marginBottom: '10px',
@@ -15,13 +16,14 @@ export const PTBSavedQueue = (props) => {
     const selected = useSelector(state => state.savedQueue.selected)
     const listSong = useSelector(state => state.savedQueue.list)
     const searchText = useSelector(state => state.songs.searchText)
+    const loading = useSelector(state => state.app.loading)
     const lenSelected = selected.length;
     return (
         <>
             <Card style={mbt10}>
-                <AddSongToQueue lenSelected={lenSelected} songData={listSong} selected={selected}/>
-                <RemoveSong lenSelected={lenSelected} songData={listSong} selected={selected} />
-                <SearchField searchText={searchText} moduleActionCreator={setSearchTextSavedQueueActionCreator}/>
+                <AddSongToQueue loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
+                <RemoveSong loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected} />
+                <SearchField loading={loading} searchText={searchText} moduleActionCreator={setSearchTextSavedQueueActionCreator}/>
             </Card>
 
         </>

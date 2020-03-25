@@ -20,18 +20,19 @@ export const PTBSongs = (props) => {
     const selected = useSelector(state => state.songs.selected)
     const listSong = useSelector(state => state.songs.list)
     const searchText = useSelector(state => state.songs.searchText)
+    const loading = useSelector(state => state.app.loading)
     const dispatch = useDispatch()
     const lenSelected = selected.length;
     return (
         <>
             <Card style={mbt10}>
-                <AddSongs lenSelected={lenSelected} songData={listSong} />
-                <EditSongs lenSelected={lenSelected} songData={listSong} selected={selected}/>
-                <RemoveSongs lenSelected={lenSelected} songData={listSong} selected={selected} />
-                <DetailSongs lenSelected={lenSelected} selected={selected} songData={listSong}/>
-                <AddInQueueSongs lenSelected={lenSelected} songData={listSong} selected={selected}/>
-                <SwitchActiveSongs showActive={showActive} onActive = {onActive}/>
-                <SearchField searchText={searchText} moduleActionCreator={setSearchTextActionCreator}/>
+                <AddSongs loading={loading} lenSelected={lenSelected} songData={listSong} />
+                <EditSongs loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
+                <RemoveSongs loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected} />
+                <DetailSongs loading={loading} lenSelected={lenSelected} selected={selected} songData={listSong}/>
+                <AddInQueueSongs loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
+                <SwitchActiveSongs loading={loading} showActive={showActive} onActive = {onActive}/>
+                <SearchField loading={loading} searchText={searchText} moduleActionCreator={setSearchTextActionCreator}/>
             </Card>
 
         </>

@@ -7,7 +7,7 @@ import {editSongActionCreator} from "../../../../store/action/modules/songs";
 
 export const EditSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, songData, selected} = props;
+    const {lenSelected, songData, selected, loading} = props;
     const dispatch = useDispatch()
 
     function showButton(lenSelected) {
@@ -44,7 +44,7 @@ export const EditSongs = (props) => {
 
     return (
         <>
-            <IconButton onClick={handlerEditRows} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handlerEditRows} disabled={loading === true ? true : showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
             <DialogSongsEdit onAddSongs={ handlerEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>

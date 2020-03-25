@@ -6,7 +6,7 @@ import {addSongInSavedQueue} from "../../../../store/action/modules/queue";
 
 export const AddSongInSavedQueue = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {songData, lenSelected, selected} = props;
+    const {songData, lenSelected, selected, loading} = props;
     const dispatch = useDispatch()
     function showButton(lenSelected) {
         return lenSelected == 1 ? false : true
@@ -25,7 +25,7 @@ export const AddSongInSavedQueue = (props) => {
 
     return (
         <>
-            <IconButton onClick={handlerAddSongInQueue} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handlerAddSongInQueue} disabled={loading === true ? true : showButton(lenSelected)}>
                 <BlockIcon/>
             </IconButton>
         </>

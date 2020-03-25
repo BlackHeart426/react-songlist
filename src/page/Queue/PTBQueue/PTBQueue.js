@@ -6,6 +6,7 @@ import {MoveUpSongQueue} from "./Tools/MoveUpSongQueue";
 import {AddSongInSavedQueue} from "./Tools/AddSongInSavedQueue";
 import {useDispatch, useSelector} from "react-redux";
 import {moveSongInSavedQueue, removeSongInQueueActionCreator} from "../../../store/action/modules/queue";
+import {AddSongs} from "../../Songs/PTBSongs/Tools/AddSongs";
 
 let mbt10 = {
     marginBottom: '10px',
@@ -15,15 +16,16 @@ let mbt10 = {
 export const PTBQueue = (props) => {
     const selected = useSelector(state => state.queue.selected)
     const listSong = useSelector(state => state.queue.list)
+    const loading = useSelector(state => state.app.loading)
     const dispatch = useDispatch()
     const lenSelected = selected.length;
     return (
         <>
             <Card style={mbt10}>
-                <AddInQueueSong lenSelected={lenSelected} songData={listSong}  selected={selected}/>
-                <UpdateSongQueue lenSelected={lenSelected} songData={listSong} />
-                <MoveUpSongQueue lenSelected={lenSelected} songData={listSong}  selected={selected}/>
-                <AddSongInSavedQueue lenSelected={lenSelected} songData={listSong} selected={selected} />
+                <AddInQueueSong loading={loading} lenSelected={lenSelected} songData={listSong}  selected={selected}/>
+                <UpdateSongQueue loading={loading} lenSelected={lenSelected} songData={listSong} />
+                <MoveUpSongQueue loading={loading} lenSelected={lenSelected} songData={listSong}  selected={selected}/>
+                <AddSongInSavedQueue loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected} />
             </Card>
 
         </>

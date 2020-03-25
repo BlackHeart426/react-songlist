@@ -8,7 +8,7 @@ import {useDispatch} from "react-redux";
 
 export const RemoveSong = (props) => {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
-    const {selected, lenSelected, songData} = props;
+    const {selected, lenSelected, songData, loading} = props;
     const dispatch = useDispatch()
 
 
@@ -26,7 +26,7 @@ export const RemoveSong = (props) => {
 
     return (
         <>
-            <IconButton onClick={handlerRemoveSong} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handlerRemoveSong} disabled={loading === true ? true : showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
             {/*<DialogSongsRemove*/}

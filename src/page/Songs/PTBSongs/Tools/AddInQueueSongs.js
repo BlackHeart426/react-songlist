@@ -7,7 +7,7 @@ import {addSongInQueueActionCreator} from "../../../../store/action/modules/queu
 
 export const AddInQueueSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, songData, selected} = props;
+    const {lenSelected, songData, selected, loading} = props;
     const dispatch = useDispatch()
 
     const addItemToRows = () => {
@@ -28,7 +28,7 @@ export const AddInQueueSongs = (props) => {
 
     return (
         <>
-            <IconButton onClick={addItemToRows} disabled={showButton(lenSelected)}>
+            <IconButton onClick={addItemToRows} disabled={loading === true ? true : showButton(lenSelected)}>
                 <PlaylistAddIcon />
             </IconButton>
             <DialogSongsAddQueue

@@ -4,7 +4,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 
 export const MoveUpSongQueue = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, editSong, changePosition, selected} = props;
+    const {lenSelected, editSong, changePosition, selected, loading} = props;
 
     function showButton(lenSelected) {
         return lenSelected == 1 ? false : true
@@ -25,7 +25,7 @@ export const MoveUpSongQueue = (props) => {
 
     return (
         <>
-            <IconButton onClick={handleMoveUpSong} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handleMoveUpSong} disabled={loading === true ? true : showButton(lenSelected)}>
                 <PublishIcon/>
             </IconButton>
         </>

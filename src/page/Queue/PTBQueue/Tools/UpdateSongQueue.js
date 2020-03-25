@@ -5,7 +5,7 @@ import {DialogUpdateSongInQueue} from "../../../../companents/Dialog/DialogQueue
 
 export const UpdateSongQueue = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, editSong, songData, selected} = props;
+    const {lenSelected, editSong, songData, selected, loading} = props;
 
     function showButton(lenSelected) {
         return lenSelected == 1 ? false : true
@@ -42,7 +42,7 @@ export const UpdateSongQueue = (props) => {
 
     return (
         <>
-            <IconButton onClick={handleEditRows} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handleEditRows} disabled={loading === true ? true : showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
             <DialogUpdateSongInQueue onAddSongs={ handleEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>

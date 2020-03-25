@@ -3,12 +3,13 @@ import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
 import * as shortid from "shortid";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addSong, addSongActionCreator} from "../../../../store/action/modules/songs";
 
 export const AddSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected} = props;
+
+    const {lenSelected, loading} = props;
     const dispatch = useDispatch()
 
     const openDialog = () => {
@@ -39,7 +40,7 @@ export const AddSongs = (props) => {
 
     return (
         <>
-            <IconButton onClick={ openDialog } disabled={ showButton(lenSelected) }>
+            <IconButton onClick={ openDialog } disabled={ loading === true ? true : showButton(lenSelected) }>
                 <ControlPointIcon />
             </IconButton>
             <DialogSongsAdd onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>

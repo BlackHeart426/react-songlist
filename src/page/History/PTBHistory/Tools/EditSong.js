@@ -5,7 +5,7 @@ import {DialogEditSongHistory} from "../../../../companents/Dialog/DialogHistory
 
 export const EditSong = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, editSong, songData, selected} = props;
+    const {lenSelected, editSong, songData, selected, loading} = props;
 
     function showButton(lenSelected) {
         return lenSelected == 1 ? false : true
@@ -43,7 +43,7 @@ export const EditSong = (props) => {
 
     return (
         <>
-            <IconButton onClick={handleEditRows} disabled={showButton(lenSelected)}>
+            <IconButton onClick={handleEditRows} disabled={loading === true ? true : showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
             <DialogEditSongHistory onAddSongs={ handleEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
