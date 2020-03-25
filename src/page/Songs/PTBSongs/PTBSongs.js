@@ -8,7 +8,9 @@ import {AddInQueueSongs} from "./Tools/AddInQueueSongs";
 import {SwitchActiveSongs} from "./Tools/SwitchActiveSongs";
 import {SearchSong} from "./Tools/SearchSong";
 import {useDispatch, useSelector} from "react-redux";
-import {addSong, removeSong, setSearchText} from "../../../store/action/modules/songs";
+import {addSong, removeSong, setSearchText, setSearchTextActionCreator} from "../../../store/action/modules/songs";
+import {RemoveSong} from "../../SavedQueue/PTBSavedQueue/Tools/RemoveSong";
+import {SearchField} from "../../../companents/SearchField/SearchField";
 
 let mbt10 = {
     marginBottom: '10px',
@@ -32,7 +34,7 @@ export const PTBSongs = (props) => {
                 <DetailSongs lenSelected={lenSelected} selected={selected} songData={listSong}/>
                 <AddInQueueSongs lenSelected={lenSelected} songData={listSong} selected={selected}/>
                 <SwitchActiveSongs showActive={showActive} onActive = {onActive}/>
-                <SearchSong searchText={searchText}/>
+                <SearchField searchText={searchText} moduleActionCreator={setSearchTextActionCreator}/>
             </Card>
 
         </>

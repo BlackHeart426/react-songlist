@@ -4,6 +4,9 @@ import {HistoryContext} from "../../../contex/module/history/historyContext";
 import {EditSong} from "./Tools/EditSong";
 import {RemoveSong} from "./Tools/RemoveSong";
 import {useDispatch, useSelector} from "react-redux";
+import {SwitchActiveSongs} from "../../Songs/PTBSongs/Tools/SwitchActiveSongs";
+import {SearchField} from "../../../companents/SearchField/SearchField";
+import {setSearchTextHistoryActionCreator} from "../../../store/action/modules/history";
 
 let mbt10 = {
     marginBottom: '10px',
@@ -21,6 +24,7 @@ export const PTBHistory = (props) => {
             <Card style={mbt10}>
                 <EditSong lenSelected={lenSelected} songData={listSong} selected={selected}/>
                 <RemoveSong lenSelected={lenSelected} songData={listSong} selected={selected}/>
+                <SearchField searchText={searchText} moduleActionCreator={setSearchTextHistoryActionCreator}/>
             </Card>
 
         </>

@@ -6,7 +6,7 @@ import {
     ADD_SONG_IN_QUEUE,
     REMOVE_SONG_HISTORY, REMOVE_SONG_IN_QUEUE,
     SET_HISTORYDATA,
-    SET_SEARCHTEXT,
+    SET_SEARCHTEXT, SET_SEARCHTEXT_HISTORY,
     SET_SELECTED, SET_SELECTED_HISTORY
 } from "../../types";
 import * as QueueAPI from "../../../API/QueueAPI";
@@ -70,7 +70,7 @@ export const setSelectedHistoryActionCreator = (state) => {
 
 export const setSearchTextHistoryActionCreator = (state) => {
     return {
-        type: SET_SEARCHTEXT,
+        type: SET_SEARCHTEXT_HISTORY,
         text: state
     }
 };
