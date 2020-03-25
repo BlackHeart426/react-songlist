@@ -14,7 +14,7 @@ export default function CustomDialog(props) {
         setDialogOpened(show)
     },[show])
 
-    const handlerClose = () => {
+    const handleClose = () => {
         setDialogOpened(false);
         onHide()
     };
@@ -22,7 +22,7 @@ export default function CustomDialog(props) {
     return (
         <Dialog
             open={dialogOpened}
-            onClose={handlerClose}
+            onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >

@@ -26,7 +26,7 @@ const defaultColor = {
 };
 
 export const EnhancedTableRows = (props) => {
-    const { data, order, isSelected, handlerClick, rowsPerPage, page, orderBy, editMode, showActive } = props
+    const { data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode, showActive } = props
     return (
         stableSort(data, getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -43,7 +43,7 @@ export const EnhancedTableRows = (props) => {
                                 role="checkbox"
                                 aria-checked={isItemSelected}
                                 tabIndex={-1}
-                                onClick={editMode ? event => handlerClick(event, data[index].id) : undefined}
+                                onClick={editMode ? event => handleClick(event, data[index].id) : undefined}
                                 selected={isItemSelected}
 
                             >
@@ -87,7 +87,7 @@ export const EnhancedTableRows = (props) => {
                                                             color="primary"
                                                             variant="outlined"
                                                             key={data[index].id}
-                                                            onClick={() => btn.handler(data[index].id)}
+                                                            onClick={() => btn.handle(data[index].id)}
                                                         >
                                                             {btn.name}
                                                         </Button>
@@ -96,7 +96,7 @@ export const EnhancedTableRows = (props) => {
                                                             type="submit"
                                                             color="primary"
                                                             key={btn.name}
-                                                            onClick={() => btn.handler(data[index].id)}>
+                                                            onClick={() => btn.handle(data[index].id)}>
                                                             {componentTags[btn.name]}
                                                         </IconButton>
                                                 ))
@@ -123,7 +123,7 @@ export const EnhancedTableRows = (props) => {
 EnhancedTableRows.propTypes = {
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
-    handlerClick: PropTypes.func.isRequired,
+    handleClick: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     rowsPerPage: PropTypes.number.isRequired,
     editMode: PropTypes.bool.isRequired,

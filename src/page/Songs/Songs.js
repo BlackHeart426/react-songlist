@@ -7,7 +7,7 @@ import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/ac
 import {showAlert, showLoader} from "../../store/action/app";
 
 const Songs = (props) => {
-    const requestHandler = (id) => {
+    const requesthandle = (id) => {
         console.log('request', id)
     };
 
@@ -15,7 +15,7 @@ const Songs = (props) => {
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
         return {title, artist, timesPlayed, lastPlayed,
             tags: { type: 'tag', data: Object.values(tags).map((tag, index) => nameArr(tag)) },
-            action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
+            action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: requesthandle }] }}
     }
 
     const wrapperSong = (song) => {
@@ -37,7 +37,7 @@ const Songs = (props) => {
         localStorage.setItem('songs', JSON.stringify(props.songData));
     },[props.songData]);
 
-    const handlerFilter = () => {
+    const handleFilter = () => {
         let songList = {...props.songData};
         if (Object.keys(songList.list).length > 0) {
             let songListTest = wrapperSong(Object.values(songList.list));
@@ -74,7 +74,7 @@ const Songs = (props) => {
             <TablePagination
                 onSelectRow = {(data) => props.action.setSelected(data)}
                 headCells = {headCells}
-                rowsData = {handlerFilter()}
+                rowsData = {handleFilter()}
                 showActive={active}
             />
         </>

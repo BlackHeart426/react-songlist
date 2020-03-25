@@ -12,13 +12,13 @@ export const SearchField = (props) => {
     const dispatch = useDispatch()
     const {moduleActionCreator} = props;
 
-    const handlerChange = event => {
+    const handleChange = event => {
         setSearchText(event.target.value);
         debugger
         dispatch(moduleActionCreator( event.target.value ));
     };
 
-    const handlerClearTextField = event => {
+    const handleClearTextField = event => {
         setSearchText( '' );
     };
 
@@ -29,14 +29,14 @@ export const SearchField = (props) => {
                 id="standard-adornment-amount"
                 value={searchText}
                 placeholder="Search"
-                onChange={handlerChange}
+                onChange={handleChange}
                 variant="outlined"
                 endAdornment={
                     <InputAdornment position="end">
                         {searchText ?
                             <IconButton
                                 aria-label="toggle password visibility"
-                                onClick={handlerClearTextField}
+                                onClick={handleClearTextField}
                                 size="small"
                             >
                                 <CloseIcon />

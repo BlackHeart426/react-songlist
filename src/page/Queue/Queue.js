@@ -17,9 +17,9 @@ const Queue = (props) => {
     function createData(position, title, artist, amount, requestBy, note) {
         return {position, title, artist, amount, requestBy, note,
             action: { type: 'btn', data: [
-                    { type: 'icon', name: 'Detail', handler: handlerDetail },
-                    { type: 'icon', name: 'Delete', handler: handlerDelete },
-                    { type: 'icon', name: 'Done', handler: handlerDone },
+                    { type: 'icon', name: 'Detail', handle: handleDetail },
+                    { type: 'icon', name: 'Delete', handle: handleDelete },
+                    { type: 'icon', name: 'Done', handle: handleDone },
                 ]
             }}
     }
@@ -32,19 +32,19 @@ const Queue = (props) => {
         })
     };
 
-    function handlerDetail(id) {
+    function handleDetail(id) {
         let queueList = {...props.queueData};
         const uuidSong = queueList.list.find(item => item.id == id);
         history.push(addUserIdAtLink("/songs/detail/"+uuidSong.id))
         console.log('detail', id)
     }
 
-    function handlerDelete(id) {
+    function handleDelete(id) {
         props.action.deleteSong(id);
         console.log('delete', id)
     }
 
-    function handlerDone(id) {
+    function handleDone(id) {
         var today = new Date();
         const songState = props.queueData.list.find(item => item.id == id);
         delete songState.data.position

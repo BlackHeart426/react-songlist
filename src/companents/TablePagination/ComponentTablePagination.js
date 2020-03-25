@@ -30,11 +30,11 @@ const ComponentTablePagination = (props) => {
         dispatch(onSelectRow([]))
     },[props.statusEditMode])
 
-    //TODO Рассмотреть возможность переноса всех handlerr в отдельный файл
+    //TODO Рассмотреть возможность переноса всех handle в отдельный файл
     /**
      * Сортировка
      */
-    const handlerRequestSort = (event, property) => {
+    const handleequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
         setOrderBy(property);
@@ -43,7 +43,7 @@ const ComponentTablePagination = (props) => {
     /**
      * Выбрать все
      */
-    const handlerSelectAllClick = event => {
+    const handleSelectAllClick = event => {
         if (event.target.checked) {
             const newSelecteds = rowsData.list.map(n => n.id);
             dispatch(onSelectRow(newSelecteds));
@@ -55,7 +55,7 @@ const ComponentTablePagination = (props) => {
     /**
      *  Выбрать элемент
      */
-    const handlerClick = (event, name) => {
+    const handleClick = (event, name) => {
         const selectedIndex = rowsData.selected.indexOf(name);
         let newSelected = [];
         if (selectedIndex === -1) {
@@ -84,14 +84,14 @@ const ComponentTablePagination = (props) => {
     /**
      *  Изменить страницу
      */
-    const handlerChangePage = (event, newPage) => {
+    const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
 
     /**
      *  Изменить количество элементов на странице
      */
-    const handlerChangeRowsPerPage = event => {
+    const handleChangeRowsPerPage = event => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
@@ -99,7 +99,7 @@ const ComponentTablePagination = (props) => {
     /**
      *  Изменить межстрочное растояние
      */
-    const handlerChangeDense = event => {
+    const handleChangeDense = event => {
         setDense(event.target.checked);
 
     };
@@ -130,8 +130,8 @@ const ComponentTablePagination = (props) => {
                             numSelected={rowsData.selected.length}
                             order={order}
                             orderBy={orderBy}
-                            onSelectAllClick={handlerSelectAllClick}
-                            onRequestSort={handlerRequestSort}
+                            onSelectAllClick={handleSelectAllClick}
+                            onRequestSort={handleequestSort}
                             rowCount={rowsData.list.length}
                             data={headCells}
                             editMode = {props.statusEditMode}
@@ -147,7 +147,7 @@ const ComponentTablePagination = (props) => {
                                 data={rowsData.list}
                                 page={page}
                                 rowsPerPage={rowsPerPage}
-                                handlerClick={handlerClick}
+                                handleClick={handleClick}
                                 isSelected={isSelected}
                                 showActive={rowsData.active}
                             />
@@ -165,12 +165,12 @@ const ComponentTablePagination = (props) => {
                     count={rowsData.list.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
-                    onChangePage={handlerChangePage}
-                    onChangeRowsPerPage={handlerChangeRowsPerPage}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
             </Paper>
             <FormControlLabel
-                control={<Switch color="primary" checked={dense} onChange={handlerChangeDense}/>}
+                control={<Switch color="primary" checked={dense} onChange={handleChangeDense}/>}
                 label="Dense padding"
             />
         </div>

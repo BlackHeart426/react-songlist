@@ -8,7 +8,7 @@ import React from "react";
 
 export function EnhancedTableHead(props) {
     const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, editMode, data, typeCheckBox } = props;
-    const createSortHandler = property => event => {
+    const createSorthandle = property => event => {
         onRequestSort(event, property);
     };
     let bold = {
@@ -45,7 +45,7 @@ export function EnhancedTableHead(props) {
                             ?  <TableSortLabel
                                 active={orderBy === headCell.id}
                                 direction={orderBy === headCell.id ? order : 'asc'}
-                                onClick={createSortHandler(headCell.id)}
+                                onClick={createSorthandle(headCell.id)}
                                 style={bold}
                             >
                                 {headCell.label}

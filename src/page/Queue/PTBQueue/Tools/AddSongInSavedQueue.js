@@ -13,11 +13,11 @@ export const AddSongInSavedQueue = (props) => {
     }
 
 
-    const requestHandler = () => {
+    const requesthandle = () => {
 
     }
 
-    const handlerAddSongInQueue = () => {
+    const handleAddSongInQueue = () => {
         const songState = songData.find(item => item.id == selected);
         delete songState.data.position;
         dispatch(addSongInSavedQueue(songState))
@@ -25,7 +25,7 @@ export const AddSongInSavedQueue = (props) => {
 
     return (
         <>
-            <IconButton onClick={handlerAddSongInQueue} disabled={loading === true ? true : showButton(lenSelected)}>
+            <IconButton onClick={handleAddSongInQueue} disabled={loading === true ? true : showButton(lenSelected)}>
                 <BlockIcon/>
             </IconButton>
         </>

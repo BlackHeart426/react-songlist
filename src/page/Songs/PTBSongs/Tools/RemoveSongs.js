@@ -10,7 +10,7 @@ export const RemoveSongs = (props) => {
     const {selected, lenSelected, songData, loading} = props;
     const dispatch = useDispatch()
 
-    const handlerOpenConfirm = () => {
+    const handleOpenConfirm = () => {
         setConfirmOpened(true)
     }
 
@@ -18,19 +18,19 @@ export const RemoveSongs = (props) => {
         return selected != 0 ? false : true
     }
 
-    const handlerRemoveSong = () => {
+    const handleRemoveSong = () => {
         dispatch(removeSongActionCreator(selected[0]))
     }
 
     return (
         <>
-            <IconButton onClick={handlerOpenConfirm} disabled={loading === true ? true : showButton(lenSelected)}>
+            <IconButton onClick={handleOpenConfirm} disabled={loading === true ? true : showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
             <DialogSongsRemove
                 show = { confirmOpened }
                 onHide = { () => setConfirmOpened(false) }
-                onAccept = { handlerRemoveSong }
+                onAccept = { handleRemoveSong }
                 dataSong={ songData.find(item => item.id == selected) }
             />
         </>

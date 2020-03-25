@@ -21,7 +21,7 @@ export const ContentDetail = (props) => {
     const {detailSong} = props;
 
 
-    const handlerChange = (event, newValue) => {
+    const handleChange = (event, newValue) => {
         setTab(newValue);
     };
 
@@ -85,7 +85,7 @@ export const ContentDetail = (props) => {
                 <div className={classes.tabRoot}>
                 <Tabs
                     value={tab}
-                    onChange={handlerChange}
+                    onChange={handleChange}
                     indicatorColor="primary"
                     textColor="primary"
                 >

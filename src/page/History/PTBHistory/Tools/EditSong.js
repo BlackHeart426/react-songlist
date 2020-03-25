@@ -12,10 +12,10 @@ export const EditSong = (props) => {
     }
 
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
-        return {title, artist, timesPlayed, lastPlayed, tags, action: { type: 'btn', data: [ { type: 'text', name: 'Request', handler: requestHandler }] }}
+        return {title, artist, timesPlayed, lastPlayed, tags, action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: requesthandle }] }}
     }
 
-    const requestHandler = () => {
+    const requesthandle = () => {
 
     }
 
@@ -34,7 +34,7 @@ export const EditSong = (props) => {
                 '',
                 tags
                 // { type: 'tag', data: [ { name: 'Music' }] } ,
-                // { type: 'btn', data: [ { type: 'text', name: 'Request11', handle: requestHandler }] }
+                // { type: 'btn', data: [ { type: 'text', name: 'Request11', handle: requesthandle }] }
             ),
             active: active
         }

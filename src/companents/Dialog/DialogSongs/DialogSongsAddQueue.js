@@ -45,18 +45,18 @@ export function DialogSongsAddQueue(props) {
         setSong(statusCopy)
     };
 
-    const handlerChange = name =>  event => {
+    const handleChange = name =>  event => {
         setProperty(name, event.target.value)
     };
 
-    const handlerClose = () => {
+    const handleClose = () => {
         setDialogOpened(false);
         onHide();
     };
 
-    const handlerAdd = (property) => event => {
+    const handleAdd = (property) => event => {
         onAccept(property);
-        handlerClose()
+        handleClose()
     };
 
     const data = {
@@ -80,7 +80,7 @@ export function DialogSongsAddQueue(props) {
                         label="Requested By"
                         type="text"
                         fullWidth
-                        onChange={handlerChange('requestedBy')}
+                        onChange={handleChange('requestedBy')}
                     />
                 </FormControl>
             </div>
@@ -92,7 +92,7 @@ export function DialogSongsAddQueue(props) {
                         label="Note"
                         type="text"
                         fullWidth
-                        onChange={handlerChange('note')}
+                        onChange={handleChange('note')}
                     />
                 </FormControl>
             </div>
@@ -101,7 +101,7 @@ export function DialogSongsAddQueue(props) {
                     <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
                     <Input
                         id="standard-adornment-amount"
-                        onChange={handlerChange('amount')}
+                        onChange={handleChange('amount')}
                         inputComponent={NumberFormatCustom}
                     />
                 </FormControl>
@@ -109,10 +109,10 @@ export function DialogSongsAddQueue(props) {
         </div>,
         action:
             <FormControl fullWidth >
-                <Button onClick={handlerClose} color="primary"  className={classes.button}>
+                <Button onClick={handleClose} color="primary"  className={classes.button}>
                     Cancel
                 </Button>
-                <Button onClick={handlerAdd(song)} color="primary"   className={classes.button}>
+                <Button onClick={handleAdd(song)} color="primary"   className={classes.button}>
                     Add
                 </Button>
             </FormControl>

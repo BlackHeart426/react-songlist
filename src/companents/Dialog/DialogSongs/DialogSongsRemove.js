@@ -21,13 +21,13 @@ export default function DialogSongRemove(props) {
         setDialogOpened(show)
     },[show])
 
-    const handlerClose = () => {
+    const handleClose = () => {
         setDialogOpened(false);
         onHide()
     };
 
-    const handlerrAccept = () => {
-        handlerClose()
+    const handleAccept = () => {
+        handleClose()
         onAccept(true)
     }
 
@@ -35,10 +35,10 @@ export default function DialogSongRemove(props) {
         title: 'Are you sure you want to delete these song?',
         content: <div><p>Title: <strong>{copyDataSongData.title}</strong></p><p>Artist: <strong>{copyDataSongData.artist}</strong></p></div>,
         action:  <>
-            <Button variant="outlined" onClick={handlerClose} color="primary">
+            <Button variant="outlined" onClick={handleClose} color="primary">
                 Cancel
             </Button>
-            <Button variant="outlined" onClick={handlerrAccept} color="secondary" autoFocus>
+            <Button variant="outlined" onClick={handleAccept} color="secondary" autoFocus>
                 Agree
             </Button>
             </>

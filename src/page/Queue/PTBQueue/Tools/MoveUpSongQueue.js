@@ -10,7 +10,7 @@ export const MoveUpSongQueue = (props) => {
         return lenSelected == 1 ? false : true
     }
 
-    const requestHandler = () => {
+    const requesthandle = () => {
 
     }
 

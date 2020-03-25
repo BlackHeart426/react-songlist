@@ -14,14 +14,14 @@ export const FilterSong = (props) => {
     const [value, setValue] = useState(false);
     const { loading} = props;
 
-    const handlerFilter = (event) => {
+    const handleFilter = (event) => {
 
         // editSong(newSong)
     }
 
     return (
         <>
-            <ButtonGroup style={ml40} name="filterSong" size="small" onChange={handlerFilter} color="primary" disabled={loading}>
+            <ButtonGroup style={ml40} name="filterSong" size="small" onChange={handleFilter} color="primary" disabled={loading}>
                 <Button value="All" label="All">All</Button>
                 <Button value="Stream" label="Stream">Stream</Button>
                 <Button value="Day" label="Day">Day</Button>

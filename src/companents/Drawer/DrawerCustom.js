@@ -27,13 +27,13 @@ const DrawerCustom = (props) => {
     const classes = useStylesDrawer();
     const [open, setOpen] = useState(false);
 
-    const handlerClick = () => {
+    const handleClick = () => {
         setOpen(!open);
     };
-    const handlerrEditMode= (event) => {
+    const handleEditMode= (event) => {
         props.action.toggleEditMode(event.target.checked)
     };
-    const handlerDrawerClose = (event) => {
+    const handleDrawerClose = (event) => {
         props.action.toggleOpenDrawer(!props.statusOpenDrawer);
     };
 
@@ -43,7 +43,7 @@ const DrawerCustom = (props) => {
             role="presentation"
         >
             <div className={classes.toolbar}>
-                <IconButton onClick={handlerDrawerClose}>
+                <IconButton onClick={handleDrawerClose}>
                     { <ChevronLeftIcon />  }
                 </IconButton>
             </div>
@@ -66,7 +66,7 @@ const DrawerCustom = (props) => {
                     renderLink(link)
                 ))}
             </List>
-            <ListItem button onClick={handlerClick} >
+            <ListItem button onClick={handleClick} >
                 <ListItemIcon><Settings/></ListItemIcon>
                 <ListItemText>Settings</ListItemText>
                 {open ? <ExpandLess /> : <ExpandMore />}
@@ -82,7 +82,7 @@ const DrawerCustom = (props) => {
                 </List>
             </Collapse>
             <ListItem>
-                <ListItemIcon><Switch onChange={handlerrEditMode} checked={props.statusEditMode} color="primary"/></ListItemIcon>
+                <ListItemIcon><Switch onChange={handleEditMode} checked={props.statusEditMode} color="primary"/></ListItemIcon>
                 <ListItemText>Edit mode</ListItemText>
             </ListItem>
         </div>
@@ -92,7 +92,7 @@ const DrawerCustom = (props) => {
         <>
             <Hidden lgUp>
                 <Drawer
-                    onClose={handlerDrawerClose}
+                    onClose={handleDrawerClose}
                     className={classes.drawer}
                     variant="temporary"
                     open={ props.statusOpenDrawer }

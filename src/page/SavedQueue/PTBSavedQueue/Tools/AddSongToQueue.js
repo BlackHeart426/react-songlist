@@ -13,7 +13,7 @@ export const AddSongToQueue = (props) => {
         setDialogOpened(true)
     };
 
-    const handlerAddSongInQueue = () => {
+    const handleAddSongInQueue = () => {
         const stateSong = songData.find(item => item.id == selected[0]);
         dispatch(moveSongInQueueActionCreator(stateSong))
     };
@@ -23,7 +23,7 @@ export const AddSongToQueue = (props) => {
     }
     return (
         <>
-            <IconButton onClick={ handlerAddSongInQueue } disabled={loading === true ? true :  showButton(lenSelected) }>
+            <IconButton onClick={ handleAddSongInQueue } disabled={loading === true ? true :  showButton(lenSelected) }>
                 <ControlPointIcon />
             </IconButton>
             {/*<DialogSongsAdd onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>*/}
