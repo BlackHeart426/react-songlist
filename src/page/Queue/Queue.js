@@ -108,7 +108,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         action: {
-            deleteSong: (uuid) => dispatch(removeSongInQueueActionCreator()),
+            deleteSong: (uuid) => dispatch(removeSongInQueueActionCreator(uuid)),
             songPerformed: (song) => dispatch(successSongActionCreator(song)),
             setSelected: (data) => setSelectedQueueActionCreator(data),
             loader: () => dispatch(showLoader())
