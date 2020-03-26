@@ -27,7 +27,7 @@ export function DialogSongsEdit(props) {
         tags: []
     }
 
-    const {show, onHide, onAddAttribute, dataSong} = props;
+    const {show, onHide, onAddSongs, dataSong} = props;
     const classes = useStyles();
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
@@ -36,7 +36,7 @@ export function DialogSongsEdit(props) {
     const [song, setSong] = useState(formControl);
 
     //TODO что-то с обьектом dataSong и вложеным data
-    useEffect(() => {
+    useEffect(() => {z
         setDialogOpened(show);
         let copyDataSong = {...dataSong};
         let active = copyDataSong['active'];
@@ -84,7 +84,7 @@ export function DialogSongsEdit(props) {
     };
 
     const handleSave = property => event => {
-        onAddAttribute(property);
+        onAddSongs(property);
         handleClose()
     };
 
