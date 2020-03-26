@@ -36,7 +36,7 @@ export function DialogSongsEdit(props) {
     const [song, setSong] = useState(formControl);
 
     //TODO что-то с обьектом dataSong и вложеным data
-    useEffect(() => {z
+    useEffect(() => {
         setDialogOpened(show);
         let copyDataSong = {...dataSong};
         let active = copyDataSong['active'];
