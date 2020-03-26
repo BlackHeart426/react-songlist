@@ -1,12 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
-import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
-import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 import TablePagination from "../../companents/TablePagination/ComponentTablePagination";
 import {headCells} from "../Songs/headTable";
 import {PTBAttributes} from "./PTBAttributes/PTBAttributes";
-import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/modules/songs";
 import {showAlert, showLoader} from "../../store/action/app";
+import {setSelectedAttributeActionCreator} from "../../store/action/modules/attributes";
 
 const Attributes = (props) => {
 
@@ -22,31 +20,15 @@ const Attributes = (props) => {
     };
 
     const handleFilter = () => {
-        let songList = {...props.songData};
-        if (Object.keys(songList.list).length > 0) {
-            let songListTest = wrapperSong(Object.values(songList.list));
-            const filtered = songListTest.filter(item => {
-
-                const values = Object.values(item.data);
-                const search = props.searchText.toLowerCase();
-                let flag = false;
-                values.forEach(val => {
-                    if (typeof val == "string") {
-                        if (val.toLowerCase().indexOf(search) > -1) {
-                            flag = true;
-                            return;
-                        }
-                    }
-                })
-                if (flag) return item
-                // return item.data.title.toUpperCase().indexOf(search) !== -1
-            });
-            songList.list = filtered;
+        let attributesList = {...props.tagsData};
+        if (Object.keys(attributesList.list).length > 0) {
+            let attributesListTest = wrapperSong(Object.values(attributesList.list));
+            attributesList.list = attributesListTest;
             return (
-                songList
+                attributesList
             )
         } else {
-            return songList
+            return attributesList
         }
 
     };
@@ -55,11 +37,11 @@ const Attributes = (props) => {
     return (
         <>
             <PTBAttributes />
-            <TablePagination
-                onSelectRow = {(data) => props.action.setSelected(data)}
-                headCells = {headCells}
-                rowsData = {handleFilter()}
-            />
+            {/*<TablePagination*/}
+            {/*    onSelectRow = {(data) => props.action.setSelected(data)}*/}
+            {/*    headCells = {headCells}*/}
+            {/*    rowsData = {handleFilter()}*/}
+            {/*/>*/}
         </>
     )
 };
@@ -74,8 +56,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         action: {
-            getSongData: () => dispatch(getSongDataActionCreator()),
-            setSelected: (data) => setSelectedActionCreator(data),
+            setSelected: (data) => setSelectedAttributeActionCreator(data),
             alert: (text) => dispatch(showAlert(text)),
             loader: () => dispatch(showLoader())
         }

@@ -5,7 +5,7 @@ import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogS
 import {useDispatch} from "react-redux";
 import {removeSongActionCreator} from "../../../../store/action/modules/songs";
 
-export const RemoveSongs = (props) => {
+export const RemoveAttribute = (props) => {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
     const {selected, lenSelected, songData, loading} = props;
     const dispatch = useDispatch()

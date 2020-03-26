@@ -1,11 +1,12 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useState} from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
 import {useDispatch} from "react-redux";
 import {editSongActionCreator} from "../../../../store/action/modules/songs";
+import {editAttributeActionCreator} from "../../../../store/action/modules/attributes";
 
-export const EditSongs = (props) => {
+export const EditAttribute = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
     const {lenSelected, songData, selected, loading} = props;
     const dispatch = useDispatch()
@@ -18,17 +19,13 @@ export const EditSongs = (props) => {
         return {title, artist, timesPlayed, lastPlayed, tags }
     }
 
-    const requesthandle = () => {
-
-    }
-
     const handleEditRows = () => {
         setDialogOpened(true)
     }
 
-    const handleEditRowsSong = (property) => {
+    const handleEditRowsAttribute = (property) => {
         const {title, artist, tags, active, timesPlayed, lastPlayed} = property;
-        const newSong = {
+        const newAttribute = {
             id: selected[0],
             data: createData(
                 title,
@@ -39,7 +36,7 @@ export const EditSongs = (props) => {
             ),
             active: active
         }
-        dispatch(editSongActionCreator(newSong))
+        dispatch(editAttributeActionCreator(newAttribute))
     }
 
     return (
@@ -47,7 +44,7 @@ export const EditSongs = (props) => {
             <IconButton onClick={handleEditRows} disabled={loading === true ? true : showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
-            <DialogSongsEdit onAddSongs={ handleEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogSongsEdit onAddAttribute={ handleEditRowsAttribute } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }

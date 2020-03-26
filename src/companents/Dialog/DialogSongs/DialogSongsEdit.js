@@ -27,7 +27,7 @@ export function DialogSongsEdit(props) {
         tags: []
     }
 
-    const {show, onHide, onAddSongs, dataSong} = props;
+    const {show, onHide, onAddAttribute, dataSong} = props;
     const classes = useStyles();
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
@@ -84,7 +84,7 @@ export function DialogSongsEdit(props) {
     };
 
     const handleSave = property => event => {
-        onAddSongs(property);
+        onAddAttribute(property);
         handleClose()
     };
 

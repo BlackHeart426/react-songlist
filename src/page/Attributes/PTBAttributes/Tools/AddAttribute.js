@@ -5,8 +5,9 @@ import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSo
 import * as shortid from "shortid";
 import {useDispatch, useSelector} from "react-redux";
 import {addSong, addSongActionCreator} from "../../../../store/action/modules/songs";
+import {addAttributesActionCreator} from "../../../../store/action/modules/attributes";
 
-export const AddSongs = (props) => {
+export const AddAttribute = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
 
     const {lenSelected, loading} = props;
@@ -20,10 +21,10 @@ export const AddSongs = (props) => {
         return lenSelected == 0 ? false : true
     }
 
-    const addRowsSong = (property) => {
+    const addAttribute = (property) => {
         console.log('property', property)
         const {title, artist, tags, active} = property;
-        const newSong = {
+        const newAttribute = {
             id: shortid.generate(),
             data: {
                 title: title,
@@ -34,8 +35,7 @@ export const AddSongs = (props) => {
             },
             active: active
         };
-        // SongAPI.getRef().child(newSong.id).set(newSong)
-        dispatch(addSongActionCreator(newSong))
+        dispatch(addAttributesActionCreator(newAttribute))
     };
 
     return (
@@ -43,7 +43,7 @@ export const AddSongs = (props) => {
             <IconButton onClick={ openDialog } disabled={ loading === true ? true : showButton(lenSelected) }>
                 <ControlPointIcon />
             </IconButton>
-            <DialogSongsAdd onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogSongsAdd onAddSongs={ addAttribute } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 };

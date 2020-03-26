@@ -21,6 +21,7 @@ import {getQueueDataActionCreator} from "./store/action/modules/queue";
 import {getSavedQueueDataActionCreator} from "./store/action/modules/savedQueue";
 import {getHistoryDataActionCreator} from "./store/action/modules/history";
 import Attributes from "./page/Attributes/Attributes";
+import {getAttributesDataActionCreator} from "./store/action/modules/attributes";
 
 const drawerWidth = 240;
 
@@ -57,6 +58,7 @@ const App = (props) => {
         props.action.getQueueData(); //Заполнение таблицы с очередью
         props.action.getSavedQueueData(); //Заполнение таблицы с очередью
         props.action.getHistoryData(); //Заполнение таблицы с очередью
+        props.action.getAttributesData(); //Заполнение таблицы с очередью
 
     },[]);
 
@@ -105,6 +107,7 @@ const mapDispatchToProps = dispatch => {
             getQueueData: () => dispatch(getQueueDataActionCreator()),
             getSavedQueueData: () => dispatch(getSavedQueueDataActionCreator()),
             getHistoryData: () => dispatch(getHistoryDataActionCreator()),
+            getAttributesData: () => dispatch(getAttributesDataActionCreator()),
             // setSelected: (data) => dispatch(setSelectedActionCreator(data)),
             alert: (text) => dispatch(showAlert(text)),
             // loader: () => dispatch(showLoader())
