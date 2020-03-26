@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import TablePagination from "../../companents/TablePagination/ComponentTablePagination";
 import {headCells} from "../Songs/headTable";
@@ -18,6 +18,11 @@ const Attributes = (props) => {
             return {id: item.id, data: createData(title, artist, timesPlayed, lastPlayed, tags), active: item.active}
         })
     };
+    useEffect(() => {
+        // props.action.getSongData(); //Заполнение таблицы с песнями
+        // dispatch(showLoader())
+debugger
+    },[]);
 
     const handleFilter = () => {
         let attributesList = {...props.tagsData};

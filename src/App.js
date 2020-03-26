@@ -78,16 +78,16 @@ const App = (props) => {
                 <main className={classes.content}>
                     <div  className={classes.toolbar}>
                         <Switch>
-                            <Route exact path="/s/:userId/queue" component={Queue}/>
-                                <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
                             <Route exact path="/s/:userId/songs" component={Songs}/>
                                 <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
                                 <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
+                            <Route exact path="/s/:userId/queue" component={Queue}/>
+                                <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
                             <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>
                             <Route exact path="/s/:userId/history" component={History}/>
                             <Route component={Settings} path="/s/:userId/settings"/>
-                            <Route component={Attributes} path="/s/:userId/settings/attributes"/>
-                            <Route component={Test} path="/s/:userId/test"/>
+                                <Route path="/s/:userId/settings/attributes" component={Attributes} />
+                            <Route path="/s/:userId/test" component={Test} />
                         </Switch>
                         {props.alert && <AlertCustom text={props.alert} />}
                     </div>

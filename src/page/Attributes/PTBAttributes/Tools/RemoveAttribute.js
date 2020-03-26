@@ -1,10 +1,9 @@
 import IconButton from "@material-ui/core/IconButton";
 import React, {useContext, useEffect, useState} from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
-import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
 import {useDispatch} from "react-redux";
-import {removeSongActionCreator} from "../../../../store/action/modules/songs";
 import {removeAttributeActionCreator} from "../../../../store/action/modules/attributes";
+import DialogAttributesRemove from "../../../../companents/Dialog/DialogAttributes/DialogAttributesRemove";
 
 export const RemoveAttribute = (props) => {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
@@ -28,7 +27,7 @@ export const RemoveAttribute = (props) => {
             <IconButton onClick={handleOpenConfirm} disabled={loading === true ? true : showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
-            <DialogSongsRemove
+            <DialogAttributesRemove
                 show = { confirmOpened }
                 onHide = { () => setConfirmOpened(false) }
                 onAccept = { handleRemoveSong }
