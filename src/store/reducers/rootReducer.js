@@ -5,6 +5,7 @@ import {songsReducer} from "./modules/songs";
 import {queueReducer} from "./modules/queue";
 import {savedQueueReducer} from "./modules/savedQueue";
 import {historyReducer} from "./modules/history";
+import {attributesReducer} from "./modules/attributes";
 
 
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
     songs: songsReducer,
     queue: queueReducer,
     savedQueue: savedQueueReducer,
-    history: historyReducer
+    history: historyReducer,
+    attributes: attributesReducer
 })
