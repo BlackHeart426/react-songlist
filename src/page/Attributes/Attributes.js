@@ -1,27 +1,27 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import TablePagination from "../../companents/TablePagination/ComponentTablePagination";
-import {headCells} from "../Songs/headTable";
+import {headCells} from "./headTable";
 import {PTBAttributes} from "./PTBAttributes/PTBAttributes";
 import {showAlert, showLoader} from "../../store/action/app";
 import {setSelectedAttributeActionCreator} from "../../store/action/modules/attributes";
 
 const Attributes = (props) => {
 
-    function createData(title, artist, timesPlayed, lastPlayed) {
-        return {title, artist, timesPlayed, lastPlayed}
+    function createData(name, image, active, showInTable, priority, ofSongs) {
+        return {name, image, active, showInTable, priority, ofSongs}
     }
 
     const wrapperSong = (song) => {
         return song.map(item => {
-            const {title, artist, timesPlayed, lastPlayed, tags} = item.data;
-            return {id: item.id, data: createData(title, artist, timesPlayed, lastPlayed, tags), active: item.active}
+            const {name, image, active, showInTable, priority, ofSongs} = item.data;
+            return {id: item.id, data: createData(name, image, active, showInTable, priority, ofSongs)}
         })
     };
     useEffect(() => {
         // props.action.getSongData(); //Заполнение таблицы с песнями
         // dispatch(showLoader())
-debugger
+
     },[]);
 
     const handleFilter = () => {
@@ -42,11 +42,11 @@ debugger
     return (
         <>
             <PTBAttributes />
-            {/*<TablePagination*/}
-            {/*    onSelectRow = {(data) => props.action.setSelected(data)}*/}
-            {/*    headCells = {headCells}*/}
-            {/*    rowsData = {handleFilter()}*/}
-            {/*/>*/}
+            <TablePagination
+                onSelectRow = {(data) => props.action.setSelected(data)}
+                headCells = {headCells}
+                rowsData = {handleFilter()}
+            />
         </>
     )
 };

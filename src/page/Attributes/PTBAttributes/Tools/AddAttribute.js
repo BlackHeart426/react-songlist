@@ -21,18 +21,19 @@ export const AddAttribute = (props) => {
     }
 
     const addAttribute = (property) => {
+        debugger
         console.log('property', property)
-        const {title, artist, tags, active} = property;
+        const {name, image, active, showInTable, priority, ofSongs} = property;
         const newAttribute = {
             id: shortid.generate(),
             data: {
-                title: title,
-                artist: artist,
-                timesPlayed: '0',
-                lastPlayed: 'never',
-                tags: tags
-            },
-            active: active
+                name: name,
+                image: image,
+                active: active,
+                showInTable: showInTable,
+                priority: priority,
+                ofSongs: 0
+            }
         };
         dispatch(addAttributesActionCreator(newAttribute))
     };
@@ -42,7 +43,7 @@ export const AddAttribute = (props) => {
             <IconButton onClick={ openDialog } disabled={ loading === true ? true : showButton(lenSelected) }>
                 <ControlPointIcon />
             </IconButton>
-            <DialogAttributesAdd onAddSongs={ addAttribute } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogAttributesAdd onAddAttribute={ addAttribute } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 };

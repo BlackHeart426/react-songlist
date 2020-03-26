@@ -85,7 +85,7 @@ const App = (props) => {
                                 <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
                             <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>
                             <Route exact path="/s/:userId/history" component={History}/>
-                            <Route component={Settings} path="/s/:userId/settings"/>
+                            <Route exact component={Settings} path="/s/:userId/settings"/>
                                 <Route path="/s/:userId/settings/attributes" component={Attributes} />
                             <Route path="/s/:userId/test" component={Test} />
                         </Switch>
