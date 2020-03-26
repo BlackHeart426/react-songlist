@@ -7,11 +7,12 @@ import {addUserIdAtLink} from "../GlobalParamaters/linkWithUserId";
 
 export const renderLink = (props) => {
 
-    const {index, link, icon, title} = props
+    const {index, link, icon, title, className} = props
 
     return(
         <li key={index}>
             <ListItem
+                className={className}
                 button
                 component={NavLink}
                 to={addUserIdAtLink(link) ? addUserIdAtLink(link) : '#'}
@@ -22,4 +23,4 @@ export const renderLink = (props) => {
             </ListItem>
         </li>
     )
-}
+};

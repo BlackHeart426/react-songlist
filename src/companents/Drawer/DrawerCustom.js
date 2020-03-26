@@ -12,7 +12,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ImageIcon from '@material-ui/icons/Image';
 import Switch from "@material-ui/core/Switch";
-import {menuDrawerCustom,  subMenuDrawerCustom} from "./menu";
+import {menuDrawerCustom, settingsMenuCustom, subMenuDrawerCustom} from "./menu";
 import {useStylesDrawer} from "./style";
 import {renderLink} from "./render";
 import IconButton from "@material-ui/core/IconButton";
@@ -73,12 +73,10 @@ const DrawerCustom = (props) => {
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItem button className={classes.nested}>
-                        <ListItemIcon>
-                            <StarBorder />
-                        </ListItemIcon>
-                        <ListItemText primary="Starred" />
-                    </ListItem>
+                    {settingsMenuCustom.map((link) => (
+                        link.className = classes.nested,
+                        renderLink(link)
+                    ))}
                 </List>
             </Collapse>
             <ListItem>
