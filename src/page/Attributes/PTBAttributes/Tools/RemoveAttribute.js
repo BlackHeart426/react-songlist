@@ -4,6 +4,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
 import {useDispatch} from "react-redux";
 import {removeSongActionCreator} from "../../../../store/action/modules/songs";
+import {removeAttributeActionCreator} from "../../../../store/action/modules/attributes";
 
 export const RemoveAttribute = (props) => {
     const [confirmOpened, setConfirmOpened] = React.useState(false);
@@ -19,7 +20,7 @@ export const RemoveAttribute = (props) => {
     }
 
     const handleRemoveSong = () => {
-        dispatch(removeSongActionCreator(selected[0]))
+        dispatch(removeAttributeActionCreator(selected[0]))
     }
 
     return (
