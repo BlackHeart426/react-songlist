@@ -15,14 +15,9 @@ const Attributes = (props) => {
     const wrapperSong = (song) => {
         return song.map(item => {
             const {name, image, active, showInTable, priority, ofSongs} = item.data;
-            return {id: item.id, data: createData(name, image, active, showInTable, priority, ofSongs)}
+            return {id: item.id, data: createData(name, image, active == 1 ? 'yes' : 'no', showInTable == 1 ? 'yes' : 'no', priority, ofSongs)}
         })
     };
-    useEffect(() => {
-        // props.action.getSongData(); //Заполнение таблицы с песнями
-        // dispatch(showLoader())
-
-    },[]);
 
     const handleFilter = () => {
         let attributesList = {...props.tagsData};

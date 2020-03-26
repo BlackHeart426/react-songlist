@@ -46,7 +46,7 @@ export const subMenuDrawerCustom = [
 
 export const settingsMenuCustom = [
     {
-        title: 'Sub attributes',
+        title: 'Song attributes',
         link: '/settings/attributes',
         icon: <LocalOfferIcon/>,
         index: 6

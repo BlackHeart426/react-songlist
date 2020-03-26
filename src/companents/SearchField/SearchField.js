@@ -14,7 +14,6 @@ export const SearchField = (props) => {
 
     const handleChange = event => {
         setSearchText(event.target.value);
-        debugger
         dispatch(moduleActionCreator( event.target.value ));
     };
 

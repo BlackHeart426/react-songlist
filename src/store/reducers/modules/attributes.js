@@ -1,14 +1,10 @@
 import React from "react";
 import {
     ADD_ATTRIBUTES,
-    ADD_SONG, EDIT_ATTRIBUTES,
-    EDIT_SONG, REMOVE_ATTRIBUTES,
-    REMOVE_SONG, SET_ATTRIBUTESDATA,
-    SET_SEARCHTEXT,
-    SET_SELECTED, SET_SELECTED_ATTRIBUTES,
-    SET_SELECTED_SONG,
-    SET_SONGDATA,
-    TOGGLE_ACTIVE
+    EDIT_ATTRIBUTES,
+    REMOVE_ATTRIBUTES,
+    SET_ATTRIBUTESDATA,
+    SET_SELECTED_ATTRIBUTES,
 } from "../../types";
 
 const initialState = {
@@ -21,7 +17,7 @@ export const attributesReducer = (state = initialState, action) => {
         case SET_ATTRIBUTESDATA:
             return { ...state, list: action.list };
         case ADD_ATTRIBUTES:
-            return { ...state, list: Object.values(state.list).concat(action.newSong) };
+            return { ...state, list: Object.values(state.list).concat(action.newAttribute) };
         case SET_SELECTED_ATTRIBUTES:
             return { ...state, selected: action.newSelect };
         case REMOVE_ATTRIBUTES:

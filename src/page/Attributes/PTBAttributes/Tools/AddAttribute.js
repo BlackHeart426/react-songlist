@@ -21,7 +21,6 @@ export const AddAttribute = (props) => {
     }
 
     const addAttribute = (property) => {
-        debugger
         console.log('property', property)
         const {name, image, active, showInTable, priority, ofSongs} = property;
         const newAttribute = {

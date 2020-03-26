@@ -10,10 +10,11 @@ import UploadButtons from "../../inputComponent/uploadButton/uploadButton";
 
 export function DialogAttributesAdd(props) {
     const formControl = {
-        title: '',
-        artist: '',
+        name: '',
+        priority: '',
+        image: '',
         active: false,
-        tags: []
+        showInTable: false
     };
 
     const {show, onHide, onAddAttribute, dataSong} = props;
@@ -21,12 +22,12 @@ export function DialogAttributesAdd(props) {
     const [dialogOpened, setDialogOpened] = useState(false);
     const [active, setActive] = useState(false);
     const [showSong, setShowSong] = useState(false);
-    const [attribute, setSong] = useState({});
+    const [attribute, setAttribute] = useState(formControl);
 
     const setProperty = (property, value) => {
         let statusCopy = Object.assign({}, attribute);
         statusCopy[property] = value;
-        setSong(statusCopy)
+        setAttribute(statusCopy)
     };
 
     const handleChange = name => event => {
@@ -45,9 +46,8 @@ export function DialogAttributesAdd(props) {
         onHide();
     };
 
-    const handleCreate = (property, close = false) => event => {
-        debugger
-        onAddAttribute(property);
+    const handleCreate = (priority) => event => {
+        onAddAttribute(priority);
         handleClose()
     };
 

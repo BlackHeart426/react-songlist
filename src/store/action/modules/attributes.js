@@ -31,14 +31,14 @@ export const getAttributesDataActionCreator = () => async dispatch => {
 };
 
 export const addAttributesActionCreator = (state) => async dispatch => {
-
     dispatch(showLoader())
     try {
         await AttributesAPI.getRef().child(state.id).set(state)
-            .then(dispatch({ type: ADD_ATTRIBUTES, newSong: state }))
+            .then(dispatch({ type: ADD_ATTRIBUTES, newAttribute: state }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
     } catch (e) {
+        debugger
         dispatch(showAlert('Что-то пошло не так'))
         dispatch(hideLoader())
     }
