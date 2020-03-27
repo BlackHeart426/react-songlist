@@ -14,8 +14,8 @@ export const RemoveAttribute = (props) => {
         setConfirmOpened(true)
     }
 
-    function showButton(selected) {
-        return selected != 0 ? false : true
+    function showButton(lenSelected) {
+        return lenSelected != 0 ? false : true
     }
 
     const handleRemoveSong = () => {

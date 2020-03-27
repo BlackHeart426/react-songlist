@@ -14,8 +14,8 @@ let paramTest = {
 export default function DialogAttributesRemove(props) {
     const [dialogOpened, setDialogOpened] = useState(false);
     const { show, onHide, onAccept, dataSong } = props
-    const copyDataSong = {...props.dataSong};
-    const copyDataSongData = {...copyDataSong['data']};
+    const copyDataAttributes = {...props.dataSong};
+    const copyDataAttributesData = {...copyDataAttributes['data']};
 
     useEffect(() => {
         setDialogOpened(show)
@@ -33,7 +33,7 @@ export default function DialogAttributesRemove(props) {
 
     const data = {
         title: 'Are you sure you want to delete these song?',
-        content: <div><p>Title: <strong>{copyDataSongData.title}</strong></p><p>Artist: <strong>{copyDataSongData.artist}</strong></p></div>,
+        content: <div><p>Name: <strong>{copyDataAttributesData.name}</strong></p></div>,
         action:  <>
             <Button variant="outlined" onClick={handleClose} color="primary">
                 Cancel

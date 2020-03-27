@@ -9,19 +9,20 @@ import {SwitchActiveSongs} from "./Tools/SwitchActiveSongs";
 import {useDispatch, useSelector} from "react-redux";
 import {setSearchTextActionCreator} from "../../../store/action/modules/songs";
 import {SearchField} from "../../../companents/SearchField/SearchField";
+import {FilterAttributes} from "./Tools/FilerAttributes";
 
 let mbt10 = {
     marginBottom: '10px',
     marginTop: '10px'
-}
+};
 
 export const PTBSongs = (props) => {
-    const {showActive, onActive} = props
-    const selected = useSelector(state => state.songs.selected)
-    const listSong = useSelector(state => state.songs.list)
-    const searchText = useSelector(state => state.songs.searchText)
-    const loading = useSelector(state => state.app.loading)
-    const dispatch = useDispatch()
+    const {showActive, onActive} = props;
+    const selected = useSelector(state => state.songs.selected);
+    const listSong = useSelector(state => state.songs.list);
+    const searchText = useSelector(state => state.songs.searchText);
+    const loading = useSelector(state => state.app.loading);
+    const attributesList = useSelector(state => state.attributes.list);
     const lenSelected = selected.length;
     return (
         <>
@@ -32,10 +33,11 @@ export const PTBSongs = (props) => {
                 <DetailSongs loading={loading} lenSelected={lenSelected} selected={selected} songData={listSong}/>
                 <AddInQueueSongs loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
                 <SwitchActiveSongs loading={loading} showActive={showActive} onActive = {onActive}/>
+                <FilterAttributes loading={loading} lenSelected={lenSelected} attributesList={attributesList} />
                 <SearchField loading={loading} searchText={searchText} moduleActionCreator={setSearchTextActionCreator}/>
             </Card>
 
         </>
     )
-}
+};
 

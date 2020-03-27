@@ -11,8 +11,8 @@ let mbt10 = {
 }
 
 export const PTBAttributes = (props) => {
-    const selected = useSelector(state => state.songs.selected);
-    const listSong = useSelector(state => state.songs.list);
+    const selected = useSelector(state => state.attributes.selected);
+    const listSong = useSelector(state => state.attributes.list);
     const loading = useSelector(state => state.app.loading);
     const lenSelected = selected.length;
     return (

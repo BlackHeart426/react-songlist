@@ -14,8 +14,8 @@ export const EditAttribute = (props) => {
         return lenSelected == 1 ? false : true
     }
 
-    function createData(title, artist, timesPlayed, lastPlayed, tags) {
-        return {title, artist, timesPlayed, lastPlayed, tags }
+    function createData(name, image, active, showInTable, priority, ofSongs) {
+        return {name, image, active, showInTable, priority, ofSongs }
     }
 
     const handleEditRows = () => {
@@ -23,15 +23,16 @@ export const EditAttribute = (props) => {
     }
 
     const handleEditRowsAttribute = (property) => {
-        const {title, artist, tags, active, timesPlayed, lastPlayed} = property;
+        const {name, image, active, showInTable, priority, ofSongs} = property;
         const newAttribute = {
             id: selected[0],
             data: createData(
-                title,
-                artist,
-                timesPlayed,
-                lastPlayed,
-                tags ,
+                name,
+                image,
+                active,
+                showInTable,
+                priority,
+                ofSongs,
             ),
             active: active
         }

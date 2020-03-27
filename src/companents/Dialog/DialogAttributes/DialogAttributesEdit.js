@@ -14,6 +14,7 @@ import React, {useEffect, useState} from "react";
 import useTheme from "@material-ui/core/styles/useTheme";
 import {getStyles, MenuProps, useStyles} from "./style";
 import CustomDialog from "../CustomDialog";
+import UploadButtons from "../../inputComponent/uploadButton/uploadButton";
 //TODO общий список тегов
 const names = [
     "Music",
@@ -21,61 +22,55 @@ const names = [
 
 export function DialogAttributesEdit(props) {
     const formControl = {
-        title: '',
-        artist: '',
+        name: '',
+        priority: '',
+        image: '',
         active: false,
-        tags: []
-    }
+        showInTable: false
+    };
 
-    const {show, onHide, onAddSongs, dataSong} = props;
+    const {show, onHide, onAddAttribute, dataSong} = props;
     const classes = useStyles();
-    const theme = useTheme();
-    const [personName, setPersonName] = useState([]);
     const [dialogOpened, setDialogOpened] = useState(false);
-    const [activeSong, setActiveSong] = useState(false);
-    const [song, setSong] = useState(formControl);
+    const [active, setActive] = useState(false);
+    const [showInTable, setShowInTable] = useState(false);
+    const [activeAttribute, setActiveAttribute] = useState(false);
+    const [attribute, setAttribute] = useState(formControl);
 
-    //TODO что-то с обьектом dataSong и вложеным data
     useEffect(() => {
         setDialogOpened(show);
-        let copyDataSong = {...dataSong};
-        let active = copyDataSong['active'];
-        let copyDataSongData = {...copyDataSong['data']};
-        const {title, artist, timesPlayed, lastPlayed, tags} = copyDataSongData;
-        let statusCopy = {...song};
-        if(copyDataSong['id']) {
-            statusCopy['title'] = title;
-            statusCopy['artist'] = artist;
-            statusCopy['timesPlayed'] = timesPlayed;
-            statusCopy['lastPlayed'] = lastPlayed;
-            statusCopy['tags'] = tags;
+        let copyDataAttributes = {...dataSong};
+        let copyDataAttributesData = {...copyDataAttributes['data']};
+        const {name, image, active, showInTable, priority, ofSongs} = copyDataAttributesData;
+        let statusCopy = {...attribute};
+        if(copyDataAttributes['id']) {
+            statusCopy['name'] = name;
+            statusCopy['image'] = image;
             statusCopy['active'] = active;
-            setSong(statusCopy);
-            setActiveSong(active)
-            setPersonName(tags)
+            statusCopy['showInTable'] = showInTable;
+            statusCopy['priority'] = priority;
+            statusCopy['ofSongs'] = ofSongs;
+            setAttribute(statusCopy);
+            setActiveAttribute(active)
+            setShowInTable(showInTable)
         }
     },[show]);
 
-
     const setProperty = (property, value) => {
-        let statusCopy = Object.assign({}, song);
+        let statusCopy = Object.assign({}, attribute);
         statusCopy[property] = value;
-        setSong(statusCopy)
-    }
+        setAttribute(statusCopy)
+    };
 
-    const handleChange = name =>  event => {
+    const handleChange = name => event => {
         setProperty(name, event.target.value)
     };
 
-    const handleChangeSelect = event => {
-        setPersonName(event.target.value);
-        setProperty('tags', event.target.value)
-    };
-
-    const handleChangeSwitch = event => {
-
-        setActiveSong(event.target.checked)
-        setProperty('active', event.target.checked)
+    const handleChangeSwitch = name => event => {
+        name == 'active'
+            ? setActive(event.target.checked)
+            : setShowInTable(event.target.checked);
+        setProperty(name, event.target.checked)
     };
 
     const handleClose = () => {
@@ -83,82 +78,71 @@ export function DialogAttributesEdit(props) {
         onHide();
     };
 
-    const handleSave = property => event => {
-        onAddSongs(property);
+    const handleCreate = (priority) => event => {
+        onAddAttribute(priority);
         handleClose()
     };
 
     const data = {
-        title: 'Edit song',
-        content: <div>
+        title: 'Edit Attribute',
+        content:
             <div>
-                <FormControl fullWidth className={classes.formControl}>
-                    <TextField
-                        margin="dense"
-                        id="Title"
-                        label="Title"
-                        type="text"
-                        value={song.title}
-                        fullWidth
-                        onChange={handleChange('title')}
-                    />
-                </FormControl>
-            </div>
-            <div>
-                <FormControl fullWidth className={classes.formControl}>
-                    <TextField
-                        margin="dense"
-                        id="Artist"
-                        label="Artist"
-                        value={song.artist}
-                        type="text"
-                        fullWidth
-                        onChange={handleChange('artist')}
-                    />
-                </FormControl>
-            </div>
-            <div>
-                <FormControl className={classes.formControl}>
-                    <FormControlLabel
-                        control={<Switch  checked={activeSong} onChange={handleChangeSwitch} color="primary" />}
-                        label="Active"
-                    />
-                </FormControl>
-            </div>
-            <div>{/*TODO в отдельный компонент*/}
-                <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-mutiple-chip-label">Attributes</InputLabel>
-                    <Select
-                        labelId="demo-mutiple-chip-label"
-                        id="demo-mutiple-chip"
-                        multiple
-                        value={personName}
-                        onChange={handleChangeSelect}
-                        input={<Input id="select-multiple-chip" />}
-                        renderValue={select => (
-                            <div className={classes.chips}>
-                                {select.map(value => (
-                                    <Chip key={value} label={value} className={classes.chip} />
-                                ))}
-                            </div>
-                        )}
-                        MenuProps={MenuProps}
-                    >
-                        {names.map(name => (
-                            <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-                                {name}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-            </div>
-        </div>,
+                <div>
+                    <FormControl fullWidth className={classes.formControl}>
+                        <TextField
+                            margin="dense"
+                            id="name"
+                            label="Name"
+                            type="text"
+                            value={attribute.name}
+                            fullWidth
+                            onChange={handleChange('name')}
+                        />
+                    </FormControl>
+                </div>
+                <div>
+                    <FormControl fullWidth className={classes.formControl}>
+                        <TextField
+                            margin="dense"
+                            id="priority"
+                            label="Priority"
+                            value={attribute.priority}
+                            type="text"
+                            fullWidth
+                            onChange={handleChange('priority')}
+                        />
+                    </FormControl>
+                </div>
+                <div>
+                    <FormControl className={classes.formControl}>
+                        <FormControlLabel
+                            control={<Switch  checked={showInTable} onChange={handleChangeSwitch('showSong')} color="primary" />}
+                            label="Show in Songlist Rows?"
+                        />
+                    </FormControl>
+                </div>
+                <div>
+                    <FormControl className={classes.formControl}>
+                        <FormControlLabel
+                            control={<Switch  checked={activeAttribute} onChange={handleChangeSwitch('active')} color="primary" />}
+                            label="Active"
+                        />
+                    </FormControl>
+                </div>
+
+                <div>
+                    <FormControl className={classes.formControl}>
+                        <UploadButtons/>
+                    </FormControl>
+                </div>
+
+            </div>,
         action:
             <FormControl fullWidth >
                 <Button onClick={handleClose} color="primary"  className={classes.button}>
                     Cancel
                 </Button>
-                <Button onClick={handleSave(song)} color="primary"  className={classes.button}>
+                <Button onClick={handleCreate(attribute)} color="primary"  className={classes.button}>
                     Save
                 </Button>
             </FormControl>
@@ -166,7 +150,7 @@ export function DialogAttributesEdit(props) {
     }
 
     return (
-        <CustomDialog  data = { data } show={ dialogOpened }  onHide={ onHide }/>
+        <CustomDialog  data = { data } show={ show }  onHide={ onHide }/>
     )
 
 }
