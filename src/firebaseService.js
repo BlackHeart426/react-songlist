@@ -1,6 +1,7 @@
 import * as app from "firebase/app";
 import "firebase/database";
 import "firebase/auth";
+import "firebase/storage"
 import * as firebase from "firebase";
 
 const config = {
@@ -16,6 +17,7 @@ const config = {
 app.initializeApp(config);
 
 export const database = app.database();
+export const storage = app.storage();
 // const userId = localStorage.getItem('userId');
 // const ref = db.ref('songs').child(userId);
 //
