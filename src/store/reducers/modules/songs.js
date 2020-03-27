@@ -2,7 +2,7 @@ import React from "react";
 import {
     ADD_SONG,
     EDIT_SONG,
-    REMOVE_SONG,
+    REMOVE_SONG, SET_FILTER_SONG,
     SET_SEARCHTEXT,
     SET_SELECTED,
     SET_SELECTED_SONG,
@@ -16,6 +16,7 @@ const initialState = {
     selected: [],
     active: false,
     searchText: '',
+    filterAttributes: [],
 };
 
 export const songsReducer = (state = initialState, action) => {
@@ -28,6 +29,8 @@ export const songsReducer = (state = initialState, action) => {
             return { ...state, active: action.active,  selected: [] };
         case ADD_SONG:
             return { ...state, list: Object.values(state.list).concat(action.newSong) };
+        case SET_FILTER_SONG:
+            return { ...state, filterAttributes: action.newAttribute };
         case SET_SELECTED_SONG:
             return { ...state, selected: action.newSelect };
         case REMOVE_SONG:

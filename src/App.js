@@ -16,7 +16,7 @@ import {Test} from "./page/Test";
 import Songs from "./page/Songs/Songs";
 import {connect, useSelector} from "react-redux";
 import {getSongDataActionCreator, setSelectedActionCreator} from "./store/action/modules/songs";
-import {showAlert, showLoader} from "./store/action/app";
+import {hideLoader, showAlert, showLoader} from "./store/action/app";
 import {getQueueDataActionCreator} from "./store/action/modules/queue";
 import {getSavedQueueDataActionCreator} from "./store/action/modules/savedQueue";
 import {getHistoryDataActionCreator} from "./store/action/modules/history";
@@ -110,7 +110,8 @@ const mapDispatchToProps = dispatch => {
             getAttributesData: () => dispatch(getAttributesDataActionCreator()),
             // setSelected: (data) => dispatch(setSelectedActionCreator(data)),
             alert: (text) => dispatch(showAlert(text)),
-            // loader: () => dispatch(showLoader())
+            showLoader: () => dispatch(showLoader()),
+            hideLoader: () => dispatch(hideLoader())
         }
     }
 };

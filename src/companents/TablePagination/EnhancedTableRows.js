@@ -67,9 +67,13 @@ export const EnhancedTableRows = (props) => {
                                             {
                                                 row[item].type == 'tag' &&
                                                 row[item].data.map((tag, indexTag) => (
-                                                    <div key={indexTag}>
-                                                        {componentTags[tag.name]}
-                                                    </div>
+                                                        <IconButton
+                                                            type="submit"
+                                                            size="small"
+                                                            color="primary"
+                                                            key={indexTag}>
+                                                            {tag.name}
+                                                        </IconButton>
                                                 ))
 
                                             }

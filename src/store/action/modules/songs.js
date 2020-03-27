@@ -5,7 +5,7 @@ import {hideLoader, showAlert, showLoader} from "../app";
 import {
     ADD_SONG,
     EDIT_SONG,
-    REMOVE_SONG,
+    REMOVE_SONG, SET_FILTER_SONG,
     SET_SEARCHTEXT,
     SET_SELECTED,
     SET_SELECTED_SONG,
@@ -51,6 +51,18 @@ export const addSongActionCreator = (state) => async dispatch => {
         await SongAPI.getRef().child(state.id).set(state)
             .then(dispatch({ type: ADD_SONG, newSong: state }))
             .catch(console.log('setData error'))
+        dispatch(hideLoader())
+    } catch (e) {
+        dispatch(showAlert('Что-то пошло не так'))
+        dispatch(hideLoader())
+    }
+};
+
+export const addFilterActionCreator = (state) => async dispatch => {
+debugger
+    dispatch(showLoader())
+    try {
+        await dispatch({ type: SET_FILTER_SONG, newAttribute: state })
         dispatch(hideLoader())
     } catch (e) {
         dispatch(showAlert('Что-то пошло не так'))

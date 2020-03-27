@@ -41,7 +41,7 @@ export const EditAttribute = (props) => {
 
     return (
         <>
-            <IconButton onClick={handleEditRows} disabled={loading === true ? true : showButton(lenSelected)}>
+            <IconButton onClick={handleEditRows} disabled={loading == true ? true : showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
             <DialogAttributesEdit onAddAttribute={ handleEditRowsAttribute } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>

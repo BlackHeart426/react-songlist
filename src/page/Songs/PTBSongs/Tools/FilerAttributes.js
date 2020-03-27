@@ -1,6 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import {useDispatch} from "react-redux";
+import {addFilterActionCreator} from "../../../../store/action/modules/songs";
 
 export const FilterAttributes = (props) => {
 
@@ -8,24 +12,26 @@ export const FilterAttributes = (props) => {
         marginLeft: '25%',
     };
 
-    const [value, setValue] = useState(false);
+    const [value, setValue] = useState([]);
     const { loading, attributesList} = props;
+    const dispatch = useDispatch()
 
-    const handleFilter = (event) => {
-
-        // editSong(newSong)
+    const handleFilter = (event, newAttribute) => {
+        setValue(newAttribute)
+        console.log(event.target.value)
+        dispatch(addFilterActionCreator(newAttribute))// editSong(newSong)
     };
 
 
     return (
 
         <>
-            <ButtonGroup style={ml40} name="filterSong" size="small" onChange={handleFilter} color="primary" disabled={loading}>
+            <ToggleButtonGroup style={ml40}  size="small" value={value} onChange={handleFilter} aria-label="text formatting" color="primary" disabled={loading}>
                 {attributesList.map((item, index) => (
-                        <Button value="All" key={index} label="All">{attributesList[index].data.name}</Button>
+                        <ToggleButton  value={attributesList[index].id} key={index} label={attributesList[index].data.name}>{attributesList[index].data.name}</ToggleButton>
                     )
                 )}
-            </ButtonGroup>
+            </ToggleButtonGroup>
         </>
     )
 }
