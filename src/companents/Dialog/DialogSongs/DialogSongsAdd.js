@@ -25,7 +25,7 @@ export function DialogSongsAdd(props) {
         tags: []
     }
 
-    const {show, onHide, onAddSongs, dataSong} = props
+    const {show, onHide, onAddSongs, dataSong, attributesList} = props
     const classes = useStyles();
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
@@ -136,9 +136,9 @@ export function DialogSongsAdd(props) {
                         )}
                         MenuProps={MenuProps}
                     >
-                        {names.map(name => (
-                            <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-                                {name}
+                        {attributesList.map((name, index) => (
+                            <MenuItem key={attributesList[index].id} value={attributesList[index].data.name} style={getStyles(name, personName, theme)}>
+                                {attributesList[index].data.name}
                             </MenuItem>
                         ))}
                     </Select>

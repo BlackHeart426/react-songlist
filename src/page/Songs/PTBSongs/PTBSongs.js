@@ -27,14 +27,43 @@ export const PTBSongs = (props) => {
     return (
         <>
             <Card style={mbt10}>
-                <AddSongs loading={loading} lenSelected={lenSelected} songData={listSong} />
-                <EditSongs loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
-                <RemoveSongs loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected} />
-                <DetailSongs loading={loading} lenSelected={lenSelected} selected={selected} songData={listSong}/>
-                <AddInQueueSongs loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
-                <SwitchActiveSongs loading={loading} showActive={showActive} onActive = {onActive}/>
-                <FilterAttributes loading={loading} lenSelected={lenSelected} attributesList={attributesList} />
-                <SearchField loading={loading} searchText={searchText} moduleActionCreator={setSearchTextActionCreator}/>
+                <AddSongs
+                    attributesList={attributesList}
+                    loading={loading}
+                    lenSelected={lenSelected}
+                    songData={listSong} />
+                <EditSongs
+                    attributesList={attributesList}
+                    loading={loading}
+                    lenSelected={lenSelected}
+                    songData={listSong}
+                    selected={selected}/>
+                <RemoveSongs
+                    loading={loading}
+                    lenSelected={lenSelected}
+                    songData={listSong}
+                    selected={selected} />
+                <DetailSongs
+                    loading={loading}
+                    lenSelected={lenSelected}
+                    selected={selected}
+                    songData={listSong}/>
+                <AddInQueueSongs
+                    loading={loading}
+                    lenSelected={lenSelected}
+                    songData={listSong} selected={selected}/>
+                <SwitchActiveSongs
+                    loading={loading}
+                    showActive={showActive}
+                    onActive = {onActive}/>
+                <FilterAttributes
+                    loading={loading}
+                    lenSelected={lenSelected}
+                    attributesList={attributesList} />
+                <SearchField
+                    loading={loading}
+                    searchText={searchText}
+                    moduleActionCreator={setSearchTextActionCreator}/>
             </Card>
 
         </>

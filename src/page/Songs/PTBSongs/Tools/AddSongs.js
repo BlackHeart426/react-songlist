@@ -9,7 +9,7 @@ import {addSong, addSongActionCreator} from "../../../../store/action/modules/so
 export const AddSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
 
-    const {lenSelected, loading} = props;
+    const {lenSelected, loading, attributesList} = props;
     const dispatch = useDispatch()
 
     const openDialog = () => {
@@ -43,7 +43,7 @@ export const AddSongs = (props) => {
             <IconButton onClick={ openDialog } disabled={ loading === true ? true : showButton(lenSelected) }>
                 <ControlPointIcon />
             </IconButton>
-            <DialogSongsAdd onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogSongsAdd attributesList={attributesList} onAddSongs={ addRowsSong } show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 };
