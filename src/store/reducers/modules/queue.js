@@ -17,11 +17,12 @@ export const queueReducer = (state = initialState, action) => {
         case SET_QUEUEDATA:
             return { ...state, list: action.list };
         case CHANGE_POSITION:
-            return { ...state, list: moveArrayItemToNewIndex(
-                    state.list,
-                    state.list.findIndex(item => item.id === action.position),
-                    state.list.findIndex(item => item.id === action.position)-1
-                )};
+            return { ...state };
+            // return { ...state, list: moveArrayItemToNewIndex(
+            //         state.list,
+            //         state.list.findIndex(item => item.id === action.position),
+            //         state.list.findIndex(item => item.id === action.position)+1
+            //     )};
         case ADD_SONG_IN_QUEUE:
             return { ...state, list: [ ...state.list, action.newSong ] };
         case SET_SELECTED_QUEUE:

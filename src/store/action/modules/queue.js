@@ -1,6 +1,6 @@
 import * as QueueAPI from "../../../API/QueueAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
-import {SET_QUEUEDATA} from "../../types";
+import {EDIT_ATTRIBUTES, SET_QUEUEDATA} from "../../types";
 import {ADD_SONG_IN_QUEUE} from "../../types";
 import {CHANGE_POSITION} from "../../types";
 import {SET_SEARCHTEXT} from "../../types";
@@ -9,6 +9,7 @@ import {REMOVE_SONG_IN_QUEUE} from "../../types";
 import {addSongInSavedQueueActionCreator} from "./savedQueue";
 import {SET_SELECTED_QUEUE} from "../../types";
 import * as shortid from "shortid";
+import * as AttributesAPI from "../../../API/AttributesAPI";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
@@ -40,7 +41,7 @@ export const addSongInQueueActionCreator = (state, idSong) => async dispatch => 
                 });
             })
             .catch(console.log('setData error'))
-        state.position = length;
+        // state.position = length;
         const song = {};
         song.position = length;
         song.data = {...state};
@@ -67,12 +68,46 @@ export const editSongInQueueActionCreator = (state) => async dispatch => {
     //     song: state
     // }
 };
+export const checkPosotion = (currentItem, oldPosition, newPosition) => {
+    if (currentItem.position === newPosition)
+    {
+        currentItem.position++
 
-export const movePositionInQueue = (state) => async dispatch => {
-    dispatch({
-        type: CHANGE_POSITION,
-        position: state
-    })
+    } else {
+        if ( currentItem.position === oldPosition){
+            currentItem.position = newPosition
+        } else {
+            currentItem.position > newPosition && currentItem.position++
+        }
+    }
+
+}
+
+export const movePositionInQueue = (idCurrent, newId) => async dispatch => {
+    const list =  [];
+    await QueueAPI.getRef().orderByChild("position").once('value')
+    .then((snapshot) => {
+        snapshot.forEach(childSnapshot => {
+            list.push(childSnapshot.val());
+        });
+    });
+    const currentPosition = {...list.find(item => item.id === idCurrent)};
+    const newPosition = {...list.find(item => item.id === newId)};
+    list.forEach((item, index) => {
+        checkPosotion(item, currentPosition.position, newPosition.position)
+    });
+    list.map(item => (
+        updateData(item)
+    ))
+
+    async function updateData(item) {
+        const updates = {};
+        updates['/'+item.id+'/'] = item;
+        await QueueAPI.getRef().update(updates)
+            .then(dispatch({ type: EDIT_ATTRIBUTES, song: item }))
+    }
+    await dispatch(getQueueDataActionCreator())
+
 }
 
 export const addSongInSavedQueue = (state) => async dispatch => {
