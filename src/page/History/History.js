@@ -46,7 +46,7 @@ const History = (props) => {
                     }
                 })
                 if (flag) return item
-                // return item.data.title.toUpperCase().indexOf(search) !== -1
+                return item.data.title.toUpperCase().indexOf(search) !== -1
             });
             songList.list = filtered;
             return (

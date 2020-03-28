@@ -14,7 +14,7 @@ export function EnhancedTableHead(props) {
     let bold = {
         fontWeight: 700,
         fontSize: 16
-    }
+    };
 
 
     return (
@@ -22,7 +22,7 @@ export function EnhancedTableHead(props) {
             <TableRow>
                 {editMode &&
                 <TableCell padding="checkbox">
-                    {typeCheckBox != 'solo' &&
+                    {typeCheckBox !== 'solo' &&
                     <Checkbox
                         indeterminate={numSelected > 0 && numSelected < rowCount}
                         checked={rowCount > 0 && numSelected === rowCount}

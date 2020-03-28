@@ -5,7 +5,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
-import { ExpandLess, ExpandMore, Settings, StarBorder
+import { ExpandLess, ExpandMore, Settings
 } from "@material-ui/icons";
 import Collapse from "@material-ui/core/Collapse";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -73,10 +73,10 @@ const DrawerCustom = (props) => {
             </ListItem>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    {settingsMenuCustom.map((link) => (
-                        link.className = classes.nested,
-                        renderLink(link)
-                    ))}
+                    {settingsMenuCustom.map((link) => {
+                        link.className = classes.nested;
+                        return renderLink(link)}
+                    )}
                 </List>
             </Collapse>
             <ListItem>

@@ -1,12 +1,12 @@
 import {Card} from "@material-ui/core";
-import React, {useContext} from "react";
+import React from "react";
 import {AddSongs} from "./Tools/AddSongs";
 import {EditSongs} from "./Tools/EditSongs";
 import {RemoveSongs} from "./Tools/RemoveSongs";
 import {DetailSongs} from "./Tools/DetailSongs";
 import {AddInQueueSongs} from "./Tools/AddInQueueSongs";
 import {SwitchActiveSongs} from "./Tools/SwitchActiveSongs";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {setSearchTextActionCreator} from "../../../store/action/modules/songs";
 import {SearchField} from "../../../companents/SearchField/SearchField";
 import {FilterAttributes} from "./Tools/FilerAttributes";

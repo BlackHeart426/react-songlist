@@ -1,27 +1,19 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useState} from "react";
+import React from "react";
 import PublishIcon from '@material-ui/icons/Publish';
 
 export const MoveUpSongQueue = (props) => {
-    const [dialogOpened, setDialogOpened] = useState(false);
-    const {lenSelected, editSong, changePosition, selected, loading} = props;
+    const {lenSelected, changePosition, selected, loading} = props;
 
     function showButton(lenSelected) {
-        return lenSelected == 1 ? false : true
+        return lenSelected === 1
     }
 
-    const requesthandle = () => {
-
-    }
-
-    const handleEditRows = () => {
-        setDialogOpened(true)
-    }
 
     const handleMoveUpSong = () => {
         changePosition(selected)
 
-    }
+    };
 
     return (
         <>
@@ -30,4 +22,4 @@ export const MoveUpSongQueue = (props) => {
             </IconButton>
         </>
     )
-}
+};

@@ -9,7 +9,7 @@ export const DetailSong = props => {
 
     return (
         <>
-            <ToolsDetail/>
+            <ToolsDetail uuid={props.match.params.id}/>
             <ContentDetail detailSong = { listSong.find(item => item.id == props.match.params.id) }/>
         </>
     )

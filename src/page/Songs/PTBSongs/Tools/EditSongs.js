@@ -1,5 +1,5 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useState} from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
 import {useDispatch} from "react-redux";
@@ -11,20 +11,16 @@ export const EditSongs = (props) => {
     const dispatch = useDispatch()
 
     function showButton(lenSelected) {
-        return lenSelected == 1 ? false : true
+        return lenSelected !== 1
     }
 
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
         return {title, artist, timesPlayed, lastPlayed, tags }
     }
 
-    const requesthandle = () => {
-
-    }
-
     const handleEditRows = () => {
         setDialogOpened(true)
-    }
+    };
 
     const handleEditRowsSong = (property) => {
         const {title, artist, tags, active, timesPlayed, lastPlayed} = property;
@@ -38,16 +34,16 @@ export const EditSongs = (props) => {
                 tags ,
             ),
             active: active
-        }
+        };
         dispatch(editSongActionCreator(newSong))
-    }
+    };
 
     return (
         <>
             <IconButton onClick={handleEditRows} disabled={loading === true ? true : showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
-            <DialogSongsEdit onAddSongs={ handleEditRowsSong } dataSong={songData.find(item => item.id == selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogSongsEdit onAddSongs={ handleEditRowsSong } dataSong={songData.find(item => item.id === selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
-}
+};

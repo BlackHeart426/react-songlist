@@ -1,5 +1,5 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useState} from "react";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import {DialogSongsAddQueue} from "../../../../companents/Dialog/DialogSongs/DialogSongsAddQueue";
 import {useDispatch} from "react-redux";
@@ -12,10 +12,10 @@ export const AddInQueueSongs = (props) => {
 
     const addItemToRows = () => {
         setDialogOpened(true)
-    }
+    };
 
     function showButton(lenSelected) {
-        return lenSelected == 1 ? false : true
+        return lenSelected !== 1
     }
 
     function addItemToQueue() {
@@ -24,7 +24,7 @@ export const AddInQueueSongs = (props) => {
 
     const handleMoveSongInQueue = (song) => {
         dispatch(addSongInQueueActionCreator(song))
-    }
+    };
 
     return (
         <>
@@ -33,9 +33,9 @@ export const AddInQueueSongs = (props) => {
             </IconButton>
             <DialogSongsAddQueue
                 onAddItemToQueue={ addItemToQueue }
-                dataSong={songData.find(item => item.id == selected[0])}
+                dataSong={songData.find(item => item.id === selected[0])}
                 onAccept = { handleMoveSongInQueue }
                 show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
-}
+};

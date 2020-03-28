@@ -1,15 +1,12 @@
-import React from "react";
 import * as HistoryAPI from "../../../API/HistoryAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
 import {
     ADD_SONG_IN_HISTORY,
-    ADD_SONG_IN_QUEUE,
-    REMOVE_SONG_HISTORY, REMOVE_SONG_IN_QUEUE,
+    REMOVE_SONG_HISTORY,
     SET_HISTORYDATA,
     SET_SEARCHTEXT, SET_SEARCHTEXT_HISTORY,
-    SET_SELECTED, SET_SELECTED_HISTORY
+   SET_SELECTED_HISTORY
 } from "../../types";
-import * as QueueAPI from "../../../API/QueueAPI";
 
 
 export const getHistoryDataActionCreator = () => async dispatch => {

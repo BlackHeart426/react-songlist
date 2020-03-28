@@ -1,6 +1,4 @@
 import PropTypes from "prop-types";
-import clsx from 'clsx';
-import {EnhancedTableHead} from "./EnhancedTableHead";
 import {getComparator, stableSort} from "./stableSort";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -9,13 +7,8 @@ import {componentTags} from "./componentTags";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import React from "react";
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import {blue, orange} from "@material-ui/core/colors";
 import {ThemeProvider} from "@material-ui/styles";
 import {outerTheme} from "./styles";
-import {Loader} from "../Loader/Loader";
-import {useSelector} from "react-redux";
-
 
 const active = {
     'color': 'rgba(0, 0, 0, 0.88)',
@@ -26,7 +19,7 @@ const defaultColor = {
 };
 
 export const EnhancedTableRows = (props) => {
-    const { data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode, showActive } = props
+    const { data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode, showActive } = props;
     return (
         stableSort(data, getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -36,7 +29,7 @@ export const EnhancedTableRows = (props) => {
 
                 return (
 
-                    (data[index].active != undefined ? ( (showActive) || (data[index].active) ) : true ) &&
+                    (data[index].active !== undefined ? ( (showActive) || (data[index].active) ) : true ) &&
                     <ThemeProvider theme={outerTheme}  key={ data[index].id }>
                             <TableRow
                                 hover
@@ -62,10 +55,10 @@ export const EnhancedTableRows = (props) => {
                                 {Object.keys(row).map((item, indexRow) => (
 
                                         <TableCell align="center" key={indexRow}
-                                                   style={data[index].active != undefined ? (data[index].active == true ? active : defaultColor) : active}>
+                                                   style={data[index].active !== undefined ? (data[index].active === true ? active : defaultColor) : active}>
 
                                             {
-                                                row[item].type == 'tag' &&
+                                                row[item].type === 'tag' &&
                                                 row[item].data.map((tag, indexTag) => (
                                                         <IconButton
                                                             type="submit"
@@ -78,14 +71,14 @@ export const EnhancedTableRows = (props) => {
 
                                             }
                                             {
-                                                row[item].type == 'position' &&
+                                                row[item].type === 'position' &&
                                                 <>{index + 1}</>
 
                                             }
                                             {
-                                                row[item].type == 'btn' && !editMode &&
+                                                row[item].type === 'btn' && !editMode &&
                                                 row[item].data.map((btn, indexBtn) => (
-                                                    btn.type == 'text'
+                                                    btn.type === 'text'
                                                         ? <Button
                                                             type="submit"
                                                             color="primary"
@@ -107,7 +100,7 @@ export const EnhancedTableRows = (props) => {
 
                                             }
                                             {
-                                                row[item].type != 'btn' && row[item].type != 'position' && row[item].type != 'tag' &&
+                                                row[item].type !== 'btn' && row[item].type !== 'position' && row[item].type !== 'tag' &&
                                                 <> {row[item]} </>
 
                                             }
@@ -121,7 +114,7 @@ export const EnhancedTableRows = (props) => {
                 );
             })
     )
-}
+};
 
 
 EnhancedTableRows.propTypes = {

@@ -1,11 +1,9 @@
-import React from "react";
 import * as SavedQueueAPI from "../../../API/SavedQueueAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
 import {
-    ADD_SONG_IN_SAVEDQUEUE, REMOVE_SONG_IN_QUEUE, REMOVE_SONG_SAVEDQUEUE,
+    ADD_SONG_IN_SAVEDQUEUE, REMOVE_SONG_SAVEDQUEUE,
     SET_SAVEDQUEUEDATA,
-    SET_SEARCHTEXT, SET_SEARCHTEXT_HISTORY, SET_SEARCHTEXT_SAVEDQUEUE,
-    SET_SELECTED,
+    SET_SEARCHTEXT_SAVEDQUEUE,
     SET_SELECTED_SAVEDQUEUE
 } from "../../types";
 import {addSongInQueueActionCreator} from "./queue";

@@ -34,7 +34,7 @@ const Queue = (props) => {
 
     function handleDetail(id) {
         let queueList = {...props.queueData};
-        const uuidSong = queueList.list.find(item => item.id == id);
+        const uuidSong = queueList.list.find(item => item.id === id);
         history.push(addUserIdAtLink("/songs/detail/"+uuidSong.id))
         console.log('detail', id)
     }
@@ -45,8 +45,8 @@ const Queue = (props) => {
     }
 
     function handleDone(id) {
-        var today = new Date();
-        const songState = props.queueData.list.find(item => item.id == id);
+        // var today = new Date();
+        const songState = props.queueData.list.find(item => item.id === id);
         delete songState.data.position
         songState.data.played = 'today';//today;
         props.action.songPerformed(songState);
@@ -64,7 +64,7 @@ const Queue = (props) => {
         } else {
             return queueList
         }
-    }
+    };
 
     const headCells = [
         { id: 'position', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Position', type: 'txt' },

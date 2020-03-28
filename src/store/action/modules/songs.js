@@ -1,4 +1,3 @@
-import React from "react";
 import * as SongAPI from "../../../API/SongAPI";
 
 import {hideLoader, showAlert, showLoader} from "../app";
@@ -7,16 +6,14 @@ import {
     EDIT_SONG,
     REMOVE_SONG, SET_FILTER_SONG,
     SET_SEARCHTEXT,
-    SET_SELECTED,
     SET_SELECTED_SONG,
     SET_SONGDATA,
     TOGGLE_ACTIVE
 } from "../../types";
-import {addSongInQueueActionCreator} from "./queue";
 
 export const getSongDataActionCreator = () => async dispatch => {
     const data = [];
-    dispatch(showLoader())
+    dispatch(showLoader());
     try {
 
         // const res = await Axios.get('https://song-list-95d78.firebaseio.com/songs/aYDAtD5RU6hGLLpBywY3ZBxUQEE2.json')
@@ -39,18 +36,18 @@ export const getSongDataActionCreator = () => async dispatch => {
                 dispatch(hideLoader())
             })
     } catch (e) {
-        dispatch(showAlert('Что-то пошло не так'))
+        dispatch(showAlert('Что-то пошло не так'));
         dispatch(hideLoader())
     }
 };
 
 export const addSongActionCreator = (state) => async dispatch => {
 
-    dispatch(showLoader())
+    dispatch(showLoader());
     try {
         await SongAPI.getRef().child(state.id).set(state)
             .then(dispatch({ type: ADD_SONG, newSong: state }))
-            .catch(console.log('setData error'))
+            .catch(console.log('setData error'));
         dispatch(hideLoader())
     } catch (e) {
         dispatch(showAlert('Что-то пошло не так'))
@@ -60,7 +57,7 @@ export const addSongActionCreator = (state) => async dispatch => {
 
 export const addFilterActionCreator = (state) => async dispatch => {
 debugger
-    dispatch(showLoader())
+    dispatch(showLoader());
     try {
         await dispatch({ type: SET_FILTER_SONG, newAttribute: state })
         dispatch(hideLoader())

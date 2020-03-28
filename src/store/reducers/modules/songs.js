@@ -1,10 +1,8 @@
-import React from "react";
 import {
     ADD_SONG,
     EDIT_SONG,
     REMOVE_SONG, SET_FILTER_SONG,
     SET_SEARCHTEXT,
-    SET_SELECTED,
     SET_SELECTED_SONG,
     SET_SONGDATA,
     TOGGLE_ACTIVE

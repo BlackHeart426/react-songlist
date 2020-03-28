@@ -3,25 +3,10 @@ import Button from "@material-ui/core/Button";
 import React, {useEffect, useState} from "react";
 import {useStyles} from "../DialogSongs/style";
 import CustomDialog from "../CustomDialog";
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 export function DialogRemoveSongHistory(props) {
-    const formControl = {
-        title: '',
-        artist: '',
-        requested: '',
-        note: '',
-        amount: '',
-    }
-
-    const {show, onHide, dataSong, onAccept} = props
+    const {show, onHide, dataSong} = props;
     const classes = useStyles();
     const [dialogOpened, setDialogOpened] = useState(false);
     const copyDataSong = {...dataSong};
@@ -29,7 +14,7 @@ export function DialogRemoveSongHistory(props) {
 
     useEffect(() => {
         setDialogOpened(show);
-    },[show])
+    },[show]);
 
     const handleAccept = () => {
         setDialogOpened(false);
@@ -66,7 +51,7 @@ export function DialogRemoveSongHistory(props) {
                 </Button>
             </FormControl>
 
-    }
+    };
 
     return (
         <CustomDialog  data = { data } show={ dialogOpened }  onHide={ onHide }/>

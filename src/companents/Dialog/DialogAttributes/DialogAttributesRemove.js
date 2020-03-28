@@ -1,25 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import CustomDialog from "../CustomDialog";
-
-let paramTest = {
-    title: 'The kill',
-    artist: '30 sec'
-}
 
 export default function DialogAttributesRemove(props) {
     const [dialogOpened, setDialogOpened] = useState(false);
-    const { show, onHide, onAccept, dataSong } = props
+    const { show, onHide, onAccept } = props;
     const copyDataAttributes = {...props.dataSong};
     const copyDataAttributesData = {...copyDataAttributes['data']};
 
     useEffect(() => {
         setDialogOpened(show)
-    },[show])
+    },[show]);
 
     const handleClose = () => {
         setDialogOpened(false);
@@ -27,7 +18,7 @@ export default function DialogAttributesRemove(props) {
     };
 
     const handleAccept = () => {
-        handleClose()
+        handleClose();
         onAccept(true)
     }
 
@@ -42,7 +33,7 @@ export default function DialogAttributesRemove(props) {
                 Agree
             </Button>
             </>
-    }
+    };
 
     return (
         <CustomDialog  data = { data } show={ dialogOpened }  onHide={ onHide }/>

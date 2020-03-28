@@ -10,19 +10,19 @@ export const AddAttribute = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
 
     const {lenSelected, loading} = props;
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const openDialog = () => {
         setDialogOpened(true)
     };
 
     function showButton(lenSelected) {
-        return lenSelected == 0 ? false : true
+        return lenSelected !== 0
     }
 
     const addAttribute = (property) => {
         console.log('property', property)
-        const {name, image, active, showInTable, priority, ofSongs} = property;
+        const {name, image, active, showInTable, priority} = property;
         const newAttribute = {
             id: shortid.generate(),
             data: {

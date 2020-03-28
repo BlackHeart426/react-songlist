@@ -1,5 +1,5 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useState} from "react";
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import {DialogAddSongToQueue} from "../../../../companents/Dialog/DialogQueue/DialogAddSongToQueue";
 
@@ -9,10 +9,10 @@ export const AddInQueueSong = (props) => {
 
     const addItemToRows = () => {
         setDialogOpened(true)
-    }
+    };
 
     function showButton(lenSelected) {
-        return lenSelected == 0 ? false : true
+        return lenSelected !== 0
     }
 
     function addItemToQueue() {
@@ -29,9 +29,9 @@ export const AddInQueueSong = (props) => {
             </IconButton>
             <DialogAddSongToQueue
                 onAddItemToQueue={ addItemToQueue }
-                dataSong={songData.find(item => item.id == selected)}
+                dataSong={songData.find(item => item.id === selected)}
                 onAccept = { handleRemoveSong }
                 show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
-}
+};

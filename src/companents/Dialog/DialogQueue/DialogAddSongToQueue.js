@@ -19,12 +19,12 @@ export function DialogAddSongToQueue(props) {
         requested: '',
         note: '',
         amount: '',
-    }
+    };
 
-    const {show, onHide, dataSong, onAccept} = props
+    const {show, onHide, dataSong, onAccept} = props;
     const classes = useStyles();
     const [dialogOpened, setDialogOpened] = useState(false);
-    const [song, setSong] = useState(formControl)
+    const [song, setSong] = useState(formControl);
     const [searchText, setValues] = React.useState('');
 
     const handleClearTextField = event => {
@@ -46,14 +46,14 @@ export function DialogAddSongToQueue(props) {
             statusCopy['artist'] = artist;
             setSong(statusCopy);
         }
-    },[show])
+    },[show]);
 
 
     const setProperty = (property, value) => {
         let statusCopy = Object.assign({}, song);
         statusCopy[property] = value;
         setSong(statusCopy)
-    }
+    };
 
     const handleChange = name =>  event => {
         setProperty(name, event.target.value)

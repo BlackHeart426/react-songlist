@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useStyles} from "./style";
 import CustomDialog from "../CustomDialog";
 import UploadButtons from "../../inputComponent/uploadButton/uploadButton";
@@ -17,9 +17,8 @@ export function DialogAttributesAdd(props) {
         showInTable: false
     };
 
-    const {show, onHide, onAddAttribute, dataSong} = props;
+    const {show, onHide, onAddAttribute} = props;
     const classes = useStyles();
-    const [dialogOpened, setDialogOpened] = useState(false);
     const [active, setActive] = useState(false);
     const [showSong, setShowSong] = useState(false);
     const [attribute, setAttribute] = useState(formControl);
@@ -35,14 +34,13 @@ export function DialogAttributesAdd(props) {
     };
 
     const handleChangeSwitch = name => event => {
-        name == 'active'
+        name === 'active'
             ? setActive(event.target.checked)
             : setShowSong(event.target.checked);
         setProperty(name, event.target.checked)
     };
 
     const handleClose = () => {
-        setDialogOpened(false);
         onHide();
     };
 

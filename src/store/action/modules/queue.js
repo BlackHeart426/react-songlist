@@ -1,4 +1,3 @@
-import React from "react";
 import * as QueueAPI from "../../../API/QueueAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
 import {SET_QUEUEDATA} from "../../types";

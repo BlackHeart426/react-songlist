@@ -1,5 +1,5 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
+import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
 import {useDispatch} from "react-redux";
@@ -12,15 +12,15 @@ export const RemoveSongs = (props) => {
 
     const handleOpenConfirm = () => {
         setConfirmOpened(true)
-    }
+    };
 
     function showButton(selected) {
-        return selected != 0 ? false : true
+        return selected === 0
     }
 
     const handleRemoveSong = () => {
         dispatch(removeSongActionCreator(selected[0]))
-    }
+    };
 
     return (
         <>
@@ -31,8 +31,8 @@ export const RemoveSongs = (props) => {
                 show = { confirmOpened }
                 onHide = { () => setConfirmOpened(false) }
                 onAccept = { handleRemoveSong }
-                dataSong={ songData.find(item => item.id == selected) }
+                dataSong={ songData.find(item => item.id === selected) }
             />
         </>
     )
-}
+};

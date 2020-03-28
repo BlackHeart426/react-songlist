@@ -1,11 +1,10 @@
 import {Card} from "@material-ui/core";
-import React, {useContext} from "react";
+import React from "react";
 import {RemoveSong} from "./Tools/RemoveSong";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {AddSongToQueue} from "./Tools/AddSongToQueue";
 import {SearchField} from "../../../companents/SearchField/SearchField";
 import {setSearchTextSavedQueueActionCreator} from "../../../store/action/modules/savedQueue";
-import {AddSongs} from "../../Songs/PTBSongs/Tools/AddSongs";
 
 let mbt10 = {
     marginBottom: '10px',
@@ -13,10 +12,10 @@ let mbt10 = {
 }
 
 export const PTBSavedQueue = (props) => {
-    const selected = useSelector(state => state.savedQueue.selected)
-    const listSong = useSelector(state => state.savedQueue.list)
-    const searchText = useSelector(state => state.songs.searchText)
-    const loading = useSelector(state => state.app.loading)
+    const selected = useSelector(state => state.savedQueue.selected);
+    const listSong = useSelector(state => state.savedQueue.list);
+    const searchText = useSelector(state => state.songs.searchText);
+    const loading = useSelector(state => state.app.loading);
     const lenSelected = selected.length;
     return (
         <>
@@ -28,4 +27,4 @@ export const PTBSavedQueue = (props) => {
 
         </>
     )
-}
+};

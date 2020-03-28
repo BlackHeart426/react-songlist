@@ -1,10 +1,9 @@
-import React from "react";
 import {
     ADD_SONG_IN_QUEUE,
     CHANGE_POSITION,
-    REMOVE_SONG, REMOVE_SONG_IN_QUEUE,
+    REMOVE_SONG_IN_QUEUE,
     SET_QUEUEDATA,
-    SET_SELECTED, SET_SELECTED_QUEUE,
+    SET_SELECTED_QUEUE,
     UPDATE_SONG_QUEUE
 } from "../../types";
 

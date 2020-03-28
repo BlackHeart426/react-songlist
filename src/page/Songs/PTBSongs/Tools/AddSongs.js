@@ -1,23 +1,23 @@
 import ControlPointIcon from "@material-ui/icons/ControlPoint";
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useState} from "react";
 import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSongsAdd";
 import * as shortid from "shortid";
-import {useDispatch, useSelector} from "react-redux";
-import {addSong, addSongActionCreator} from "../../../../store/action/modules/songs";
+import {useDispatch} from "react-redux";
+import {addSongActionCreator} from "../../../../store/action/modules/songs";
 
 export const AddSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
 
     const {lenSelected, loading, attributesList} = props;
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const openDialog = () => {
         setDialogOpened(true)
     };
 
     function showButton(lenSelected) {
-        return lenSelected == 0 ? false : true
+        return lenSelected === 0 ? false : true
     }
 
     const addRowsSong = (property) => {
@@ -34,7 +34,6 @@ export const AddSongs = (props) => {
             },
             active: active
         };
-        // SongAPI.getRef().child(newSong.id).set(newSong)
         dispatch(addSongActionCreator(newSong))
     };
 

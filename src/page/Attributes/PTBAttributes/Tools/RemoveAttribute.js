@@ -1,5 +1,5 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
+import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {useDispatch} from "react-redux";
 import {removeAttributeActionCreator} from "../../../../store/action/modules/attributes";
@@ -12,15 +12,15 @@ export const RemoveAttribute = (props) => {
 
     const handleOpenConfirm = () => {
         setConfirmOpened(true)
-    }
+    };
 
     function showButton(lenSelected) {
-        return lenSelected != 0 ? false : true
+        return lenSelected === 0
     }
 
     const handleRemoveSong = () => {
         dispatch(removeAttributeActionCreator(selected[0]))
-    }
+    };
 
     return (
         <>
@@ -31,8 +31,8 @@ export const RemoveAttribute = (props) => {
                 show = { confirmOpened }
                 onHide = { () => setConfirmOpened(false) }
                 onAccept = { handleRemoveSong }
-                dataSong={ songData.find(item => item.id == selected) }
+                dataSong={ songData.find(item => item.id === selected) }
             />
         </>
     )
-}
+};

@@ -17,15 +17,16 @@ let btnRight = {
 }
 
 export const ToolsDetail = (props) => {
+    const {uuid} = props;
     return (
         <>
             <Card style={mbt10}>
                 <ToolDetailBack/>
                 <label color="textSecondary">Created on Feb 29, 2020</label>
                 <div  style={btnRight}>
-                    <ToolDetailEditSong/>
-                    <ToolDetailRequestSong/>
-                    <ToolDetailHistorySong/>
+                    <ToolDetailEditSong uuid={uuid}/>
+                    <ToolDetailRequestSong uuid={uuid}/>
+                    <ToolDetailHistorySong uuid={uuid}/>
                 </div>
             </Card>
         </>

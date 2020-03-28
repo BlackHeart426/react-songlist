@@ -2,20 +2,20 @@ import React, { useEffect, useState} from "react";
 import TablePagination from '../../companents/TablePagination/ComponentTablePagination'
 import {PTBSongs} from "./PTBSongs/PTBSongs";
 import {headCells} from "./headTable";
-import {connect, useDispatch} from "react-redux";
+import {connect} from "react-redux";
 import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/modules/songs";
 import {showAlert, showLoader} from "../../store/action/app";
 
 const Songs = (props) => {
-    const requesthandle = (id) => {
+    const handleRequest = (id) => {
         console.log('request', id)
     };
 
-    const nameArr = nameTag => ( {name: nameTag} )
+    const nameArr = nameTag => ( {name: nameTag} );
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
         return {title, artist, timesPlayed, lastPlayed,
             tags: { type: 'tag', data: Object.values(tags).map((tag, index) => nameArr(tag)) },
-            action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: requesthandle }] }}
+            action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: handleRequest }] }}
     }
 
     const wrapperSong = (song) => {
@@ -26,14 +26,9 @@ const Songs = (props) => {
     };
 
     const {active, setActive} = useState(false);
-    useEffect(() => {
-        // props.action.getSongData(); //Заполнение таблицы с песнями
-            // dispatch(showLoader())
 
-    },[]);
-    //
     useEffect(() => {
-        console.log('props.songData',props.songData)
+        console.log('props.songData',props.songData);
         localStorage.setItem('songs', JSON.stringify(props.songData));
     },[props.songData]);
 
@@ -55,7 +50,6 @@ const Songs = (props) => {
                     }
                 })
                 if (flag) return item
-                // return item.data.title.toUpperCase().indexOf(search) !== -1
             });
             songList.list = filtered;
             return (
@@ -83,9 +77,10 @@ const Songs = (props) => {
 
 
 const mapStateToProps = state => {
-    console.log('songData', state.songs)
+    console.log('songData', state.songs);
     return {
         searchText: state.songs.searchText,
+        filterAttributes: state.songs.filterAttributes,
         songData: state.songs,
     }
 };

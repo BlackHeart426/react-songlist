@@ -15,21 +15,21 @@ export function DialogUpdateSongInQueue(props) {
         requested: '',
         note: '',
         amount: '',
-    }
+    };
 
-    const {show, onHide, dataSong, onAccept} = props
+    const {show, onHide, dataSong, onAccept} = props;
     const classes = useStyles();
     const [dialogOpened, setDialogOpened] = useState(false);
     const [song, setSong] = useState(formControl)
-    const [searchText, setValues] = React.useState('');
+    // const [searchText, setValues] = React.useState('');
 
-    const handleClearTextField = event => {
-        setValues( '' );
-    };
-
-    const handleChangeSearch = event => {
-        setValues( event.target.value );
-    };
+    // const handleClearTextField = event => {
+    //     setValues( '' );
+    // };
+    //
+    // const handleChangeSearch = event => {
+    //     setValues( event.target.value );
+    // };
     //TODO что-то с обьектом dataSong и вложеным data
     useEffect(() => {
         setDialogOpened(show);

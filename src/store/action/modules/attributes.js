@@ -1,15 +1,11 @@
-import React from "react";
 import * as AttributesAPI from "../../../API/AttributesAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
 import {
     ADD_ATTRIBUTES,
-    ADD_SONG, EDIT_ATTRIBUTES,
-    EDIT_SONG, REMOVE_ATTRIBUTES,
-    REMOVE_SONG, SET_ATTRIBUTESDATA,
-    SET_SEARCHTEXT, SET_SELECTED_ATTRIBUTES,
-    SET_SELECTED_SONG,
-    SET_SONGDATA,
-    TOGGLE_ACTIVE
+    EDIT_ATTRIBUTES,
+    REMOVE_ATTRIBUTES,
+    SET_ATTRIBUTESDATA,
+    SET_SELECTED_ATTRIBUTES,
 } from "../../types";
 
 export const getAttributesDataActionCreator = () => async dispatch => {

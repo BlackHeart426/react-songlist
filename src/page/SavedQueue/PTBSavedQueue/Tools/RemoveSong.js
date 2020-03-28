@@ -1,32 +1,24 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useContext, useEffect, useState} from "react";
+import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
-import DialogSongsRemove from "../../../../companents/Dialog/DialogSongs/DialogSongsRemove";
-import {DialogSongsEdit} from "../../../../companents/Dialog/DialogSongs/DialogSongsEdit";
 import {removeSongSavedQueueActionCreator} from "../../../../store/action/modules/savedQueue";
 import {useDispatch} from "react-redux";
 
 export const RemoveSong = (props) => {
-    const [confirmOpened, setConfirmOpened] = React.useState(false);
-    const {selected, lenSelected, songData, loading} = props;
-    const dispatch = useDispatch()
-
-
-    const handleOpenConfirm = () => {
-        setConfirmOpened(true)
-    }
+    const {selected, lenSelected, loading} = props;
+    const dispatch = useDispatch();
 
     function showButton(selected) {
-        return selected != 0 ? false : true
+        return selected === 0
     }
 
-    const handleemoveSong = () => {
+    const handleMoveSong = () => {
         dispatch(removeSongSavedQueueActionCreator(selected[0]))
-    }
+    };
 
     return (
         <>
-            <IconButton onClick={handleemoveSong} disabled={loading === true ? true : showButton(lenSelected)}>
+            <IconButton onClick={handleMoveSong} disabled={loading === true ? true : showButton(lenSelected)}>
                 <DeleteIcon />
             </IconButton>
             {/*<DialogSongsRemove*/}

@@ -1,9 +1,8 @@
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {lighten} from "@material-ui/core";
-import {blue, red} from "@material-ui/core/colors";
+import {blue} from "@material-ui/core/colors";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 //TODO разобрать
-const styledBy = (property, mapping) => props => mapping[props[property]];
 
 export const outerTheme = createMuiTheme({
     palette: {

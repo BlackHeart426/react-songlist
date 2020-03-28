@@ -2,7 +2,6 @@ import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from '@material-ui/icons/Close';
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Collapse from "@material-ui/core/Collapse";
 import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +21,6 @@ export const AlertCustom = ({ text }) =>{
     const [open, setOpen] = React.useState(false);
     return (
         <div className={classes.root}>
-            {/*<Collapse >*/}
                 <Alert
                     action={
                         <IconButton
@@ -39,7 +37,6 @@ export const AlertCustom = ({ text }) =>{
                 >
                     {text}
                 </Alert>
-            {/*</Collapse>*/}
         </div>
     )
 };
