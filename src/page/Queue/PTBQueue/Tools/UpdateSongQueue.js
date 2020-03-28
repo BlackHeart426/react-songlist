@@ -8,7 +8,7 @@ export const UpdateSongQueue = (props) => {
     const {lenSelected, editSong, songData, selected, loading} = props;
 
     function showButton(lenSelected) {
-        return lenSelected !== 1
+        return lenSelected === 1 ? false : true
     }
 
     function createData(title, artist, timesPlayed, lastPlayed, tags) {

@@ -43,6 +43,7 @@ export const addSongInSavedQueueActionCreator = (state) => async dispatch => {
 };
 
 export const moveSongInQueueActionCreator = (stateSong) => async dispatch => {
+    debugger
     await dispatch(removeSongSavedQueueActionCreator(stateSong.id));
     await dispatch(addSongInQueueActionCreator(stateSong.data, stateSong.id));
 };

@@ -76,26 +76,31 @@ export const EnhancedTableRows = (props) => {
 
                                             }
                                             {
-                                                row[item].type === 'btn' && !editMode &&
-                                                row[item].data.map((btn, indexBtn) => (
+                                                row[item].type === 'btn'
+
+                                                &&  row[item].data.map((btn, indexBtn) => (
                                                     btn.type === 'text'
-                                                        ? <Button
-                                                            type="submit"
-                                                            color="primary"
-                                                            variant="outlined"
-                                                            key={data[index].id}
-                                                            onClick={() => btn.handle(data[index].id)}
-                                                        >
-                                                            {btn.name}
-                                                        </Button>
-                                                        :
-                                                        <IconButton
-                                                            type="submit"
-                                                            color="primary"
-                                                            key={btn.name}
-                                                            onClick={() => btn.handle(data[index].id)}>
-                                                            {componentTags[btn.name]}
-                                                        </IconButton>
+                                                        ? (!editMode
+                                                            && <Button
+                                                                type="submit"
+                                                                color="primary"
+                                                                variant="outlined"
+                                                                key={data[index].id}
+                                                                onClick={() => btn.handle(data[index].id)}
+                                                            >
+                                                                {btn.name}
+                                                            </Button>
+                                                        )
+                                                        : (editMode
+                                                            && <IconButton
+                                                                type="submit"
+                                                                size={"small"}
+                                                                color="primary"
+                                                                key={btn.name}
+                                                                onClick={() => btn.handle(data[index].id)}>
+                                                                {componentTags[btn.name]}
+                                                            </IconButton>
+                                                        )
                                                 ))
 
                                             }

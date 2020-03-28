@@ -4,7 +4,7 @@ import {AddInQueueSong} from "./Tools/AddInQueueSong";
 import {UpdateSongQueue} from "./Tools/UpdateSongQueue";
 import {MoveUpSongQueue} from "./Tools/MoveUpSongQueue";
 import {AddSongInSavedQueue} from "./Tools/AddSongInSavedQueue";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 let mbt10 = {
     marginBottom: '10px',
@@ -15,7 +15,6 @@ export const PTBQueue = (props) => {
     const selected = useSelector(state => state.queue.selected)
     const listSong = useSelector(state => state.queue.list)
     const loading = useSelector(state => state.app.loading)
-    const dispatch = useDispatch()
     const lenSelected = selected.length;
     return (
         <>

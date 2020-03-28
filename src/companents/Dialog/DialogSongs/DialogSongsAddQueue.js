@@ -16,7 +16,7 @@ export function DialogSongsAddQueue(props) {
         artist: '',
         requestedBy: '',
         note: '',
-        amount: '',
+        amount: '0',
     }
 
     const {show, onHide, dataSong, onAccept} = props;
@@ -101,6 +101,7 @@ export function DialogSongsAddQueue(props) {
                     <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
                     <Input
                         id="standard-adornment-amount"
+                        value={song.amount}
                         onChange={handleChange('amount')}
                         inputComponent={NumberFormatCustom}
                     />

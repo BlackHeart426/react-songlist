@@ -8,7 +8,7 @@ export const AddSongInSavedQueue = (props) => {
     const {songData, lenSelected, selected, loading} = props;
     const dispatch = useDispatch()
     function showButton(lenSelected) {
-        return lenSelected === 1
+        return lenSelected === 1 ? false : true
     }
 
     const handleAddSongInQueue = () => {

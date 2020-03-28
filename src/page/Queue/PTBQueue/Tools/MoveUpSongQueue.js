@@ -6,7 +6,7 @@ export const MoveUpSongQueue = (props) => {
     const {lenSelected, changePosition, selected, loading} = props;
 
     function showButton(lenSelected) {
-        return lenSelected === 1
+        return lenSelected === 1 ? false : true
     }
 
 

@@ -14,7 +14,7 @@ export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
     dispatch(showLoader())
     try {
-        await QueueAPI.getRef().once('value')
+        await QueueAPI.getRef().orderByChild("position").once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
                     data.push(childSnapshot.val());
@@ -28,7 +28,7 @@ export const getQueueDataActionCreator = () => async dispatch => {
     }
 };
 
-export const addSongInQueueActionCreator = (state) => async dispatch => {
+export const addSongInQueueActionCreator = (state, idSong) => async dispatch => {
 
     dispatch(showLoader())
     try {
@@ -42,8 +42,10 @@ export const addSongInQueueActionCreator = (state) => async dispatch => {
             .catch(console.log('setData error'))
         state.position = length;
         const song = {};
+        song.position = length;
         song.data = {...state};
         song.id = shortid.generate();
+        song.idSong = idSong;
         await QueueAPI.getRef().child(song.id).set(song)
             .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: song }))
             .catch(console.log('setData error'))

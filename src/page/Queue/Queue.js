@@ -15,7 +15,7 @@ const Queue = (props) => {
     const history = useHistory();
 
     function createData(position, title, artist, amount, requestBy, note) {
-        return {position, title, artist, amount, requestBy, note,
+        return {position: {type: 'position', positionBase: position}, title, artist, amount, requestBy, note,
             action: { type: 'btn', data: [
                     { type: 'icon', name: 'Detail', handle: handleDetail },
                     { type: 'icon', name: 'Delete', handle: handleDelete },
