@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function UploadButtons() {
+export default function UploadButtons(props) {
     const property = {
         image: {},
         url: '',
@@ -54,6 +54,7 @@ export default function UploadButtons() {
     const [state, setState] = useState(property);
     const [loading, setLoading] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
+    const {getUrl} = props;
 
     const buttonClassname = clsx({
         [classes.buttonSuccess]: success,
@@ -88,11 +89,13 @@ export default function UploadButtons() {
                     setSuccess(true)
                     // complete function ....
                     storageRef.getDownloadURL().then(function(url) {
-                        // Insert url into an <img> tag to "download"
                         setState({url})
+                        // Insert url into an <img> tag to "download"
+                        getUrl(url)
                     }).catch(function(error) {});
                 });
         }
+
     }
 
     return (

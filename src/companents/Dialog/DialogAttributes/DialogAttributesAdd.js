@@ -49,6 +49,10 @@ export function DialogAttributesAdd(props) {
         handleClose()
     };
 
+    const handleImage = (url) => {
+        setProperty('image', url)
+    }
+
     const data = {
         title: 'New Attribute',
         content:
@@ -98,7 +102,7 @@ export function DialogAttributesAdd(props) {
 
                 <div>
                     <FormControl className={classes.formControl}>
-                        <UploadButtons/>
+                        <UploadButtons getUrl={handleImage}/>
                     </FormControl>
                 </div>
 
