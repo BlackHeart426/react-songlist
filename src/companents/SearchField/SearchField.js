@@ -19,6 +19,7 @@ export const SearchField = (props) => {
 
     const handleClearTextField = event => {
         setSearchText( '' );
+        dispatch(moduleActionCreator( '' ));
     };
 
     return (
@@ -32,15 +33,15 @@ export const SearchField = (props) => {
                 variant="outlined"
                 endAdornment={
                     <InputAdornment position="end">
-                        {searchText ?
-                            <IconButton
+                        {searchText
+                            ? <IconButton
                                 aria-label="toggle password visibility"
                                 onClick={handleClearTextField}
                                 size="small"
                             >
                                 <CloseIcon />
-                            </IconButton> :
-                            <IconButton
+                            </IconButton>
+                            : <IconButton
                                 aria-label="toggle password visibility"
                                 size="small"
                             >
