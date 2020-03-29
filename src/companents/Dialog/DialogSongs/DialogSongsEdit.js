@@ -25,7 +25,7 @@ export function DialogSongsEdit(props) {
         tags: []
     }
 
-    const {show, onHide, onAddSongs, dataSong} = props;
+    const {show, onHide, onAddSongs, dataSong, attributesList} = props;
     const classes = useStyles();
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
@@ -133,18 +133,20 @@ export function DialogSongsEdit(props) {
                         value={personName}
                         onChange={handleChangeSelect}
                         input={<Input id="select-multiple-chip" />}
-                        renderValue={select => (
+                        renderValue={selected => (
                             <div className={classes.chips}>
-                                {select.map(value => (
-                                    <Chip key={value} label={value} className={classes.chip} />
+                                {selected.map(value => (
+                                    // <Chip key={value} label={value} className={classes.chip} />
+                                    <img key={value.id} src={value.url} alt="" height={20} width={20}/>
                                 ))}
                             </div>
                         )}
                         MenuProps={MenuProps}
                     >
-                        {names.map(name => (
-                            <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-                                {name}
+                        {attributesList.map((name, index) => (
+                            <MenuItem key={name.id} value={{id: name. id, url: name.data.image}} style={getStyles(name, personName, theme)}>
+                                {name.data.name}
+                                <img src={name.data.image} alt="" height={20} width={20}/>
                             </MenuItem>
                         ))}
                     </Select>

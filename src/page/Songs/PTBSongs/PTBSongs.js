@@ -51,7 +51,8 @@ export const PTBSongs = (props) => {
                 <AddInQueueSongs
                     loading={loading}
                     lenSelected={lenSelected}
-                    songData={listSong} selected={selected}/>
+                    songData={listSong}
+                    selected={selected}/>
                 <SwitchActiveSongs
                     loading={loading}
                     showActive={showActive}

@@ -14,7 +14,7 @@ const Songs = (props) => {
     const wrapperTags = (image, id) => (  { url: image, id: id } );
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
         return {title, artist, timesPlayed, lastPlayed,
-            tags: { type: 'tags', data: Object.values(tags).map((tag, index) => wrapperTags(tag)) },
+            tags: { type: 'tags', data: tags && Object.values(tags).map((tag, index) => wrapperTags(tag)) },
             action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: handleRequest }] }}
     }
 
@@ -37,7 +37,6 @@ const Songs = (props) => {
         if (Object.keys(songList.list).length > 0) {
             let songListTest = wrapperSong(Object.values(songList.list));
             const filtered = songListTest.filter(item => {
-
                 const values = Object.values(item.data);
                 const search = props.searchText.toLowerCase();
                 let flag = false;
