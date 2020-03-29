@@ -82,6 +82,7 @@ const mapStateToProps = state => {
         searchText: state.songs.searchText,
         filterAttributes: state.songs.filterAttributes,
         songData: state.songs,
+        tagsData: state.attributes,
     }
 };
 

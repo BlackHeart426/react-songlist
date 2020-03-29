@@ -61,6 +61,7 @@ export function DialogSongsAdd(props) {
 
     const handleChangeSelect = event => {
         setPersonName(event.target.value);
+        console.log(event.target.value)
         setProperty('tags', event.target.value)
     };
 
@@ -130,15 +131,17 @@ export function DialogSongsAdd(props) {
                         renderValue={selected => (
                             <div className={classes.chips}>
                                 {selected.map(value => (
-                                    <Chip key={value} label={value} className={classes.chip} />
+                                    // <Chip key={value} label={value} className={classes.chip} />
+                                    <img key={value.id} src={value.url} alt="" height={20} width={20}/>
                                 ))}
                             </div>
                         )}
                         MenuProps={MenuProps}
                     >
                         {attributesList.map((name, index) => (
-                            <MenuItem key={attributesList[index].id} value={attributesList[index].data.name} style={getStyles(name, personName, theme)}>
-                                {attributesList[index].data.name}
+                            <MenuItem key={name.id} value={{id: name. id, url: name.data.image}} style={getStyles(name, personName, theme)}>
+                                {name.data.name}
+                                <img src={name.data.image} alt="" height={20} width={20}/>
                             </MenuItem>
                         ))}
                     </Select>
