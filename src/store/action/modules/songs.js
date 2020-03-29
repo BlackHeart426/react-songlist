@@ -56,7 +56,6 @@ export const addSongActionCreator = (state) => async dispatch => {
 };
 
 export const addFilterActionCreator = (state) => async dispatch => {
-debugger
     dispatch(showLoader());
     try {
         await dispatch({ type: SET_FILTER_SONG, newAttribute: state })

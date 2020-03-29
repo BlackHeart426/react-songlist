@@ -11,7 +11,7 @@ const Songs = (props) => {
         console.log('request', id)
     };
 
-    const wrapperTags = (image, id) => (  { url: image, id: id } );
+    const wrapperTags = (image, id) => (  { url: image.url, id: image.id } );
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
         return {title, artist, timesPlayed, lastPlayed,
             tags: { type: 'tags', data: tags && Object.values(tags).map((tag, index) => wrapperTags(tag)) },
@@ -36,18 +36,36 @@ const Songs = (props) => {
         let songList = {...props.songData};
         if (Object.keys(songList.list).length > 0) {
             let songListTest = wrapperSong(Object.values(songList.list));
-            const filtered = songListTest.filter(item => {
+            const filteredSearch = songListTest.filter(item => {
                 const values = Object.values(item.data);
                 const search = props.searchText.toLowerCase();
+
                 let flag = false;
+
                 values.forEach(val => {
-                    if (typeof val == "string") {
+                     if(typeof val == "string"){
                         if (val.toLowerCase().indexOf(search) > -1) {
                             flag = true;
                             return;
                         }
                     }
                 })
+                if (flag) return item
+            });
+            const filtered = filteredSearch.filter(item => {
+                const values = Object.values(item.data);
+                const attributes = {...props.filterAttributes};
+                let flag = false;
+
+                values.forEach(val => {
+                    if (typeof val == "object") {
+                        if (val.data[0].id === attributes[0]) {
+                            flag = true;
+                            return;
+                        }
+                    }
+                })
+
                 if (flag) return item
             });
             songList.list = filtered;
@@ -79,9 +97,8 @@ const mapStateToProps = state => {
     console.log('songData', state.songs);
     return {
         searchText: state.songs.searchText,
-        filterAttributes: state.songs.filterAttributes,
         songData: state.songs,
-        tagsData: state.attributes,
+        filterAttributes: state.songs.filterAttributes,
     }
 };
 
