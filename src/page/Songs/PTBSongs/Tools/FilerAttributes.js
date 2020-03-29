@@ -28,7 +28,13 @@ export const FilterAttributes = (props) => {
         <>
             <ToggleButtonGroup style={ml40}  size="small" value={value} onChange={handleFilter} aria-label="text formatting" color="primary" disabled={loading}>
                 {attributesList.map((item, index) => (
-                        <ToggleButton  value={attributesList[index].id} key={index} label={attributesList[index].data.name}>{attributesList[index].data.name}</ToggleButton>
+                        <ToggleButton
+                            value={attributesList[index].id}
+                            key={index} label={attributesList[index].data.name}>
+                            {attributesList[index].data.image
+                                ? <img src={attributesList[index].data.image} width={25} height={25} alt=""/>
+                                : attributesList[index].data.name}
+                        </ToggleButton>
                     )
                 )}
             </ToggleButtonGroup>

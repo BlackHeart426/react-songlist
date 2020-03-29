@@ -76,6 +76,11 @@ export const EnhancedTableRows = (props) => {
 
                                             }
                                             {
+                                                row[item].type === 'img' &&
+                                                <img src={row[item].data} alt="" width={30} height={30}/>
+
+                                            }
+                                            {
                                                 row[item].type === 'btn'
 
                                                 &&  row[item].data.map((btn, indexBtn) => (
@@ -105,7 +110,7 @@ export const EnhancedTableRows = (props) => {
 
                                             }
                                             {
-                                                row[item].type !== 'btn' && row[item].type !== 'position' && row[item].type !== 'tag' &&
+                                                row[item].type !== 'img' && row[item].type !== 'btn' && row[item].type !== 'position' && row[item].type !== 'tag' &&
                                                 <> {row[item]} </>
 
                                             }
