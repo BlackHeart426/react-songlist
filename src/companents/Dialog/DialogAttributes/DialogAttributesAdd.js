@@ -12,7 +12,7 @@ export function DialogAttributesAdd(props) {
     const formControl = {
         name: '',
         priority: '',
-        image: '',
+        image: null,
         active: false,
         showInTable: false
     };

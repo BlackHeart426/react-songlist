@@ -8,10 +8,10 @@ import {setSelectedAttributeActionCreator} from "../../store/action/modules/attr
 
 const Attributes = (props) => {
 
-    function createData(name, image, active, showInTable, priority, ofSongs) {
+    function createData(id, name, image, active, showInTable, priority, ofSongs) {
         return {
             name,
-            image: { type: 'img', data: image },
+            image: { type: 'tags', data: [{url: image, id: id}] },
             active, showInTable, priority, ofSongs}
     }
 
@@ -19,7 +19,7 @@ const Attributes = (props) => {
         return song.map(item => {
             const {name, image, active, showInTable, priority, ofSongs} = item.data;
             return {id: item.id, data: createData(
-                name, image, active == 1 ? 'yes' : 'no', showInTable == 1 ? 'yes' : 'no', priority, ofSongs)}
+                    item.id, name, image, active == 1 ? 'yes' : 'no', showInTable == 1 ? 'yes' : 'no', priority, ofSongs)}
         })
     };
 

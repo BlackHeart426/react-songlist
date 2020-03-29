@@ -11,10 +11,10 @@ const Songs = (props) => {
         console.log('request', id)
     };
 
-    const nameArr = nameTag => ( {name: nameTag} );
+    const wrapperTags = (image, id) => (  { url: image, id: id } );
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
         return {title, artist, timesPlayed, lastPlayed,
-            tags: { type: 'tag', data: Object.values(tags).map((tag, index) => nameArr(tag)) },
+            tags: { type: 'tags', data: Object.values(tags).map((tag, index) => wrapperTags(tag)) },
             action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: handleRequest }] }}
     }
 

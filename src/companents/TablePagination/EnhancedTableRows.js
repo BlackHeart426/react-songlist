@@ -57,27 +57,31 @@ export const EnhancedTableRows = (props) => {
                                         <TableCell align="center" key={indexRow}
                                                    style={data[index].active !== undefined ? (data[index].active === true ? active : defaultColor) : active}>
 
-                                            {
-                                                row[item].type === 'tag' &&
-                                                row[item].data.map((tag, indexTag) => (
-                                                        <IconButton
-                                                            type="submit"
-                                                            size="small"
-                                                            color="primary"
-                                                            key={indexTag}>
-                                                            {tag.name}
-                                                        </IconButton>
-                                                ))
+                                            {/*{*/}
+                                            {/*    row[item].type === 'tag' &&*/}
+                                            {/*    row[item].data.map((tag, indexTag) => (*/}
+                                            {/*            <IconButton*/}
+                                            {/*                type="submit"*/}
+                                            {/*                size="small"*/}
+                                            {/*                color="primary"*/}
+                                            {/*                key={indexTag}>*/}
+                                            {/*                {tag.name}*/}
+                                            {/*            </IconButton>*/}
+                                            {/*    ))*/}
 
-                                            }
+                                            {/*}*/}
                                             {
                                                 row[item].type === 'position' &&
                                                 <>{index + 1}</>
 
                                             }
                                             {
-                                                row[item].type === 'img' &&
-                                                <img src={row[item].data} alt="" width={30} height={30}/>
+
+                                                row[item].type === 'tags'
+                                                &&  row[item].data.map((tag, indexTag) => (
+                                                    <img key={indexTag} src={tag.url} alt="" width={30} height={30}/>
+                                                ))
+
 
                                             }
                                             {
@@ -110,7 +114,7 @@ export const EnhancedTableRows = (props) => {
 
                                             }
                                             {
-                                                row[item].type !== 'img' && row[item].type !== 'btn' && row[item].type !== 'position' && row[item].type !== 'tag' &&
+                                                row[item].type !== 'tags' && row[item].type !== 'btn' && row[item].type !== 'position' && row[item].type !== 'tag' &&
                                                 <> {row[item]} </>
 
                                             }
