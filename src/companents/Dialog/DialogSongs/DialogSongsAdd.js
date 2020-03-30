@@ -12,6 +12,8 @@ import React, {useEffect, useState} from "react";
 import useTheme from "@material-ui/core/styles/useTheme";
 import {getStyles, MenuProps, useStyles} from "./style";
 import CustomDialog from "../CustomDialog";
+import Avatar from "@material-ui/core/Avatar";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const names = [
     'Music',
@@ -81,6 +83,10 @@ export function DialogSongsAdd(props) {
         close && handleClose()
     };
 
+    const handleDelete = () => {
+        console.log('qwe')
+    }
+
     const data = {
         title: 'Create new song',
         content: <div>
@@ -130,16 +136,23 @@ export function DialogSongsAdd(props) {
                         input={<Input id="select-multiple-chip" />}
                         renderValue={selected => (
                             <div className={classes.chips}>
-                                {selected.map(value => (
-                                    // <Chip key={value} label={value} className={classes.chip} />
-                                    <img key={value.id} src={value.url} alt="" height={20} width={20}/>
+                                {selected.map((value, index) => (
+                                    <Chip
+                                        key={value}
+                                        avatar={
+                                            <Avatar
+                                                src={attributesList.find(item => item.id === value).data.image}
+                                            />
+                                        }
+                                        label={attributesList.find(item => item.id === value).data.name}
+                                        className={classes.chip} />
                                 ))}
                             </div>
                         )}
                         MenuProps={MenuProps}
                     >
                         {attributesList.map((name, index) => (
-                            <MenuItem key={name.id} value={{id: name. id, url: name.data.image}} style={getStyles(name, personName, theme)}>
+                            <MenuItem key={name.id} value={name.id} style={getStyles(name, personName, theme)}>
                                 {name.data.name}
                                 <img src={name.data.image} alt="" height={20} width={20}/>
                             </MenuItem>
