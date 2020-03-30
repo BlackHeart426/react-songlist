@@ -6,9 +6,11 @@ import Checkbox from "@material-ui/core/Checkbox";
 import {componentTags} from "./componentTags";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {ThemeProvider} from "@material-ui/styles";
 import {outerTheme} from "./styles";
+import DoneIcon from "@material-ui/icons/Done";
+import CloseIcon from '@material-ui/icons/Close';
 
 const active = {
     'color': 'rgba(0, 0, 0, 0.88)',
@@ -18,8 +20,48 @@ const defaultColor = {
     'color': 'rgba(255, 0, 0, 0.87)',
 };
 
+const promptTableRow = () => {
+    const content = 'Are you delete current item?'
+    return (
+        <TableRow  style={{'display':'none'}}>
+            <TableCell colSpan="6">
+                {content}
+            </TableCell>
+        </TableRow>
+    )
+}
+
 export const EnhancedTableRows = (props) => {
     const { data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode, showActive } = props;
+    const [prompt, setPrompt] = useState('')
+    const currentTableRow = useRef(null)
+
+    const handleAccept= () => {
+
+        handleCancel()
+    }
+
+    const handleCancel= () => {
+        const elementPrompt = document.getElementById(prompt + '-propmt');
+        elementPrompt.style.display = 'none';
+        const element = document.getElementById(prompt);
+        element.style.display = '';
+    }
+
+    const handlePrompt = (handleAction, id) => {
+        const element = document.getElementById(id);
+        element.style.display = 'none';
+        console.log(element)
+        setPrompt(id)
+    }
+    useEffect(() => {
+        if(prompt) {
+            const element = document.getElementById(prompt + '-propmt');
+            element.style.display = '';
+        }
+    },[prompt])
+
+
     return (
         stableSort(data, getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -31,99 +73,121 @@ export const EnhancedTableRows = (props) => {
 
                     (data[index].active !== undefined ? ( (showActive) || (data[index].active) ) : true ) &&
                     <ThemeProvider theme={outerTheme}  key={ data[index].id }>
-                            <TableRow
-                                hover
-                                role="checkbox"
-                                aria-checked={isItemSelected}
-                                tabIndex={-1}
-                                onClick={editMode ? event => handleClick(event, data[index].id) : undefined}
-                                selected={isItemSelected}
+                        <TableRow style={{'display':'none'}}  id={data[index].id+'-propmt'}>
+                            <TableCell colSpan="7" >
+                                <strong>Are you delete current item?</strong>
+                            </TableCell>
+                            <TableCell align="center" >
+                                <IconButton
+                                    type="submit"
+                                    size={"small"}
+                                    color="primary"
+                                    onClick={handleAccept}>
+                                        <DoneIcon/>
+                                </IconButton>
+                                <IconButton
+                                    type="submit"
+                                    size={"small"}
+                                    color="primary"
+                                    onClick={handleCancel}>
+                                        <CloseIcon/>
+                                </IconButton>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow
+                            hover
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
+                            id={data[index].id}
+                            onClick={editMode ? event => handleClick(event, data[index].id) : undefined}
+                            selected={isItemSelected}
+                            ref={currentTableRow}
+                        >
+                            {editMode &&
+                            <TableCell padding="checkbox">
+                                <Checkbox
+                                    value="secondary"
+                                    color="primary"
+                                    checked={isItemSelected}
+                                    inputProps={{'aria-labelledby': labelId}}
+                                />
+                            </TableCell>
+                            }
 
-                            >
-                                {editMode &&
-                                <TableCell padding="checkbox">
-                                    <Checkbox
-                                        value="secondary"
-                                        color="primary"
-                                        checked={isItemSelected}
-                                        inputProps={{'aria-labelledby': labelId}}
-                                    />
+                            {/*TODO Переписать с типом элемента*/}
+                            {Object.keys(row).map((item, indexRow) => (
+
+                                <TableCell align="center" key={indexRow}
+                                           style={data[index].active !== undefined ? (data[index].active === true ? active : defaultColor) : active}>
+
+                                    {/*{*/}
+                                    {/*    row[item].type === 'tag' &&*/}
+                                    {/*    row[item].data.map((tag, indexTag) => (*/}
+                                    {/*            <IconButton*/}
+                                    {/*                type="submit"*/}
+                                    {/*                size="small"*/}
+                                    {/*                color="primary"*/}
+                                    {/*                key={indexTag}>*/}
+                                    {/*                {tag.name}*/}
+                                    {/*            </IconButton>*/}
+                                    {/*    ))*/}
+
+                                    {/*}*/}
+                                    {
+                                        row[item].type === 'position' &&
+                                        <>{index + 1}</>
+
+                                    }
+                                    {
+
+                                        row[item].type === 'tags'
+                                        &&  row[item].data.map((tag, indexTag) => (
+                                            <img key={indexTag} src={tag.url} alt="" width={30} height={30}/>
+                                        ))
+
+
+                                    }
+                                    {
+                                        row[item].type === 'btn'
+
+                                        &&  row[item].data.map((btn, indexBtn) => (
+                                            btn.type === 'text'
+                                                ? (!editMode
+                                                    && <Button
+                                                        type="submit"
+                                                        color="primary"
+                                                        variant="outlined"
+                                                        key={data[index].id}
+                                                        onClick={() => btn.handle(data[index].id)}
+                                                    >
+                                                        {btn.name}
+                                                    </Button>
+                                                )
+                                                : (editMode
+                                                    && <IconButton
+                                                        type="submit"
+                                                        size={"small"}
+                                                        color="primary"
+                                                        key={btn.name}
+                                                        onClick={() => handlePrompt(() => btn.handle(data[index].id), data[index].id)}>
+                                                        {componentTags[btn.name]}
+                                                    </IconButton>
+                                                )
+                                        ))
+
+                                    }
+                                    {
+                                        row[item].type !== 'tags' && row[item].type !== 'btn' && row[item].type !== 'position' && row[item].type !== 'tag' &&
+                                        <> {row[item]} </>
+
+                                    }
+
                                 </TableCell>
-                                }
+                                )
+                            )}
 
-                                {/*TODO Переписать с типом элемента*/}
-                                {Object.keys(row).map((item, indexRow) => (
-
-                                        <TableCell align="center" key={indexRow}
-                                                   style={data[index].active !== undefined ? (data[index].active === true ? active : defaultColor) : active}>
-
-                                            {/*{*/}
-                                            {/*    row[item].type === 'tag' &&*/}
-                                            {/*    row[item].data.map((tag, indexTag) => (*/}
-                                            {/*            <IconButton*/}
-                                            {/*                type="submit"*/}
-                                            {/*                size="small"*/}
-                                            {/*                color="primary"*/}
-                                            {/*                key={indexTag}>*/}
-                                            {/*                {tag.name}*/}
-                                            {/*            </IconButton>*/}
-                                            {/*    ))*/}
-
-                                            {/*}*/}
-                                            {
-                                                row[item].type === 'position' &&
-                                                <>{index + 1}</>
-
-                                            }
-                                            {
-
-                                                row[item].type === 'tags'
-                                                &&  row[item].data.map((tag, indexTag) => (
-                                                    <img key={indexTag} src={tag.url} alt="" width={30} height={30}/>
-                                                ))
-
-
-                                            }
-                                            {
-                                                row[item].type === 'btn'
-
-                                                &&  row[item].data.map((btn, indexBtn) => (
-                                                    btn.type === 'text'
-                                                        ? (!editMode
-                                                            && <Button
-                                                                type="submit"
-                                                                color="primary"
-                                                                variant="outlined"
-                                                                key={data[index].id}
-                                                                onClick={() => btn.handle(data[index].id)}
-                                                            >
-                                                                {btn.name}
-                                                            </Button>
-                                                        )
-                                                        : (editMode
-                                                            && <IconButton
-                                                                type="submit"
-                                                                size={"small"}
-                                                                color="primary"
-                                                                key={btn.name}
-                                                                onClick={() => btn.handle(data[index].id)}>
-                                                                {componentTags[btn.name]}
-                                                            </IconButton>
-                                                        )
-                                                ))
-
-                                            }
-                                            {
-                                                row[item].type !== 'tags' && row[item].type !== 'btn' && row[item].type !== 'position' && row[item].type !== 'tag' &&
-                                                <> {row[item]} </>
-
-                                            }
-
-                                        </TableCell>
-                                    )
-                                )}
-
-                            </TableRow>
+                        </TableRow>
                     </ThemeProvider>
                 );
             })
