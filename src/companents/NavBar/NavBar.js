@@ -11,7 +11,7 @@ import {withWidth} from "@material-ui/core";
 import Hidden from '@material-ui/core/Hidden';
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {toggleEditModeActionCreator, toggleOpenDrawerActionCreator} from "../../store/action/app";
+import { toggleOpenDrawerActionCreator} from "../../store/action/app";
 
 const useStyles = makeStyles(theme => ({
     list: {
@@ -41,10 +41,6 @@ function NavBar(props){
     const handleDrawerOpen = () => {
         setOpen(true);
         props.action.toggleOpenDrawer( !props.statusOpenDrawer )
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
     };
 
     return (

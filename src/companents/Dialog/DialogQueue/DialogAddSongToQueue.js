@@ -11,43 +11,29 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import SearchIcon from "@material-ui/icons/Search";
+import AsynchronousSearch from "../../SearchField/SearchAsync";
 
 export function DialogAddSongToQueue(props) {
     const formControl = {
         title: '',
         artist: '',
-        requested: '',
+        requestedBy: '',
         note: '',
-        amount: '',
-    };
+        amount: '0',
+    }
 
     const {show, onHide, dataSong, onAccept} = props;
     const classes = useStyles();
     const [dialogOpened, setDialogOpened] = useState(false);
     const [song, setSong] = useState(formControl);
-    const [searchText, setValues] = React.useState('');
+    const [idSong, setIdSong] = useState(null)
+    const [title, setTitle] = useState(null)
+    const [artist, setArtist] = useState(null)
 
-    const handleClearTextField = event => {
-        setValues( '' );
-    };
-
-    const handleChangeSearch = event => {
-        setValues( event.target.value );
-    };
     //TODO что-то с обьектом dataSong и вложеным data
     useEffect(() => {
         setDialogOpened(show);
-        let copyDataSong = {...dataSong};
-        if(copyDataSong['id']) { //TODO переделать проверка на пустоту обьета
-            let copyDataSongData = {...copyDataSong['data']};
-            const {title, artist} = copyDataSongData;
-            let statusCopy = {...song};
-            statusCopy['title'] = title;
-            statusCopy['artist'] = artist;
-            setSong(statusCopy);
-        }
     },[show]);
-
 
     const setProperty = (property, value) => {
         let statusCopy = Object.assign({}, song);
@@ -65,53 +51,26 @@ export function DialogAddSongToQueue(props) {
     };
 
     const handleAdd = (property) => event => {
-        onAccept(property)
+        property = {...property, title, artist}
+        onAccept(property, idSong)
         handleClose()
     };
+
+    async function handleSelectSong(songData){
+        setIdSong (songData.id)
+
+        // await setProperty('title', songData.data.title)
+        // await setProperty('artist', songData.data.artist)
+        await setTitle(songData.data.title)
+        await setArtist(songData.data.artist)
+    }
 
     const data = {
         title: 'Add song to queue',
         content:
             <div>
-            {/*<div>*/}
-            {/*    <label className={classes.formControl}>*/}
-            {/*        Song*/}
-            {/*    </label>*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <label className={classes.formControl}>*/}
-            {/*        {song.title} by {song.artist}*/}
-            {/*    </label>*/}
-            {/*</div>*/}
                 <FormControl fullWidth className={classes.formControl}>
-                    <TextField
-                        id="standard-adornment-amount"
-                        value={searchText}
-                        placeholder="Search"
-                        onChange={handleChangeSearch}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                {searchText
-                                    ?
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClearTextField}
-                                        size="small"
-                                    >
-                                        <CloseIcon />
-                                    </IconButton>
-                                    :
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        size="small"
-                                    >
-                                        <SearchIcon />
-                                    </IconButton>
-                                }
-                            </InputAdornment>
-                        }
-                        // startAdornment={ <InputAdornment  position="start"><SearchIcon className={classes.searhIcon}/></InputAdornment>}
-                    />
+                    <AsynchronousSearch selectSong={(song) => handleSelectSong(song)}/>
                 </FormControl>
             <div>
             </div>

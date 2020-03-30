@@ -5,6 +5,7 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import {useDispatch} from "react-redux";
 import {addFilterActionCreator} from "../../../../store/action/modules/songs";
+import {StyledToggleButtonGroup} from "../../../../companents/Styled/StyledToggleButtonGroup";
 
 export const FilterAttributes = (props) => {
 
@@ -18,7 +19,6 @@ export const FilterAttributes = (props) => {
 
     const handleFilter = (event, newAttribute) => {
         setValue(newAttribute)
-        console.log(event.target.value)
         dispatch(addFilterActionCreator(newAttribute))// editSong(newSong)
     };
 
