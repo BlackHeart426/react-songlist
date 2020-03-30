@@ -20,27 +20,16 @@ const defaultColor = {
     'color': 'rgba(255, 0, 0, 0.87)',
 };
 
-const promptTableRow = () => {
-    const content = 'Are you delete current item?'
-    return (
-        <TableRow  style={{'display':'none'}}>
-            <TableCell colSpan="6">
-                {content}
-            </TableCell>
-        </TableRow>
-    )
-}
-
 export const EnhancedTableRows = (props) => {
     const { data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode, showActive } = props;
     const [prompt, setPrompt] = useState('')
-    const currentTableRow = useRef(null)
+    const [accept, setAccept] = useState(() => () => console.log('empty'))
 
     const handleAccept= () => {
-
+        accept && accept()
         handleCancel()
     }
-
+//TODO найди решение через рендеринг новой строки а не скрывать пустые
     const handleCancel= () => {
         const elementPrompt = document.getElementById(prompt + '-propmt');
         elementPrompt.style.display = 'none';
@@ -53,6 +42,7 @@ export const EnhancedTableRows = (props) => {
         element.style.display = 'none';
         console.log(element)
         setPrompt(id)
+        setAccept(() => () => handleAction())
     }
     useEffect(() => {
         if(prompt) {
@@ -102,7 +92,6 @@ export const EnhancedTableRows = (props) => {
                             id={data[index].id}
                             onClick={editMode ? event => handleClick(event, data[index].id) : undefined}
                             selected={isItemSelected}
-                            ref={currentTableRow}
                         >
                             {editMode &&
                             <TableCell padding="checkbox">
@@ -170,7 +159,11 @@ export const EnhancedTableRows = (props) => {
                                                         size={"small"}
                                                         color="primary"
                                                         key={btn.name}
-                                                        onClick={() => handlePrompt(() => btn.handle(data[index].id), data[index].id)}>
+                                                        onClick={
+                                                            btn.name == 'Delete'
+                                                            ? (() => handlePrompt(() => btn.handle(data[index].id), data[index].id))
+                                                             : () => btn.handle(data[index].id)
+                                                        }>
                                                         {componentTags[btn.name]}
                                                     </IconButton>
                                                 )
