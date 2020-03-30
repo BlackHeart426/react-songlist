@@ -56,17 +56,25 @@ const Songs = (props) => {
                 const values = Object.values(item.data);
                 const attributes = {...props.filterAttributes};
                 let flag = false;
+                const list = Object.values(attributes);
+                if(list.length > 0) {
+                    values.forEach(val => {
+                        if (typeof val == "object") {
+                            if (val.data.forEach(valItem => {
 
-                values.forEach(val => {
-                    if (typeof val == "object") {
-                        if (val.data[0].id === attributes[0]) {
-                            flag = true;
-                            return;
+                                if (list.find(item => item === valItem.id)) {
+                                    flag = true;
+                                    return;
+                                }
+                            })) ;
                         }
-                    }
-                })
+                    });
 
-                if (flag) return item
+                    if (flag) return item
+                } else  {
+                    return item
+                }
+
             });
             songList.list = filtered;
             return (
