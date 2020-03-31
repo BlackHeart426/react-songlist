@@ -1,7 +1,7 @@
 import React from "react";
 import {Code, History, LibraryBooks, LibraryMusic, QueueMusic} from "@material-ui/icons";
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-
+import BackupIcon from '@material-ui/icons/Backup';
 export const menuDrawerCustom = [
     {
         title: 'Songs',
@@ -49,6 +49,12 @@ export const settingsMenuCustom = [
         title: 'Song attributes',
         link: '/settings/attributes',
         icon: <LocalOfferIcon/>,
+        index: 6
+    },
+    {
+        title: 'Song import',
+        link: '/settings/song-import',
+        icon: <BackupIcon/>,
         index: 6
     }
 ];

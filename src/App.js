@@ -22,6 +22,7 @@ import {getSavedQueueDataActionCreator} from "./store/action/modules/savedQueue"
 import {getHistoryDataActionCreator} from "./store/action/modules/history";
 import Attributes from "./page/Attributes/Attributes";
 import {getAttributesDataActionCreator} from "./store/action/modules/attributes";
+import {SongImport} from "./page/SongImport/SongImport";
 
 const drawerWidth = 240;
 
@@ -88,6 +89,7 @@ const App = (props) => {
                             <Route exact path="/s/:userId/history" component={History}/>
                             <Route exact component={Settings} path="/s/:userId/settings"/>
                                 <Route path="/s/:userId/settings/attributes" component={Attributes} />
+                                <Route path="/s/:userId/settings/song-import" component={SongImport} />
                             <Route path="/s/:userId/test" component={Test} />
                         </Switch>
                         {props.alert && <AlertCustom text={props.alert} />}
