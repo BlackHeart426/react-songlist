@@ -56,6 +56,7 @@ const ComponentTablePagination = (props) => {
      *  Выбрать элемент
      */
     const handleClick = (event, name) => {
+
         const selectedIndex = rowsData.selected.indexOf(name);
         let newSelected = [];
         if (selectedIndex === -1) {

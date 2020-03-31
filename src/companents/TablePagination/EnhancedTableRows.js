@@ -56,9 +56,10 @@ export const EnhancedTableRows = (props) => {
         stableSort(data, getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row, index) => {
+                let indexNew = index + (page * rowsPerPage)
+                index = indexNew
                 const isItemSelected = isSelected(data[index].id);
                 const labelId = `enhanced-table-checkbox-${index}`;
-
                 return (
 
                     (data[index].active !== undefined ? ( (showActive) || (data[index].active) ) : true ) &&

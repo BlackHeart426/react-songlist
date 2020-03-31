@@ -34,7 +34,7 @@ export const addAttributesActionCreator = (state) => async dispatch => {
             .catch(console.log('setData error'))
         dispatch(hideLoader())
     } catch (e) {
-        debugger
+
         dispatch(showAlert('Что-то пошло не так'))
         dispatch(hideLoader())
     }

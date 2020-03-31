@@ -10,6 +10,8 @@ import Tab from "@material-ui/core/Tab";
 import {TabPanel} from "../../../companents/TabPanel/TabPanel";
 import {a11yProps, useStyles} from "./stylesDetail";
 import Skeleton from "@material-ui/lab/Skeleton";
+import Avatar from "@material-ui/core/Avatar";
+import {useSelector} from "react-redux";
 
 export const ContentDetail = (props) => {
 
@@ -19,6 +21,7 @@ export const ContentDetail = (props) => {
     const [lastPlayed, setLastPlayed] = React.useState('never');
     const [queue, setQueue] = React.useState(0);
     const {detailSong} = props;
+    const attributesList = useSelector(state => state.attributes.list)
 
 
     const handleChange = (event, newValue) => {
@@ -26,7 +29,6 @@ export const ContentDetail = (props) => {
     };
 
     useEffect(() => {
-        debugger
         detailSong && setTimesPlayed(detailSong.data.timesPlayed)
             && setLastPlayed(detailSong.data.lastPlayed)
             && setQueue(0)
@@ -42,9 +44,18 @@ export const ContentDetail = (props) => {
                     {detailSong && detailSong.data.artist}
                 </Typography>
                 <div className={classes.pos}>
-                    {/*{detailSong && detailSong.data.tags.map(value => {*/}
-                    {/*    <Chip key={value} label={value} className={classes.chip} />*/}
-                    {/*})}*/}
+                    {detailSong && detailSong.data.tags.map(value => (
+                        <Chip
+                            key={value}
+                            label={attributesList.length > 0 && attributesList.find(item => item.id === value).data.name}
+                            avatar={
+                                <Avatar
+                                    src={attributesList.length > 0 ? attributesList.find(item => item.id === value).data.image.toString() : undefined}
+                                />
+                            }
+                            className={classes.chip}
+                        />
+                    ))}
                 </div>
 
                 {detailSong

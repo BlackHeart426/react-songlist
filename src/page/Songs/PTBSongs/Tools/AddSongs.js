@@ -33,7 +33,7 @@ export const AddSongs = (props) => {
             },
             active: active
         };
-        debugger
+
         dispatch(addSongActionCreator(newSong))
     };
 
