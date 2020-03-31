@@ -36,12 +36,10 @@ const Queue = (props) => {
         let queueList = {...props.queueData};
         const uuidSong = queueList.list.find(item => item.id === id);
         history.push(addUserIdAtLink("/songs/detail/"+uuidSong.id))
-        console.log('detail', id)
     }
 
     function handleDelete(id) {
         props.action.deleteSong(id);
-        console.log('delete', id)
     }
 
     function handleDone(id) {
@@ -50,7 +48,6 @@ const Queue = (props) => {
         delete songState.data.position
         songState.data.played = 'today';//today;
         props.action.songPerformed(songState);
-        console.log('done', id)
     }
 
     const updateQueueData = () => {

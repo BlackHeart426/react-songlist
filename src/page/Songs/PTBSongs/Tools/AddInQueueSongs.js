@@ -19,7 +19,6 @@ export const AddInQueueSongs = (props) => {
     }
 
     function addItemToQueue() {
-        console.log('asd')
     }
 
     const handleMoveSongInQueue = (song) => {

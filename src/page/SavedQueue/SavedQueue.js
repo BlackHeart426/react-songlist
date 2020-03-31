@@ -57,7 +57,6 @@ const SavedQueue = (props) => {
     };
 
     useEffect(() => {
-        console.log('props.songData',props.songData)
         localStorage.setItem('songs', JSON.stringify(props.songData));
     },[props.songData]);
     return (
@@ -73,7 +72,6 @@ const SavedQueue = (props) => {
 }
 
 const mapStateToProps = state => {
-    console.log('songData', state.songs)
     return {
         searchText: state.savedQueue.searchText,
         songData: state.savedQueue,

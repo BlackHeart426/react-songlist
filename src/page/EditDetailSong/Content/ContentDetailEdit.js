@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Card} from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
@@ -15,23 +15,52 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
 export const ContentDetailEdit = (props) => {
+    const formData = {
+        artist: '',
+        title: '',
+        capo: '',
+        active: false,
+        amount: 0,
+        comment: ''
 
+    }
     const classes = useStyles();
     const [tab, setTab] = React.useState(0);
     const [title, setTitle] = React.useState('');
+    const [activeSong, setActiveSong] = React.useState(false);
+    const [limit, setLimit] = React.useState(false);
     const [artist, setArtist] = React.useState('');
+    const [state, setState] = useState(formData)
     const {detailSong} = props;
 
     const handleChange = (event, newValue) => {
     };
 
     useEffect(() => {
-        detailSong && setTitle(detailSong.data.title)
-            && setArtist(detailSong.data.artist)
-    },[])
+        let copyDataSong = {...detailSong};
+        let active = copyDataSong['active'];
+        let copyDataSongData = {...copyDataSong['data']};
+        const {title, artist, capo, amount, comment} = copyDataSongData;
+        let statusCopy = {...state};
+        if(copyDataSong['id']) {
+            statusCopy['title'] = title;
+            statusCopy['artist'] = artist;
+            statusCopy['capo'] = capo;
+            statusCopy['amount'] = amount;
+            statusCopy['comment'] = comment;
+            statusCopy['active'] = active;
+            setState(statusCopy);
+            setActiveSong(active)
+            setLimit(active)
+            // setPersonName(tags)
+            }
 
-    const handleChangeSwitch = event => {
 
+    },[detailSong])
+
+    const handleChangeSwitch = prop => event => {
+        prop === 'active' && setActiveSong(!activeSong)
+        prop === 'limit' && setLimit(!limit)
     };
 
     return (
@@ -43,7 +72,7 @@ export const ContentDetailEdit = (props) => {
                         id="TITLE"
                         label="TITLE"
                         type="text"
-                        value={title}
+                        value={state.title}
                         className={classes.textField}
                     />
                 </FormControl>
@@ -52,7 +81,7 @@ export const ContentDetailEdit = (props) => {
                         margin="dense"
                         id="ARTIST"
                         label="ARTIST"
-                        value={artist}
+                        value={state.artist}
                         type="text"
                         className={classes.textField}
                     />
@@ -70,7 +99,7 @@ export const ContentDetailEdit = (props) => {
                 <div>
                     <FormControl className={classes.formControl}>
                         <FormControlLabel
-                            control={<Switch  checked={true} onChange={handleChangeSwitch} color="primary" />}
+                            control={<Switch  checked={activeSong} onChange={handleChangeSwitch('active')} color="primary" />}
                             label="Active"
                         />
                     </FormControl>
@@ -81,7 +110,7 @@ export const ContentDetailEdit = (props) => {
                 <div>
                     <FormControl className={classes.formControl}>
                         <FormControlLabel
-                            control={<Switch  checked={true} onChange={handleChangeSwitch} color="primary" />}
+                            control={<Switch  checked={limit} onChange={handleChangeSwitch('limit')} color="primary" />}
                             label="Bypass Request Limits?"
                         />
                     </FormControl>

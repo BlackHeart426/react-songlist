@@ -21,7 +21,6 @@ export const AddAttribute = (props) => {
     }
 
     const addAttribute = (property) => {
-        console.log('property', property)
         const {name, image, active, showInTable, priority} = property;
         const newAttribute = {
             id: shortid.generate(),

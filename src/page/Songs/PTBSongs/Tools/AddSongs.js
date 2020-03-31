@@ -22,14 +22,23 @@ export const AddSongs = (props) => {
 
     const addRowsSong = (property) => {
         const {title, artist, tags, active} = property;
+        const today = new Date();
         const newSong = {
             id: shortid.generate(),
             data: {
                 title: title,
                 artist: artist,
-                timesPlayed: '0',
+                capo: '',
+                chords: '',
+                lyrics: '',
+                comment: '',
+                tabs: '',
+                limit: null,
+                timesPlayed: 0,
                 lastPlayed: 'never',
-                tags: tags
+                tags: tags,
+                create_at: today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() +' '+ today.getHours()+':'+ today.getMinutes()+':'+ today.getSeconds(),
+                update_at: today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() +' '+ today.getHours()+':'+ today.getMinutes()+':'+ today.getSeconds()
             },
             active: active
         };

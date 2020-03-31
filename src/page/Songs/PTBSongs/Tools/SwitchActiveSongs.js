@@ -13,7 +13,6 @@ export const SwitchActiveSongs = (props) => {
     const handleActive = event => {
         setActived(event.target.checked)
         // onActive(event.target.checked)
-        console.log(songData.active)
         dispatch(toggleActiveActionCreator(!songData.active))
     };
 

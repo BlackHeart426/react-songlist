@@ -11,7 +11,7 @@ export const EditDetailSong = props => {
     return (
         <>
             <ToolsEditDetail/>
-            <ContentDetailEdit detailSong={listSong.find(item => item.id == props.match.params.id)}/>
+            <ContentDetailEdit detailSong={listSong.find(item => item.id === props.match.params.id)}/>
         </>
     )
 }

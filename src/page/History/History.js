@@ -73,7 +73,6 @@ const History = (props) => {
 
 
 const mapStateToProps = state => {
-    console.log('songData', state.songs)
     return {
         filter: state.history.filterData,
         searchText: state.history.searchText,

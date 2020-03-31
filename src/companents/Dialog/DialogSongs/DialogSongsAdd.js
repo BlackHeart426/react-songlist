@@ -58,7 +58,6 @@ export function DialogSongsAdd(props) {
 
     const handleChangeSelect = event => {
         setPersonName(event.target.value);
-        console.log(event.target.value)
         setProperty('tags', event.target.value)
     };
 

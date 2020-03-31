@@ -40,7 +40,6 @@ export const EnhancedTableRows = (props) => {
     const handlePrompt = (handleAction, id) => {
         const element = document.getElementById(id);
         element.style.display = 'none';
-        console.log(element)
         setPrompt(id)
         setAccept(() => () => handleAction())
     }

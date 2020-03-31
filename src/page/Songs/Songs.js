@@ -9,7 +9,6 @@ import {getAttributesDataActionCreator} from "../../store/action/modules/attribu
 
 const Songs = (props) => {
     const handleRequest = (id) => {
-        console.log('request', id)
     };
 
     // const wrapperTags = (id) => (  { url: props.attributesList.find(item => item.id === id ).data.image, id: id } );
@@ -31,7 +30,6 @@ const Songs = (props) => {
     const {active, setActive} = useState(false);
 
     useEffect(() => {
-        console.log('props.songData',props.songData);
         localStorage.setItem('songs', JSON.stringify(props.songData));
     },[props.songData]);
 
@@ -109,7 +107,6 @@ const Songs = (props) => {
 
 
 const mapStateToProps = state => {
-    console.log('songData', state.songs);
     return {
         attributesList: state.attributes.list,
         searchText: state.songs.searchText,

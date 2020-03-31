@@ -61,7 +61,6 @@ export default function UploadButtons(props) {
     });
 
     const handleChange = event => {
-        console.log(event.target.files[0])
 
         const image = event.target.files[0];
 
@@ -82,7 +81,6 @@ export default function UploadButtons(props) {
                 },
                 (error) => {
                     // error function ....
-                    console.log(error);
                 },
                 () => {
                     setLoading(false)
