@@ -53,7 +53,7 @@ export const ContentDetail = (props) => {
                                     src={attributesList.length > 0 ? attributesList.find(item => item.id === value).data.image.toString() : undefined}
                                 />
                             }
-                            className={classes.chip}
+                            className={classes.chipRoot}
                         />
                     ))}
                 </div>
@@ -64,7 +64,9 @@ export const ContentDetail = (props) => {
                         id="TIMES_PLAYED"
                         label="TIMES PLAYED"
                         type="text"
-                        disabled={true}
+                        InputProps={{
+                            readOnly: true,
+                        }}
                         value={timesPlayed}
                         className={classes.textField}
                     />
@@ -75,7 +77,9 @@ export const ContentDetail = (props) => {
                             id="LAST_PLAYED"
                             label="LAST PLAYED"
                             type="text"
-                            disabled={true}
+                            InputProps={{
+                                readOnly: true,
+                            }}
                             value={lastPlayed}
                             className={classes.textField}
                         />
@@ -87,7 +91,9 @@ export const ContentDetail = (props) => {
                         id="IN_QUEUE"
                         label="IN QUEUE"
                         type="text"
-                        disabled={true}
+                        InputProps={{
+                            readOnly: true,
+                        }}
                         value={queue}
                         className={classes.textField}
                     />

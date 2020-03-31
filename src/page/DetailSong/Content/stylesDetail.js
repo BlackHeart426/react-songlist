@@ -2,7 +2,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export const useStyles = makeStyles({
     root: {
-        minWidth: 275,
+        minWidth: 275
     },
     bullet: {
         display: 'inline-block',
@@ -14,6 +14,10 @@ export const useStyles = makeStyles({
     },
     pos: {
         marginBottom: 24,
+
+    },
+    chipRoot: {
+        marginRight: 10
     },
     tabRoot: {
         flexGrow: 1,
