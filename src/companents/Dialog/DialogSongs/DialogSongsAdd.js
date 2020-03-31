@@ -13,11 +13,6 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import {getStyles, MenuProps, useStyles} from "./style";
 import CustomDialog from "../CustomDialog";
 import Avatar from "@material-ui/core/Avatar";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-
-const names = [
-    'Music',
-];
 
 export function DialogSongsAdd(props) {
     const formControl = {
@@ -83,9 +78,6 @@ export function DialogSongsAdd(props) {
         close && handleClose()
     };
 
-    const handleDelete = () => {
-        console.log('qwe')
-    }
 
     const data = {
         title: 'Create new song',

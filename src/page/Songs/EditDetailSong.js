@@ -1,8 +1,7 @@
-import React, {useContext, useEffect} from "react";
+import React from "react";
 import {ContentDetailEdit} from "../EditDetailSong/Content/ContentDetailEdit";
 import {ToolsEditDetail} from "../EditDetailSong/Tools/ToolsEditDetail";
-import {useDispatch, useSelector} from "react-redux";
-import {getSongDataActionCreator} from "../../store/action/modules/songs";
+import {useSelector} from "react-redux";
 
 
 

@@ -7,10 +7,6 @@ import React, {useEffect, useState} from "react";
 import {useStyles} from "../DialogSongs/style";
 import CustomDialog from "../CustomDialog";
 import {NumberFormatCustom} from "../../inputComponent/NumberFormatCustom/NumberFormatCustom";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import SearchIcon from "@material-ui/icons/Search";
 import AsynchronousSearch from "../../SearchField/SearchAsync";
 
 export function DialogAddSongToQueue(props) {
