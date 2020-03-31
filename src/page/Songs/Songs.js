@@ -5,16 +5,19 @@ import {headCells} from "./headTable";
 import {connect} from "react-redux";
 import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/modules/songs";
 import {showAlert, showLoader} from "../../store/action/app";
+import {getAttributesDataActionCreator} from "../../store/action/modules/attributes";
 
 const Songs = (props) => {
     const handleRequest = (id) => {
         console.log('request', id)
     };
 
-    const wrapperTags = (image, id) => (  { url: image.url, id: image.id } );
+    // const wrapperTags = (id) => (  { url: props.attributesList.find(item => item.id === id ).data.image, id: id } );
+    const wrapperTags = (id) => {
+        return { url: props.attributesList.length > 0 && props.attributesList.find(item => item.id === id ).data.image, id: id } };
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
         return {title, artist, timesPlayed, lastPlayed,
-            tags: { type: 'tags', data: tags && Object.values(tags).map((tag, index) => wrapperTags(tag)) },
+            tags: { type: 'tags', data: tags && Object.values(tags).map((id, index) => id && wrapperTags(id)) },
             action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: handleRequest }] }}
     }
 
@@ -31,6 +34,10 @@ const Songs = (props) => {
         console.log('props.songData',props.songData);
         localStorage.setItem('songs', JSON.stringify(props.songData));
     },[props.songData]);
+
+    // useEffect(() => {
+    //     props.action.getAttributesData()
+    // },[]);
 
     const handleFilter = () => {
         let songList = {...props.songData};
@@ -104,15 +111,18 @@ const Songs = (props) => {
 const mapStateToProps = state => {
     console.log('songData', state.songs);
     return {
+        attributesList: state.attributes.list,
         searchText: state.songs.searchText,
         songData: state.songs,
         filterAttributes: state.songs.filterAttributes,
+
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         action: {
+            getAttributesData: () => dispatch(getAttributesDataActionCreator()),
             getSongData: () => dispatch(getSongDataActionCreator()),
             setSelected: (data) => setSelectedActionCreator(data),
             alert: (text) => dispatch(showAlert(text)),

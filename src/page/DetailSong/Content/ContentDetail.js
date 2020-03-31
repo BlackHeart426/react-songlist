@@ -26,6 +26,7 @@ export const ContentDetail = (props) => {
     };
 
     useEffect(() => {
+        debugger
         detailSong && setTimesPlayed(detailSong.data.timesPlayed)
             && setLastPlayed(detailSong.data.lastPlayed)
             && setQueue(0)
@@ -41,9 +42,9 @@ export const ContentDetail = (props) => {
                     {detailSong && detailSong.data.artist}
                 </Typography>
                 <div className={classes.pos}>
-                    {detailSong && detailSong.data.tags.map(value => (
-                        <Chip key={value} label={value} className={classes.chip} />
-                    ))}
+                    {/*{detailSong && detailSong.data.tags.map(value => {*/}
+                    {/*    <Chip key={value} label={value} className={classes.chip} />*/}
+                    {/*})}*/}
                 </div>
 
                 {detailSong

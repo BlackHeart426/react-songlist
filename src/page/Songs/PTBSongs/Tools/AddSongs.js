@@ -17,11 +17,10 @@ export const AddSongs = (props) => {
     };
 
     function showButton(lenSelected) {
-        return lenSelected === 0 ? false : true
+        return lenSelected !== 0
     }
 
     const addRowsSong = (property) => {
-        console.log('property', property)
         const {title, artist, tags, active} = property;
         const newSong = {
             id: shortid.generate(),
@@ -34,6 +33,7 @@ export const AddSongs = (props) => {
             },
             active: active
         };
+        debugger
         dispatch(addSongActionCreator(newSong))
     };
 

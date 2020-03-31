@@ -16,7 +16,7 @@ import {Test} from "./page/Test";
 import Songs from "./page/Songs/Songs";
 import {connect, useSelector} from "react-redux";
 import {getSongDataActionCreator, setSelectedActionCreator} from "./store/action/modules/songs";
-import {hideLoader, showAlert, showLoader} from "./store/action/app";
+import {getAllDataActionCreator, hideLoader, showAlert, showLoader} from "./store/action/app";
 import {getQueueDataActionCreator} from "./store/action/modules/queue";
 import {getSavedQueueDataActionCreator} from "./store/action/modules/savedQueue";
 import {getHistoryDataActionCreator} from "./store/action/modules/history";
@@ -54,11 +54,12 @@ const App = (props) => {
     const classes = useStyles();
 
     useEffect(() => {
-        props.action.getSongData(); //Заполнение таблицы с песнями
-        props.action.getQueueData(); //Заполнение таблицы с очередью
-        props.action.getSavedQueueData(); //Заполнение таблицы с очередью
-        props.action.getHistoryData(); //Заполнение таблицы с очередью
-        props.action.getAttributesData(); //Заполнение таблицы с очередью
+        // props.action.getSongData(); //Заполнение таблицы с песнями
+        // props.action.getQueueData(); //Заполнение таблицы с очередью
+        // props.action.getSavedQueueData(); //Заполнение таблицы с очередью
+        // props.action.getHistoryData(); //Заполнение таблицы с очередью
+        // props.action.getAttributesData(); //Заполнение таблицы с очередью
+        props.action.getAllData();
 
     },[]);
 
@@ -103,12 +104,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
     return {
         action: {
+            getAllData: () => dispatch(getAllDataActionCreator()),
+            getAttributesData: () => dispatch(getAttributesDataActionCreator()),
             getSongData: () => dispatch(getSongDataActionCreator()),
             getQueueData: () => dispatch(getQueueDataActionCreator()),
             getSavedQueueData: () => dispatch(getSavedQueueDataActionCreator()),
             getHistoryData: () => dispatch(getHistoryDataActionCreator()),
-            getAttributesData: () => dispatch(getAttributesDataActionCreator()),
-            // setSelected: (data) => dispatch(setSelectedActionCreator(data)),
+            setSelected: (data) => dispatch(setSelectedActionCreator(data)),
             alert: (text) => dispatch(showAlert(text)),
             showLoader: () => dispatch(showLoader()),
             hideLoader: () => dispatch(hideLoader())
