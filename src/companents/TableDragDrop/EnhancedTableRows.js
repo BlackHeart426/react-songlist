@@ -45,6 +45,23 @@ export const EnhancedTableRows = (props) => {
         setState(data)
     },[data])
 
+    const styleButton = (name) => {
+        let color = 'white';
+        switch (name) {
+            case 'Detail':
+                color = '#ffd740';
+                break;
+            case 'Done':
+                color = '#0f0';
+                break;
+            case 'Delete':
+                color = '#f44336';
+                break;
+
+        }
+        return color
+    }
+
     const Row = SortableElement((data, index) => {
         const row = data.data[1];
         const indexW = data.data[0];
@@ -55,27 +72,27 @@ export const EnhancedTableRows = (props) => {
         return (
             <>
                 <ThemeProvider theme={outerTheme} >
-                <TableRow style={{'display':'none'}}  id={row.id+'-propmt'}>
-                    <TableCell colSpan="8" >
-                        <strong>Are you delete current item?</strong>
-                    </TableCell>
-                    <TableCell align="center" >
-                        <IconButton
-                            type="submit"
-                            size={"small"}
-                            color="primary"
-                            onClick={handleAccept}>
-                            <DoneIcon/>
-                        </IconButton>
-                        <IconButton
-                            type="submit"
-                            size={"small"}
-                            color="primary"
-                            onClick={handleCancel}>
-                            <CloseIcon/>
-                        </IconButton>
-                    </TableCell>
-                </TableRow>
+                {/*<TableRow style={{'display':'none'}}  id={row.id+'-propmt'}>*/}
+                {/*    <TableCell colSpan="8" >*/}
+                {/*        <strong>Are you delete current item?</strong>*/}
+                {/*    </TableCell>*/}
+                {/*    <TableCell align="center" >*/}
+                {/*        <IconButton*/}
+                {/*            type="submit"*/}
+                {/*            size={"small"}*/}
+                {/*            color="primary"*/}
+                {/*            onClick={handleAccept}>*/}
+                {/*            <DoneIcon/>*/}
+                {/*        </IconButton>*/}
+                {/*        <IconButton*/}
+                {/*            type="submit"*/}
+                {/*            size={"small"}*/}
+                {/*            color="primary"*/}
+                {/*            onClick={handleCancel}>*/}
+                {/*            <CloseIcon/>*/}
+                {/*        </IconButton>*/}
+                {/*    </TableCell>*/}
+                {/*</TableRow>*/}
                 <TableRow
                     hover
                     role="checkbox"
@@ -126,12 +143,13 @@ export const EnhancedTableRows = (props) => {
                                             && <IconButton
                                                 type="submit"
                                                 size={"small"}
+                                                // style={
+                                                //    {"color": styleButton(btn.name)}
+                                                // }
                                                 color="primary"
                                                 key={btn.name}
                                                 onClick={
-                                                    btn.name == 'Delete'
-                                                        ? (() => handlePrompt(() => btn.handle(row.id), row.id))
-                                                        : () => btn.handle(row.id)
+                                                    () => btn.handle(row.id)
                                                 }>
                                                 {componentTags[btn.name]}
                                             </IconButton>
