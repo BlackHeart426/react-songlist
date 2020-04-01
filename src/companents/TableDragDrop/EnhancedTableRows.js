@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Table from "@material-ui/core/Table";
 import {arrayMove, SortableContainer, SortableElement, SortableHandle} from "react-sortable-hoc";
 import TableBody from "@material-ui/core/TableBody";
+import {TableRowColumn} from "material-ui/Table";
 
 const active = {
     'color': 'rgba(0, 0, 0, 0.88)',
@@ -91,23 +92,122 @@ export const EnhancedTableRows = (props) => {
             status: 'enabled'
         }
     ]);
+    // stableSort(data, getComparator(order, orderBy))
+    //     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    //     .map((row, index) => {
+    //         let indexNew = index + (page * rowsPerPage)
+    //         index = indexNew
+    //         const isItemSelected = isSelected(data[index].id);
+    //         const labelId = `enhanced-table-checkbox-${index}`;
+    //         return (
+    //
+    //             (data[index].active !== undefined ? ( (showActive) || (data[index].active) ) : true ) &&
+    //             <ThemeProvider theme={outerTheme}  key={ data[index].id }>
+    //
+    //             </ThemeProvider>
+    //         );
+    //     })
+    const Row = SortableElement((data) => {
+        const row = data.data[1];
+        const index = data.data[0];
 
-    const Row = SortableElement(({ data, ...other }) => {
+        let indexNew = parseInt(index) + (page * rowsPerPage)
+        const isItemSelected = isSelected(row.id);
+        const labelId = `enhanced-table-checkbox-${indexNew}`;
         return (
-            <TableRow {...other}>
-                <TableCell style={{ width: '5%' }}>
-                    <DragHandle />
-                </TableCell>
-                <TableCell>
-                    {data.id}
-                </TableCell>
-                <TableCell>
-                    {data.name}
-                </TableCell>
-                <TableCell>
-                    {data.status}
-                </TableCell>
-            </TableRow>
+            <>
+                {/*<TableRow style={{'display':'none'}}  id={row.id+'-propmt'}>*/}
+                {/*    <TableCell colSpan="7" >*/}
+                {/*        <strong>Are you delete current item?</strong>*/}
+                {/*    </TableCell>*/}
+                {/*    <TableCell align="center" >*/}
+                {/*        <IconButton*/}
+                {/*            type="submit"*/}
+                {/*            size={"small"}*/}
+                {/*            color="primary"*/}
+                {/*            onClick={handleAccept}>*/}
+                {/*            <DoneIcon/>*/}
+                {/*        </IconButton>*/}
+                {/*        <IconButton*/}
+                {/*            type="submit"*/}
+                {/*            size={"small"}*/}
+                {/*            color="primary"*/}
+                {/*            onClick={handleCancel}>*/}
+                {/*            <CloseIcon/>*/}
+                {/*        </IconButton>*/}
+                {/*    </TableCell>*/}
+                {/*</TableRow>*/}
+                <TableRow
+                    hover
+                    role="checkbox"
+                    aria-checked={isItemSelected}
+                    tabIndex={-1}
+                    id={row.id}
+                    onClick={editMode ? event => handleClick(event, row.id) : undefined}
+                    selected={isItemSelected}
+                >
+                    {editMode &&
+                        <TableCell padding="checkbox">
+                            <Checkbox
+                                value="secondary"
+                                color="primary"
+                                checked={isItemSelected}
+                                inputProps={{'aria-labelledby': labelId}}
+                            />
+                            <DragHandle />
+                        </TableCell>
+
+                    }
+
+                    {/*TODO Переписать с типом элемента*/}
+                    {Object.keys(row.data).map((item, indexRow) => {
+                        debugger
+                            return <TableCell
+                                align="center"
+                                key={indexRow}
+                                style={row.active !== undefined ? (row.active === true ? active : defaultColor) : active}>
+
+
+                                {/*}*/}
+                                {
+                                    row.data[item].type === 'position' &&
+                                    <>{indexNew + 1}</>
+
+                                }
+
+                                {
+                                    row.data[item].type === 'btn'
+
+                                    && row.data[item].data.map((btn, indexBtn) => (
+                                        (editMode
+                                            && <IconButton
+                                                type="submit"
+                                                size={"small"}
+                                                color="primary"
+                                                key={btn.name}
+                                                onClick={
+                                                    btn.name == 'Delete'
+                                                        ? (() => handlePrompt(() => btn.handle(row.id), row.id))
+                                                        : () => btn.handle(row.id)
+                                                }>
+                                                {componentTags[btn.name]}
+                                            </IconButton>
+                                        )
+                                    ))
+
+                                }
+                                {
+                                    row.data[item].type !== 'tags' && row.data[item].type !== 'btn' && row.data[item].type !== 'position' && row.data[item].type !== 'tag' &&
+                                    <> {row.data[item]} </>
+
+                                }
+
+                            </TableCell>
+                        }
+                    )}
+
+                </TableRow>
+            </>
         )
     })
 
@@ -121,8 +221,6 @@ export const EnhancedTableRows = (props) => {
     );
 
     const onSortEnd = ({oldIndex, newIndex}) => {
-        debugger
-        console.log('1')
         setPeople(
             arrayMove(people, oldIndex, newIndex),
         );
@@ -141,6 +239,7 @@ export const EnhancedTableRows = (props) => {
     }
 
     const handlePrompt = (handleAction, id) => {
+        debugger
         const element = document.getElementById(id);
         element.style.display = 'none';
         setPrompt(id)
@@ -153,16 +252,15 @@ export const EnhancedTableRows = (props) => {
         }
     },[prompt])
 
-
+    const dataSong = Object.entries(data)
     return (
         <TableBodySortable onSortEnd={onSortEnd} useDragHandle
         >
-            {people.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+            {dataSong.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
                 console.log('sort')
+                const indexRow = row[0]
                 return (
                     <Row
-                        index={index}
-                        key={row.id}
                         data={row}
                     />
                 )

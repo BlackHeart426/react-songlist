@@ -21,18 +21,18 @@ export function EnhancedTableHead(props) {
         <TableHead>
             <TableRow>
                 {editMode &&
-                <TableCell padding="checkbox">
-                    {typeCheckBox !== 'solo' &&
-                    <Checkbox
-                        indeterminate={numSelected > 0 && numSelected < rowCount}
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        value="secondary"
-                        color="primary"
-                        inputProps={{'aria-label': 'select all desserts'}}
-                    />
-                    }
-                </TableCell>
+                    <TableCell padding="checkbox">
+                        {typeCheckBox !== 'solo' &&
+                        <Checkbox
+                            indeterminate={numSelected > 0 && numSelected < rowCount}
+                            checked={rowCount > 0 && numSelected === rowCount}
+                            onChange={onSelectAllClick}
+                            value="secondary"
+                            color="primary"
+                            inputProps={{'aria-label': 'select all desserts'}}
+                        />
+                        }
+                    </TableCell>
                 }
                 {data.map(headCell => (
                     <TableCell
