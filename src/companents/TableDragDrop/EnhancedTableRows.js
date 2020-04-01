@@ -1,21 +1,19 @@
 import PropTypes from "prop-types";
-import {getComparator, stableSort} from "./stableSort";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Checkbox from "@material-ui/core/Checkbox";
 import {componentTags} from "./componentTags";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import React, {useEffect, useRef, useState} from "react";
-import {ThemeProvider} from "@material-ui/styles";
-import {outerTheme} from "./styles";
-import DoneIcon from "@material-ui/icons/Done";
-import CloseIcon from '@material-ui/icons/Close';
-import Table from "@material-ui/core/Table";
 import {arrayMove, SortableContainer, SortableElement, SortableHandle} from "react-sortable-hoc";
 import TableBody from "@material-ui/core/TableBody";
-import {TableRowColumn} from "material-ui/Table";
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
+import {
+    getQueueDataActionCreator,
+    movePositionInQueue,
+    setQueueDataActionCreator
+} from "../../store/action/modules/queue";
+import {useDispatch, useSelector} from "react-redux";
 
 const active = {
     'color': 'rgba(0, 0, 0, 0.88)',
@@ -30,6 +28,8 @@ export const EnhancedTableRows = (props) => {
     const [prompt, setPrompt] = useState('')
     const [accept, setAccept] = useState(() => () => console.log('empty'))
     const [state, setState] = useState([])
+    const dispatch = useDispatch()
+    const queueData = useSelector(state => state.queue.list)
 
     const TableBodySortable = SortableContainer(({ children }) => (
         <TableBody >
@@ -38,81 +38,14 @@ export const EnhancedTableRows = (props) => {
     ));
 
     useEffect(()=>{
+        console.log(state)
+
+    },[state])
+
+    useEffect(()=>{
         setState(data)
     },[data])
 
-    const [people, setPeople] = useState( [
-        {
-            id: 1,
-            name: 'People 1',
-            status: 'enabled'
-        },
-        {
-            id: 2,
-            name: 'People 2',
-            status: 'disabled'
-        },
-        {
-            id: 3,
-            name: 'People 3',
-            status: 'disabled'
-        },
-        {
-            id: 4,
-            name: 'People 4',
-            status: 'disabled'
-        },
-        {
-            id: 5,
-            name: 'People 5',
-            status: 'disabled'
-        },
-        {
-            id: 6,
-            name: 'People 6',
-            status: 'disabled'
-        },
-        {
-            id: 7,
-            name: 'People 7',
-            status: 'disabled'
-        },
-        {
-            id: 8,
-            name: 'People 8',
-            status: 'disabled'
-        },
-        {
-            id: 9,
-            name: 'People 9',
-            status: 'disabled'
-        },
-        {
-            id: 10,
-            name: 'People 10',
-            status: 'enabled'
-        },
-        {
-            id: 11,
-            name: 'People 11',
-            status: 'enabled'
-        }
-    ]);
-    // stableSort(data, getComparator(order, orderBy))
-    //     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-    //     .map((row, index) => {
-    //         let indexNew = index + (page * rowsPerPage)
-    //         index = indexNew
-    //         const isItemSelected = isSelected(data[index].id);
-    //         const labelId = `enhanced-table-checkbox-${index}`;
-    //         return (
-    //
-    //             (data[index].active !== undefined ? ( (showActive) || (data[index].active) ) : true ) &&
-    //             <ThemeProvider theme={outerTheme}  key={ data[index].id }>
-    //
-    //             </ThemeProvider>
-    //         );
-    //     })
     const Row = SortableElement((data, index) => {
         const row = data.data[1];
         const indexW = data.data[0];
@@ -231,12 +164,19 @@ export const EnhancedTableRows = (props) => {
     );
 
     const onSortEnd = ({oldIndex, newIndex}) => {
-
-        const newList = arrayMove(state, oldIndex, newIndex);
+        const newIndexData = arrayMove(state, oldIndex, newIndex)
+        // setState(
+        //     newIndexData
+        // );
+        newIndexData.map((item, index) => {
+            item.position = index;
+            item.idSong = queueData.find((itemData => itemData.id === item.id)).idSong;
+            delete item.data.action
+            return item
+        })
         debugger
-        setState(
-            arrayMove(state, oldIndex, newIndex),
-        );
+        newIndexData.forEach(item => dispatch(setQueueDataActionCreator(item)))
+        dispatch(getQueueDataActionCreator())
     };
 
     const handleAccept= () => {
@@ -266,12 +206,10 @@ export const EnhancedTableRows = (props) => {
     },[prompt])
 
     const dataSong = Object.entries(state)
-    debugger
     return (
         <TableBodySortable onSortEnd={onSortEnd} useDragHandle
         >
             {dataSong.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
-                console.log('sort')
                 return (
                     <Row
                         index={index}

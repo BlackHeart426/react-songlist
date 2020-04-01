@@ -28,6 +28,22 @@ export const getQueueDataActionCreator = () => async dispatch => {
         dispatch(hideLoader())
     }
 };
+export const setQueueDataActionCreator = (state) => async dispatch => {
+    dispatch(showLoader())
+    try {
+        const updates = {};
+        updates['/'+state.id+'/'] = state;
+        QueueAPI.getRef().update(updates)
+        // .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: song }))
+        // .catch(console.log('setData error'))
+        await dispatch(hideLoader())
+    } catch (e) {
+        console.log(e)
+        dispatch(showAlert('Что-то пошло не так'))
+        dispatch(hideLoader())
+    }
+
+};
 
 export const addSongInQueueActionCreator = (state, idSong) => async dispatch => {
 
@@ -68,7 +84,7 @@ export const editSongInQueueActionCreator = (state) => async dispatch => {
     //     song: state
     // }
 };
-export const checkPosotion = (currentItem, oldPosition, newPosition) => {
+export const checkPosition = (currentItem, oldPosition, newPosition) => {
     if (currentItem.position === newPosition)
     {
         currentItem.position++
@@ -84,6 +100,7 @@ export const checkPosotion = (currentItem, oldPosition, newPosition) => {
 }
 
 export const movePositionInQueue = (idCurrent, newId) => async dispatch => {
+    debugger
     const list =  [];
     await QueueAPI.getRef().orderByChild("position").once('value')
     .then((snapshot) => {
@@ -94,18 +111,18 @@ export const movePositionInQueue = (idCurrent, newId) => async dispatch => {
     const currentPosition = {...list.find(item => item.id === idCurrent)};
     const newPosition = {...list.find(item => item.id === newId)};
     list.forEach((item, index) => {
-        checkPosotion(item, currentPosition.position, newPosition.position)
+        checkPosition(item, currentPosition.position, newPosition.position)
     });
-    list.map(item => (
-        updateData(item)
-    ))
+    // list.map(item => (
+    //     updateData(item)
+    // ))
 
-    async function updateData(item) {
-        const updates = {};
-        updates['/'+item.id+'/'] = item;
-        await QueueAPI.getRef().update(updates)
-            .then(dispatch({ type: EDIT_ATTRIBUTES, song: item }))
-    }
+    // async function updateData(item) {
+    //     const updates = {};
+    //     updates['/'+item.id+'/'] = item;
+    //     await QueueAPI.getRef().update(updates)
+    //         .then(dispatch({ type: EDIT_ATTRIBUTES, song: item }))
+    // }
     await dispatch(getQueueDataActionCreator())
 
 }

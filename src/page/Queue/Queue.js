@@ -15,8 +15,10 @@ import ConteinerTableDragDrop from "../../companents/TableDragDrop/ConteinerTabl
 const Queue = (props) => {
     const history = useHistory();
 
-    function createData(position, title, artist, amount, requestBy, note) {
-        return {position: {type: 'position', positionBase: position}, title, artist, amount, requestBy, note,
+    function createData(position, title, artist, amount, requestedBy, note) {
+        return {
+            position: {type: 'position'},
+            title, artist, amount, requestedBy, note,
             action: { type: 'btn', data: [
                     { type: 'icon', name: 'Detail', handle: handleDetail },
                     { type: 'icon', name: 'Delete', handle: handleDelete },
