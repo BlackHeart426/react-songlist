@@ -107,11 +107,11 @@ export const EnhancedTableRows = (props) => {
     //             </ThemeProvider>
     //         );
     //     })
-    const Row = SortableElement((data) => {
+    const Row = SortableElement((data, index) => {
         const row = data.data[1];
-        const index = data.data[0];
+        const indexW = data.data[0];
 
-        let indexNew = parseInt(index) + (page * rowsPerPage)
+        let indexNew = parseInt(indexW) + (page * rowsPerPage)
         const isItemSelected = isSelected(row.id);
         const labelId = `enhanced-table-checkbox-${indexNew}`;
         return (
@@ -261,6 +261,8 @@ export const EnhancedTableRows = (props) => {
                 const indexRow = row[0]
                 return (
                     <Row
+                        index={index}
+                        key={index}
                         data={row}
                     />
                 )
