@@ -5,6 +5,7 @@ import { blue500, blue700 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import { SortableContainer, SortableHandle, SortableElement, arrayMove } from 'react-sortable-hoc'
+import TableCell from "@material-ui/core/TableCell";
 
 const theme = getMuiTheme({
     palette: {
@@ -19,8 +20,8 @@ const DragHandle = SortableHandle(({ style }) => (
 );
 
 // Универсальный компонент для превращения TableBody в sortable контейнер
-const TableBodySortable = SortableContainer(({ children, displayRowCheckbox }) => (
-    <TableBody displayRowCheckbox={displayRowCheckbox}>
+const TableBodySortable = SortableContainer(({ children }) => (
+    <TableBody >
         {children}
     </TableBody>
 ));
@@ -32,19 +33,18 @@ TableBodySortable.muiName = 'TableBody'
 const Row = SortableElement(({ data, ...other }) => {
     return (
         <TableRow {...other}>
-            {other.children[0]}
-            <TableRowColumn style={{ width: '5%' }}>
+            <TableCell style={{ width: '5%' }}>
                 <DragHandle />
-            </TableRowColumn>
-            <TableRowColumn>
+            </TableCell>
+            <TableCell>
                 {data.id}
-            </TableRowColumn>
-            <TableRowColumn>
+            </TableCell>
+            <TableCell>
                 {data.name}
-            </TableRowColumn>
-            <TableRowColumn>
+            </TableCell>
+            <TableCell>
                 {data.status}
-            </TableRowColumn>
+            </TableCell>
         </TableRow>
     )
 })
@@ -92,7 +92,7 @@ class SortableTable extends Component {
                     </TableRow>
                 </TableHeader>
                 <TableBodySortable onSortEnd={this.onSortEnd} useDragHandle
-                                   displayRowCheckbox={false}>
+                                  >
                     {this.state.peoples.map((row, index) => {
                         return (
                             <Row

@@ -10,6 +10,7 @@ import {
 } from "../../store/action/modules/queue";
 import {addUserIdAtLink} from "../../companents/GlobalParamaters/linkWithUserId";
 import {useHistory} from "react-router";
+import ConteinerTableDragDrop from "../../companents/TableDragDrop/ConteinerTableDragDrop";
 
 const Queue = (props) => {
     const history = useHistory();
@@ -82,7 +83,7 @@ const Queue = (props) => {
     return (
         <>
             <PTBQueue/>
-            <TablePagination
+            <ConteinerTableDragDrop
                 typeCheckBox={'solo'}
                 onSelectRow = {(data) => props.action.setSelected(data)}
                 headCells = {headCells}
