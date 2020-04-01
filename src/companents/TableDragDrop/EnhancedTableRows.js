@@ -15,6 +15,7 @@ import Table from "@material-ui/core/Table";
 import {arrayMove, SortableContainer, SortableElement, SortableHandle} from "react-sortable-hoc";
 import TableBody from "@material-ui/core/TableBody";
 import {TableRowColumn} from "material-ui/Table";
+import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
 const active = {
     'color': 'rgba(0, 0, 0, 0.88)',
@@ -28,12 +29,17 @@ export const EnhancedTableRows = (props) => {
     const { data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode, showActive } = props;
     const [prompt, setPrompt] = useState('')
     const [accept, setAccept] = useState(() => () => console.log('empty'))
+    const [state, setState] = useState([])
 
     const TableBodySortable = SortableContainer(({ children }) => (
         <TableBody >
             {children}
         </TableBody>
     ));
+
+    useEffect(()=>{
+        setState(data)
+    },[data])
 
     const [people, setPeople] = useState( [
         {
@@ -48,47 +54,47 @@ export const EnhancedTableRows = (props) => {
         },
         {
             id: 3,
-            name: 'People 2',
+            name: 'People 3',
             status: 'disabled'
         },
         {
             id: 4,
-            name: 'People 2',
+            name: 'People 4',
             status: 'disabled'
         },
         {
             id: 5,
-            name: 'People 2',
+            name: 'People 5',
             status: 'disabled'
         },
         {
             id: 6,
-            name: 'People 2',
+            name: 'People 6',
             status: 'disabled'
         },
         {
             id: 7,
-            name: 'People 2',
+            name: 'People 7',
             status: 'disabled'
         },
         {
             id: 8,
-            name: 'People 2',
+            name: 'People 8',
             status: 'disabled'
         },
         {
             id: 9,
-            name: 'People 2',
+            name: 'People 9',
             status: 'disabled'
         },
         {
             id: 10,
-            name: 'People 1',
+            name: 'People 10',
             status: 'enabled'
         },
         {
             id: 11,
-            name: 'People 1',
+            name: 'People 11',
             status: 'enabled'
         }
     ]);
@@ -147,21 +153,24 @@ export const EnhancedTableRows = (props) => {
                     selected={isItemSelected}
                 >
                     {editMode &&
-                        <TableCell padding="checkbox">
-                            <Checkbox
-                                value="secondary"
-                                color="primary"
-                                checked={isItemSelected}
-                                inputProps={{'aria-labelledby': labelId}}
-                            />
-                            <DragHandle />
-                        </TableCell>
+                        <>
+                            <TableCell padding="none">
+                                <DragHandle />
+                            </TableCell>
+                            <TableCell padding="checkbox" >
+                                <Checkbox
+                                    value="secondary"
+                                    color="primary"
+                                    checked={isItemSelected}
+                                    inputProps={{'aria-labelledby': labelId}}
+                                />
+                            </TableCell>
 
+                        </>
                     }
 
                     {/*TODO Переписать с типом элемента*/}
                     {Object.keys(row.data).map((item, indexRow) => {
-                        debugger
                             return <TableCell
                                 align="center"
                                 key={indexRow}
@@ -217,12 +226,16 @@ export const EnhancedTableRows = (props) => {
 
 // Компонент который используется активации drag-n-drop при клике внутри компонента
     const DragHandle = SortableHandle(({ style }) => (
-        <span style={{ ...style, ...{ cursor: 'move' } }} >{'::::'}</span>)
+        <span style={{ ...style, ...{ cursor: 'move' } }} ><DragIndicatorIcon/></span>
+        )
     );
 
     const onSortEnd = ({oldIndex, newIndex}) => {
-        setPeople(
-            arrayMove(people, oldIndex, newIndex),
+
+        const newList = arrayMove(state, oldIndex, newIndex);
+        debugger
+        setState(
+            arrayMove(state, oldIndex, newIndex),
         );
     };
 
@@ -252,13 +265,13 @@ export const EnhancedTableRows = (props) => {
         }
     },[prompt])
 
-    const dataSong = Object.entries(data)
+    const dataSong = Object.entries(state)
+    debugger
     return (
         <TableBodySortable onSortEnd={onSortEnd} useDragHandle
         >
             {dataSong.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
                 console.log('sort')
-                const indexRow = row[0]
                 return (
                     <Row
                         index={index}
