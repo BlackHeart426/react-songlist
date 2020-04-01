@@ -16,6 +16,8 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {ThemeProvider} from "@material-ui/styles";
 import {outerTheme} from "../TablePagination/styles";
+import DoneIcon from "@material-ui/icons/Done";
+import CloseIcon from '@material-ui/icons/Close';
 
 const active = {
     'color': 'rgba(0, 0, 0, 0.88)',
@@ -40,11 +42,6 @@ export const EnhancedTableRows = (props) => {
     ));
 
     useEffect(()=>{
-        console.log(state)
-
-    },[state])
-
-    useEffect(()=>{
         setState(data)
     },[data])
 
@@ -58,34 +55,34 @@ export const EnhancedTableRows = (props) => {
         return (
             <>
                 <ThemeProvider theme={outerTheme} >
-                {/*<TableRow style={{'display':'none'}}  id={row.id+'-propmt'}>*/}
-                {/*    <TableCell colSpan="7" >*/}
-                {/*        <strong>Are you delete current item?</strong>*/}
-                {/*    </TableCell>*/}
-                {/*    <TableCell align="center" >*/}
-                {/*        <IconButton*/}
-                {/*            type="submit"*/}
-                {/*            size={"small"}*/}
-                {/*            color="primary"*/}
-                {/*            onClick={handleAccept}>*/}
-                {/*            <DoneIcon/>*/}
-                {/*        </IconButton>*/}
-                {/*        <IconButton*/}
-                {/*            type="submit"*/}
-                {/*            size={"small"}*/}
-                {/*            color="primary"*/}
-                {/*            onClick={handleCancel}>*/}
-                {/*            <CloseIcon/>*/}
-                {/*        </IconButton>*/}
-                {/*    </TableCell>*/}
-                {/*</TableRow>*/}
+                <TableRow style={{'display':'none'}}  id={row.id+'-propmt'}>
+                    <TableCell colSpan="8" >
+                        <strong>Are you delete current item?</strong>
+                    </TableCell>
+                    <TableCell align="center" >
+                        <IconButton
+                            type="submit"
+                            size={"small"}
+                            color="primary"
+                            onClick={handleAccept}>
+                            <DoneIcon/>
+                        </IconButton>
+                        <IconButton
+                            type="submit"
+                            size={"small"}
+                            color="primary"
+                            onClick={handleCancel}>
+                            <CloseIcon/>
+                        </IconButton>
+                    </TableCell>
+                </TableRow>
                 <TableRow
                     hover
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
                     id={row.id}
-                    onClick={editMode ? event => handleClick(event, row.id) : undefined}
+
                     selected={isItemSelected}
                 >
                     {editMode &&
@@ -98,6 +95,7 @@ export const EnhancedTableRows = (props) => {
                                     value="secondary"
                                     color="primary"
                                     checked={isItemSelected}
+                                    onClick={editMode ? event => handleClick(event, row.id) : undefined}
                                     inputProps={{'aria-labelledby': labelId}}
                                 />
                             </TableCell>
@@ -192,12 +190,12 @@ export const EnhancedTableRows = (props) => {
         const elementPrompt = document.getElementById(prompt + '-propmt');
         elementPrompt.style.display = 'none';
         const element = document.getElementById(prompt);
-        element.style.display = '';
+        element.style.display = 'table-row';
     }
 
     const handlePrompt = (handleAction, id) => {
-        debugger
         const element = document.getElementById(id);
+        console.log(element)
         element.style.display = 'none';
         setPrompt(id)
         setAccept(() => () => handleAction())
@@ -205,7 +203,7 @@ export const EnhancedTableRows = (props) => {
     useEffect(() => {
         if(prompt) {
             const element = document.getElementById(prompt + '-propmt');
-            element.style.display = '';
+            element.style.display = 'table-row';
         }
     },[prompt])
 
