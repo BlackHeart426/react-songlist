@@ -14,6 +14,8 @@ import {
     setQueueDataActionCreator
 } from "../../store/action/modules/queue";
 import {useDispatch, useSelector} from "react-redux";
+import {ThemeProvider} from "@material-ui/styles";
+import {outerTheme} from "../TablePagination/styles";
 
 const active = {
     'color': 'rgba(0, 0, 0, 0.88)',
@@ -55,6 +57,7 @@ export const EnhancedTableRows = (props) => {
         const labelId = `enhanced-table-checkbox-${indexNew}`;
         return (
             <>
+                <ThemeProvider theme={outerTheme} >
                 {/*<TableRow style={{'display':'none'}}  id={row.id+'-propmt'}>*/}
                 {/*    <TableCell colSpan="7" >*/}
                 {/*        <strong>Are you delete current item?</strong>*/}
@@ -149,6 +152,7 @@ export const EnhancedTableRows = (props) => {
                     )}
 
                 </TableRow>
+                </ThemeProvider>
             </>
         )
     })
