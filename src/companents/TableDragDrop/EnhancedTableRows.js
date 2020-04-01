@@ -11,6 +11,9 @@ import {ThemeProvider} from "@material-ui/styles";
 import {outerTheme} from "./styles";
 import DoneIcon from "@material-ui/icons/Done";
 import CloseIcon from '@material-ui/icons/Close';
+import Table from "@material-ui/core/Table";
+import {arrayMove, SortableContainer, SortableElement, SortableHandle} from "react-sortable-hoc";
+import TableBody from "@material-ui/core/TableBody";
 
 const active = {
     'color': 'rgba(0, 0, 0, 0.88)',
@@ -24,6 +27,106 @@ export const EnhancedTableRows = (props) => {
     const { data, order, isSelected, handleClick, rowsPerPage, page, orderBy, editMode, showActive } = props;
     const [prompt, setPrompt] = useState('')
     const [accept, setAccept] = useState(() => () => console.log('empty'))
+
+    const TableBodySortable = SortableContainer(({ children }) => (
+        <TableBody >
+            {children}
+        </TableBody>
+    ));
+
+    const [people, setPeople] = useState( [
+        {
+            id: 1,
+            name: 'People 1',
+            status: 'enabled'
+        },
+        {
+            id: 2,
+            name: 'People 2',
+            status: 'disabled'
+        },
+        {
+            id: 3,
+            name: 'People 2',
+            status: 'disabled'
+        },
+        {
+            id: 4,
+            name: 'People 2',
+            status: 'disabled'
+        },
+        {
+            id: 5,
+            name: 'People 2',
+            status: 'disabled'
+        },
+        {
+            id: 6,
+            name: 'People 2',
+            status: 'disabled'
+        },
+        {
+            id: 7,
+            name: 'People 2',
+            status: 'disabled'
+        },
+        {
+            id: 8,
+            name: 'People 2',
+            status: 'disabled'
+        },
+        {
+            id: 9,
+            name: 'People 2',
+            status: 'disabled'
+        },
+        {
+            id: 10,
+            name: 'People 1',
+            status: 'enabled'
+        },
+        {
+            id: 11,
+            name: 'People 1',
+            status: 'enabled'
+        }
+    ]);
+
+    const Row = SortableElement(({ data, ...other }) => {
+        return (
+            <TableRow {...other}>
+                <TableCell style={{ width: '5%' }}>
+                    <DragHandle />
+                </TableCell>
+                <TableCell>
+                    {data.id}
+                </TableCell>
+                <TableCell>
+                    {data.name}
+                </TableCell>
+                <TableCell>
+                    {data.status}
+                </TableCell>
+            </TableRow>
+        )
+    })
+
+// Строка необходима для того чтобы наш кастомный боди воспринимался как TableBody и в этом случае ошибки не будет
+    TableBodySortable.muiName = 'TableBody'
+
+
+// Компонент который используется активации drag-n-drop при клике внутри компонента
+    const DragHandle = SortableHandle(({ style }) => (
+        <span style={{ ...style, ...{ cursor: 'move' } }} >{'::::'}</span>)
+    );
+
+    const onSortEnd = ({oldIndex, newIndex}) => {
+        debugger
+        console.log('1')
+        setPeople(
+            arrayMove(people, oldIndex, newIndex),
+        );
+    };
 
     const handleAccept= () => {
         accept && accept()
@@ -52,117 +155,19 @@ export const EnhancedTableRows = (props) => {
 
 
     return (
-        stableSort(data, getComparator(order, orderBy))
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row, index) => {
-                let indexNew = index + (page * rowsPerPage)
-                index = indexNew
-                const isItemSelected = isSelected(data[index].id);
-                const labelId = `enhanced-table-checkbox-${index}`;
+        <TableBodySortable onSortEnd={onSortEnd} useDragHandle
+        >
+            {people.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+                console.log('sort')
                 return (
-
-                    (data[index].active !== undefined ? ( (showActive) || (data[index].active) ) : true ) &&
-                    <ThemeProvider theme={outerTheme}  key={ data[index].id }>
-                        <TableRow style={{'display':'none'}}  id={data[index].id+'-propmt'}>
-                            <TableCell colSpan="7" >
-                                <strong>Are you delete current item?</strong>
-                            </TableCell>
-                            <TableCell align="center" >
-                                <IconButton
-                                    type="submit"
-                                    size={"small"}
-                                    color="primary"
-                                    onClick={handleAccept}>
-                                        <DoneIcon/>
-                                </IconButton>
-                                <IconButton
-                                    type="submit"
-                                    size={"small"}
-                                    color="primary"
-                                    onClick={handleCancel}>
-                                        <CloseIcon/>
-                                </IconButton>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow
-                            hover
-                            role="checkbox"
-                            aria-checked={isItemSelected}
-                            tabIndex={-1}
-                            id={data[index].id}
-                            onClick={editMode ? event => handleClick(event, data[index].id) : undefined}
-                            selected={isItemSelected}
-                        >
-                            {editMode &&
-                            <TableCell padding="checkbox">
-                                <Checkbox
-                                    value="secondary"
-                                    color="primary"
-                                    checked={isItemSelected}
-                                    inputProps={{'aria-labelledby': labelId}}
-                                />
-                            </TableCell>
-                            }
-
-                            {/*TODO Переписать с типом элемента*/}
-                            {Object.keys(row).map((item, indexRow) => (
-
-                                <TableCell align="center" key={indexRow}
-                                           style={data[index].active !== undefined ? (data[index].active === true ? active : defaultColor) : active}>
-
-                                    {
-                                        row[item].type === 'position' &&
-                                        <>{index + 1}</>
-
-                                    }
-
-                                    {
-                                        row[item].type === 'btn'
-
-                                        &&  row[item].data.map((btn, indexBtn) => (
-                                            btn.type === 'text'
-                                                ? (!editMode
-                                                    && <Button
-                                                        type="submit"
-                                                        color="primary"
-                                                        variant="outlined"
-                                                        key={data[index].id}
-                                                        onClick={() => btn.handle(data[index].id)}
-                                                    >
-                                                        {btn.name}
-                                                    </Button>
-                                                )
-                                                : (editMode
-                                                    && <IconButton
-                                                        type="submit"
-                                                        size={"small"}
-                                                        color="primary"
-                                                        key={btn.name}
-                                                        onClick={
-                                                            btn.name == 'Delete'
-                                                            ? (() => handlePrompt(() => btn.handle(data[index].id), data[index].id))
-                                                             : () => btn.handle(data[index].id)
-                                                        }>
-                                                        {componentTags[btn.name]}
-                                                    </IconButton>
-                                                )
-                                        ))
-
-                                    }
-                                    {
-                                        row[item].type !== 'tags' && row[item].type !== 'btn' && row[item].type !== 'position' && row[item].type !== 'tag' &&
-                                        <> {row[item]} </>
-
-                                    }
-
-                                </TableCell>
-                                )
-                            )}
-
-                        </TableRow>
-                    </ThemeProvider>
-                );
-            })
+                    <Row
+                        index={index}
+                        key={row.id}
+                        data={row}
+                    />
+                )
+            })}
+        </TableBodySortable>
     )
 };
 

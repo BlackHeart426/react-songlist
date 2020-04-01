@@ -28,23 +28,7 @@ const ConteinerTableDragDrop = (props) => {
     const loading = useSelector(state => state.app.loading)
     const dispatch = useDispatch();
 
-    const [people, setPeople] = useState( [
-        {
-            id: 1,
-            name: 'People 1',
-            status: 'enabled'
-        },
-        {
-            id: 2,
-            name: 'People 2',
-            status: 'disabled'
-        },
-        {
-            id: 3,
-            name: 'People 1',
-            status: 'enabled'
-        }
-    ]);
+
 
     useEffect(() => {
 
@@ -136,47 +120,9 @@ const ConteinerTableDragDrop = (props) => {
      */
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rowsData.length - page * rowsPerPage);
 
-    const Row = SortableElement(({ data, ...other }) => {
-        return (
-            <TableRow {...other}>
-                <TableCell style={{ width: '5%' }}>
-                    <DragHandle />
-                </TableCell>
-                <TableCell>
-                    {data.id}
-                </TableCell>
-                <TableCell>
-                    {data.name}
-                </TableCell>
-                <TableCell>
-                    {data.status}
-                </TableCell>
-            </TableRow>
-        )
-    })
-
-    const TableBodySortable = SortableContainer(({ children }) => (
-        <TableBody >
-            {children}
-        </TableBody>
-    ));
-
-// Строка необходима для того чтобы наш кастомный боди воспринимался как TableBody и в этом случае ошибки не будет
-    TableBodySortable.muiName = 'TableBody'
 
 
-// Компонент который используется активации drag-n-drop при клике внутри компонента
-    const DragHandle = SortableHandle(({ style }) => (
-        <span style={{ ...style, ...{ cursor: 'move' } }} >{'::::'}</span>)
-    );
 
-    const onSortEnd = ({oldIndex, newIndex}) => {
-        debugger
-        console.log('1')
-        setPeople(
-             arrayMove(people, oldIndex, newIndex),
-        );
-    };
 
     return (
         <div className={classes.root}>
@@ -202,44 +148,31 @@ const ConteinerTableDragDrop = (props) => {
                             editMode = {props.statusEditMode}
                             typeCheckBox={typeCheckBox}
                         />
-                        <TableBodySortable onSortEnd={onSortEnd} useDragHandle
-                                           >
-                            {people.map((row, index) => {
-                                console.log('sort')
-                                return (
-                                    <Row
-                                        index={index}
-                                        key={row.id}
-                                        data={row}
-                                    />
-                                )
-                            })}
-                        </TableBodySortable>
-                        {/*<TableBody>*/}
-                        {/*    <EnhancedTableRows*/}
-                        {/*        classes={classes}*/}
-                        {/*        order={order}*/}
-                        {/*        orderBy={orderBy}*/}
-                        {/*        editMode ={props.statusEditMode}*/}
-                        {/*        data={rowsData.list}*/}
-                        {/*        page={page}*/}
-                        {/*        rowsPerPage={rowsPerPage}*/}
-                        {/*        handleClick={handleClick}*/}
-                        {/*        isSelected={isSelected}*/}
-                        {/*        showActive={rowsData.active}*/}
-                        {/*    />*/}
-                        {/*    {emptyRows > 0 && (*/}
-                        {/*        <TableRow style={{height: (dense ? 33 : 53) * emptyRows}}>*/}
-                        {/*            <TableCell colSpan={6}/>*/}
-                        {/*        </TableRow>*/}
-                        {/*    )}*/}
-                        {/*</TableBody>*/}
+
+                            <EnhancedTableRows
+                                classes={classes}
+                                order={order}
+                                orderBy={orderBy}
+                                editMode ={props.statusEditMode}
+                                data={rowsData.list}
+                                page={page}
+                                rowsPerPage={rowsPerPage}
+                                handleClick={handleClick}
+                                isSelected={isSelected}
+                                showActive={rowsData.active}
+                            />
+                            {/*{emptyRows > 0 && (*/}
+                            {/*    <TableRow style={{height: (dense ? 33 : 53) * emptyRows}}>*/}
+                            {/*        <TableCell colSpan={6}/>*/}
+                            {/*    </TableRow>*/}
+                            {/*)}*/}
                     </Table>
                 </TableContainer>
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25, 50, 100]}
                     component="div"
                     count={rowsData.list.length}
+                    // count={people.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
