@@ -132,7 +132,7 @@ export const EnhancedTableRows = (props) => {
 
                                         row[item].type === 'tags'
                                         &&  row[item].data.map((tag, indexTag) => (
-                                            <img key={indexTag} src={tag.url} alt="" width={30} height={30}/>
+                                            <img key={indexTag} src={tag.url.toString()} alt="" width={30} height={30}/>
                                         ))
 
 

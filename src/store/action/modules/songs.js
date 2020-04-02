@@ -33,7 +33,6 @@ export const getSongDataActionCreator = () => async dispatch => {
 
 export const editPlayedActionCreator = (id, timesPlayed) => async dispatch => {
     dispatch(showLoader());
-    debugger
     try {
         await SongAPI.getRef().child(id).child('data').update({'timesPlayed': timesPlayed});
         await  dispatch({ type: EDIT_SONGS_TIMESPLAYED, data: {id: id, timesPlayed: timesPlayed} });
@@ -42,7 +41,20 @@ export const editPlayedActionCreator = (id, timesPlayed) => async dispatch => {
         dispatch(showAlert('Что-то пошло не так'))
         dispatch(hideLoader())
     }
-}
+};
+
+export const editLastPlayedActionCreator = (id) => async dispatch => {
+    dispatch(showLoader());
+    const currentTime = new Date();
+    try {
+        await SongAPI.getRef().child(id).child('data').update({'lastPlayed': currentTime.getFullYear() + '-' + (currentTime.getMonth()+1) + '-' + currentTime.getDate() +' '+ currentTime.getHours()+':'+ currentTime.getMinutes()+':'+ currentTime.getSeconds()});
+        await  dispatch({ type: EDIT_SONGS_TIMESPLAYED, data: {id: id, currentTime: currentTime} });
+        dispatch(hideLoader())
+    } catch (e) {
+        dispatch(showAlert('Что-то пошло не так'))
+        dispatch(hideLoader())
+    }
+};
 
 export const addSongActionCreator = (state) => async dispatch => {
 

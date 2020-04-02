@@ -1,6 +1,6 @@
 import {
     ADD_SONG,
-    EDIT_SONG, EDIT_SONGS_TIMESPLAYED,
+    EDIT_SONG, EDIT_SONGS_LASTPLAYED, EDIT_SONGS_TIMESPLAYED,
     REMOVE_SONG, SET_FILTER_SONG,
     SET_SEARCHTEXT,
     SET_SELECTED_SONG,
@@ -42,6 +42,12 @@ export const songsReducer = (state = initialState, action) => {
             return { ...state, ...state.list.forEach(item => {
                 debugger
                 item.id === action.data.id && (item.data.timesPlayed = action.data.timesPlayed)
+            })
+            };
+        case EDIT_SONGS_LASTPLAYED:
+            return { ...state, ...state.list.forEach(item => {
+                debugger
+                item.id === action.data.id && (item.data.lastPlayed = action.data.lastPlayed)
             })
             };
         default:
