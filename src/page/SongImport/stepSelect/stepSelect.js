@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -19,13 +19,6 @@ function createData(title, artist, active) {
     return { title, artist, active };
 }
 
-const rows = [
-    createData('India', 'IN', 1324171354, 3287263),
-    createData('China', 'CN', 1403500365, 9596961),
-    createData('Italy', 'IT', 60483973, 301340),
-
-];
-
 const useStyles = makeStyles({
     root: {
         width: '100%',
@@ -35,10 +28,15 @@ const useStyles = makeStyles({
     },
 });
 
-export default function () {
+export default function (props) {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const {data} = props
+
+    useEffect(()=>{
+        console.log(data)
+    },[data])
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -67,13 +65,13 @@ export default function () {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                        {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
                             return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                    {columns.map((column) => {
+                                <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                                    {columns.map((column, indexColumn) => {
                                         const value = row[column.id];
                                         return (
-                                            <TableCell key={column.id} align={column.align}>
+                                            <TableCell key={indexColumn} align={column.align}>
                                                 {column.format && typeof value === 'number' ? column.format(value) : value}
                                             </TableCell>
                                         );
@@ -87,7 +85,7 @@ export default function () {
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}
+                count={data.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}

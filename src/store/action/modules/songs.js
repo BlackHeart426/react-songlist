@@ -15,18 +15,6 @@ export const getSongDataActionCreator = () => async dispatch => {
     const data = [];
     dispatch(showLoader());
     try {
-
-        // const res = await Axios.get('https://song-list-95d78.firebaseio.com/songs/aYDAtD5RU6hGLLpBywY3ZBxUQEE2.json')
-        // console.log('res', res.data)
-        //     dispatch({ type: SET_SONGDATA, list: res.data })
-        //     dispatch(hideLoader())
-        // await SongAPI.getRef().on('value', snapshot => {
-        //     snapshot.forEach(childSnapshot => {
-        //         data.push(childSnapshot.val());
-        //     });
-        //     dispatch({ type: SET_SONGDATA, list: data })
-        //     dispatch(hideLoader())
-        // })
         await SongAPI.getRef().once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {

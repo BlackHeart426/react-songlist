@@ -3,27 +3,38 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, {useState} from "react";
+import CsvParse from "@vtex/react-csv-parse";
+import UploadButtonsCustom from "../../../companents/inputComponent/uploadButton/uploadButtonCustom";
 
-export default function StepReview(){
+export default function StepReview(props){
+
+    const [rows, setRows] = React.useState([])
+    const [nameFile, setNameFile] = useState('');
+    const {onData} = props;
+
+    const keys = [
+        "title",
+        "artist",
+        "active"
+    ];
+
+    const handleData = data => {
+        setRows(data)
+        onData(data)
+        console.log(data)
+    };
 
     return (
         <>
             <div style={{"marginBottom": "10px"}}>
-                <FormControl disabled>
-                    <InputLabel htmlFor="component-disabled">Name</InputLabel>
-                    <Input id="component-disabled" value={''} />
-                </FormControl>
+                <CsvParse
+                    keys={keys}
+                    onDataUploaded={handleData}
+                    // render={onChange => <input type="file" onChange={onChange} />}
+                    render={onChange => <UploadButtonsCustom type="file"  onChange={(event) => onChange(event)} name={"CSV File"}/>}
+                />
 
-                <Button
-                    style={{"marginTop":"10px"}}
-                    variant="outlined"
-                    color="primary"
-                    // onClick={handleBack}
-                    // className={classes.button}
-                >
-                    CSV File
-                </Button>
 
             </div>
             <Typography>
