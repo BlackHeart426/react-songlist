@@ -13,7 +13,6 @@ const Songs = (props) => {
 
     // const wrapperTags = (id) => (  { url: props.attributesList.find(item => item.id === id ).data.image, id: id } );
     const wrapperTags = (id) => {
-        debugger
         return { url: props.attributesList.length > 0 && props.attributesList.find(item => item.id === id ).data.image, id: id } };
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
         return {title, artist, timesPlayed, lastPlayed,

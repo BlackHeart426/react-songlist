@@ -3,17 +3,19 @@ import * as SongAPI from "../../../API/SongAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
 import {
     ADD_SONG,
-    EDIT_SONG,
+    EDIT_SONG, EDIT_SONGS_TIMESPLAYED,
     REMOVE_SONG, SET_FILTER_SONG,
     SET_SEARCHTEXT,
     SET_SELECTED_SONG,
     SET_SONGDATA,
     TOGGLE_ACTIVE
 } from "../../types";
+import {useSelector} from "react-redux";
 
 export const getSongDataActionCreator = () => async dispatch => {
     const data = [];
     dispatch(showLoader());
+
     try {
         await SongAPI.getRef().once('value')
             .then((snapshot) => {
@@ -28,6 +30,19 @@ export const getSongDataActionCreator = () => async dispatch => {
         dispatch(hideLoader())
     }
 };
+
+export const editPlayedActionCreator = (id, timesPlayed) => async dispatch => {
+    dispatch(showLoader());
+    debugger
+    try {
+        await SongAPI.getRef().child(id).child('data').update({'timesPlayed': timesPlayed});
+        await  dispatch({ type: EDIT_SONGS_TIMESPLAYED, data: {id: id, timesPlayed: timesPlayed} });
+        dispatch(hideLoader())
+    } catch (e) {
+        dispatch(showAlert('Что-то пошло не так'))
+        dispatch(hideLoader())
+    }
+}
 
 export const addSongActionCreator = (state) => async dispatch => {
 

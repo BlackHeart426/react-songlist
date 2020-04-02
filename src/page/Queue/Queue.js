@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import TablePagination from '../../companents/TablePagination/ComponentTablePagination'
 import {PTBQueue} from "./PTBQueue/PTBQueue";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {showLoader} from "../../store/action/app";
 import {
     removeSongInQueueActionCreator,
@@ -50,7 +50,10 @@ const Queue = (props) => {
         const songState = props.queueData.list.find(item => item.id === id);
         delete songState.data.position
         songState.data.played = 'today';//today;
-        props.action.songPerformed(songState);
+        debugger
+        const timesPlayed = Object.values(props.songData.list).find(item => item.id === songState.idSong).data.timesPlayed;
+        props.action.songPerformed(songState, timesPlayed+1);
+
     }
 
     const updateQueueData = () => {
@@ -100,6 +103,7 @@ const Queue = (props) => {
 const mapStateToProps = state => {
     return {
         queueData: state.queue,
+        songData: state.songs,
 
     }
 };
@@ -108,7 +112,7 @@ const mapDispatchToProps = dispatch => {
     return {
         action: {
             deleteSong: (uuid) => dispatch(removeSongInQueueActionCreator(uuid)),
-            songPerformed: (song) => dispatch(successSongActionCreator(song)),
+            songPerformed: (song, timesPlayed) => dispatch(successSongActionCreator(song, timesPlayed)),
             setSelected: (data) => setSelectedQueueActionCreator(data),
             loader: () => dispatch(showLoader())
         }
