@@ -3,7 +3,7 @@ import * as SongAPI from "../../../API/SongAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
 import {
     ADD_SONG,
-    EDIT_SONG, EDIT_SONGS_TIMESPLAYED,
+    EDIT_SONG, EDIT_SONGS_LASTPLAYED, EDIT_SONGS_TIMESPLAYED,
     REMOVE_SONG, SET_FILTER_SONG,
     SET_SEARCHTEXT,
     SET_SELECTED_SONG,
@@ -46,9 +46,10 @@ export const editPlayedActionCreator = (id, timesPlayed) => async dispatch => {
 export const editLastPlayedActionCreator = (id) => async dispatch => {
     dispatch(showLoader());
     const currentTime = new Date();
+    const dataTime = currentTime.getFullYear() + '-' + (currentTime.getMonth()+1) + '-' + currentTime.getDate() +' '+ currentTime.getHours()+':'+ currentTime.getMinutes()+':'+ currentTime.getSeconds();
     try {
-        await SongAPI.getRef().child(id).child('data').update({'lastPlayed': currentTime.getFullYear() + '-' + (currentTime.getMonth()+1) + '-' + currentTime.getDate() +' '+ currentTime.getHours()+':'+ currentTime.getMinutes()+':'+ currentTime.getSeconds()});
-        await  dispatch({ type: EDIT_SONGS_TIMESPLAYED, data: {id: id, currentTime: currentTime} });
+        await SongAPI.getRef().child(id).child('data').update({'lastPlayed': dataTime});
+        await  dispatch({ type: EDIT_SONGS_LASTPLAYED, data: {id: id, lastPlayed: dataTime} });
         dispatch(hideLoader())
     } catch (e) {
         dispatch(showAlert('Что-то пошло не так'))
