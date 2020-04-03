@@ -5,6 +5,7 @@ import {DialogSongsAdd} from "../../../../companents/Dialog/DialogSongs/DialogSo
 import * as shortid from "shortid";
 import {useDispatch} from "react-redux";
 import {addSongActionCreator} from "../../../../store/action/modules/songs";
+import moment from "moment";
 
 export const AddSongs = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -37,8 +38,8 @@ export const AddSongs = (props) => {
                 timesPlayed: 0,
                 lastPlayed: 'never',
                 tags: tags,
-                create_at: today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() +' '+ today.getHours()+':'+ today.getMinutes()+':'+ today.getSeconds(),
-                update_at: today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() +' '+ today.getHours()+':'+ today.getMinutes()+':'+ today.getSeconds()
+                create_at: moment().format(),
+                update_at: moment().format()
             },
             active: active
         };

@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/action/modules/songs";
 import {showAlert, showLoader} from "../../store/action/app";
 import {getAttributesDataActionCreator} from "../../store/action/modules/attributes";
+import moment from "moment";
 
 const Songs = (props) => {
     const handleRequest = (id) => {
@@ -23,7 +24,7 @@ const Songs = (props) => {
     const wrapperSong = (song) => {
         return song.map(item => {
             const {title, artist, timesPlayed, lastPlayed, tags} = item.data;
-            return {id: item.id, data: createData(title, artist, timesPlayed, lastPlayed, tags), active: item.active}
+            return {id: item.id, data: createData(title, artist, timesPlayed,  lastPlayed === 'never' ? lastPlayed : lastPlayed && moment(lastPlayed).fromNow(), tags), active: item.active}
         })
     };
 

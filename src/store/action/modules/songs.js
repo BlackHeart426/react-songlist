@@ -11,6 +11,7 @@ import {
     TOGGLE_ACTIVE
 } from "../../types";
 import {useSelector} from "react-redux";
+import moment from "moment";
 
 export const getSongDataActionCreator = () => async dispatch => {
     const data = [];
@@ -45,8 +46,7 @@ export const editPlayedActionCreator = (id, timesPlayed) => async dispatch => {
 
 export const editLastPlayedActionCreator = (id) => async dispatch => {
     dispatch(showLoader());
-    const currentTime = new Date();
-    const dataTime = currentTime.getFullYear() + '-' + (currentTime.getMonth()+1) + '-' + currentTime.getDate() +' '+ currentTime.getHours()+':'+ currentTime.getMinutes()+':'+ currentTime.getSeconds();
+    const dataTime = moment().format();
     try {
         await SongAPI.getRef().child(id).child('data').update({'lastPlayed': dataTime});
         await  dispatch({ type: EDIT_SONGS_LASTPLAYED, data: {id: id, lastPlayed: dataTime} });

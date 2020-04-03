@@ -11,6 +11,7 @@ import {
 import {addUserIdAtLink} from "../../companents/GlobalParamaters/linkWithUserId";
 import {useHistory} from "react-router";
 import ConteinerTableDragDrop from "../../companents/TableDragDrop/ConteinerTableDragDrop";
+import moment from "moment";
 
 const Queue = (props) => {
     const history = useHistory();
@@ -46,10 +47,10 @@ const Queue = (props) => {
     }
 
     function handleDone(id) {
-        // var today = new Date();
+        const currentTime = new Date();
         const songState = props.queueData.list.find(item => item.id === id);
         delete songState.data.position
-        songState.data.played = 'today';//today;
+        songState.data.played = moment().format();//today;
         debugger
         const timesPlayed = Object.values(props.songData.list).find(item => item.id === songState.idSong).data.timesPlayed;
         props.action.songPerformed(songState, timesPlayed+1);

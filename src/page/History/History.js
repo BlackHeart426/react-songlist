@@ -4,14 +4,14 @@ import {PTBHistory} from "./PTBHistory/PTBHistory";
 import {showAlert, showLoader} from "../../store/action/app";
 import {connect} from "react-redux";
 import {setSelectedHistoryActionCreator} from "../../store/action/modules/history";
+import moment from "moment";
 
 
 const History = (props) => {
-
     const wrapperSong = (song) => {
         return song.map(item => {
             const {title, artist, amount, requestedBy, played, note} = item.data;
-            return {id: item.id, data: createData(title, artist, amount, requestedBy, played, note), active: item.active}
+            return {id: item.id, data: createData(title, artist, amount, requestedBy, moment(played).fromNow(), note), active: item.active}
         })
     };
 

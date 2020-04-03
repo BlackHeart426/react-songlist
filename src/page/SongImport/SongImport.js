@@ -13,6 +13,7 @@ import {addSongActionCreator, setSongDataActionCreator} from "../../store/action
 import * as shortid from "shortid";
 import {addAttributesActionCreator} from "../../store/action/modules/attributes";
 import Typography from "@material-ui/core/Typography";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -78,8 +79,8 @@ export function SongImport() {
                     timesPlayed: 0,
                     lastPlayed: 'never',
                     tags: ["newSong"],
-                    create_at: today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() +' '+ today.getHours()+':'+ today.getMinutes()+':'+ today.getSeconds(),
-                    update_at: today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() +' '+ today.getHours()+':'+ today.getMinutes()+':'+ today.getSeconds()
+                    create_at: moment().format(),
+                    update_at: moment().format()
                 },
                 active: (active === 'true')
             };

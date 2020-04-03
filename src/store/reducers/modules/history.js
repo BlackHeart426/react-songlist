@@ -19,7 +19,8 @@ export const historyReducer = (state = initialState, action) => {
         case SET_HISTORYDATA:
             return { ...state, list: action.list };
         case ADD_SONG_IN_HISTORY:
-            return { ...state, list: Object.values(state.list).concat(action.newSong) };
+            return { ...state, list: [action.newSong, ...state.list] };
+            // return { ...state, list: Object.values(state.list).unshift(action.newSong) };
         case SET_SELECTED_HISTORY:
             return { ...state, selected: action.newSelect };
         case SET_SEARCHTEXT_HISTORY:
