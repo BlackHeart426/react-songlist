@@ -1,62 +1,61 @@
-import React, { Component } from "react";
+import React, {Component, useState} from "react";
 
 import {connect} from "react-redux";
 import {auth, logout} from "../../store/action/auth";
 import Button from "@material-ui/core/Button";
+import {DialogSongsAddQueue} from "../Dialog/DialogSongs/DialogSongsAddQueue";
+import {DialogLogin} from "../Dialog/DialogAuth/DialogLogin";
+import {DialogSongsAdd} from "../Dialog/DialogSongs/DialogSongsAdd";
+import {Login} from "./Login";
 
-class Auth extends Component {
+export function Auth() {
 
-    loginHandler = () => {
-        this.props.auth(
-            'val@gmail.com',
-            1234567,
-            true
-        )
-    }
 
-    registerHandler = () => {
-        this.props.auth(
-            'val@gmail.com',
-            1234567,
-            false
-        )
+
+    const handleRegister = () => {
+        // this.props.auth(
+        //     'val@gmail.com',
+        //     1234567,
+        //     false
+        // )
 
     }
 
-    logoutHandler = () => {
-        this.props.logout()
+
+    const handleRecovery = () => {
+        // this.props.auth(
+        //     'val@gmail.com',
+        //     1234567,
+        //     false
+        // )
 
     }
 
-    render() {
-        return (
-            <>
-                <Button
-                    onClick={this.registerHandler}
-                    type="submit"
-                    color="inherit"
-                >
-                    Registration
-                </Button>
-                <Button
-                    onClick={this.loginHandler}
-                    type="submit"
-                    color="inherit"
+    const logoutHandler = () => {
+        // this.props.logout()
 
-                >
-                    Login
-                </Button>
-                <Button
-                    onClick={this.logoutHandler}
-                    type="submit"
-                    color="inherit"
-                >
-                    Logout
-                </Button>
-            </>
-        )
     }
 
+    return (
+        <>
+            <Button
+                onClick={handleRegister}
+                type="submit"
+                color="inherit"
+            >
+                Registration
+            </Button>
+            <Login/>
+
+            <Button
+                onClick={handleRecovery}
+                type="submit"
+                color="inherit"
+            >
+                Logout
+            </Button>
+        </>
+    )
 }
 
 function mapStateToProps(state) {
