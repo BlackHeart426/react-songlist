@@ -2,10 +2,10 @@ import * as HistoryAPI from "../../../API/HistoryAPI";
 import {hideLoader, showAlert, showLoader} from "../app";
 import {
     ADD_SONG_IN_HISTORY,
-    REMOVE_SONG_HISTORY,
+    REMOVE_SONG_HISTORY, SET_FILTER_HISTORY, SET_FILTER_SONG,
     SET_HISTORYDATA,
     SET_SEARCHTEXT, SET_SEARCHTEXT_HISTORY,
-   SET_SELECTED_HISTORY
+    SET_SELECTED_HISTORY
 } from "../../types";
 
 
@@ -42,6 +42,18 @@ export const editSongInHistoryActionCreator = (state) => async dispatch => {
     //     type: EDIT_SONG,
     //     song: state
     // }
+};
+
+
+export const addFilterHistoryActionCreator = (state) => async dispatch => {
+    dispatch(showLoader());
+    try {
+        await dispatch({ type: SET_FILTER_HISTORY, newAttribute: state })
+        dispatch(hideLoader())
+    } catch (e) {
+        dispatch(showAlert('Что-то пошло не так'))
+        dispatch(hideLoader())
+    }
 };
 
 export const addSongInHistoryActionCreator = (state) => async dispatch => {

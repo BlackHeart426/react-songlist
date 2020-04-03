@@ -4,6 +4,11 @@ import EditIcon from "@material-ui/icons/Edit";
 import {DialogEditSongHistory} from "../../../../companents/Dialog/DialogHistory/DialogEditSongHistory";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import {addFilterActionCreator} from "../../../../store/action/modules/songs";
+import {useDispatch} from "react-redux";
+import {addFilterHistoryActionCreator} from "../../../../store/action/modules/history";
 
 export const FilterSong = (props) => {
 
@@ -11,23 +16,45 @@ export const FilterSong = (props) => {
         marginLeft: '25%',
     }
 
-    const [value, setValue] = useState(false);
+    const [value, setValue] = useState(["stream"]);
     const { loading} = props;
+    const dispatch = useDispatch()
 
-    const handleFilter = (event) => {
-
-        // editSong(newSong)
-    }
+    const handleFilter = (event, newAttribute) => {
+        setValue(newAttribute)
+        dispatch(addFilterHistoryActionCreator(newAttribute))// editSong(newSong)
+    };
 
     return (
         <>
-            <ButtonGroup style={ml40} name="filterSong" size="small" onChange={handleFilter} color="primary" disabled={loading}>
-                <Button value="All" label="All">All</Button>
-                <Button value="Stream" label="Stream">Stream</Button>
-                <Button value="Day" label="Day">Day</Button>
-                <Button value="Month" label="Month">Month</Button>
-                <Button value="Year" label="Year">year</Button>
-            </ButtonGroup>
+            <ToggleButtonGroup style={ml40}  size="small" value={value} onChange={handleFilter} aria-label="text formatting" color="primary" disabled={loading}>
+                <ToggleButton
+                    color="primary"
+                    value="all"
+                    >
+                    All
+                </ToggleButton>
+                <ToggleButton
+                    value="stream"
+                    >
+                    stream
+                </ToggleButton>
+                <ToggleButton
+                    value="day"
+                >
+                    day
+                </ToggleButton>
+                <ToggleButton
+                    value="month"
+                    >
+                    month
+                </ToggleButton>
+                <ToggleButton
+                    value="year"
+                    >
+                    year
+                </ToggleButton>
+            </ToggleButtonGroup>
         </>
     )
 }

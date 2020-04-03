@@ -1,6 +1,6 @@
 import {
     ADD_SONG_IN_HISTORY,
-    REMOVE_SONG_HISTORY,
+    REMOVE_SONG_HISTORY, SET_FILTER_HISTORY, SET_FILTER_SONG,
     SET_HISTORYDATA, SET_SEARCHTEXT_HISTORY,
     SET_SELECTED_HISTORY
 } from "../../types";
@@ -11,7 +11,7 @@ const initialState = {
     list: [],
     selected: [],
     searchText: '',
-    filterData: '',
+    filterData: ["stream"],
 };
 
 export const historyReducer = (state = initialState, action) => {
@@ -23,6 +23,8 @@ export const historyReducer = (state = initialState, action) => {
             // return { ...state, list: Object.values(state.list).unshift(action.newSong) };
         case SET_SELECTED_HISTORY:
             return { ...state, selected: action.newSelect };
+        case SET_FILTER_HISTORY:
+            return { ...state, filterData: action.newAttribute };
         case SET_SEARCHTEXT_HISTORY:
             return { ...state, searchText: action.text };
         case REMOVE_SONG_HISTORY:

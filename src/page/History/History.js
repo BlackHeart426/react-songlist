@@ -11,7 +11,7 @@ const History = (props) => {
     const wrapperSong = (song) => {
         return song.map(item => {
             const {title, artist, amount, requestedBy, played, note} = item.data;
-            return {id: item.id, data: createData(title, artist, amount, requestedBy, moment(played).fromNow(), note), active: item.active}
+            return {id: item.id, data: createData(title, artist, amount, requestedBy, played, note), active: item.active}
         })
     };
 
@@ -32,7 +32,7 @@ const History = (props) => {
         let songList = {...props.songData};
         if (Object.keys(songList.list).length > 0) {
             let songListTest = wrapperSong(Object.values(songList.list));
-            const filtered = songListTest.filter(item => {
+            const filteredSearch = songListTest.filter(item => {
 
                 const values = Object.values(item.data);
                 const search = props.searchText.toLowerCase();
@@ -48,6 +48,54 @@ const History = (props) => {
                 if (flag) return item
                 return item.data.title.toUpperCase().indexOf(search) !== -1
             });
+            const filtered = filteredSearch.filter(item => {
+                const attributes = {...props.filter};
+                const datePlayed = item.data.played;
+                let flag = false;
+                const list = Object.values(attributes);
+                var now = moment().format();
+                list.forEach(item => {
+                    debugger
+                    switch (item) {
+                        case "all":
+                            flag = true;
+                            break;
+                        case "stream":
+                            if( moment(now).isSame(datePlayed, 'day') !== false) {
+                                flag = true;
+                            }
+                            break;
+                        case "day":
+                            if( moment(now).isSame(datePlayed, 'day') !== false) {
+                                flag = true;
+                            }
+                            break;
+                        case "month":
+                            if( moment(now).isSame(datePlayed, 'month') !== false) {
+                                flag = true;
+                            }
+                            break;
+                        case "year":
+                            if( moment(now).isSame(datePlayed, 'year') !== false) {
+                                flag = true;
+                            }
+                            break;
+
+
+                    }
+                })
+
+                // if (val.data.forEach(valItem => {
+                //
+                //     if (list.find(item => item === valItem.id)) {
+                //         flag = true;
+                //         return;
+                //     }
+                // })) ;
+                if (flag) return item
+            });
+            filtered.forEach(item => item.data.played =  moment(item.data.played).fromNow());
+            debugger
             songList.list = filtered;
             return (
                 songList
@@ -77,6 +125,7 @@ const mapStateToProps = state => {
         filter: state.history.filterData,
         searchText: state.history.searchText,
         songData: state.history,
+
     }
 };
 
