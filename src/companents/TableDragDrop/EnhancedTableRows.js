@@ -182,6 +182,8 @@ export const EnhancedTableRows = (props) => {
         <span style={{ ...style, ...{ cursor: 'move' } }} ><DragIndicatorIcon/></span>
         )
     );
+    // update local state for visual update
+    // переделать update store чтобы не запрашивать каждый раз с сервера
 
     const onSortEnd = ({oldIndex, newIndex}) => {
         const newIndexData = arrayMove(state, oldIndex, newIndex)

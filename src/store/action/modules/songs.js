@@ -56,9 +56,7 @@ export const editLastPlayedActionCreator = (id) => async dispatch => {
         dispatch(hideLoader())
     }
 };
-
 export const addSongActionCreator = (state) => async dispatch => {
-
     dispatch(showLoader());
     try {
         await SongAPI.getRef().child(state.id).set(state)
