@@ -9,13 +9,6 @@ export function auth(email, password, isLogin) {
             email, password,
             returnSecureToken: true
         }
-        let dataUser = {};
-
-        // const signIn = authFirebase.signInWithEmailAndPassword(authData.email, authData.password);
-        //
-        //
-        //
-        // const loginig = authFirebase.onAuthStateChanged()
 
         // let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAfhz1Gqiu7HXMBMdGXYwKuEnSdxjWhj50'
         let response = false;
@@ -33,7 +26,6 @@ export function auth(email, password, isLogin) {
             response = firebaseAuth.createUserWithEmailAndPassword(email, password);
         }
 
-        // const response = await axios.post(url, authData)
         debugger
         firebaseAuth.onAuthStateChanged(function(user) {
             if (user) {
@@ -48,6 +40,8 @@ export function auth(email, password, isLogin) {
                         localStorage.setItem('token', token)
                         localStorage.setItem('userId', uid)
                         localStorage.setItem('expirationDate', expirationDate)
+                        dispatch(authSuccess(token))
+                        dispatch(autoLogout(expirationDate))
                     }
                 );
 
@@ -56,8 +50,7 @@ export function auth(email, password, isLogin) {
             }
         });
 
-        // dispatch(authSuccess(data.idToken))
-        // dispatch(autoLogout(data.expiresIn))
+
 
     }
 }

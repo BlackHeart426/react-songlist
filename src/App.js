@@ -23,6 +23,7 @@ import {getHistoryDataActionCreator} from "./store/action/modules/history";
 import Attributes from "./page/Attributes/Attributes";
 import {getAttributesDataActionCreator} from "./store/action/modules/attributes";
 import {SongImport} from "./page/SongImport/SongImport";
+import {Home} from "./page/Home";
 
 const drawerWidth = 240;
 
@@ -71,30 +72,32 @@ const App = (props) => {
                 <NavBar
                     className={classes.appBar}
                 />
-                <DrawerCustom
-                    className={classes.drawer}
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                />
-                <main className={classes.content}>
-                    <div  className={classes.toolbar}>
-                        <Switch>
-                            <Route exact path="/s/:userId/songs" component={Songs}/>
-                                <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
-                                <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
-                            <Route exact path="/s/:userId/queue" component={Queue}/>
-                                <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
-                            <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>
-                            <Route exact path="/s/:userId/history" component={History}/>
-                            <Route exact component={Settings} path="/s/:userId/settings"/>
-                                <Route path="/s/:userId/settings/attributes" component={Attributes} />
-                                <Route path="/s/:userId/settings/song-import" component={SongImport} />
-                            <Route path="/s/:userId/test" component={Test} />
-                        </Switch>
-                        {props.alert && <AlertCustom text={props.alert} />}
-                    </div>
-                </main>
+                <Home/>
+                {/*<DrawerCustom*/}
+                {/*    className={classes.drawer}*/}
+                {/*    classes={{*/}
+                {/*        paper: classes.drawerPaper,*/}
+                {/*    }}*/}
+                {/*/>*/}
+                {/*<main className={classes.content}>*/}
+                {/*    <div  className={classes.toolbar}>*/}
+                {/*        <Switch>*/}
+                {/*            <Route exact path="/s/:userId/songs" component={Songs}/>*/}
+                {/*                <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>*/}
+                {/*                <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>*/}
+                {/*            <Route exact path="/s/:userId/queue" component={Queue}/>*/}
+                {/*                <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>*/}
+                {/*            <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>*/}
+                {/*            <Route exact path="/s/:userId/history" component={History}/>*/}
+                {/*            <Route exact component={Settings} path="/s/:userId/settings"/>*/}
+                {/*                <Route path="/s/:userId/settings/attributes" component={Attributes} />*/}
+                {/*                <Route path="/s/:userId/settings/song-import" component={SongImport} />*/}
+                {/*            <Route path="/s/:userId/test" component={Test} />*/}
+                {/*            <Route exact path="/" component={Home} />*/}
+                {/*        </Switch>*/}
+                {/*        {props.alert && <AlertCustom text={props.alert} />}*/}
+                {/*    </div>*/}
+                {/*</main>*/}
             </div>
     );
 };
