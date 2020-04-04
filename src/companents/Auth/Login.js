@@ -16,13 +16,14 @@ const Login = (props) => {
     };
     const handleLogin = (dataUser) => {
         console.log(dataUser.email)
-        const signIn = firebaseAuth.signInWithEmailAndPassword(dataUser.username, dataUser.password);
-        signIn
-            .then(
-                props.getAllData(),
-                props.alert('Пользователь авторизован') )
-            .catch(e => console.log(e.message))
-
+        props.auth(dataUser.username, dataUser.password, true)
+        // const signIn = firebaseAuth.signInWithEmailAndPassword(dataUser.username, dataUser.password);
+        // signIn
+        //     .then(
+        //         props.getAllData(),
+        //         props.alert('Пользователь авторизован') )
+        //     .catch(e => console.log(e.message))
+        // localStorage.setItem('token', data.idToken)
         // props.auth(
         //     'val@gmail.com',
         //     1234567,

@@ -8,7 +8,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import {Typography} from "@material-ui/core";
 
-export function Auth() {
+export function Auth(props) {
 
 
 
@@ -32,7 +32,8 @@ export function Auth() {
     }
 
     const handleLogout = () => {
-        firebaseAuth.signOut();
+        props.logout()
+
 
     }
 

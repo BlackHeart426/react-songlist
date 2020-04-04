@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
 import {connect} from "react-redux";
 import {DialogSignUp} from "../Dialog/DialogAuth/DialogSignUp";
-import {auth} from "../../firebaseService";
+import {auth as firebaseAuth} from "../../firebaseService";
+import {auth, logout} from "../../store/action/auth";
 import {showAlert} from "../../store/action/app";
 
 const SignUp = (props) => {
@@ -13,11 +14,11 @@ const SignUp = (props) => {
 
     };
     const handleSignUp = (dataUser) => {
-
-        const signUp = auth.createUserWithEmailAndPassword(dataUser.email, dataUser.password);
-        signUp
-            .then(  )
-            .catch(e => props.alert(e.message))
+        props.auth(dataUser.email, dataUser.password)
+        // const signUp = auth.createUserWithEmailAndPassword(dataUser.email, dataUser.password);
+        // signUp
+        //     .then(  )
+        //     .catch(e => props.alert(e.message))
         // props.auth(
         //     'val@gmail.com',
         //     1234567,
