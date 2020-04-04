@@ -8,6 +8,12 @@ export function auth(email, password, isLogin) {
             returnSecureToken: true
         }
 
+        // const signIn = authFirebase.signInWithEmailAndPassword(authData.email, authData.password);
+        //
+        //
+        //
+        // const loginig = authFirebase.onAuthStateChanged()
+
         let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAfhz1Gqiu7HXMBMdGXYwKuEnSdxjWhj50'
 
         if (isLogin) {

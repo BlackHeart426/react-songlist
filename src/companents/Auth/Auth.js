@@ -1,12 +1,12 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useState} from "react";
 
+import {auth as firebaseAuth}  from "../../firebaseService";
 import {connect} from "react-redux";
 import {auth, logout} from "../../store/action/auth";
 import Button from "@material-ui/core/Button";
-import {DialogSongsAddQueue} from "../Dialog/DialogSongs/DialogSongsAddQueue";
-import {DialogLogin} from "../Dialog/DialogAuth/DialogLogin";
-import {DialogSongsAdd} from "../Dialog/DialogSongs/DialogSongsAdd";
-import {Login} from "./Login";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import {Typography} from "@material-ui/core";
 
 export function Auth() {
 
@@ -31,24 +31,39 @@ export function Auth() {
 
     }
 
+    const handleLogout = () => {
+        firebaseAuth.signOut();
+
+    }
+
     const logoutHandler = () => {
         // this.props.logout()
 
     }
+    const [isLogin, setIsLogin] = useState(false);
+    useEffect(() => {
+        firebaseAuth.onAuthStateChanged( firebaseUser => {
+            if (firebaseUser) {
+                console.log(firebaseUser);
+                setIsLogin(true)
+            } else {
+                console.log('not loggin')
+                setIsLogin(false)
+            }
+        } )
+    },[firebaseAuth])
 
     return (
         <>
-            <Button
-                onClick={handleRegister}
-                type="submit"
-                color="inherit"
-            >
-                Registration
-            </Button>
-            <Login/>
+            {isLogin
+                ? <Typography>User</Typography>
+                :  <>
+                    <SignUp/>
+                    <Login/>
+                </>}
 
             <Button
-                onClick={handleRecovery}
+                onClick={handleLogout}
                 type="submit"
                 color="inherit"
             >

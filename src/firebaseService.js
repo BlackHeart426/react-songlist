@@ -17,6 +17,7 @@ app.initializeApp(config);
 
 export const database = app.database();
 export const storage = app.storage();
+export const auth = app.auth();
 // const userId = localStorage.getItem('userId');
 // const ref = db.ref('songs').child(userId);
 //

@@ -10,6 +10,10 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Card from "@material-ui/core/Card";
 import Dialog from "@material-ui/core/Dialog";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -34,7 +38,7 @@ const useStyles = makeStyles((theme) =>
 export function DialogLogin(props) {
 
     const classes = useStyles();
-    const {show} = props;
+    const {show, onHide, onLogin} = props;
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [dialogOpened, setDialogOpened] = useState(false);
@@ -51,17 +55,23 @@ export function DialogLogin(props) {
     }, [username, password]);
 
     useEffect(() => {
-       setDialogOpened(true)
+       setDialogOpened(show)
     }, [show]);
 
     const handleLogin = () => {
-        if (username === 'abc@email.com' && password === 'password') {
-            setError(false);
-            setHelperText('Login Successfully');
-        } else {
-            setError(true);
-            setHelperText('Incorrect username or password')
+        const dataUser = {
+            username,
+            password
         }
+        onLogin(dataUser)
+        // if (username === 'abc@email.com' && password === 'password') {
+        //     //Запрос в БД
+        //     setError(false);
+        //     setHelperText('Login Successfully');
+        // } else {
+        //     setError(true);
+        //     setHelperText('Incorrect username or password')
+        // }
     };
 
     const handleKeyPress = (e) => {
@@ -71,6 +81,7 @@ export function DialogLogin(props) {
     };
 
     const handleClose = (e) => {
+        onHide()
         setDialogOpened(false)
     };
 
@@ -109,6 +120,10 @@ export function DialogLogin(props) {
                                     onChange={(e)=>setPassword(e.target.value)}
                                     onKeyPress={(e)=>handleKeyPress(e)}
                                 />
+                                <FormControlLabel
+                                    control={<Checkbox value="remember" color="primary" />}
+                                    label="Remember me"
+                                />
                             </div>
                         </CardContent>
                         <CardActions>
@@ -117,10 +132,24 @@ export function DialogLogin(props) {
                                 size="large"
                                 color="primary"
                                 className={classes.loginBtn}
-                                onClick={()=>handleLogin()}
+                                onClick={handleLogin}
                                 disabled={isButtonDisabled}>
                                 Login
                             </Button>
+                        </CardActions>
+                        <CardActions>
+                            <Grid container>
+                                <Grid item xs>
+                                    <Link href="#" variant="body2">
+                                        Forgot password?
+                                    </Link>
+                                </Grid>
+                                <Grid item>
+                                    <Link href="#" variant="body2">
+                                        {"Don't have an account? Sign Up"}
+                                    </Link>
+                                </Grid>
+                            </Grid>
                         </CardActions>
                     </Card>
             </Dialog>

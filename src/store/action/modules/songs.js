@@ -27,6 +27,7 @@ export const getSongDataActionCreator = () => async dispatch => {
                 dispatch(hideLoader())
             })
     } catch (e) {
+        console.log(e)
         dispatch(showAlert('Что-то пошло не так'));
         dispatch(hideLoader())
     }

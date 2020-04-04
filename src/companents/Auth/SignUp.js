@@ -1,28 +1,23 @@
 import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
-import {DialogLogin} from "../Dialog/DialogAuth/DialogLogin";
-import {auth, logout} from "../../store/action/auth";
-import {auth as firebaseAuth} from "../../firebaseService";
 import {connect} from "react-redux";
-import {Auth} from "./Auth";
-import {getAllDataActionCreator, showAlert} from "../../store/action/app";
+import {DialogSignUp} from "../Dialog/DialogAuth/DialogSignUp";
+import {auth} from "../../firebaseService";
+import {showAlert} from "../../store/action/app";
 
-const Login = (props) => {
+const SignUp = (props) => {
     const [dialogOpened, setDialogOpened] = useState(false);
 
     const handleOpenLogin = () => {
         setDialogOpened(true)
 
     };
-    const handleLogin = (dataUser) => {
-        console.log(dataUser.email)
-        const signIn = firebaseAuth.signInWithEmailAndPassword(dataUser.username, dataUser.password);
-        signIn
-            .then(
-                props.getAllData(),
-                props.alert('Пользователь авторизован') )
-            .catch(e => console.log(e.message))
+    const handleSignUp = (dataUser) => {
 
+        const signUp = auth.createUserWithEmailAndPassword(dataUser.email, dataUser.password);
+        signUp
+            .then(  )
+            .catch(e => props.alert(e.message))
         // props.auth(
         //     'val@gmail.com',
         //     1234567,
@@ -38,11 +33,11 @@ const Login = (props) => {
                 color="inherit"
 
             >
-                Login
+                Sign Up
             </Button>
-            <DialogLogin
+            <DialogSignUp
                 show={ dialogOpened }
-                onLogin = {(dataUser) => handleLogin(dataUser)}
+                onSignUp = {(dataUser) => handleSignUp(dataUser)}
                 onHide={ () => setDialogOpened(false) }/>
         </>
     )
@@ -59,9 +54,8 @@ function mapDispatchToProps(dispatch) {
     return {
         auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin)),
         alert: (text) => dispatch(showAlert(text)),
-        getAllData: () => dispatch(getAllDataActionCreator()),
-        logout: () => dispatch(logout)
+        // logout: () => dispatch(logout)
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
