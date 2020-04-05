@@ -16,7 +16,13 @@ import {Test} from "./page/Test";
 import Songs from "./page/Songs/Songs";
 import {connect, useSelector} from "react-redux";
 import {getSongDataActionCreator, setSelectedActionCreator} from "./store/action/modules/songs";
-import {getAllDataActionCreator, hideLoader, showAlert, showLoader} from "./store/action/app";
+import {
+    getAllDataActionCreator,
+    hideLoader, isPageUserActionCreator,
+    showAlert,
+    showLoader,
+    toggleEditModeActionCreator
+} from "./store/action/app";
 import {getQueueDataActionCreator} from "./store/action/modules/queue";
 import {getSavedQueueDataActionCreator} from "./store/action/modules/savedQueue";
 import {getHistoryDataActionCreator} from "./store/action/modules/history";
@@ -57,7 +63,18 @@ const App = (props) => {
     const classes = useStyles();
     const [isLogin, setIsLogin] = useState(false)
 
+    const handleCheckUser = () => {
+        const currentUser = localStorage.getItem('currentUser');
+        const userId = localStorage.getItem('userId');
+        if (currentUser === userId) {
+            return true
+        }
+        return false
+    }
+
     useEffect(() => {
+        props.isLogin && props.action.toggleEditMode(true)
+        props.action.isMyPage(handleCheckUser())
         // props.action.getSongData(); //Заполнение таблицы с песнями
         // props.action.getQueueData(); //Заполнение таблицы с очередью
         // props.action.getSavedQueueData(); //Заполнение таблицы с очередью
@@ -74,12 +91,6 @@ const App = (props) => {
                 <NavBar
                     className={classes.appBar}
                 />
-                {/*<DrawerCustom*/}
-                {/*    className={classes.drawer}*/}
-                {/*    classes={{*/}
-                {/*        paper: classes.drawerPaper,*/}
-                {/*    }}*/}
-                {/*/>*/}
                 <main className={classes.content}>
                     <div  className={classes.toolbar}>
                         <Switch>
@@ -106,7 +117,8 @@ const App = (props) => {
 
 const mapStateToProps = state => ({
     alert: state.app.alert,
-    isLogin: state.app.isLogin
+    isLogin: state.app.isLogin,
+    editMode: state.app.editMode,
 
 });
 
@@ -123,6 +135,8 @@ const mapDispatchToProps = dispatch => {
             alert: (text) => dispatch(showAlert(text)),
             showLoader: () => dispatch(showLoader()),
             hideLoader: () => dispatch(hideLoader()),
+            toggleEditMode: (data) => dispatch(toggleEditModeActionCreator(data)),
+            isMyPage: (state) => dispatch(isPageUserActionCreator(state)),
         }
     }
 };

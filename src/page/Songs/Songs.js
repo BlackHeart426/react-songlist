@@ -11,8 +11,11 @@ import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer"
 import {withWidth} from "@material-ui/core";
 import DrawerCustom from "../../companents/Drawer/DrawerCustom";
+import {useHistory, useParams, useRouteMatch} from "react-router";
+import matchPath from "react-router/modules/matchPath";
 
 const Songs = (props) => {
+    const params = useParams();
     const handleRequest = (id) => {
     };
 
@@ -38,9 +41,10 @@ const Songs = (props) => {
         localStorage.setItem('songs', JSON.stringify(props.songData));
     },[props.songData]);
 
-    // useEffect(() => {
-    //     props.action.getAttributesData()
-    // },[]);
+    useEffect(() => {
+        const currentUser = params.userId
+        localStorage.setItem("currentUser", currentUser)
+    },[]);
 
     const handleFilter = () => {
         let songList = {...props.songData};
@@ -99,6 +103,7 @@ const Songs = (props) => {
 
     return (
         <>
+            {/*<div>{props.match.params.userId}</div>*/}
             <PTBSongs showActive={active}/>
             <TablePagination
                 onSelectRow = {(data) => props.action.setSelected(data)}

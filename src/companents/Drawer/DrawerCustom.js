@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, {useEffect, useState} from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -36,6 +36,11 @@ const DrawerCustom = (props) => {
     const handleDrawerClose = (event) => {
         props.action.toggleOpenDrawer(!props.statusOpenDrawer);
     };
+
+
+    const handleCheckUser = () => {
+
+    }
 
     const sideList = () => (
         <div
@@ -79,10 +84,12 @@ const DrawerCustom = (props) => {
                     )}
                 </List>
             </Collapse>
-            <ListItem>
-                <ListItemIcon><Switch onChange={handleEditMode} checked={props.statusEditMode} color="primary"/></ListItemIcon>
-                <ListItemText>Edit mode</ListItemText>
-            </ListItem>
+            {props.isMyPage
+                && <ListItem>
+                    <ListItemIcon><Switch onChange={handleEditMode} checked={props.statusEditMode} color="primary"/></ListItemIcon>
+                    <ListItemText>Edit mode</ListItemText>
+                </ListItem>
+            }
         </div>
     );
 
@@ -123,7 +130,9 @@ const DrawerCustom = (props) => {
 const mapStateToProps = state => {
     return {
         statusEditMode: state.app.editMode,
-        statusOpenDrawer: state.app.openDrawer
+        statusOpenDrawer: state.app.openDrawer,
+        isLogin: state.app.isLogin,
+        isMyPage: state.app.isPageUser
     }
 };
 

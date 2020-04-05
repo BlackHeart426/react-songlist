@@ -1,12 +1,22 @@
-import {HIDE_ALERT, HIDE_LOADER, IS_LOGIN, OPEN_DRAWER, SHOW_ALERT, SHOW_LOADER, TOGGLE_EDITMODE} from "../types";
+import {
+    HIDE_ALERT,
+    HIDE_LOADER,
+    IS_LOGIN,
+    IS_PAGE_USER,
+    OPEN_DRAWER,
+    SHOW_ALERT,
+    SHOW_LOADER,
+    TOGGLE_EDITMODE
+} from "../types";
 
 
 const initialState = {
     loading: false,
     alert: null,
-    editMode: true,
+    editMode: false,
     openDrawer: false,
-    isLogin: false
+    isLogin: false,
+    isPageUser: false
 };
 
 export const appReducer = (state  = initialState, action) => {
@@ -25,6 +35,8 @@ export const appReducer = (state  = initialState, action) => {
             return { ...state, editMode: action.payload };
         case OPEN_DRAWER:
             return { ...state, openDrawer: action.payload };
+        case IS_PAGE_USER:
+            return { ...state, isPageUser: action.payload };
         default: return state
     }
 }

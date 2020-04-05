@@ -8,6 +8,7 @@ export const HIDE_ALERT = 'APP/HIDE_ALERT';
 export const TOGGLE_EDITMODE = 'APP/TOGGLE_EDITMODE';
 export const OPEN_DRAWER = 'APP/OPEN_DRAWER';
 export const IS_LOGIN = 'APP/IS_LOGIN';
+export const IS_PAGE_USER = 'APP/IS_PAGE_USER';
 
 export const SET_SONGDATA = 'SONGS/SET_ROWS';
 export const ADD_SONG = 'SONGS/ADD_ROWS';

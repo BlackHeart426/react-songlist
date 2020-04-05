@@ -1,4 +1,13 @@
-import {HIDE_ALERT, HIDE_LOADER, IS_LOGIN, OPEN_DRAWER, SHOW_ALERT, SHOW_LOADER, TOGGLE_EDITMODE} from "../types";
+import {
+    HIDE_ALERT,
+    HIDE_LOADER,
+    IS_LOGIN,
+    IS_PAGE_USER,
+    OPEN_DRAWER,
+    SHOW_ALERT,
+    SHOW_LOADER,
+    TOGGLE_EDITMODE
+} from "../types";
 import {getSongDataActionCreator, setSelectedActionCreator} from "./modules/songs";
 import {getQueueDataActionCreator} from "./modules/queue";
 import {getSavedQueueDataActionCreator} from "./modules/savedQueue";
@@ -25,6 +34,13 @@ export const isLoginActionCreator = (state) => {
 export const showLoader = () => {
     return {
         type: SHOW_LOADER
+    }
+};
+
+export const isPageUserActionCreator = (state) => {
+    return {
+        type: IS_PAGE_USER,
+        payload: state
     }
 };
 

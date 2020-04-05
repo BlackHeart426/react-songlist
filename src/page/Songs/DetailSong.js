@@ -8,7 +8,6 @@ import {withDrawer} from "../../companents/hoc/withDrawer";
 const DetailSong = props => {
     const listSong = useSelector(state => state.songs.list)
     const attributesList = useSelector(state => state.attributes.list)
-
      return (
         <>
             <ToolsDetail uuid={props.match.params.id}/>

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
 import {connect} from "react-redux";
 import {auth, logout} from "../../store/action/auth";
-import {showAlert} from "../../store/action/app";
+import {isPageUserActionCreator, showAlert} from "../../store/action/app";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {SettingsUser} from "../../page/SettingsUser";
@@ -30,6 +30,14 @@ const User = (props) => {
     function handleMyPage() {
         const uuid = localStorage.getItem('userId')
         history.push(addUserIdAtLink("/songs"))
+        // const currentUser = localStorage.getItem('currentUser');
+        // const userId = localStorage.getItem('userId');
+        // if (currentUser === userId) {
+        //     return true
+        // }
+        // return false
+        props.isMyPage(true)
+
     }
 
     return(
@@ -68,6 +76,7 @@ function mapDispatchToProps(dispatch) {
     return {
         auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin)),
         alert: (text) => dispatch(showAlert(text)),
+        isMyPage: (state) => dispatch(isPageUserActionCreator(state)),
         logout: () => dispatch(logout)
     }
 }
