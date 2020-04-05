@@ -1,9 +1,11 @@
 import React, {useEffect} from "react";
 import {ContentDetail} from "../DetailSong/Content/ContentDetail";
 import {ToolsDetail} from "../DetailSong/Tools/ToolsDetail";
-import { useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
+import {compose} from "redux";
+import {withDrawer} from "../../companents/hoc/withDrawer";
 
-export const DetailSong = props => {
+const DetailSong = props => {
     const listSong = useSelector(state => state.songs.list)
     const attributesList = useSelector(state => state.attributes.list)
 
@@ -14,3 +16,4 @@ export const DetailSong = props => {
         </>
     )
 }
+export default withDrawer(DetailSong)

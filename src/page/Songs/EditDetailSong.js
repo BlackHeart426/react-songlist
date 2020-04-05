@@ -2,10 +2,11 @@ import React from "react";
 import {ContentDetailEdit} from "../EditDetailSong/Content/ContentDetailEdit";
 import {ToolsEditDetail} from "../EditDetailSong/Tools/ToolsEditDetail";
 import {useSelector} from "react-redux";
+import {withDrawer} from "../../companents/hoc/withDrawer";
 
 
 
-export const EditDetailSong = props => {
+const EditDetailSong = props => {
     const listSong = useSelector(state => state.songs.list)
 
     return (
@@ -15,3 +16,5 @@ export const EditDetailSong = props => {
         </>
     )
 }
+
+export default withDrawer(EditDetailSong)

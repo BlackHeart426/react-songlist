@@ -5,6 +5,8 @@ import {showAlert, showLoader} from "../../store/action/app";
 import {connect} from "react-redux";
 import {setSelectedHistoryActionCreator} from "../../store/action/modules/history";
 import moment from "moment";
+import {compose} from "redux";
+import {withDrawer} from "../../companents/hoc/withDrawer";
 
 
 const History = (props) => {
@@ -138,5 +140,7 @@ const mapDispatchToProps = dispatch => {
         }
     }
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(History);
+export default compose(
+    withDrawer,
+    connect(mapStateToProps, mapDispatchToProps))
+(History);

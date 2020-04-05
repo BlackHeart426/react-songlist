@@ -12,6 +12,8 @@ import {addUserIdAtLink} from "../../companents/GlobalParamaters/linkWithUserId"
 import {useHistory} from "react-router";
 import ConteinerTableDragDrop from "../../companents/TableDragDrop/ConteinerTableDragDrop";
 import moment from "moment";
+import {compose} from "redux";
+import {withDrawer} from "../../companents/hoc/withDrawer";
 
 const Queue = (props) => {
     const history = useHistory();
@@ -119,5 +121,7 @@ const mapDispatchToProps = dispatch => {
         }
     }
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Queue);
+export default compose(
+    withDrawer,
+    connect(mapStateToProps, mapDispatchToProps))
+(Queue);

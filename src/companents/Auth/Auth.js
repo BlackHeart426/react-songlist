@@ -1,46 +1,15 @@
 import React, {Component, useEffect, useState} from "react";
-
 import {auth as firebaseAuth}  from "../../firebaseService";
-import {connect} from "react-redux";
-import {auth, logout} from "../../store/action/auth";
-import Button from "@material-ui/core/Button";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import {Typography} from "@material-ui/core";
+import SignOut from "./SignOut";
+import {auth, logout} from "../../store/action/auth";
+import {connect, useSelector} from "react-redux";
+import User from "./User";
 
 export function Auth(props) {
 
-
-
-    const handleRegister = () => {
-        // this.props.auth(
-        //     'val@gmail.com',
-        //     1234567,
-        //     false
-        // )
-
-    }
-
-
-    const handleRecovery = () => {
-        // this.props.auth(
-        //     'val@gmail.com',
-        //     1234567,
-        //     false
-        // )
-
-    }
-
-    const handleLogout = () => {
-        props.logout()
-
-
-    }
-
-    const logoutHandler = () => {
-        // this.props.logout()
-
-    }
     const [isLogin, setIsLogin] = useState(false);
     useEffect(() => {
         firebaseAuth.onAuthStateChanged( firebaseUser => {
@@ -55,24 +24,20 @@ export function Auth(props) {
     },[firebaseAuth])
 
     return (
-        <>
+        <React.Fragment>
             {isLogin
-                ? <Typography>User</Typography>
+                ?   <>
+                    <User/>
+                </>
                 :  <>
                     <SignUp/>
                     <Login/>
-                </>}
-
-            <Button
-                onClick={handleLogout}
-                type="submit"
-                color="inherit"
-            >
-                Logout
-            </Button>
-        </>
+                </>
+            }
+        </React.Fragment>
     )
 }
+
 
 function mapStateToProps(state) {
     return {

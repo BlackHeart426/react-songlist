@@ -14,6 +14,7 @@ import * as shortid from "shortid";
 import {addAttributesActionCreator} from "../../store/action/modules/attributes";
 import Typography from "@material-ui/core/Typography";
 import moment from "moment";
+import {withDrawer} from "../../companents/hoc/withDrawer";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,7 +37,7 @@ function getSteps() {
 }
 
 
-export function SongImport() {
+function SongImport() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const [songData, setSongData] = useState([]);
@@ -154,3 +155,5 @@ export function SongImport() {
         </div>
     );
 }
+
+export default withDrawer(SongImport)

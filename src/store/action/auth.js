@@ -2,6 +2,7 @@ import axios from 'axios';
 import {AUTH_LOGOUT, AUTH_SUCCESS} from "../types";
 import {auth as firebaseAuth} from "../../firebaseService";
 import {useState} from "react";
+import {isLoginActionCreator} from "./app";
 
 export function auth(email, password, isLogin) {
     return async dispatch => {
@@ -40,13 +41,12 @@ export function auth(email, password, isLogin) {
                         localStorage.setItem('token', token)
                         localStorage.setItem('userId', uid)
                         localStorage.setItem('expirationDate', expirationDate)
-                        dispatch(authSuccess(token))
-                        dispatch(autoLogout(expirationDate))
+                        localStorage.setItem('email', email)
+                        dispatch(isLoginActionCreator(true))
+                        // dispatch(authSuccess(token))
+                        // dispatch(autoLogout(expirationDate))
                     }
                 );
-
-
-
             }
         });
 
@@ -78,8 +78,9 @@ export function logout() {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
     localStorage.removeItem('expirationDate')
-    return {
-        type: AUTH_LOGOUT
+
+    return dispatch => {
+        dispatch(isLoginActionCreator(false))
     }
 }
 

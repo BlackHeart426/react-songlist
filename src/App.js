@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './App.css';
 import { Route, Switch} from "react-router-dom";
 import Queue from "./page/Queue/Queue";
@@ -10,8 +10,8 @@ import DrawerCustom from "./companents/Drawer/DrawerCustom";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {AlertCustom} from  './companents/Alert/Alert'
-import {DetailSong} from "./page/Songs/DetailSong";
-import {EditDetailSong} from "./page/Songs/EditDetailSong";
+import DetailSong from "./page/Songs/DetailSong";
+import EditDetailSong from "./page/Songs/EditDetailSong";
 import {Test} from "./page/Test";
 import Songs from "./page/Songs/Songs";
 import {connect, useSelector} from "react-redux";
@@ -22,7 +22,7 @@ import {getSavedQueueDataActionCreator} from "./store/action/modules/savedQueue"
 import {getHistoryDataActionCreator} from "./store/action/modules/history";
 import Attributes from "./page/Attributes/Attributes";
 import {getAttributesDataActionCreator} from "./store/action/modules/attributes";
-import {SongImport} from "./page/SongImport/SongImport";
+import SongImport from "./page/SongImport/SongImport";
 import {Home} from "./page/Home";
 
 const drawerWidth = 240;
@@ -44,6 +44,7 @@ const useStyles = makeStyles(theme => ({
         width: drawerWidth,
     },
     content: {
+        marginLeft: '240px',
         flexGrow: 1,
         marginTop: '40px', //TODO не динамичекий
         padding: theme.spacing(3),
@@ -54,6 +55,7 @@ const useStyles = makeStyles(theme => ({
 
 const App = (props) => {
     const classes = useStyles();
+    const [isLogin, setIsLogin] = useState(false)
 
     useEffect(() => {
         // props.action.getSongData(); //Заполнение таблицы с песнями
@@ -72,38 +74,40 @@ const App = (props) => {
                 <NavBar
                     className={classes.appBar}
                 />
-                <Home/>
                 {/*<DrawerCustom*/}
                 {/*    className={classes.drawer}*/}
                 {/*    classes={{*/}
                 {/*        paper: classes.drawerPaper,*/}
                 {/*    }}*/}
                 {/*/>*/}
-                {/*<main className={classes.content}>*/}
-                {/*    <div  className={classes.toolbar}>*/}
-                {/*        <Switch>*/}
-                {/*            <Route exact path="/s/:userId/songs" component={Songs}/>*/}
-                {/*                <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>*/}
-                {/*                <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>*/}
-                {/*            <Route exact path="/s/:userId/queue" component={Queue}/>*/}
-                {/*                <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>*/}
-                {/*            <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>*/}
-                {/*            <Route exact path="/s/:userId/history" component={History}/>*/}
-                {/*            <Route exact component={Settings} path="/s/:userId/settings"/>*/}
-                {/*                <Route path="/s/:userId/settings/attributes" component={Attributes} />*/}
-                {/*                <Route path="/s/:userId/settings/song-import" component={SongImport} />*/}
-                {/*            <Route path="/s/:userId/test" component={Test} />*/}
-                {/*            <Route exact path="/" component={Home} />*/}
-                {/*        </Switch>*/}
-                {/*        {props.alert && <AlertCustom text={props.alert} />}*/}
-                {/*    </div>*/}
-                {/*</main>*/}
+                <main className={classes.content}>
+                    <div  className={classes.toolbar}>
+                        <Switch>
+                            <Route exact path="/s/:userId/songs" component={Songs}/>
+                                <Route path="/s/:userId/songs/detail/:id" component={DetailSong}/>
+                                <Route path="/s/:userId/songs/edit/:id" component={EditDetailSong}/>
+                            <Route exact path="/s/:userId/queue" component={Queue}/>
+                                <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
+                            <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>
+                            <Route exact path="/s/:userId/history" component={History}/>
+                            <Route exact component={Settings} path="/s/:userId/settings"/>
+                                <Route path="/s/:userId/settings/attributes" component={Attributes} />
+                                <Route path="/s/:userId/settings/song-import" component={SongImport} />
+                            <Route path="/s/:userId/test" component={Test} />
+                            <Route exact path="/" component={Home} />
+                        </Switch>
+                        {props.alert && <AlertCustom text={props.alert} />}
+                    </div>
+                </main>
+                }
             </div>
     );
 };
 
 const mapStateToProps = state => ({
-    alert: state.app.alert
+    alert: state.app.alert,
+    isLogin: state.app.isLogin
+
 });
 
 const mapDispatchToProps = dispatch => {
@@ -118,7 +122,7 @@ const mapDispatchToProps = dispatch => {
             setSelected: (data) => dispatch(setSelectedActionCreator(data)),
             alert: (text) => dispatch(showAlert(text)),
             showLoader: () => dispatch(showLoader()),
-            hideLoader: () => dispatch(hideLoader())
+            hideLoader: () => dispatch(hideLoader()),
         }
     }
 };

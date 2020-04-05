@@ -5,6 +5,8 @@ import {headCells} from "./headTable";
 import {PTBAttributes} from "./PTBAttributes/PTBAttributes";
 import {showAlert, showLoader} from "../../store/action/app";
 import {setSelectedAttributeActionCreator} from "../../store/action/modules/attributes";
+import {compose} from "redux";
+import {withDrawer} from "../../companents/hoc/withDrawer";
 
 const Attributes = (props) => {
 
@@ -66,5 +68,7 @@ const mapDispatchToProps = dispatch => {
         }
     }
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Attributes)
+export default compose(
+    withDrawer,
+    connect(mapStateToProps, mapDispatchToProps))
+(Attributes);

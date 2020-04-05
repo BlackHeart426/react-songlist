@@ -1,4 +1,4 @@
-import {HIDE_ALERT, HIDE_LOADER, OPEN_DRAWER, SHOW_ALERT, SHOW_LOADER, TOGGLE_EDITMODE} from "../types";
+import {HIDE_ALERT, HIDE_LOADER, IS_LOGIN, OPEN_DRAWER, SHOW_ALERT, SHOW_LOADER, TOGGLE_EDITMODE} from "../types";
 import {getSongDataActionCreator, setSelectedActionCreator} from "./modules/songs";
 import {getQueueDataActionCreator} from "./modules/queue";
 import {getSavedQueueDataActionCreator} from "./modules/savedQueue";
@@ -14,6 +14,13 @@ export const getAllDataActionCreator = () => async dispatch => {
     await dispatch(getAttributesDataActionCreator())
     await dispatch(hideLoader())
 }
+
+export const isLoginActionCreator = (state) => {
+    return {
+        type: IS_LOGIN,
+        payload: state
+    }
+};
 
 export const showLoader = () => {
     return {

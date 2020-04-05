@@ -4,6 +4,8 @@ import {PTBSavedQueue} from "./PTBSavedQueue/PTBSavedQueue";
 import {showAlert, showLoader} from "../../store/action/app";
 import {connect} from "react-redux";
 import {setSelectedSavedQueueActionCreator} from "../../store/action/modules/savedQueue";
+import {compose} from "redux";
+import {withDrawer} from "../../companents/hoc/withDrawer";
 
 const SavedQueue = (props) => {
 
@@ -87,5 +89,7 @@ const mapDispatchToProps = dispatch => {
         }
     }
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(SavedQueue);
+export default compose(
+    withDrawer,
+    connect(mapStateToProps, mapDispatchToProps))
+(SavedQueue);

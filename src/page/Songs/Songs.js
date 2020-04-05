@@ -7,6 +7,10 @@ import {getSongDataActionCreator, setSelectedActionCreator} from "../../store/ac
 import {showAlert, showLoader} from "../../store/action/app";
 import {getAttributesDataActionCreator} from "../../store/action/modules/attributes";
 import moment from "moment";
+import {compose} from "redux";
+import {withDrawer} from "../../companents/hoc/withDrawer"
+import {withWidth} from "@material-ui/core";
+import DrawerCustom from "../../companents/Drawer/DrawerCustom";
 
 const Songs = (props) => {
     const handleRequest = (id) => {
@@ -129,4 +133,7 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Songs);
+export default compose(
+    withDrawer,
+    connect(mapStateToProps, mapDispatchToProps))
+(Songs);
