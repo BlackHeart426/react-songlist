@@ -14,7 +14,6 @@ import {editLastPlayedActionCreator, editPlayedActionCreator} from "./songs";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
-    dispatch(showLoader())
     try {
         await QueueAPI.getRef().orderByChild("position").once('value')
             .then((snapshot) => {
@@ -22,11 +21,9 @@ export const getQueueDataActionCreator = () => async dispatch => {
                     data.push(childSnapshot.val());
                 });
                 dispatch({ type: SET_QUEUEDATA, list: data });
-                dispatch(hideLoader())
             })
     } catch (e) {
-        dispatch(showAlert('Что-то пошло не так'))
-        dispatch(hideLoader())
+        // dispatch(showAlert('Что-то пошло не так'))
     }
 };
 export const setQueueDataActionCreator = (state) => async dispatch => {
@@ -101,7 +98,6 @@ export const checkPosition = (currentItem, oldPosition, newPosition) => {
 }
 
 export const movePositionInQueue = (idCurrent, newId) => async dispatch => {
-    debugger
     const list =  [];
     await QueueAPI.getRef().orderByChild("position").once('value')
     .then((snapshot) => {

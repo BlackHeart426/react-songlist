@@ -43,6 +43,7 @@ export function DialogAttributesEdit(props) {
         let copyDataAttributesData = {...copyDataAttributes['data']};
         const {name, image, active, showInTable, priority, ofSongs} = copyDataAttributesData;
         let statusCopy = {...attribute};
+        console.log('copyDataAttributes',copyDataAttributes)
         if(copyDataAttributes['id']) {
             statusCopy['name'] = name;
             statusCopy['image'] = image;
@@ -82,6 +83,10 @@ export function DialogAttributesEdit(props) {
         onAddAttribute(priority);
         handleClose()
     };
+
+    const handleImage = (url) => {
+        setProperty('image', url)
+    }
 
     const data = {
         title: 'Edit Attribute',
@@ -132,7 +137,7 @@ export function DialogAttributesEdit(props) {
 
                 <div>
                     <FormControl className={classes.formControl}>
-                        <UploadButtons/>
+                        <UploadButtons getUrl={handleImage}/>
                     </FormControl>
                 </div>
 

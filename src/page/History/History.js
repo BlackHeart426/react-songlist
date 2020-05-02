@@ -57,7 +57,6 @@ const History = (props) => {
                 const list = Object.values(attributes);
                 var now = moment().format();
                 list.forEach(item => {
-                    debugger
                     switch (item) {
                         case "all":
                             flag = true;
@@ -97,7 +96,6 @@ const History = (props) => {
                 if (flag) return item
             });
             filtered.forEach(item => item.data.played =  moment(item.data.played).fromNow());
-            debugger
             songList.list = filtered;
             return (
                 songList

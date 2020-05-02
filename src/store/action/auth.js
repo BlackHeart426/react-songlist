@@ -27,7 +27,6 @@ export function auth(email, password, isLogin) {
             response = firebaseAuth.createUserWithEmailAndPassword(email, password);
         }
 
-        debugger
         firebaseAuth.onAuthStateChanged(function(user) {
             if (user) {
                 const uid = user.uid
@@ -35,7 +34,6 @@ export function auth(email, password, isLogin) {
                 const expiresIn = user.metadata.a;
                 const token = user.getIdToken().then(
                     function(token){
-                        debugger
                         const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
 
                         localStorage.setItem('token', token)

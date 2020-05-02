@@ -1,5 +1,5 @@
 import IconButton from "@material-ui/core/IconButton";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import {useDispatch} from "react-redux";
 import {editAttributeActionCreator} from "../../../../store/action/modules/attributes";
@@ -36,6 +36,7 @@ export const EditAttribute = (props) => {
             ),
             active: active
         }
+        console.log(newAttribute)
         dispatch(editAttributeActionCreator(newAttribute))
     }
 
@@ -44,7 +45,7 @@ export const EditAttribute = (props) => {
             <IconButton onClick={handleEditRows} disabled={loading === true ? true : showButton(lenSelected)}>
                 <EditIcon />
             </IconButton>
-            <DialogAttributesEdit onAddAttribute={ handleEditRowsAttribute } dataSong={songData.find(item => item.id === selected)} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
+            <DialogAttributesEdit onAddAttribute={ handleEditRowsAttribute } dataSong={Object.values(songData).find(item => item.id === selected[0])} show={ dialogOpened } onHide={ () => setDialogOpened(false) }/>
         </>
     )
 }

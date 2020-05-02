@@ -15,7 +15,6 @@ import moment from "moment";
 
 export const getSongDataActionCreator = () => async dispatch => {
     const data = [];
-    dispatch(showLoader());
 
     try {
         await SongAPI.getRef().once('value')
@@ -24,12 +23,10 @@ export const getSongDataActionCreator = () => async dispatch => {
                     data.push(childSnapshot.val());
                 });
                 dispatch({ type: SET_SONGDATA, list: data });
-                dispatch(hideLoader())
             })
     } catch (e) {
         console.log(e)
-        dispatch(showAlert('Что-то пошло не так'));
-        dispatch(hideLoader())
+        // dispatch(showAlert('Что-то пошло не так'));
     }
 };
 

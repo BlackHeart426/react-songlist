@@ -1,5 +1,5 @@
 import {Card} from "@material-ui/core";
-import React from "react";
+import React, {useEffect} from "react";
 import {AddAttribute} from "./Tools/AddAttribute";
 import {EditAttribute} from "./Tools/EditAttribute";
 import {RemoveAttribute} from "./Tools/RemoveAttribute";
@@ -15,6 +15,11 @@ export const PTBAttributes = (props) => {
     const listSong = useSelector(state => state.attributes.list);
     const loading = useSelector(state => state.app.loading);
     const lenSelected = selected.length;
+    useEffect(()=>{
+        console.log('listSong',listSong)
+        console.log(selected)
+    },[listSong])
+
     return (
         <>
             <Card style={mbt10}>

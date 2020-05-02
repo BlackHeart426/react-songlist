@@ -11,7 +11,6 @@ import {
 
 export const getHistoryDataActionCreator = () => async dispatch => {
     const data = [];
-    dispatch(showLoader())
     try {
         await HistoryAPI.getRef().once('value')
             .then((snapshot) => {
@@ -19,11 +18,9 @@ export const getHistoryDataActionCreator = () => async dispatch => {
                         data.push(childSnapshot.val());
                     });
                 dispatch({ type: SET_HISTORYDATA, list: data });
-                dispatch(hideLoader())
             })
     } catch (e) {
-        dispatch(showAlert('Что-то пошло не так'))
-        dispatch(hideLoader())
+        // dispatch(showAlert('Что-то пошло не так'))
     }
 };
 

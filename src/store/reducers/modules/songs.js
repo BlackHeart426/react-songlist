@@ -40,13 +40,11 @@ export const songsReducer = (state = initialState, action) => {
             };
         case EDIT_SONGS_TIMESPLAYED:
             return { ...state, ...state.list.forEach(item => {
-                debugger
                 item.id === action.data.id && (item.data.timesPlayed = action.data.timesPlayed)
             })
             };
         case EDIT_SONGS_LASTPLAYED:
             return { ...state, ...state.list.forEach(item => {
-                debugger
                 item.id === action.data.id && (item.data.lastPlayed = action.data.lastPlayed)
             })
             };

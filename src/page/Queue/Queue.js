@@ -53,7 +53,6 @@ const Queue = (props) => {
         const songState = props.queueData.list.find(item => item.id === id);
         delete songState.data.position
         songState.data.played = moment().format();//today;
-        debugger
         const timesPlayed = Object.values(props.songData.list).find(item => item.id === songState.idSong).data.timesPlayed;
         props.action.songPerformed(songState, timesPlayed+1);
 

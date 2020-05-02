@@ -196,7 +196,6 @@ export const EnhancedTableRows = (props) => {
             delete item.data.action
             return item
         })
-        debugger
         newIndexData.forEach(item => dispatch(setQueueDataActionCreator(item)))
         dispatch(getQueueDataActionCreator())
     };
