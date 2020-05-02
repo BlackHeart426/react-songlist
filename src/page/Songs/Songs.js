@@ -13,10 +13,24 @@ import {withWidth} from "@material-ui/core";
 import DrawerCustom from "../../companents/Drawer/DrawerCustom";
 import {useHistory, useParams, useRouteMatch} from "react-router";
 import matchPath from "react-router/modules/matchPath";
+import {addSongInQueueActionCreator} from "../../store/action/modules/queue";
 
 const Songs = (props) => {
     const params = useParams();
     const handleRequest = (id) => {
+        const songData = Object.values(props.songData.list).find(item => item.id === id)
+        console.log(songData)
+
+        const template = {
+            title: '',
+            artist: '',
+            requestedBy: '',
+            note: '',
+            amount: '0',
+        }
+        template.title = songData.data.title;
+        template.artist = songData.data.artist;
+        props.action.addSong(template, id)
     };
 
     // const wrapperTags = (id) => (  { url: props.attributesList.find(item => item.id === id ).data.image, id: id } );
@@ -133,7 +147,8 @@ const mapDispatchToProps = dispatch => {
             getSongData: () => dispatch(getSongDataActionCreator()),
             setSelected: (data) => setSelectedActionCreator(data),
             alert: (text) => dispatch(showAlert(text)),
-            loader: () => dispatch(showLoader())
+            loader: () => dispatch(showLoader()),
+            addSong: (song, uuid) =>  dispatch(addSongInQueueActionCreator(song, uuid))
         }
     }
 };
