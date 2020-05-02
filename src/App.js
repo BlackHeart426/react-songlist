@@ -31,6 +31,11 @@ import {getAttributesDataActionCreator} from "./store/action/modules/attributes"
 import SongImport from "./page/SongImport/SongImport";
 import {Home} from "./page/Home";
 import {autoLogin} from "./store/action/auth";
+import {NonFound} from "./page/NonFound";
+import {compose} from "redux";
+import {withDrawer} from "./companents/hoc/withDrawer";
+import {withCheckPage} from "./companents/hoc/withCheckPage";
+import {withRouter} from "react-router";
 
 const drawerWidth = 240;
 
@@ -108,6 +113,7 @@ const App = (props) => {
                                 <Route path="/s/:userId/settings/song-import" component={SongImport} />
                             <Route path="/s/:userId/test" component={Test} />
                             <Route exact path="/" component={Home} />
+                            <Route component={NonFound}/>
                         </Switch>
                         {props.alert && <AlertCustom text={props.alert} />}
                     </div>
@@ -144,4 +150,7 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(App)
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps))
+(App);

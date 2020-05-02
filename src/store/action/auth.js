@@ -1,8 +1,7 @@
-import axios from 'axios';
 import {AUTH_LOGOUT, AUTH_SUCCESS} from "../types";
-import {auth as firebaseAuth} from "../../firebaseService";
-import {useState} from "react";
+import {auth as firebaseAuth, createUserFireBase} from "../../firebaseService";
 import {isLoginActionCreator} from "./app";
+
 
 export function auth(email, password, isLogin) {
     return async dispatch => {
@@ -11,20 +10,22 @@ export function auth(email, password, isLogin) {
             returnSecureToken: true
         }
 
-        // let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAfhz1Gqiu7HXMBMdGXYwKuEnSdxjWhj50'
         let response = false;
         if(isLogin) {
             function signIn(){
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                     .then(function(firebaseUser) {
-
+                        console.log(firebaseUser)
                     })
                     .catch(error =>console.log('messageError' , error.message ))
             }
             await signIn();
-            // url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyAfhz1Gqiu7HXMBMdGXYwKuEnSdxjWhj50'
         } else {
-            response = firebaseAuth.createUserWithEmailAndPassword(email, password);
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .then(function(firebaseUser) {
+                    console.log(firebaseUser)
+                })
+                .catch(error =>console.log('messageError' , error.message ))
         }
 
         firebaseAuth.onAuthStateChanged(function(user) {
@@ -41,6 +42,7 @@ export function auth(email, password, isLogin) {
                         localStorage.setItem('expirationDate', expirationDate)
                         localStorage.setItem('email', email)
                         dispatch(isLoginActionCreator(true))
+                        dispatch(setUserActionCreator())
                         // dispatch(authSuccess(token))
                         // dispatch(autoLogout(expirationDate))
                     }
@@ -50,6 +52,13 @@ export function auth(email, password, isLogin) {
 
 
 
+    }
+}
+
+export function setUserActionCreator() {
+    return dispatch => {
+        const userId = localStorage.getItem('userId')
+        createUserFireBase(userId)
     }
 }
 

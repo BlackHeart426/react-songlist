@@ -11,12 +11,15 @@ import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer"
 import {withWidth} from "@material-ui/core";
 import DrawerCustom from "../../companents/Drawer/DrawerCustom";
-import {useHistory, useParams, useRouteMatch} from "react-router";
+import {useHistory, useParams, useRouteMatch, withRouter} from "react-router";
 import matchPath from "react-router/modules/matchPath";
 import {addSongInQueueActionCreator} from "../../store/action/modules/queue";
+import {withCheckPage} from "../../companents/hoc/withCheckPage";
 
 const Songs = (props) => {
     const params = useParams();
+
+
     const handleRequest = (id) => {
         const songData = Object.values(props.songData.list).find(item => item.id === id)
         console.log(songData)
@@ -57,6 +60,7 @@ const Songs = (props) => {
 
     useEffect(() => {
         const currentUser = params.userId
+        console.log(currentUser)
         localStorage.setItem("currentUser", currentUser)
     },[]);
 
@@ -155,5 +159,7 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
     withDrawer,
+    withRouter,
+    withCheckPage,
     connect(mapStateToProps, mapDispatchToProps))
 (Songs);

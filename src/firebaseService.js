@@ -18,6 +18,19 @@ app.initializeApp(config);
 export const database = app.database();
 export const storage = app.storage();
 export const auth = app.auth();
+
+export function getDataPageBlogFireBase(name) {
+    return database.ref('userPage')
+        .child(name)
+        .once('value')
+}
+
+export function createUserFireBase(userId) {
+    return database.ref('userPage')
+        .child(userId)  //userID
+        .set({pageName: userId})
+}
+
 // const userId = localStorage.getItem('userId');
 // const ref = db.ref('songs').child(userId);
 //
