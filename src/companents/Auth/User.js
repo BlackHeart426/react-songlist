@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import {connect} from "react-redux";
 import {auth, logout} from "../../store/action/auth";
-import {isPageUserActionCreator, showAlert} from "../../store/action/app";
+import {getAllDataActionCreator, isPageUserActionCreator, showAlert} from "../../store/action/app";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {SettingsUser} from "../../page/SettingsUser";
@@ -11,7 +11,14 @@ import {useHistory} from "react-router";
 
 const User = (props) => {
     const history = useHistory();
+    const {isLogin} = props
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [isLoginAuth, setIsLoginAuth] = useState(false);
+
+    useEffect(()=>{
+        const email = localStorage.getItem('email')
+        setIsLoginAuth(email)
+    },[isLogin])
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -37,6 +44,7 @@ const User = (props) => {
         // }
         // return false
         props.isMyPage(true)
+        props.getAllData();
 
     }
 
@@ -48,7 +56,7 @@ const User = (props) => {
                 aria-controls="simple-menu"
                 aria-haspopup="true"
                 onClick={handleClick}>
-                {localStorage.getItem('email')}
+                {isLoginAuth}
             </Button>
             <Menu
                 id="simple-menu"
@@ -77,7 +85,8 @@ function mapDispatchToProps(dispatch) {
         auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin)),
         alert: (text) => dispatch(showAlert(text)),
         isMyPage: (state) => dispatch(isPageUserActionCreator(state)),
-        logout: () => dispatch(logout)
+        logout: () => dispatch(logout()),
+        getAllData: () => dispatch(getAllDataActionCreator()),
     }
 }
 

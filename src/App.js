@@ -30,6 +30,7 @@ import Attributes from "./page/Attributes/Attributes";
 import {getAttributesDataActionCreator} from "./store/action/modules/attributes";
 import SongImport from "./page/SongImport/SongImport";
 import {Home} from "./page/Home";
+import {autoLogin} from "./store/action/auth";
 
 const drawerWidth = 240;
 
@@ -73,6 +74,7 @@ const App = (props) => {
     }
 
     useEffect(() => {
+        props.action.autoLogin()
         props.isLogin && props.action.toggleEditMode(true)
         props.action.isMyPage(handleCheckUser())
         // props.action.getSongData(); //Заполнение таблицы с песнями
@@ -137,6 +139,7 @@ const mapDispatchToProps = dispatch => {
             hideLoader: () => dispatch(hideLoader()),
             toggleEditMode: (data) => dispatch(toggleEditModeActionCreator(data)),
             isMyPage: (state) => dispatch(isPageUserActionCreator(state)),
+            autoLogin: () => dispatch(autoLogin())
         }
     }
 };

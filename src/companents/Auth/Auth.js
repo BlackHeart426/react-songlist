@@ -11,23 +11,32 @@ import User from "./User";
 export function Auth(props) {
 
     const [isLogin, setIsLogin] = useState(false);
-    useEffect(() => {
-        firebaseAuth.onAuthStateChanged( firebaseUser => {
-            if (firebaseUser) {
-                console.log(firebaseUser);
-                setIsLogin(true)
-            } else {
-                console.log('not loggin')
-                setIsLogin(false)
-            }
-        } )
-    },[firebaseAuth])
+    // useEffect(() => {
+    //     firebaseAuth.onAuthStateChanged( firebaseUser => {
+    //         if (firebaseUser) {
+    //             console.log(firebaseUser);
+    //             setIsLogin(true)
+    //         } else {
+    //             console.log('not loggin')
+    //             setIsLogin(false)
+    //         }
+    //     } )
+    // },[firebaseAuth])
+
+    useEffect(()=>{
+        console.log(props.isLogin)
+        if(props.isLogin) {
+            setIsLogin(true)
+        } else {
+            setIsLogin(false)
+        }
+    },[props.isLogin])
 
     return (
         <React.Fragment>
             {isLogin
                 ?   <>
-                    <User/>
+                    <User isLogin={isLogin}/>
                 </>
                 :  <>
                     <SignUp/>
@@ -41,7 +50,7 @@ export function Auth(props) {
 
 function mapStateToProps(state) {
     return {
-        counter: state.counter
+        isLogin: state.app.isLogin
     }
 
 }

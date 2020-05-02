@@ -59,12 +59,15 @@ export function autoLogin() {
         const token = localStorage.getItem('token')
         if (!token) {
             dispatch(logout())
+            dispatch(isLoginActionCreator(false))
         } else {
             const expirationDate = new Date(localStorage.getItem('expirationDate'))
             if (expirationDate <= new Date()) {
                 dispatch(logout())
+                dispatch(isLoginActionCreator(false))
             } else {
                 dispatch(authSuccess(token))
+                dispatch(isLoginActionCreator(true))
                 dispatch(autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000))
             }
         }
@@ -76,6 +79,13 @@ export function logout() {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
     localStorage.removeItem('expirationDate')
+    localStorage.removeItem('email')
+    localStorage.removeItem('songs')
+    localStorage.removeItem('attributes')
+    localStorage.removeItem('queue')
+    localStorage.removeItem('savedqueue')
+    localStorage.removeItem('history')
+    localStorage.removeItem('currentuser')
 
     return dispatch => {
         dispatch(isLoginActionCreator(false))
