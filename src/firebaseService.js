@@ -25,6 +25,12 @@ export function getDataPageBlogFireBase(name) {
         .once('value')
 }
 
+export function getCheckDataFireBase(nameTable, userId) {
+    return database.ref(nameTable)
+        .child(userId)
+        .once('value')
+}
+
 export function createUserFireBase(userId) {
     return database.ref('userPage')
         .child(userId)  //userID

@@ -4,16 +4,18 @@ import {PTBQueue} from "./PTBQueue/PTBQueue";
 import {connect, useSelector} from "react-redux";
 import {showLoader} from "../../store/action/app";
 import {
+    getQueueDataActionCreator,
     removeSongInQueueActionCreator,
     setSelectedQueueActionCreator,
     successSongActionCreator
 } from "../../store/action/modules/queue";
 import {addUserIdAtLink} from "../../companents/GlobalParamaters/linkWithUserId";
-import {useHistory} from "react-router";
+import {useHistory, withRouter} from "react-router";
 import ConteinerTableDragDrop from "../../companents/TableDragDrop/ConteinerTableDragDrop";
 import moment from "moment";
 import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
+import {withCheckPage} from "../../companents/hoc/withCheckPage";
 
 const Queue = (props) => {
     const history = useHistory();
@@ -29,6 +31,19 @@ const Queue = (props) => {
                 ]
             }}
     }
+
+    useEffect(()=>{
+        if(Object.values(props.queueDataList).length > 0){
+            console.log('success')
+        } else {
+            console.log('getData')
+            if (!props.queueDataNotFound) {
+                props.action.getQueueData()
+            }
+
+        }
+    },[props.queueDataList])
+
 
 
     const wrapperSong = (song) => {
@@ -105,7 +120,9 @@ const Queue = (props) => {
 const mapStateToProps = state => {
     return {
         queueData: state.queue,
+        queueDataList: state.queue.list,
         songData: state.songs,
+        queueDataNotFound: state.queue.dataNotFound,
 
     }
 };
@@ -116,11 +133,14 @@ const mapDispatchToProps = dispatch => {
             deleteSong: (uuid) => dispatch(removeSongInQueueActionCreator(uuid)),
             songPerformed: (song, timesPlayed) => dispatch(successSongActionCreator(song, timesPlayed)),
             setSelected: (data) => setSelectedQueueActionCreator(data),
-            loader: () => dispatch(showLoader())
+            loader: () => dispatch(showLoader()),
+            getQueueData: () => dispatch(getQueueDataActionCreator()),
         }
     }
 };
 export default compose(
     withDrawer,
+    withRouter,
+    withCheckPage,
     connect(mapStateToProps, mapDispatchToProps))
 (Queue);

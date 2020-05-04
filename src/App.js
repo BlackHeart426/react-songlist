@@ -87,7 +87,7 @@ const App = (props) => {
         // props.action.getSavedQueueData(); //Заполнение таблицы с очередью
         // props.action.getHistoryData(); //Заполнение таблицы с очередью
         // props.action.getAttributesData(); //Заполнение таблицы с очередью
-        props.action.getAllData();
+        // props.action.getAllData();
 
     },[]);
 

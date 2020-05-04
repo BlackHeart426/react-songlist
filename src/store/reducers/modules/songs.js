@@ -15,12 +15,13 @@ const initialState = {
     active: false,
     searchText: '',
     filterAttributes: [],
+    dataNotFound: false
 };
 
 export const songsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_SONGDATA:
-            return { ...state, list: action.list };
+            return { ...state, list: action.list, dataNotFound: action.dataNotFound };
         case SET_SEARCHTEXT:
             return { ...state, searchText: action.text };
         case TOGGLE_ACTIVE:

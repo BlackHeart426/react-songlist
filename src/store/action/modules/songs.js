@@ -15,14 +15,19 @@ import moment from "moment";
 
 export const getSongDataActionCreator = () => async dispatch => {
     const data = [];
-
+    dispatch(showLoader())
     try {
         await SongAPI.getRef().once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
                     data.push(childSnapshot.val());
                 });
-                dispatch({ type: SET_SONGDATA, list: data });
+                let dataNotFound = false
+                if(data.length === 0) {
+                    dataNotFound = true
+                }
+                dispatch({ type: SET_SONGDATA, list: data, dataNotFound: dataNotFound });
+                dispatch(hideLoader())
             })
     } catch (e) {
         console.log(e)

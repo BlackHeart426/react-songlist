@@ -14,13 +14,19 @@ import {editLastPlayedActionCreator, editPlayedActionCreator} from "./songs";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
+    dispatch(showLoader())
     try {
         await QueueAPI.getRef().orderByChild("position").once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
                     data.push(childSnapshot.val());
                 });
-                dispatch({ type: SET_QUEUEDATA, list: data });
+                let dataNotFound = false
+                if(data.length === 0) {
+                    dataNotFound = true
+                }
+                dispatch({ type: SET_QUEUEDATA, list: data, dataNotFound: dataNotFound });
+                dispatch(hideLoader())
             })
     } catch (e) {
         // dispatch(showAlert('Что-то пошло не так'))

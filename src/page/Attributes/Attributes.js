@@ -4,11 +4,26 @@ import TablePagination from "../../companents/TablePagination/ComponentTablePagi
 import {headCells} from "./headTable";
 import {PTBAttributes} from "./PTBAttributes/PTBAttributes";
 import {showAlert, showLoader} from "../../store/action/app";
-import {setSelectedAttributeActionCreator} from "../../store/action/modules/attributes";
+import {getAttributesDataActionCreator, setSelectedAttributeActionCreator} from "../../store/action/modules/attributes";
 import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
+import {withRouter} from "react-router";
+import {withCheckPage} from "../../companents/hoc/withCheckPage";
 
 const Attributes = (props) => {
+
+    useEffect(()=>{
+        if(Object.values(props.attributesList).length > 0){
+            console.log('success')
+        } else {
+            console.log('getData')
+            if(!props.attributesDataNotFound){
+                props.action.getAttributesData()
+            }
+
+        }
+    },[props.attributesList])
+
 
     function createData(id, name, image, active, showInTable, priority, ofSongs) {
         return {
@@ -56,6 +71,8 @@ const Attributes = (props) => {
 const mapStateToProps = state => {
     return {
         tagsData: state.attributes,
+        attributesList: state.attributes.list,
+        attributesDataNotFound: state.attributes.dataNotFound,
     }
 };
 
@@ -64,11 +81,14 @@ const mapDispatchToProps = dispatch => {
         action: {
             setSelected: (data) => setSelectedAttributeActionCreator(data),
             alert: (text) => dispatch(showAlert(text)),
-            loader: () => dispatch(showLoader())
+            loader: () => dispatch(showLoader()),
+            getAttributesData: () => dispatch(getAttributesDataActionCreator()),
         }
     }
 };
 export default compose(
     withDrawer,
+    withRouter,
+    withCheckPage,
     connect(mapStateToProps, mapDispatchToProps))
 (Attributes);

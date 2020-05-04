@@ -11,13 +11,19 @@ import {
 
 export const getHistoryDataActionCreator = () => async dispatch => {
     const data = [];
+    dispatch(showLoader())
     try {
         await HistoryAPI.getRef().once('value')
             .then((snapshot) => {
                     snapshot.forEach(childSnapshot => {
                         data.push(childSnapshot.val());
                     });
-                dispatch({ type: SET_HISTORYDATA, list: data });
+                let dataNotFound = false
+                if(data.length === 0) {
+                    dataNotFound = true
+                }
+                dispatch({ type: SET_HISTORYDATA, list: data, dataNotFound: dataNotFound });
+                dispatch(hideLoader())
             })
     } catch (e) {
         // dispatch(showAlert('Что-то пошло не так'))

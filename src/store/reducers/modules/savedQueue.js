@@ -10,12 +10,13 @@ const initialState = {
     list: [],
     selected: [],
     searchText: '',
+    dataNotFound: false
 }
 
 export const savedQueueReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_SAVEDQUEUEDATA:
-            return { ...state, list: action.list };
+            return { ...state, list: action.list, dataNotFound: action.dataNotFound };
         case SET_SELECTED_SAVEDQUEUE:
             return { ...state, selected: action.newSelect };
         case ADD_SONG_IN_SAVEDQUEUE:

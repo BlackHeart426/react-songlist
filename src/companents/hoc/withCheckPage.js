@@ -19,22 +19,33 @@ export const withCheckPage = (Component) => {
 
         componentDidMount() {
             const {match} = this.props
-            getDataPageBlogFireBase(match.params.userId)
-                .then((snapshot) => {
-                    if(snapshot.val() === null){
+            const currentUser = localStorage.getItem('currentUser')
+            // if(currentUser === match.params.userId){
+            //     this.setState(() => ({ existPage: true }));
+            // } else {
+                getDataPageBlogFireBase(match.params.userId)
+                    .then((snapshot) => {
+                        if(snapshot.val() === null){
+                            console.log(snapshot.val())
+                            this.setState(() => ({ existPage: false }));
+                        } else {
+                            console.log('yyyyyyyyyyyy')
+                            this.setState(() => ({ existPage: true }));
+                            const currentUser = match.params.userId
+                            localStorage.setItem("currentUser", currentUser)
+                        }
+                    })
+                    .catch(error => {
                         this.setState(() => ({ existPage: false }));
-                    } else {
-                        this.setState(() => ({ existPage: true }));
-                    }
-                })
-                .catch(error => {
-                    this.setState(() => ({ existPage: false }));
-                })
+                    })
+            // }
+
 
         }
 
 
         render() {
+
             const { existPage } = this.state;
             const userId = localStorage.getItem('userId')
             const {match} = this.props

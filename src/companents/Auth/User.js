@@ -5,8 +5,6 @@ import {auth, logout} from "../../store/action/auth";
 import {getAllDataActionCreator, isPageUserActionCreator, showAlert} from "../../store/action/app";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import {SettingsUser} from "../../page/SettingsUser";
-import {addUserIdAtLink} from "../GlobalParamaters/linkWithUserId";
 import {useHistory} from "react-router";
 
 const User = (props) => {
@@ -36,7 +34,7 @@ const User = (props) => {
 
     function handleMyPage() {
         const uuid = localStorage.getItem('userId')
-        history.push(addUserIdAtLink("/songs"))
+        history.push(`/s/${uuid}/songs`)
         // const currentUser = localStorage.getItem('currentUser');
         // const userId = localStorage.getItem('userId');
         // if (currentUser === userId) {

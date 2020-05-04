@@ -3,9 +3,14 @@ import TablePagination from "../../companents/TablePagination/ComponentTablePagi
 import {PTBSavedQueue} from "./PTBSavedQueue/PTBSavedQueue";
 import {showAlert, showLoader} from "../../store/action/app";
 import {connect} from "react-redux";
-import {setSelectedSavedQueueActionCreator} from "../../store/action/modules/savedQueue";
+import {
+    getSavedQueueDataActionCreator,
+    setSelectedSavedQueueActionCreator
+} from "../../store/action/modules/savedQueue";
 import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
+import {withRouter} from "react-router";
+import {withCheckPage} from "../../companents/hoc/withCheckPage";
 
 const SavedQueue = (props) => {
 
@@ -19,6 +24,18 @@ const SavedQueue = (props) => {
     function createData( title, artist, amount, requestedBy, note) {
         return { title, artist, amount, requestedBy, note}
     }
+
+    useEffect(()=>{
+        if(Object.values(props.savedQueueList).length > 0){
+        } else {
+            console.log(props.savedQueueList)
+            if (!props.savedQueueDataNotFound) {
+                props.action.getSavedQueueData()
+            }
+
+        }
+    },[props.savedQueueList])
+
 
     const headCells = [
         { id: 'title', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
@@ -59,8 +76,9 @@ const SavedQueue = (props) => {
     };
 
     useEffect(() => {
-        localStorage.setItem('songs', JSON.stringify(props.songData));
+        localStorage.setItem('savedQueue', JSON.stringify(props.songData));
     },[props.songData]);
+
     return (
         <>
             <PTBSavedQueue/>
@@ -77,6 +95,8 @@ const mapStateToProps = state => {
     return {
         searchText: state.savedQueue.searchText,
         songData: state.savedQueue,
+        savedQueueList: state.savedQueue.list,
+        savedQueueDataNotFound: state.savedQueue.dataNotFound,
     }
 };
 
@@ -85,11 +105,14 @@ const mapDispatchToProps = dispatch => {
         action: {
             setSelected: (data) => setSelectedSavedQueueActionCreator(data),
             alert: (text) => dispatch(showAlert(text)),
-            loader: () => dispatch(showLoader())
+            loader: () => dispatch(showLoader()),
+            getSavedQueueData: () => dispatch(getSavedQueueDataActionCreator()),
         }
     }
 };
 export default compose(
     withDrawer,
+    withRouter,
+    withCheckPage,
     connect(mapStateToProps, mapDispatchToProps))
 (SavedQueue);

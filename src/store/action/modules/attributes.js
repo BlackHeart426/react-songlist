@@ -10,16 +10,22 @@ import {
 
 export const getAttributesDataActionCreator = () => async dispatch => {
     const data = [];
+    dispatch(showLoader())
     try {
         await AttributesAPI.getRef().once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
                     data.push(childSnapshot.val());
                 });
-                dispatch({ type: SET_ATTRIBUTESDATA, list: data });
+                let dataNotFound = false
+                if(data.length === 0) {
+                    dataNotFound = true
+                }
+                dispatch({ type: SET_ATTRIBUTESDATA, list: data, dataNotFound: dataNotFound });
+                dispatch(hideLoader())
             })
     } catch (e) {
-        // dispatch(showAlert('Что-то пошло не так'))
+        dispatch(showAlert('Что-то пошло не так'))
     }
 };
 

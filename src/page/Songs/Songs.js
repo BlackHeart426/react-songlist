@@ -15,10 +15,10 @@ import {useHistory, useParams, useRouteMatch, withRouter} from "react-router";
 import matchPath from "react-router/modules/matchPath";
 import {addSongInQueueActionCreator} from "../../store/action/modules/queue";
 import {withCheckPage} from "../../companents/hoc/withCheckPage";
+import {withCheckData} from "../../companents/hoc/withCheckData";
 
 const Songs = (props) => {
     const params = useParams();
-
 
     const handleRequest = (id) => {
         const songData = Object.values(props.songData.list).find(item => item.id === id)
@@ -58,11 +58,15 @@ const Songs = (props) => {
         localStorage.setItem('songs', JSON.stringify(props.songData));
     },[props.songData]);
 
-    useEffect(() => {
-        const currentUser = params.userId
-        console.log(currentUser)
-        localStorage.setItem("currentUser", currentUser)
-    },[]);
+    useEffect(()=>{
+        if(Object.values(props.songsList).length > 0){
+        } else {
+            if(!props.songsDataNotFound){
+                props.action.getSongData()
+            }
+
+        }
+    },[props.songsList])
 
     const handleFilter = () => {
         let songList = {...props.songData};
@@ -136,10 +140,12 @@ const Songs = (props) => {
 
 const mapStateToProps = state => {
     return {
+        songsList: state.songs.list,
         attributesList: state.attributes.list,
         searchText: state.songs.searchText,
         songData: state.songs,
         filterAttributes: state.songs.filterAttributes,
+        songsDataNotFound: state.songs.dataNotFound,
 
     }
 };

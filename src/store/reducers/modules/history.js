@@ -12,12 +12,13 @@ const initialState = {
     selected: [],
     searchText: '',
     filterData: ["stream"],
+    dataNotFound: false
 };
 
 export const historyReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_HISTORYDATA:
-            return { ...state, list: action.list };
+            return { ...state, list: action.list, dataNotFound: action.dataNotFound };
         case ADD_SONG_IN_HISTORY:
             return { ...state, list: [action.newSong, ...state.list] };
             // return { ...state, list: Object.values(state.list).unshift(action.newSong) };

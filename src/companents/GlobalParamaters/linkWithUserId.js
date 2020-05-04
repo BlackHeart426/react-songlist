@@ -3,5 +3,5 @@ export const addUserIdAtLink = (link) => (
 )
 
 const getUserId = () => (
-    localStorage.getItem('userId')
+    localStorage.getItem('currentUser')
 )

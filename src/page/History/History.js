@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import TablePagination from "../../companents/TablePagination/ComponentTablePagination";
 import {PTBHistory} from "./PTBHistory/PTBHistory";
 import {showAlert, showLoader} from "../../store/action/app";
 import {connect} from "react-redux";
-import {setSelectedHistoryActionCreator} from "../../store/action/modules/history";
+import {getHistoryDataActionCreator, setSelectedHistoryActionCreator} from "../../store/action/modules/history";
 import moment from "moment";
 import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
+import {withRouter} from "react-router";
+import {withCheckPage} from "../../companents/hoc/withCheckPage";
 
 
 const History = (props) => {
@@ -20,6 +22,24 @@ const History = (props) => {
     function createData( title, artist, amount, requestedBy, played, note) {
         return { title, artist, amount, requestedBy, played, note}
     }
+
+    useEffect(()=>{
+        if(Object.values(props.historyList).length > 0){
+            console.log('success')
+        } else {
+            console.log('getData')
+            if(!props.historyDataNotFound){
+                props.action.getHistoryData()
+            }
+
+        }
+    },[props.historyList])
+
+
+    useEffect(() => {
+        localStorage.setItem('history', JSON.stringify(props.songData));
+    },[props.songData]);
+
 
     const headCells = [
         { id: 'title', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
@@ -125,6 +145,8 @@ const mapStateToProps = state => {
         filter: state.history.filterData,
         searchText: state.history.searchText,
         songData: state.history,
+        historyList: state.history.list,
+        historyDataNotFound: state.history.dataNotFound,
 
     }
 };
@@ -134,11 +156,14 @@ const mapDispatchToProps = dispatch => {
         action: {
             setSelected: (data) => setSelectedHistoryActionCreator(data),
             alert: (text) => dispatch(showAlert(text)),
-            loader: () => dispatch(showLoader())
+            loader: () => dispatch(showLoader()),
+            getHistoryData: () => dispatch(getHistoryDataActionCreator()),
         }
     }
 };
 export default compose(
     withDrawer,
+    withRouter,
+    withCheckPage,
     connect(mapStateToProps, mapDispatchToProps))
 (History);

@@ -11,16 +11,23 @@ import {addSongInQueueActionCreator} from "./queue";
 
 export const getSavedQueueDataActionCreator = () => async dispatch => {
     const data = [];
+    dispatch(showLoader())
     try {
         await SavedQueueAPI.getRef().once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
                     data.push(childSnapshot.val());
                 });
-                dispatch({ type: SET_SAVEDQUEUEDATA, list: data });
+                let dataNotFound = false
+                if(data.length === 0) {
+                    dataNotFound = true
+                }
+                dispatch({ type: SET_SAVEDQUEUEDATA, list: data, dataNotFound: dataNotFound });
+                dispatch(hideLoader())
             })
     } catch (e) {
-        // dispatch(showAlert('Что-то пошло не так'))
+        dispatch(hideLoader())
+        dispatch(showAlert('Что-то пошло не так'))
     }
 };
 

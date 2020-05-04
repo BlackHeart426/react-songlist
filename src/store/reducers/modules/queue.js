@@ -9,13 +9,14 @@ import {
 
 const initialState = {
     list: [],
-    selected: []
+    selected: [],
+    dataNotFound: false
 }
 
 export const queueReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_QUEUEDATA:
-            return { ...state, list: action.list };
+            return { ...state, list: action.list, dataNotFound: action.dataNotFound };
         case CHANGE_POSITION:
             return { ...state };
             // return { ...state, list: moveArrayItemToNewIndex(

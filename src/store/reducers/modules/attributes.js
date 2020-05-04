@@ -9,12 +9,13 @@ import {
 const initialState = {
     list: [],
     selected: [],
+    dataNotFound: false
 };
 
 export const attributesReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_ATTRIBUTESDATA:
-            return { ...state, list: action.list };
+            return { ...state, list: action.list, dataNotFound: action.dataNotFound };
         case ADD_ATTRIBUTES:
             return { ...state, list: Object.values(state.list).concat(action.newAttribute) };
         case SET_SELECTED_ATTRIBUTES:
