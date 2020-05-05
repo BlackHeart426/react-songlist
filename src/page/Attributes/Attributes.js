@@ -7,10 +7,16 @@ import {showAlert, showLoader} from "../../store/action/app";
 import {getAttributesDataActionCreator, setSelectedAttributeActionCreator} from "../../store/action/modules/attributes";
 import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
-import {withRouter} from "react-router";
+import {useParams, withRouter} from "react-router";
 import {withCheckPage} from "../../companents/hoc/withCheckPage";
+import {setCurrentUserActionCreator} from "../../store/action/currentUser";
 
 const Attributes = (props) => {
+    const params = useParams();
+
+    useEffect(()=>{
+        props.action.setUser(params.userId)
+    },[])
 
     useEffect(()=>{
         if(Object.values(props.attributesList).length > 0){
@@ -83,6 +89,7 @@ const mapDispatchToProps = dispatch => {
             alert: (text) => dispatch(showAlert(text)),
             loader: () => dispatch(showLoader()),
             getAttributesData: () => dispatch(getAttributesDataActionCreator()),
+            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser))
         }
     }
 };

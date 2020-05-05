@@ -7,11 +7,13 @@ import {getHistoryDataActionCreator, setSelectedHistoryActionCreator} from "../.
 import moment from "moment";
 import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
-import {withRouter} from "react-router";
+import {useParams, withRouter} from "react-router";
 import {withCheckPage} from "../../companents/hoc/withCheckPage";
+import {setCurrentUserActionCreator} from "../../store/action/currentUser";
 
 
 const History = (props) => {
+    const params = useParams();
     const wrapperSong = (song) => {
         return song.map(item => {
             const {title, artist, amount, requestedBy, played, note} = item.data;
@@ -36,6 +38,9 @@ const History = (props) => {
     },[props.historyList])
 
 
+    useEffect(()=>{
+        props.action.setUser(params.userId)
+    },[])
     useEffect(() => {
         localStorage.setItem('history', JSON.stringify(props.songData));
     },[props.songData]);
@@ -158,6 +163,7 @@ const mapDispatchToProps = dispatch => {
             alert: (text) => dispatch(showAlert(text)),
             loader: () => dispatch(showLoader()),
             getHistoryData: () => dispatch(getHistoryDataActionCreator()),
+            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser))
         }
     }
 };

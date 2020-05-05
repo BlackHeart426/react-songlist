@@ -10,15 +10,17 @@ import {
     successSongActionCreator
 } from "../../store/action/modules/queue";
 import {addUserIdAtLink} from "../../companents/GlobalParamaters/linkWithUserId";
-import {useHistory, withRouter} from "react-router";
+import {useHistory, useParams, withRouter} from "react-router";
 import ConteinerTableDragDrop from "../../companents/TableDragDrop/ConteinerTableDragDrop";
 import moment from "moment";
 import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
 import {withCheckPage} from "../../companents/hoc/withCheckPage";
+import {setCurrentUserActionCreator} from "../../store/action/currentUser";
 
 const Queue = (props) => {
     const history = useHistory();
+    const params = useParams();
 
     function createData(position, title, artist, amount, requestedBy, note) {
         return {
@@ -31,6 +33,11 @@ const Queue = (props) => {
                 ]
             }}
     }
+
+
+    useEffect(()=>{
+        props.action.setUser(params.userId)
+    },[])
 
     useEffect(()=>{
         if(Object.values(props.queueDataList).length > 0){
@@ -135,6 +142,7 @@ const mapDispatchToProps = dispatch => {
             setSelected: (data) => setSelectedQueueActionCreator(data),
             loader: () => dispatch(showLoader()),
             getQueueData: () => dispatch(getQueueDataActionCreator()),
+            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser))
         }
     }
 };

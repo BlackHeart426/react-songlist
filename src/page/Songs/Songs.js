@@ -15,7 +15,7 @@ import {useHistory, useParams, useRouteMatch, withRouter} from "react-router";
 import matchPath from "react-router/modules/matchPath";
 import {addSongInQueueActionCreator} from "../../store/action/modules/queue";
 import {withCheckPage} from "../../companents/hoc/withCheckPage";
-import {setCurrentUserActionCreator} from "../../store/action/currentUser";
+import {setCurrentUserActionCreator, updateEmailCurrentUserActionCreator} from "../../store/action/currentUser";
 
 const Songs = (props) => {
     const params = useParams();
@@ -60,10 +60,12 @@ const Songs = (props) => {
 
     useEffect(()=>{
         props.action.setUser(params.userId)
+
     },[])
 
     useEffect(()=>{
         console.log(params.userId)
+        props.action.update(params.userId)
         if(Object.values(props.songsList).length > 0){
         } else {
             if(!props.songsDataNotFound){
@@ -164,7 +166,8 @@ const mapDispatchToProps = dispatch => {
             alert: (text) => dispatch(showAlert(text)),
             loader: () => dispatch(showLoader()),
             addSong: (song, uuid) =>  dispatch(addSongInQueueActionCreator(song, uuid)),
-            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser))
+            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser)),
+            update: (currentUser) => dispatch(updateEmailCurrentUserActionCreator(currentUser)),
         }
     }
 };

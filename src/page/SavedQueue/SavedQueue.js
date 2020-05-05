@@ -9,8 +9,9 @@ import {
 } from "../../store/action/modules/savedQueue";
 import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
-import {withRouter} from "react-router";
+import {useParams, withRouter} from "react-router";
 import {withCheckPage} from "../../companents/hoc/withCheckPage";
+import {setCurrentUserActionCreator} from "../../store/action/currentUser";
 
 const SavedQueue = (props) => {
 
@@ -36,6 +37,11 @@ const SavedQueue = (props) => {
         }
     },[props.savedQueueList])
 
+    const params = useParams();
+
+    useEffect(()=>{
+        props.action.setUser(params.userId)
+    },[])
 
     const headCells = [
         { id: 'title', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
@@ -107,6 +113,7 @@ const mapDispatchToProps = dispatch => {
             alert: (text) => dispatch(showAlert(text)),
             loader: () => dispatch(showLoader()),
             getSavedQueueData: () => dispatch(getSavedQueueDataActionCreator()),
+            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser))
         }
     }
 };

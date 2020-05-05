@@ -26,9 +26,10 @@ export const withCheckPage = (Component) => {
                 getDataPageBlogFireBase(match.params.userId)
                     .then((snapshot) => {
                         if(snapshot.val() === null){
-                            console.log(snapshot.val())
+
                             this.setState(() => ({ existPage: false }));
                         } else {
+                            localStorage.setItem('emailCurrentUser', snapshot.val().email)
                             this.setState(() => ({ existPage: true }));
                             const currentUser = match.params.userId
                             localStorage.setItem("currentUser", currentUser)

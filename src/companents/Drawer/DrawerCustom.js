@@ -26,7 +26,8 @@ import {toggleEditModeActionCreator, toggleOpenDrawerActionCreator} from "../../
 const DrawerCustom = (props) => {
     const classes = useStylesDrawer();
     const [open, setOpen] = useState(false);
-    const [currentUser, setCurrentUser] = useState('')
+    const [currentUser, setCurrentUser] = useState({userId: '', email: ''})
+
 
     const handleClick = () => {
         setOpen(!open);
@@ -44,7 +45,7 @@ const DrawerCustom = (props) => {
     }
 
     useEffect(()=>{
-        setCurrentUser(props.currentUser)
+        setCurrentUser({...currentUser, userId: props.currentUser.currentUserId, email:  props.currentUser.email} )
     },[props.currentUser])
 
     const sideList = () => (
@@ -63,17 +64,17 @@ const DrawerCustom = (props) => {
                         <ImageIcon />
                     </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Black__Heart" secondary="Streamer" />
+                <ListItemText primary={currentUser.email} secondary="Streamer" />
             </ListItem>
             <List>
                 {menuDrawerCustom.map((link) => (
-                   renderLink(link, currentUser)
+                   renderLink(link, currentUser.userId)
                 ))}
             </List>
             <Divider />
             <List>
                 {subMenuDrawerCustom.map((link) => (
-                    renderLink(link, currentUser)
+                    renderLink(link, currentUser.userId)
                 ))}
             </List>
             <ListItem button onClick={handleClick} >
@@ -138,7 +139,7 @@ const mapStateToProps = state => {
         statusOpenDrawer: state.app.openDrawer,
         isLogin: state.app.isLogin,
         isMyPage: state.app.isPageUser,
-        currentUser: state.currentUser.currentUserId
+        currentUser: state.currentUser
     }
 };
 
