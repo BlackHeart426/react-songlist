@@ -86,7 +86,7 @@ const DrawerCustom = (props) => {
                 <List component="div" disablePadding>
                     {settingsMenuCustom.map((link) => {
                         link.className = classes.nested;
-                        return renderLink(link, currentUser)}
+                        return renderLink(link, currentUser.userId)}
                     )}
                 </List>
             </Collapse>

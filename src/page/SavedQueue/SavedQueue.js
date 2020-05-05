@@ -11,7 +11,7 @@ import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
 import {useParams, withRouter} from "react-router";
 import {withCheckPage} from "../../companents/hoc/withCheckPage";
-import {setCurrentUserActionCreator} from "../../store/action/currentUser";
+import {setCurrentUserActionCreator, updateEmailCurrentUserActionCreator} from "../../store/action/currentUser";
 
 const SavedQueue = (props) => {
 
@@ -27,6 +27,7 @@ const SavedQueue = (props) => {
     }
 
     useEffect(()=>{
+        props.action.update(params.userId)
         if(Object.values(props.savedQueueList).length > 0){
         } else {
             console.log(props.savedQueueList)
@@ -113,7 +114,8 @@ const mapDispatchToProps = dispatch => {
             alert: (text) => dispatch(showAlert(text)),
             loader: () => dispatch(showLoader()),
             getSavedQueueData: () => dispatch(getSavedQueueDataActionCreator()),
-            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser))
+            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser)),
+            update: (currentUser) => dispatch(updateEmailCurrentUserActionCreator(currentUser)),
         }
     }
 };

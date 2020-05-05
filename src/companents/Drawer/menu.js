@@ -27,12 +27,12 @@ export const menuDrawerCustom = [
         icon: <History/>,
         index: 4
     },
-    {
-        title: 'Test',
-        link: '/test',
-        icon: <History/>,
-        index: 5
-    },
+    // {
+    //     title: 'Test',
+    //     link: '/test',
+    //     icon: <History/>,
+    //     index: 5
+    // },
 ];
 
 export const subMenuDrawerCustom = [

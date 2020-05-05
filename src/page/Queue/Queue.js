@@ -16,7 +16,7 @@ import moment from "moment";
 import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
 import {withCheckPage} from "../../companents/hoc/withCheckPage";
-import {setCurrentUserActionCreator} from "../../store/action/currentUser";
+import {setCurrentUserActionCreator, updateEmailCurrentUserActionCreator} from "../../store/action/currentUser";
 
 const Queue = (props) => {
     const history = useHistory();
@@ -40,6 +40,7 @@ const Queue = (props) => {
     },[])
 
     useEffect(()=>{
+        props.action.update(params.userId)
         if(Object.values(props.queueDataList).length > 0){
             console.log('success')
         } else {
@@ -142,7 +143,8 @@ const mapDispatchToProps = dispatch => {
             setSelected: (data) => setSelectedQueueActionCreator(data),
             loader: () => dispatch(showLoader()),
             getQueueData: () => dispatch(getQueueDataActionCreator()),
-            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser))
+            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser)),
+            update: (currentUser) => dispatch(updateEmailCurrentUserActionCreator(currentUser)),
         }
     }
 };

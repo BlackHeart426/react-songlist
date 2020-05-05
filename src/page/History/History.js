@@ -9,7 +9,7 @@ import {compose} from "redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
 import {useParams, withRouter} from "react-router";
 import {withCheckPage} from "../../companents/hoc/withCheckPage";
-import {setCurrentUserActionCreator} from "../../store/action/currentUser";
+import {setCurrentUserActionCreator, updateEmailCurrentUserActionCreator} from "../../store/action/currentUser";
 
 
 const History = (props) => {
@@ -26,6 +26,7 @@ const History = (props) => {
     }
 
     useEffect(()=>{
+        props.action.update(params.userId)
         if(Object.values(props.historyList).length > 0){
             console.log('success')
         } else {
@@ -163,7 +164,8 @@ const mapDispatchToProps = dispatch => {
             alert: (text) => dispatch(showAlert(text)),
             loader: () => dispatch(showLoader()),
             getHistoryData: () => dispatch(getHistoryDataActionCreator()),
-            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser))
+            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser)),
+            update: (currentUser) => dispatch(updateEmailCurrentUserActionCreator(currentUser)),
         }
     }
 };
