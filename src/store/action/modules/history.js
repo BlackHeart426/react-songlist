@@ -7,13 +7,14 @@ import {
     SET_SEARCHTEXT, SET_SEARCHTEXT_HISTORY,
     SET_SELECTED_HISTORY
 } from "../../types";
+import {userId} from "./songs";
 
 
 export const getHistoryDataActionCreator = () => async dispatch => {
     const data = [];
     dispatch(showLoader())
     try {
-        await HistoryAPI.getRef().once('value')
+        await HistoryAPI.getRef(userId).once('value')
             .then((snapshot) => {
                     snapshot.forEach(childSnapshot => {
                         data.push(childSnapshot.val());
@@ -31,7 +32,7 @@ export const getHistoryDataActionCreator = () => async dispatch => {
 };
 
 export const removeSongHistoryActionCreator = (uuid) => async dispatch => {
-    HistoryAPI.getRef().child(uuid).remove()
+    HistoryAPI.getRef(userId).child(uuid).remove()
         .then(dispatch({ type: REMOVE_SONG_HISTORY,  row: uuid }))
         .catch(console.log('removeData error'))
 };
@@ -62,7 +63,7 @@ export const addFilterHistoryActionCreator = (state) => async dispatch => {
 export const addSongInHistoryActionCreator = (state) => async dispatch => {
     dispatch(showLoader())
     try {
-        await HistoryAPI.getRef().child(state.id).set(state)
+        await HistoryAPI.getRef(userId).child(state.id).set(state)
             .then(dispatch({ type: ADD_SONG_IN_HISTORY, newSong: state }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())

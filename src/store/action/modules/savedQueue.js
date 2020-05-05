@@ -7,13 +7,14 @@ import {
     SET_SELECTED_SAVEDQUEUE
 } from "../../types";
 import {addSongInQueueActionCreator} from "./queue";
+import {userId} from "./songs";
 
 
 export const getSavedQueueDataActionCreator = () => async dispatch => {
     const data = [];
     dispatch(showLoader())
     try {
-        await SavedQueueAPI.getRef().once('value')
+        await SavedQueueAPI.getRef(userId).once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
                     data.push(childSnapshot.val());
@@ -35,7 +36,7 @@ export const addSongInSavedQueueActionCreator = (state) => async dispatch => {
 
     dispatch(showLoader())
     try {
-        await SavedQueueAPI.getRef().child(state.id).set(state)
+        await SavedQueueAPI.getRef(userId).child(state.id).set(state)
             .then(dispatch({ type: ADD_SONG_IN_SAVEDQUEUE, newSong: state }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
@@ -53,7 +54,7 @@ export const moveSongInQueueActionCreator = (stateSong) => async dispatch => {
 };
 
 export const removeSongSavedQueueActionCreator = (uuid) => async dispatch => {
-    SavedQueueAPI.getRef().child(uuid).remove()
+    SavedQueueAPI.getRef(userId).child(uuid).remove()
         .then(dispatch({ type: REMOVE_SONG_SAVEDQUEUE,  row: uuid }))
         .catch(console.log('removeData error'))
 };

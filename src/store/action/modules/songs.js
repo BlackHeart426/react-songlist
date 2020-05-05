@@ -13,6 +13,8 @@ import {
 import {useSelector} from "react-redux";
 import moment from "moment";
 
+export const userId = localStorage.getItem('userId')
+
 export const getSongDataActionCreator = (userId) => async dispatch => {
     const data = [];
     dispatch(showLoader())
@@ -38,7 +40,7 @@ export const getSongDataActionCreator = (userId) => async dispatch => {
 export const editPlayedActionCreator = (id, timesPlayed) => async dispatch => {
     dispatch(showLoader());
     try {
-        await SongAPI.getRef().child(id).child('data').update({'timesPlayed': timesPlayed});
+        await SongAPI.getRef(userId).child(id).child('data').update({'timesPlayed': timesPlayed});
         await  dispatch({ type: EDIT_SONGS_TIMESPLAYED, data: {id: id, timesPlayed: timesPlayed} });
         dispatch(hideLoader())
     } catch (e) {
@@ -51,7 +53,7 @@ export const editLastPlayedActionCreator = (id) => async dispatch => {
     dispatch(showLoader());
     const dataTime = moment().format();
     try {
-        await SongAPI.getRef().child(id).child('data').update({'lastPlayed': dataTime});
+        await SongAPI.getRef(userId).child(id).child('data').update({'lastPlayed': dataTime});
         await  dispatch({ type: EDIT_SONGS_LASTPLAYED, data: {id: id, lastPlayed: dataTime} });
         dispatch(hideLoader())
     } catch (e) {
@@ -62,7 +64,7 @@ export const editLastPlayedActionCreator = (id) => async dispatch => {
 export const addSongActionCreator = (state) => async dispatch => {
     dispatch(showLoader());
     try {
-        await SongAPI.getRef().child(state.id).set(state)
+        await SongAPI.getRef(userId).child(state.id).set(state)
             .then(dispatch({ type: ADD_SONG, newSong: state }))
             .catch(console.log('setData error'));
         dispatch(hideLoader())
@@ -86,7 +88,7 @@ export const addFilterActionCreator = (state) => async dispatch => {
 export const editSongActionCreator = (state) => async dispatch => {
     const updates = {};
     updates['/'+state.id+'/'] = state;
-    SongAPI.getRef().update(updates)
+    SongAPI.getRef(userId).update(updates)
         .then(dispatch({ type: EDIT_SONG,    song: state }))
     // return {
     //     type: EDIT_SONG,
@@ -99,7 +101,7 @@ export const removeSongActionCreator = (uuid) => async dispatch => {
     //     type: REMOVE_SONG,
     //     row: state
     // }))
-    SongAPI.getRef().child(uuid).remove()
+    SongAPI.getRef(userId).child(uuid).remove()
         .then(dispatch({ type: REMOVE_SONG,  row: uuid }))
         .catch(console.log('removeData error'))
 };

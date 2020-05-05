@@ -55,6 +55,6 @@ export const settingsMenuCustom = [
         title: 'Song import',
         link: '/settings/song-import',
         icon: <BackupIcon/>,
-        index: 6
+        index: 7
     }
 ];

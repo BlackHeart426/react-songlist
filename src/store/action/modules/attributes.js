@@ -7,12 +7,13 @@ import {
     SET_ATTRIBUTESDATA,
     SET_SELECTED_ATTRIBUTES,
 } from "../../types";
+import {userId} from "./songs";
 
 export const getAttributesDataActionCreator = () => async dispatch => {
     const data = [];
     dispatch(showLoader())
     try {
-        await AttributesAPI.getRef().once('value')
+        await AttributesAPI.getRef(userId).once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
                     data.push(childSnapshot.val());
@@ -32,7 +33,7 @@ export const getAttributesDataActionCreator = () => async dispatch => {
 export const addAttributesActionCreator = (state) => async dispatch => {
     dispatch(showLoader())
     try {
-        await AttributesAPI.getRef().child(state.id).set(state)
+        await AttributesAPI.getRef(userId).child(state.id).set(state)
             .then(dispatch({ type: ADD_ATTRIBUTES, newAttribute: state }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
@@ -46,12 +47,12 @@ export const addAttributesActionCreator = (state) => async dispatch => {
 export const editAttributeActionCreator = (state) => async dispatch => {
     const updates = {};
     updates['/'+state.id+'/'] = state;
-    AttributesAPI.getRef().update(updates)
+    AttributesAPI.getRef(userId).update(updates)
         .then(dispatch({ type: EDIT_ATTRIBUTES,    song: state }))
 };
 
 export const removeAttributeActionCreator = (uuid) => async dispatch => {
-    AttributesAPI.getRef().child(uuid).remove()
+    AttributesAPI.getRef(userId).child(uuid).remove()
         .then(dispatch({ type: REMOVE_ATTRIBUTES,  row: uuid }))
         .catch(console.log('removeData error'))
 };

@@ -45,7 +45,9 @@ const DrawerCustom = (props) => {
     }
 
     useEffect(()=>{
-        setCurrentUser({...currentUser, userId: props.currentUser.currentUserId, email:  props.currentUser.email} )
+        if(props.currentUser.currentUserId != undefined) {
+            setCurrentUser({...currentUser, userId: props.currentUser.currentUserId, email: props.currentUser.email})
+        }
     },[props.currentUser])
 
     const sideList = () => (

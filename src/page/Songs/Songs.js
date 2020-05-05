@@ -66,6 +66,7 @@ const Songs = (props) => {
     useEffect(()=>{
         console.log(params.userId)
         props.action.update(params.userId)
+        props.action.getAttributesData()
         if(Object.values(props.songsList).length > 0){
         } else {
             if(!props.songsDataNotFound){

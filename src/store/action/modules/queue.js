@@ -10,13 +10,13 @@ import {addSongInSavedQueueActionCreator} from "./savedQueue";
 import {SET_SELECTED_QUEUE} from "../../types";
 import * as shortid from "shortid";
 import * as AttributesAPI from "../../../API/AttributesAPI";
-import {editLastPlayedActionCreator, editPlayedActionCreator} from "./songs";
+import {editLastPlayedActionCreator, editPlayedActionCreator, userId} from "./songs";
 
 export const getQueueDataActionCreator = () => async dispatch => {
     const data = [];
     dispatch(showLoader())
     try {
-        await QueueAPI.getRef().orderByChild("position").once('value')
+        await QueueAPI.getRef(userId).orderByChild("position").once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
                     data.push(childSnapshot.val());
@@ -37,7 +37,7 @@ export const setQueueDataActionCreator = (state) => async dispatch => {
     try {
         const updates = {};
         updates['/'+state.id+'/'] = state;
-        QueueAPI.getRef().update(updates)
+        QueueAPI.getRef(userId).update(updates)
         // .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: song }))
         // .catch(console.log('setData error'))
         await dispatch(hideLoader())
@@ -54,7 +54,7 @@ export const addSongInQueueActionCreator = (state, idSong) => async dispatch => 
     dispatch(showLoader())
     try {
         let length = 1;
-        await QueueAPI.getRef().once('value')
+        await QueueAPI.getRef(userId).once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
                     length++;
@@ -67,7 +67,7 @@ export const addSongInQueueActionCreator = (state, idSong) => async dispatch => 
         song.data = {...state};
         song.id = shortid.generate();
         song.idSong = idSong;
-        await QueueAPI.getRef().child(song.id).set(song)
+        await QueueAPI.getRef(userId).child(song.id).set(song)
             .then(dispatch({ type: ADD_SONG_IN_QUEUE, newSong: song }))
             .catch(console.log('setData error'))
         dispatch(hideLoader())
@@ -105,7 +105,7 @@ export const checkPosition = (currentItem, oldPosition, newPosition) => {
 
 export const movePositionInQueue = (idCurrent, newId) => async dispatch => {
     const list =  [];
-    await QueueAPI.getRef().orderByChild("position").once('value')
+    await QueueAPI.getRef(userId).orderByChild("position").once('value')
     .then((snapshot) => {
         snapshot.forEach(childSnapshot => {
             list.push(childSnapshot.val());
@@ -144,7 +144,7 @@ export const successSongActionCreator = (stateSong, timesPlayed) => async dispat
 
 
 export const removeSongInQueueActionCreator = (uuid) => async dispatch => {
-    QueueAPI.getRef().child(uuid).remove()
+    QueueAPI.getRef(userId).child(uuid).remove()
         .then(dispatch({ type: REMOVE_SONG_IN_QUEUE,  row: uuid }))
         .catch(console.log('removeData error'))
 };
