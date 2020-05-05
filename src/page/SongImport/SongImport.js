@@ -87,7 +87,21 @@ function SongImport() {
             };
             dispatch(addSongActionCreator(newSong))
             setUpload(true)
+
+
         })
+        const newAttribute = {
+            id: 'newSong',
+            data: {
+                name: 'newSong',
+                image: "https://firebasestorage.googleapis.com/v0/b/song-list-95d78.appspot.com/o/images%2Fw512h5121390857118new512.png?alt=media&token=8bc1bb35-2fc3-452e-b684-8702ee4f6f45",
+                active: true,
+                showInTable: true,
+                priority: 0,
+                ofSongs: 0
+            }
+        };
+        dispatch(addAttributesActionCreator(newAttribute))
     };
 
     const handleBack = () => {

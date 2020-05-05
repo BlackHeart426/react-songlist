@@ -64,7 +64,7 @@ const Queue = (props) => {
     function handleDetail(id) {
         let queueList = {...props.queueData};
         const uuidSong = queueList.list.find(item => item.id === id);
-        history.push(addUserIdAtLink("/songs/detail/"+uuidSong.id))
+        history.push(addUserIdAtLink("/songs/detail/"+uuidSong.idSong))
     }
 
     function handleDelete(id) {

@@ -29,6 +29,7 @@ export const ContentDetail = (props) => {
     };
 
     useEffect(() => {
+        console.log('detailSong',detailSong)
         detailSong && setTimesPlayed(detailSong.data.timesPlayed)
             && setLastPlayed(detailSong.data.lastPlayed)
             && setQueue(0)

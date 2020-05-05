@@ -23,6 +23,7 @@ export const PTBSongs = (props) => {
     const searchText = useSelector(state => state.songs.searchText);
     const loading = useSelector(state => state.app.loading);
     const attributesList = useSelector(state => state.attributes.list);
+    const userId = useSelector(state => state.currentUser.currentUserId);
     const lenSelected = selected.length;
     return (
         <>
@@ -47,6 +48,7 @@ export const PTBSongs = (props) => {
                     loading={loading}
                     lenSelected={lenSelected}
                     selected={selected}
+                    userId={userId}
                     songData={listSong}/>
                 <AddInQueueSongs
                     loading={loading}

@@ -5,13 +5,13 @@ import {useHistory} from "react-router";
 import {addUserIdAtLink} from "../../../../companents/GlobalParamaters/linkWithUserId";
 
 export const DetailSongs = (props) => {
-    const {lenSelected, songData, selected, loading} = props;
+    const {lenSelected, songData, selected, loading, userId} = props;
     const history = useHistory();
 
 
     const showDetail = () => {
         const uuidSong = songData.find(item => item.id === selected[0]);
-        history.push(addUserIdAtLink("/songs/detail/"+uuidSong.id))
+        history.push(addUserIdAtLink("/songs/detail/"+uuidSong.id,userId ))
     }
 
     function showButton(lenSelected) {
