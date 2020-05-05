@@ -1,7 +1,6 @@
-export const addUserIdAtLink = (link) => (
-    "/s/"+getUserId()+link
+export const addUserIdAtLink = (link, user) => (
+    "/s/"+user+link
 )
 
-const getUserId = () => (
-    localStorage.getItem('currentUser')
-)
+
+

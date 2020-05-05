@@ -6,6 +6,7 @@ import {queueReducer} from "./modules/queue";
 import {savedQueueReducer} from "./modules/savedQueue";
 import {historyReducer} from "./modules/history";
 import {attributesReducer} from "./modules/attributes";
+import {currentUserReducer} from "./currentUser";
 
 
 export default combineReducers({
@@ -15,5 +16,6 @@ export default combineReducers({
     queue: queueReducer,
     savedQueue: savedQueueReducer,
     history: historyReducer,
+    currentUser: currentUserReducer,
     attributes: attributesReducer
 })

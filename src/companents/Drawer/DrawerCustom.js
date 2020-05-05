@@ -26,6 +26,7 @@ import {toggleEditModeActionCreator, toggleOpenDrawerActionCreator} from "../../
 const DrawerCustom = (props) => {
     const classes = useStylesDrawer();
     const [open, setOpen] = useState(false);
+    const [currentUser, setCurrentUser] = useState('')
 
     const handleClick = () => {
         setOpen(!open);
@@ -41,6 +42,10 @@ const DrawerCustom = (props) => {
     const handleCheckUser = () => {
 
     }
+
+    useEffect(()=>{
+        setCurrentUser(props.currentUser)
+    },[props.currentUser])
 
     const sideList = () => (
         <div
@@ -62,13 +67,13 @@ const DrawerCustom = (props) => {
             </ListItem>
             <List>
                 {menuDrawerCustom.map((link) => (
-                   renderLink(link)
+                   renderLink(link, currentUser)
                 ))}
             </List>
             <Divider />
             <List>
                 {subMenuDrawerCustom.map((link) => (
-                    renderLink(link)
+                    renderLink(link, currentUser)
                 ))}
             </List>
             <ListItem button onClick={handleClick} >
@@ -80,7 +85,7 @@ const DrawerCustom = (props) => {
                 <List component="div" disablePadding>
                     {settingsMenuCustom.map((link) => {
                         link.className = classes.nested;
-                        return renderLink(link)}
+                        return renderLink(link, currentUser)}
                     )}
                 </List>
             </Collapse>
@@ -132,7 +137,8 @@ const mapStateToProps = state => {
         statusEditMode: state.app.editMode,
         statusOpenDrawer: state.app.openDrawer,
         isLogin: state.app.isLogin,
-        isMyPage: state.app.isPageUser
+        isMyPage: state.app.isPageUser,
+        currentUser: state.currentUser.currentUserId
     }
 };
 

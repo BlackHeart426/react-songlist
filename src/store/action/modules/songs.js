@@ -13,11 +13,11 @@ import {
 import {useSelector} from "react-redux";
 import moment from "moment";
 
-export const getSongDataActionCreator = () => async dispatch => {
+export const getSongDataActionCreator = (userId) => async dispatch => {
     const data = [];
     dispatch(showLoader())
     try {
-        await SongAPI.getRef().once('value')
+        await SongAPI.getRef(userId).once('value')
             .then((snapshot) => {
                 snapshot.forEach(childSnapshot => {
                     data.push(childSnapshot.val());

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {getDataPageBlogFireBase} from "../../firebaseService";
 import {Loading} from "../../page/Loading";
 import {BlogNonFound} from "../../page/PageNonFound";
-import {useParams} from "react-router";
+import {Redirect, useParams} from "react-router";
 
 export const withCheckPage = (Component) => {
 
@@ -29,7 +29,6 @@ export const withCheckPage = (Component) => {
                             console.log(snapshot.val())
                             this.setState(() => ({ existPage: false }));
                         } else {
-                            console.log('yyyyyyyyyyyy')
                             this.setState(() => ({ existPage: true }));
                             const currentUser = match.params.userId
                             localStorage.setItem("currentUser", currentUser)
@@ -53,7 +52,7 @@ export const withCheckPage = (Component) => {
                 return <Loading isLoading={true}/>
             } else {
                 if(existPage === false){
-                    return <BlogNonFound/>
+                    return <Redirect to={"/"}/>
                 } else if(existPage === true) {
                     return <Component isAuth={userId ? true : false}/>
                 }

@@ -30,7 +30,7 @@ import Attributes from "./page/Attributes/Attributes";
 import {getAttributesDataActionCreator} from "./store/action/modules/attributes";
 import SongImport from "./page/SongImport/SongImport";
 import {Home} from "./page/Home";
-import {autoLogin} from "./store/action/auth";
+import {autoLogin, getUserActionCreator} from "./store/action/auth";
 import {NonFound} from "./page/NonFound";
 import {compose} from "redux";
 import {withDrawer} from "./companents/hoc/withDrawer";
@@ -82,6 +82,7 @@ const App = (props) => {
         props.action.autoLogin()
         props.isLogin && props.action.toggleEditMode(true)
         props.action.isMyPage(handleCheckUser())
+        props.action.dataUser()
         // props.action.getSongData(); //Заполнение таблицы с песнями
         // props.action.getQueueData(); //Заполнение таблицы с очередью
         // props.action.getSavedQueueData(); //Заполнение таблицы с очередью
@@ -145,7 +146,8 @@ const mapDispatchToProps = dispatch => {
             hideLoader: () => dispatch(hideLoader()),
             toggleEditMode: (data) => dispatch(toggleEditModeActionCreator(data)),
             isMyPage: (state) => dispatch(isPageUserActionCreator(state)),
-            autoLogin: () => dispatch(autoLogin())
+            autoLogin: () => dispatch(autoLogin()),
+            dataUser: () => dispatch(getUserActionCreator())
         }
     }
 };

@@ -1,5 +1,5 @@
 import {AUTH_LOGOUT, AUTH_SUCCESS} from "../types";
-import {auth as firebaseAuth, createUserFireBase} from "../../firebaseService";
+import {auth as firebaseAuth, createUserFireBase, getUserFireBase} from "../../firebaseService";
 import {isLoginActionCreator} from "./app";
 
 
@@ -58,8 +58,19 @@ export function auth(email, password, isLogin) {
 export function setUserActionCreator() {
     return dispatch => {
         const userId = localStorage.getItem('userId')
-        createUserFireBase(userId)
+        const email = localStorage.getItem('email')
+        createUserFireBase(userId, email)
     }
+}
+
+export function getUserActionCreator() {
+    return dispatch => {
+        const userId = localStorage.getItem('userId')
+    //     getUserFireBase(userId)
+    //         .then(res => {
+    //             dispatch({type: AUTH_SUCCESS, token})
+    //         })
+     }
 }
 
 

@@ -15,7 +15,7 @@ import {useHistory, useParams, useRouteMatch, withRouter} from "react-router";
 import matchPath from "react-router/modules/matchPath";
 import {addSongInQueueActionCreator} from "../../store/action/modules/queue";
 import {withCheckPage} from "../../companents/hoc/withCheckPage";
-import {withCheckData} from "../../companents/hoc/withCheckData";
+import {setCurrentUserActionCreator} from "../../store/action/currentUser";
 
 const Songs = (props) => {
     const params = useParams();
@@ -59,10 +59,15 @@ const Songs = (props) => {
     },[props.songData]);
 
     useEffect(()=>{
+        props.action.setUser(params.userId)
+    },[])
+
+    useEffect(()=>{
+        console.log(params.userId)
         if(Object.values(props.songsList).length > 0){
         } else {
             if(!props.songsDataNotFound){
-                props.action.getSongData()
+                props.action.getSongData(params.userId)
             }
 
         }
@@ -154,11 +159,12 @@ const mapDispatchToProps = dispatch => {
     return {
         action: {
             getAttributesData: () => dispatch(getAttributesDataActionCreator()),
-            getSongData: () => dispatch(getSongDataActionCreator()),
+            getSongData: (userId) => dispatch(getSongDataActionCreator(userId)),
             setSelected: (data) => setSelectedActionCreator(data),
             alert: (text) => dispatch(showAlert(text)),
             loader: () => dispatch(showLoader()),
-            addSong: (song, uuid) =>  dispatch(addSongInQueueActionCreator(song, uuid))
+            addSong: (song, uuid) =>  dispatch(addSongInQueueActionCreator(song, uuid)),
+            setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser))
         }
     }
 };

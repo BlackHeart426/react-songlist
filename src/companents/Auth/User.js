@@ -6,6 +6,8 @@ import {getAllDataActionCreator, isPageUserActionCreator, showAlert} from "../..
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {useHistory} from "react-router";
+import {setCurrentUserActionCreator} from "../../store/action/currentUser";
+import {getSongDataActionCreator} from "../../store/action/modules/songs";
 
 const User = (props) => {
     const history = useHistory();
@@ -34,6 +36,7 @@ const User = (props) => {
 
     function handleMyPage() {
         const uuid = localStorage.getItem('userId')
+        localStorage.setItem("currentUser", uuid)
         history.push(`/s/${uuid}/songs`)
         // const currentUser = localStorage.getItem('currentUser');
         // const userId = localStorage.getItem('userId');
@@ -42,7 +45,9 @@ const User = (props) => {
         // }
         // return false
         props.isMyPage(true)
-        props.getAllData();
+        props.setUser(uuid)
+        props.getSongData(uuid)
+        // props.getAllData();
 
     }
 
@@ -84,7 +89,8 @@ function mapDispatchToProps(dispatch) {
         alert: (text) => dispatch(showAlert(text)),
         isMyPage: (state) => dispatch(isPageUserActionCreator(state)),
         logout: () => dispatch(logout()),
-        getAllData: () => dispatch(getAllDataActionCreator()),
+        setUser: (currentUser) => dispatch(setCurrentUserActionCreator(currentUser)),
+        getSongData: (uuid) => dispatch(getSongDataActionCreator(uuid)),
     }
 }
 

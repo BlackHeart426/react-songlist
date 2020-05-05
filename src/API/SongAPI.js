@@ -1,10 +1,8 @@
 import {database} from "../firebaseService";
 
-export const getRef = () => {
-    const userId = localStorage.getItem('userId');
-    const currentUser = localStorage.getItem('currentUser');
-
-    const ref = database.ref('songs').child(currentUser);
+export const getRef = (userId) => {
+    console.log(userId)
+    const ref = database.ref('songs').child(userId);
     return ref
 }
 

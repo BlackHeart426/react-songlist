@@ -31,10 +31,16 @@ export function getCheckDataFireBase(nameTable, userId) {
         .once('value')
 }
 
-export function createUserFireBase(userId) {
+export function createUserFireBase(userId, email) {
     return database.ref('userPage')
         .child(userId)  //userID
-        .set({pageName: userId})
+        .set({pageName: userId, email: email})
+}
+
+export function getUserFireBase(userId) {
+    return database.ref('userPage')
+        .child(userId)  //userID
+        .once('value')
 }
 
 // const userId = localStorage.getItem('userId');
