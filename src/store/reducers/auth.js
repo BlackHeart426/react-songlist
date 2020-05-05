@@ -1,7 +1,8 @@
-import {AUTH_LOGOUT, AUTH_SUCCESS} from "../types";
+import {AUTH_LOGOUT, AUTH_SUCCESS, SET_USERID} from "../types";
 
 const initialState = {
-    token: null
+    token: null,
+    userId: ''
 }
 
 export default function authReducer(state = initialState, action) {
@@ -13,6 +14,10 @@ export default function authReducer(state = initialState, action) {
         case AUTH_LOGOUT:
             return {
                 ...state, token: null
+            }
+        case SET_USERID:
+            return {
+                ...state, userId: action.payload
             }
         default:
             return state

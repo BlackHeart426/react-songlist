@@ -72,7 +72,7 @@ const App = (props) => {
     const handleCheckUser = () => {
         const currentUser = localStorage.getItem('currentUser');
         const userId = localStorage.getItem('userId');
-        if (currentUser === userId) {
+        if (props.currentUserId === props.userId) {
             return true
         }
         return false
@@ -90,7 +90,7 @@ const App = (props) => {
         // props.action.getAttributesData(); //Заполнение таблицы с очередью
         // props.action.getAllData();
 
-    },[]);
+    },[props.currentUserId]);
 
     return (
 
@@ -128,6 +128,8 @@ const mapStateToProps = state => ({
     alert: state.app.alert,
     isLogin: state.app.isLogin,
     editMode: state.app.editMode,
+    currentUserId: state.currentUser.currentUserId,
+    userId: state.auth.userId
 
 });
 

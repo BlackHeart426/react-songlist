@@ -1,5 +1,6 @@
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const AUTH_SUCCESS = 'AUTH/AUTH_SUCCESS';
+export const AUTH_LOGOUT = 'AUTH/AUTH_LOGOUT';
+export const SET_USERID = 'AUTH/SET_USERID';
 
 export const SHOW_LOADER = 'APP/SHOW_LOADER';
 export const HIDE_LOADER = 'APP/HIDE_LOADER';

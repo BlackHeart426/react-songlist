@@ -77,19 +77,22 @@ const DrawerCustom = (props) => {
                     renderLink(link, currentUser.userId)
                 ))}
             </List>
-            <ListItem button onClick={handleClick} >
+            {props.isMyPage
+            && <ListItem button onClick={handleClick}>
                 <ListItemIcon><Settings/></ListItemIcon>
                 <ListItemText>Settings</ListItemText>
-                {open ? <ExpandLess /> : <ExpandMore />}
+                {open ? <ExpandLess/> : <ExpandMore/>}
             </ListItem>
+            }
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     {settingsMenuCustom.map((link) => {
                         link.className = classes.nested;
                         return renderLink(link, currentUser.userId)}
                     )}
-                </List>
+            </List>
             </Collapse>
+
             {props.isMyPage
                 && <ListItem>
                     <ListItemIcon><Switch onChange={handleEditMode} checked={props.statusEditMode} color="primary"/></ListItemIcon>

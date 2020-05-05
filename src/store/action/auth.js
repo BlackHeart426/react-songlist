@@ -1,4 +1,4 @@
-import {AUTH_LOGOUT, AUTH_SUCCESS} from "../types";
+import {AUTH_LOGOUT, AUTH_SUCCESS, SET_USERID} from "../types";
 import {auth as firebaseAuth, createUserFireBase, getUserFireBase} from "../../firebaseService";
 import {isLoginActionCreator} from "./app";
 
@@ -42,6 +42,7 @@ export function auth(email, password, isLogin) {
                         localStorage.setItem('expirationDate', expirationDate)
                         localStorage.setItem('email', email)
                         dispatch(isLoginActionCreator(true))
+                        dispatch(setUserIdActionCreator(uid))
                         dispatch(setUserActionCreator())
                         // dispatch(authSuccess(token))
                         // dispatch(autoLogout(expirationDate))
@@ -52,6 +53,14 @@ export function auth(email, password, isLogin) {
 
 
 
+    }
+}
+
+
+export const setUserIdActionCreator = (userId) => {
+    return {
+        type: SET_USERID,
+        payload: userId
     }
 }
 
@@ -77,6 +86,7 @@ export function getUserActionCreator() {
 export function autoLogin() {
     return dispatch => {
         const token = localStorage.getItem('token')
+        const userId = localStorage.getItem('userId')
         if (!token) {
             dispatch(logout())
             dispatch(isLoginActionCreator(false))
@@ -85,9 +95,11 @@ export function autoLogin() {
             if (expirationDate <= new Date()) {
                 dispatch(logout())
                 dispatch(isLoginActionCreator(false))
+                dispatch(setUserIdActionCreator(null))
             } else {
                 dispatch(authSuccess(token))
                 dispatch(isLoginActionCreator(true))
+                dispatch(setUserIdActionCreator(userId))
                 dispatch(autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000))
             }
         }
@@ -109,6 +121,7 @@ export function logout() {
 
     return dispatch => {
         dispatch(isLoginActionCreator(false))
+        dispatch(setUserIdActionCreator(null))
     }
 }
 

@@ -3,7 +3,7 @@ import {
     HIDE_LOADER,
     IS_LOGIN,
     IS_PAGE_USER,
-    OPEN_DRAWER,
+    OPEN_DRAWER, SET_USERID,
     SHOW_ALERT,
     SHOW_LOADER,
     TOGGLE_EDITMODE
@@ -23,6 +23,7 @@ export const getAllDataActionCreator = () => async dispatch => {
     await dispatch(getAttributesDataActionCreator())
     await dispatch(hideLoader())
 }
+
 
 export const isLoginActionCreator = (state) => {
     return {
