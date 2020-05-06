@@ -110,7 +110,8 @@ const App = (props) => {
                             <Route exact path="/s/:userId/queue" component={Queue}/>
                                 <Route path="/s/:userId/queue/detail/:id" component={DetailSong}/>
                             <Route exact path="/s/:userId/queue-saved" component={SavedQueue}/>
-                            <Route exact path="/s/:userId/history" component={History}/>
+                            <Route exact path="/s/:userId/history/" component={History}/>
+                            <Route exact path="/s/:userId/history/:filter/:idSong" component={History}/>
                             <Route exact component={Settings} path="/s/:userId/settings"/>
                                 <Route path="/s/:userId/settings/attributes" component={Attributes} />
                                 <Route path="/s/:userId/settings/song-import" component={SongImport} />

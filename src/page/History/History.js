@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import TablePagination from "../../companents/TablePagination/ComponentTablePagination";
 import {PTBHistory} from "./PTBHistory/PTBHistory";
 import {showAlert, showLoader} from "../../store/action/app";
@@ -13,11 +13,12 @@ import {setCurrentUserActionCreator, updateEmailCurrentUserActionCreator} from "
 
 
 const History = (props) => {
+    const [paramsPage, setParamsPage] = useState({filter: '', idSong: ''})
     const params = useParams();
     const wrapperSong = (song) => {
         return song.map(item => {
             const {title, artist, amount, requestedBy, played, note} = item.data;
-            return {id: item.id, data: createData(title, artist, amount, requestedBy, played, note), active: item.active}
+            return {id: item.id, idSong: item.idSong,data: createData(title, artist, amount, requestedBy, played, note), active: item.active}
         })
     };
 
@@ -40,8 +41,10 @@ const History = (props) => {
 
 
     useEffect(()=>{
+        setParamsPage({...paramsPage, filter: params.filter, idSong: params.idSong})
         props.action.setUser(params.userId)
     },[])
+
     useEffect(() => {
         localStorage.setItem('history', JSON.stringify(props.songData));
     },[props.songData]);
@@ -58,8 +61,10 @@ const History = (props) => {
 
     const handleFilter = () => {
         let songList = {...props.songData};
+
         if (Object.keys(songList.list).length > 0) {
             let songListTest = wrapperSong(Object.values(songList.list));
+            console.log('asd', songListTest)
             const filteredSearch = songListTest.filter(item => {
 
                 const values = Object.values(item.data);
@@ -76,8 +81,22 @@ const History = (props) => {
                 if (flag) return item
                 return item.data.title.toUpperCase().indexOf(search) !== -1
             });
-            const filtered = filteredSearch.filter(item => {
-                const attributes = {...props.filter};
+            const filteredSong = filteredSearch.filter(item => {
+                const song = paramsPage.idSong;
+                console.log('123',song)
+                debugger
+                if (item.idSong === song) {
+                    return item;
+                }
+            });
+            const filtered = filteredSong.filter(item => {
+                let attributes =  {...props.filter};
+                if(paramsPage.filter) {
+                    attributes = [paramsPage.filter];
+                } else {
+                    attributes = {...props.filter};
+                }
+
                 const datePlayed = item.data.played;
                 let flag = false;
                 const list = Object.values(attributes);
@@ -135,7 +154,7 @@ const History = (props) => {
 
     return (
         <>
-            <PTBHistory/>
+            <PTBHistory params={params.filter}/>
             <TablePagination
                 onSelectRow = {(data) => props.action.setSelected(data)}
                 headCells = {headCells}

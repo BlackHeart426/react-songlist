@@ -16,6 +16,10 @@ export const FilterSong = (props) => {
         marginLeft: '25%',
     }
 
+    useEffect(()=>{
+        props.params && setValue(props.params)
+    },[])
+
     const [value, setValue] = useState(["stream"]);
     const { loading} = props;
     const dispatch = useDispatch()

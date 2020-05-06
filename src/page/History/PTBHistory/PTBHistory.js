@@ -1,5 +1,5 @@
 import {Card} from "@material-ui/core";
-import React from "react";
+import React, {useEffect} from "react";
 import {EditSong} from "./Tools/EditSong";
 import {RemoveSong} from "./Tools/RemoveSong";
 import { useSelector} from "react-redux";
@@ -41,7 +41,7 @@ export const PTBHistory = (props) => {
             <Card style={mbt10} elevation={0} className={classes.paper}>
                 <EditSong loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
                 <RemoveSong loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
-                <FilterSong loading={loading}/>
+                <FilterSong params={props.params} loading={loading}/>
                 <SearchField loading={loading} searchText={searchText} moduleActionCreator={setSearchTextHistoryActionCreator}/>
             </Card>
 
