@@ -13,8 +13,13 @@ import Input from "@material-ui/core/Input";
 import {NumberFormatCustom} from "../../../companents/inputComponent/NumberFormatCustom/NumberFormatCustom";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import {updateDataActionCreator} from "../../../store/action/modules/songs";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {useParams} from "react-router";
 
-export const ContentDetailEdit = (props) => {
+const ContentDetailEdit = (props) => {
+    const params = useParams();
     const formData = {
         artist: '',
         title: '',
@@ -32,9 +37,6 @@ export const ContentDetailEdit = (props) => {
     const [artist, setArtist] = React.useState('');
     const [state, setState] = useState(formData)
     const {detailSong} = props;
-
-    const handleChange = (event, newValue) => {
-    };
 
     useEffect(() => {
         let copyDataSong = {...detailSong};
@@ -63,6 +65,14 @@ export const ContentDetailEdit = (props) => {
         prop === 'limit' && setLimit(!limit)
     };
 
+    const handleChange = name => event => {
+        setState({...state, [name]: event.target.value})
+    };
+
+    const handleSave = name => event => {
+        props.action.updateData(params.id, name, event.target.value)
+    }
+
     return (
         <Card className={classes.root}>
             <CardContent>
@@ -73,6 +83,8 @@ export const ContentDetailEdit = (props) => {
                         label="TITLE"
                         type="text"
                         value={state.title}
+                        onChange={handleChange('title')}
+                        onBlur={handleSave('title')}
                         className={classes.textField}
                     />
                 </FormControl>
@@ -83,6 +95,8 @@ export const ContentDetailEdit = (props) => {
                         label="ARTIST"
                         value={state.artist}
                         type="text"
+                        onChange={handleChange('artist')}
+                        onBlur={handleSave('artist')}
                         className={classes.textField}
                     />
                 </FormControl>
@@ -91,7 +105,10 @@ export const ContentDetailEdit = (props) => {
                         margin="dense"
                         id="CAPO"
                         label="CAPO"
+                        value={state.capo}
                         type="text"
+                        onChange={handleChange('capo')}
+                        onBlur={handleSave('capo')}
                         className={classes.textField}
                     />
                 </FormControl>
@@ -132,6 +149,9 @@ export const ContentDetailEdit = (props) => {
                             id="COMMENT"
                             label="COMMENT"
                             type="text"
+                            value={state.comment}
+                            onChange={handleChange('comment')}
+                            onBlur={handleSave('comment')}
                             className={classes.textField}
                         />
                     </FormControl>
@@ -164,3 +184,20 @@ export const ContentDetailEdit = (props) => {
         </Card>
     )
 }
+
+const mapStateToProps = state => ({
+    userId: state.auth.userId
+
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        action: {
+            updateData: (id, nameColumn, value) => dispatch(updateDataActionCreator(id, nameColumn, value)),
+        }
+    }
+};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps))
+(ContentDetailEdit);

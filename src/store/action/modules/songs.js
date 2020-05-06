@@ -37,6 +37,19 @@ export const getSongDataActionCreator = (userId) => async dispatch => {
     }
 };
 
+export const updateDataActionCreator = (id, nameColumn, value) => async dispatch => {
+    dispatch(showLoader());
+    try {
+        await SongAPI.getRef(userId).child(id).child('data').update({[nameColumn]: value});
+        // await  dispatch({ type: EDIT_SONGS_TIMESPLAYED, data: {id: id, timesPlayed: timesPlayed} });
+        dispatch(hideLoader())
+        dispatch(showAlert('Данные сохранены'))
+    } catch (e) {
+        dispatch(showAlert('Что-то пошло не так'))
+        dispatch(hideLoader())
+    }
+};
+
 export const editPlayedActionCreator = (id, timesPlayed) => async dispatch => {
     dispatch(showLoader());
     try {

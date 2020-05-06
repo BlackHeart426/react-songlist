@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {ContentDetailEdit} from "../EditDetailSong/Content/ContentDetailEdit";
+import ContentDetailEdit from "../EditDetailSong/Content/ContentDetailEdit";
 import {ToolsEditDetail} from "../EditDetailSong/Tools/ToolsEditDetail";
 import {connect, useSelector} from "react-redux";
 import {withDrawer} from "../../companents/hoc/withDrawer";
