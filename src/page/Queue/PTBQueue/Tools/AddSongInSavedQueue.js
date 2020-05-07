@@ -13,7 +13,7 @@ export const AddSongInSavedQueue = (props) => {
 
     const handleAddSongInQueue = () => {
         const songState = songData.find(item => item.id === selected[0]);
-
+        console.log(songState)
         delete songState.data.position;
 
         dispatch(addSongInSavedQueue(songState))

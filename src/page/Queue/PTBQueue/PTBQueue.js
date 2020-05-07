@@ -20,7 +20,7 @@ export const PTBQueue = (props) => {
         <>
             <Card style={mbt10}>
                 <AddInQueueSong loading={loading} lenSelected={lenSelected} songData={listSong}  selected={selected}/>
-                <UpdateSongQueue loading={loading} lenSelected={lenSelected} songData={listSong} />
+                {/*<UpdateSongQueue loading={loading} lenSelected={lenSelected} songData={listSong} />*/}
                 <MoveUpSongQueue loading={loading} lenSelected={lenSelected} songData={listSong}  selected={selected}/>
                 <AddSongInSavedQueue loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected} />
             </Card>
