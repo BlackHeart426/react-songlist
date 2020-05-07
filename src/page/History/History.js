@@ -68,27 +68,38 @@ const History = (props) => {
             const filteredSearch = songListTest.filter(item => {
 
                 const values = Object.values(item.data);
-                const search = props.searchText.toLowerCase();
-                let flag = false;
-                values.forEach(val => {
-                    if (typeof val == "string") {
-                        if (val.toLowerCase().indexOf(search) > -1) {
-                            flag = true;
-                            return;
-                        }
+                console.log(paramsPage)
+                if (paramsPage.idSong) {
+                    const song = paramsPage.idSong;
+                    console.log('123',song)
+                    if (item.idSong === song) {
+                        return item;
                     }
-                })
-                if (flag) return item
-                return item.data.title.toUpperCase().indexOf(search) !== -1
-            });
-            const filteredSong = filteredSearch.filter(item => {
-                const song = paramsPage.idSong;
-                console.log('123',song)
-                if (item.idSong === song) {
-                    return item;
+                } else {
+                    const search = props.searchText.toLowerCase();
+                    let flag = false;
+                    values.forEach(val => {
+                        if (typeof val == "string") {
+                            if (val.toLowerCase().indexOf(search) > -1) {
+                                flag = true;
+                                return;
+                            }
+                        }
+                    })
+                    if (flag) return item
+                    return item.data.title.toUpperCase().indexOf(search) !== -1
                 }
+
+
             });
-            const filtered = filteredSong.filter(item => {
+            // const filteredSong = filteredSearch.filter(item => {
+            //     const song = paramsPage.idSong;
+            //     console.log('123',song)
+            //     if (item.idSong === song) {
+            //         return item;
+            //     }
+            // });
+            const filtered = filteredSearch.filter(item => {
                 let attributes =  {...props.filter};
                 if(paramsPage.filter) {
                     attributes = [paramsPage.filter];
