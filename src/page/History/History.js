@@ -84,7 +84,6 @@ const History = (props) => {
             const filteredSong = filteredSearch.filter(item => {
                 const song = paramsPage.idSong;
                 console.log('123',song)
-                debugger
                 if (item.idSong === song) {
                     return item;
                 }

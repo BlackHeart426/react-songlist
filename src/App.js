@@ -79,11 +79,17 @@ const App = (props) => {
     }
     const userId = localStorage.getItem('userId')
 
+    useEffect(()=>{
+        console.log('123',props.isMyPage)
+        props.isMyPage === false && props.action.toggleEditMode(false)
+    },[props.isMyPage])
+
     useEffect(() => {
         props.action.autoLogin()
-        props.isLogin && props.action.toggleEditMode(true)
+        props.isLogin && props.isMyPage && props.action.toggleEditMode(true)
         props.action.isMyPage(handleCheckUser())
         props.action.dataUser()
+        props.currentUserId && props.action.getSongData(props.currentUserId)
         //Заполнение таблицы с песнями
         // props.action.getQueueData(); //Заполнение таблицы с очередью
         // props.action.getSavedQueueData(); //Заполнение таблицы с очередью
@@ -130,6 +136,7 @@ const App = (props) => {
 const mapStateToProps = state => ({
     alert: state.app.alert,
     isLogin: state.app.isLogin,
+    isMyPage: state.app.isPageUser,
     editMode: state.app.editMode,
     currentUserId: state.currentUser.currentUserId,
     userId: state.auth.userId
@@ -141,7 +148,7 @@ const mapDispatchToProps = dispatch => {
         action: {
             getAllData: () => dispatch(getAllDataActionCreator()),
             getAttributesData: () => dispatch(getAttributesDataActionCreator()),
-            getSongData: () => dispatch(getSongDataActionCreator()),
+            getSongData: userId => dispatch(getSongDataActionCreator(userId)),
             getQueueData: () => dispatch(getQueueDataActionCreator()),
             getSavedQueueData: () => dispatch(getSavedQueueDataActionCreator()),
             getHistoryData: () => dispatch(getHistoryDataActionCreator()),
