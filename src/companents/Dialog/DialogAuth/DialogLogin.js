@@ -87,6 +87,7 @@ export function DialogLogin(props) {
 
     return (
         <React.Fragment>
+            <p>qwe</p>
             <Dialog
                 open={dialogOpened}
                 onClose={handleClose}
