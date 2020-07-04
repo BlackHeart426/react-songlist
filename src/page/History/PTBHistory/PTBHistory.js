@@ -34,14 +34,15 @@ export const PTBHistory = (props) => {
     const searchText = useSelector(state => state.history.searchText);
     const loading = useSelector(state => state.app.loading);
     const lenSelected = selected.length;
+    const isPageUser = useSelector(state => state.app.isPageUser)
     const classes = useStyles();
 
     return (
         <>
             <Card style={mbt10} elevation={0} className={classes.paper}>
-                <EditSong loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
-                <RemoveSong loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
-                <FilterSong params={props.params} loading={loading}/>
+                {isPageUser && <EditSong loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>}
+                {isPageUser && <RemoveSong loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>}
+                {isPageUser && <FilterSong params={props.params} loading={loading}/>}
                 <SearchField loading={loading} searchText={searchText} moduleActionCreator={setSearchTextHistoryActionCreator}/>
             </Card>
 

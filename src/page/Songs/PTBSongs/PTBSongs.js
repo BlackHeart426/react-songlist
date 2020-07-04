@@ -24,41 +24,47 @@ export const PTBSongs = (props) => {
     const loading = useSelector(state => state.app.loading);
     const attributesList = useSelector(state => state.attributes.list);
     const userId = useSelector(state => state.currentUser.currentUserId);
+    const isPageUser = useSelector(state => state.app.isPageUser)
     const lenSelected = selected.length;
     return (
         <>
             <Card style={mbt10}>
-                <AddSongs
+                {isPageUser
+                && <AddSongs
                     attributesList={attributesList}
                     loading={loading}
                     lenSelected={lenSelected}
-                    songData={listSong} />
-                <EditSongs
+                    songData={listSong} />}
+                {isPageUser
+                && <EditSongs
                     attributesList={attributesList}
                     loading={loading}
                     lenSelected={lenSelected}
                     songData={listSong}
-                    selected={selected}/>
-                <RemoveSongs
+                    selected={selected}/>}
+                {isPageUser
+                    && <RemoveSongs
                     loading={loading}
                     lenSelected={lenSelected}
                     songData={listSong}
-                    selected={selected} />
+                    selected={selected} />}
                 <DetailSongs
                     loading={loading}
                     lenSelected={lenSelected}
                     selected={selected}
                     userId={userId}
                     songData={listSong}/>
-                <AddInQueueSongs
+                {isPageUser
+                    && <AddInQueueSongs
                     loading={loading}
                     lenSelected={lenSelected}
                     songData={listSong}
-                    selected={selected}/>
-                <SwitchActiveSongs
+                    selected={selected}/>}
+                {isPageUser
+                    && <SwitchActiveSongs
                     loading={loading}
                     showActive={showActive}
-                    onActive = {onActive}/>
+                    onActive = {onActive}/>}
                 <FilterAttributes
                     loading={loading}
                     lenSelected={lenSelected}

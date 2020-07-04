@@ -16,14 +16,15 @@ export const PTBSavedQueue = (props) => {
     const listSong = useSelector(state => state.savedQueue.list);
     const searchText = useSelector(state => state.songs.searchText);
     const loading = useSelector(state => state.app.loading);
+    const isPageUser = useSelector(state => state.app.isPageUser)
     const lenSelected = selected.length;
     return (
         <>
-            <Card style={mbt10}>
+            {isPageUser && <Card style={mbt10}>
                 <AddSongToQueue loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected}/>
                 <RemoveSong loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected} />
                 <SearchField loading={loading} searchText={searchText} moduleActionCreator={setSearchTextSavedQueueActionCreator}/>
-            </Card>
+            </Card>}
 
         </>
     )

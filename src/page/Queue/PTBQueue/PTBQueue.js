@@ -15,15 +15,17 @@ export const PTBQueue = (props) => {
     const selected = useSelector(state => state.queue.selected)
     const listSong = useSelector(state => state.queue.list)
     const loading = useSelector(state => state.app.loading)
+    const isPageUser = useSelector(state => state.app.isPageUser)
     const lenSelected = selected.length;
     return (
         <>
-            <Card style={mbt10}>
+            {isPageUser
+            && <Card style={mbt10}>
                 <AddInQueueSong loading={loading} lenSelected={lenSelected} songData={listSong}  selected={selected}/>
                 {/*<UpdateSongQueue loading={loading} lenSelected={lenSelected} songData={listSong} />*/}
                 <MoveUpSongQueue loading={loading} lenSelected={lenSelected} songData={listSong}  selected={selected}/>
                 <AddSongInSavedQueue loading={loading} lenSelected={lenSelected} songData={listSong} selected={selected} />
-            </Card>
+            </Card>}
 
         </>
     )
