@@ -88,14 +88,14 @@ export function DialogSongsEdit(props) {
     };
 
     const data = {
-        title: 'Edit song',
+        title: 'Редактировать услугу',
         content: <div>
             <div>
                 <FormControl fullWidth className={classes.formControl}>
                     <TextField
                         margin="dense"
                         id="Title"
-                        label="Title"
+                        label="Наименование"
                         type="text"
                         value={song.title}
                         fullWidth
@@ -108,7 +108,7 @@ export function DialogSongsEdit(props) {
                     <TextField
                         margin="dense"
                         id="Artist"
-                        label="Artist"
+                        label="Описание"
                         value={song.artist}
                         type="text"
                         fullWidth
@@ -120,13 +120,13 @@ export function DialogSongsEdit(props) {
                 <FormControl className={classes.formControl}>
                     <FormControlLabel
                         control={<Switch  checked={activeSong} onChange={handleChangeSwitch} color="primary" />}
-                        label="Active"
+                        label="Активная"
                     />
                 </FormControl>
             </div>
             <div>{/*TODO в отдельный компонент*/}
                 <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-mutiple-chip-label">Attributes</InputLabel>
+                    <InputLabel id="demo-mutiple-chip-label">Категория</InputLabel>
                     <Select
                         labelId="demo-mutiple-chip-label"
                         id="demo-mutiple-chip"
@@ -164,10 +164,10 @@ export function DialogSongsEdit(props) {
         action:
             <FormControl fullWidth >
                 <Button onClick={handleClose} color="primary"  className={classes.button}>
-                    Cancel
+                    Отменить
                 </Button>
                 <Button onClick={handleSave(song)} color="primary"  className={classes.button}>
-                    Save
+                    Сохранить
                 </Button>
             </FormControl>
 

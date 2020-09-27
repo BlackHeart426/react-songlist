@@ -59,7 +59,7 @@ function NavBar(props){
                         </IconButton>
                     </Hidden>
                     <Typography variant="h6" className={classes.title}>
-                        React SONG-LIST
+                        Панель заказов
                     </Typography>
                     <Hidden xsDown>
                         <Auth/>

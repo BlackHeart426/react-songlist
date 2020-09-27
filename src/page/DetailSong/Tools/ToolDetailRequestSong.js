@@ -10,7 +10,7 @@ export const ToolDetailRequestSong = () => {
     return (
         <>
             <Button onClick={detailClose}>
-                Request
+                Выбрать
             </Button>
         </>
     )

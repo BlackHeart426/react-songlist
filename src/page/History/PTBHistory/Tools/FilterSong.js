@@ -36,27 +36,27 @@ export const FilterSong = (props) => {
                     color="primary"
                     value="all"
                     >
-                    All
+                    За все время
                 </ToggleButton>
                 <ToggleButton
                     value="stream"
                     >
-                    stream
+                    Рабочий день
                 </ToggleButton>
                 <ToggleButton
                     value="day"
                 >
-                    day
+                    Полный день
                 </ToggleButton>
                 <ToggleButton
                     value="month"
                     >
-                    month
+                    Месяц
                 </ToggleButton>
                 <ToggleButton
                     value="year"
                     >
-                    year
+                    Год
                 </ToggleButton>
             </ToggleButtonGroup>
         </>

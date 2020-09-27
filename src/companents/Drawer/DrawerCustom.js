@@ -66,7 +66,7 @@ const DrawerCustom = (props) => {
                         <ImageIcon />
                     </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={currentUser.email} secondary="Streamer" />
+                <ListItemText primary="Иванов Иван" secondary="Менеджер" />
             </ListItem>
             <List>
                 {menuDrawerCustom.map((link) => (
@@ -74,15 +74,15 @@ const DrawerCustom = (props) => {
                 ))}
             </List>
             <Divider />
-            <List>
-                {subMenuDrawerCustom.map((link) => (
-                    renderLink(link, currentUser.userId)
-                ))}
-            </List>
+            {/*<List>*/}
+            {/*    {subMenuDrawerCustom.map((link) => (*/}
+            {/*        renderLink(link, currentUser.userId)*/}
+            {/*    ))}*/}
+            {/*</List>*/}
             {props.isMyPage
             && <ListItem button onClick={handleClick}>
                 <ListItemIcon><Settings/></ListItemIcon>
-                <ListItemText>Settings</ListItemText>
+                <ListItemText>Настройки</ListItemText>
                 {open ? <ExpandLess/> : <ExpandMore/>}
             </ListItem>
             }

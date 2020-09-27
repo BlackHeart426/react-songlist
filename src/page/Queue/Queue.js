@@ -93,14 +93,13 @@ const Queue = (props) => {
             return queueList
         }
     };
-
     const headCells = [
-        { id: 'position', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Position', type: 'txt' },
-        { id: 'title', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
-        { id: 'artist', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Artist', type: 'txt' },
-        { id: 'amount', numeric: true, order: false, disablePadding: false, editMode: true, label: 'Amount', type: 'txt' },
-        { id: 'request-by', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Request by', type: 'txt' },
-        { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
+        { id: 'position', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Очередь', type: 'txt' },
+        { id: 'title', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Услуга', type: 'txt' },
+        { id: 'artist', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Заказчик', type: 'txt' },
+        { id: 'amount', numeric: true, order: false, disablePadding: false, editMode: true, label: 'Стоимость', type: 'txt' },
+        { id: 'request-by', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Работник', type: 'txt' },
+        { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Примечание', type: 'txt' },
         { id: 'action', numeric: false, order: false, disablePadding: false, editMode: true, label: '', type: 'btn' },
     ];
 

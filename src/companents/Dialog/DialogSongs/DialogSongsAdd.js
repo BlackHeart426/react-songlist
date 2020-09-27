@@ -79,14 +79,14 @@ export function DialogSongsAdd(props) {
 
 
     const data = {
-        title: 'Create new song',
+        title: 'Добавить услугу',
         content: <div>
             <div>
                 <FormControl fullWidth className={classes.formControl}>
                     <TextField
                         margin="dense"
-                        id="Title"
-                        label="Title"
+                        id="title"
+                        label="Услуга"
                         type="text"
                         value={song.title}
                         fullWidth
@@ -99,7 +99,7 @@ export function DialogSongsAdd(props) {
                     <TextField
                         margin="dense"
                         id="Artist"
-                        label="Artist"
+                        label="Описание"
                         value={song.artist}
                         type="text"
                         fullWidth
@@ -117,7 +117,7 @@ export function DialogSongsAdd(props) {
             </div>
             <div>{/*TODO в отдельный компонент*/}
                 <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-mutiple-chip-label">Attributes</InputLabel>
+                    <InputLabel id="demo-mutiple-chip-label">Катеория</InputLabel>
                     <Select
                         labelId="demo-mutiple-chip-label"
                         id="demo-mutiple-chip"
@@ -155,13 +155,13 @@ export function DialogSongsAdd(props) {
         action:
             <FormControl fullWidth >
                 <Button onClick={handleClose} color="primary"  className={classes.button}>
-                    Cancel
+                    Отменить
                 </Button>
                 <Button onClick={handleCreate(song)} color="primary"  className={classes.button}>
-                    Create
+                    Создать
                 </Button>
                 <Button onClick={handleCreate(song, true)} color="primary" className={classes.button}>
-                    Create and close
+                    Создать и закрыть
                 </Button>
             </FormControl>
 

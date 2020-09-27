@@ -23,14 +23,14 @@ export default function DialogSongRemove(props) {
     }
 
     const data = {
-        title: 'Are you sure you want to delete these song?',
-        content: <div><p>Title: <strong>{copyDataSongData.title}</strong></p><p>Artist: <strong>{copyDataSongData.artist}</strong></p></div>,
+        title: 'Вы действительно хотите удалить услугу',
+        content: <div><p>Наименование: <strong>{copyDataSongData.title}</strong></p></div>,
         action:  <>
             <Button variant="outlined" onClick={handleClose} color="primary">
-                Cancel
+                Отменить
             </Button>
             <Button variant="outlined" onClick={handleAccept} color="secondary" autoFocus>
-                Agree
+                Согласен
             </Button>
             </>
     }

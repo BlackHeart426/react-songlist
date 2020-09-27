@@ -42,7 +42,7 @@ const Songs = (props) => {
     function createData(title, artist, timesPlayed, lastPlayed, tags) {
         return {title, artist, timesPlayed, lastPlayed,
             tags: { type: 'tags', data: tags && Object.values(tags).map((id, index) => id && wrapperTags(id)) },
-            action: { type: 'btn', data: [ { type: 'text', name: 'Request', handle: handleRequest }] }}
+            action: { type: 'btn', data: [ { type: 'text', name: 'Выбрать', handle: handleRequest }] }}
     }
 
     const wrapperSong = (song) => {

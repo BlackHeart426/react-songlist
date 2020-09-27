@@ -13,7 +13,7 @@ import {
 const initialState = {
     loading: false,
     alert: null,
-    editMode: false,
+    editMode: true,
     openDrawer: false,
     isLogin: false,
     isPageUser: false

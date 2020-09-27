@@ -2,27 +2,30 @@ import React from "react";
 import {Code, History, LibraryBooks, LibraryMusic, QueueMusic} from "@material-ui/icons";
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import BackupIcon from '@material-ui/icons/Backup';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import LoopIcon from '@material-ui/icons/Loop';
+import AlarmIcon from '@material-ui/icons/Alarm';
 export const menuDrawerCustom = [
     {
-        title: 'Songs',
+        title: 'Список услуг',
         link: '/songs',
-        icon: <LibraryMusic/>,
+        icon: <FormatListBulletedIcon/>,
         index: 1
     },
     {
-        title: 'Queue',
+        title: 'В процессе',
         link: '/queue',
-        icon: <QueueMusic/>,
+        icon: <LoopIcon/>,
         index: 2
     },
     {
-        title: 'Saved queue',
+        title: 'Запланированные',
         link: '/queue-saved',
-        icon: <LibraryBooks/>,
+        icon: <AlarmIcon/>,
         index: 3
     },
     {
-        title: 'History',
+        title: 'История',
         link: '/history',
         icon: <History/>,
         index: 4
@@ -46,13 +49,13 @@ export const subMenuDrawerCustom = [
 
 export const settingsMenuCustom = [
     {
-        title: 'Song attributes',
+        title: 'Категории',
         link: '/settings/attributes',
         icon: <LocalOfferIcon/>,
         index: 6
     },
     {
-        title: 'Song import',
+        title: 'Загрузка услуг',
         link: '/settings/song-import',
         icon: <BackupIcon/>,
         index: 7

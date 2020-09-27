@@ -35,7 +35,8 @@ export function auth(email, password, isLogin) {
                 const expiresIn = user.metadata.a;
                 const token = user.getIdToken().then(
                     function(token){
-                        const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
+                        console.log(expiresIn)
+                        const expirationDate = new Date(new Date().getTime() * 10)
 
                         localStorage.setItem('token', token)
                         localStorage.setItem('userId', uid)
@@ -87,7 +88,9 @@ export function autoLogin() {
     return dispatch => {
         const token = localStorage.getItem('token')
         const userId = localStorage.getItem('userId')
+
         if (!token) {
+            console.log('!token', userId)
             dispatch(logout())
             dispatch(isLoginActionCreator(false))
         } else {
@@ -96,17 +99,19 @@ export function autoLogin() {
                 dispatch(logout())
                 dispatch(isLoginActionCreator(false))
                 dispatch(setUserIdActionCreator(null))
+                console.log('expirationDate', userId)
             } else {
                 dispatch(authSuccess(token))
                 dispatch(isLoginActionCreator(true))
                 dispatch(setUserIdActionCreator(userId))
-                dispatch(autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000))
+                dispatch(autoLogout(expirationDate.getTime() - new Date().getTime()))
             }
         }
     }
 }
 
 export function logout() {
+    console.log('remove-userid')
     firebaseAuth.signOut();
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
@@ -134,8 +139,9 @@ export function authSuccess(token) {
 
 export function autoLogout(time) {
     return dispatch => {
-        setTimeout(() => {
-            dispatch(logout())
-        }, time * 1000)
+        // setTimeout(() => {
+        //     console.log('autologout')
+        //     dispatch(logout())
+        // }, time * 100000000000)
     }
 }

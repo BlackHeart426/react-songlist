@@ -181,7 +181,7 @@ const ConteinerTableDragDrop = (props) => {
             </Paper>
             <FormControlLabel
                 control={<Switch color="primary" checked={dense} onChange={handleChangeDense}/>}
-                label="Dense padding"
+                label="Расширить"
             />
         </div>
     );

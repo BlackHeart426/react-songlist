@@ -51,12 +51,12 @@ const History = (props) => {
 
 
     const headCells = [
-        { id: 'title', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
-        { id: 'artist', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Artist', type: 'txt' },
-        { id: 'amount', numeric: true, order: false, disablePadding: false, editMode: true, label: 'Amount', type: 'txt' },
-        { id: 'requested-by', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Requested by', type: 'txt' },
-        { id: 'played', numeric: false, order: false, disablePadding: false, editMode: true, label: 'played', type: 'txt' },
-        { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
+        { id: 'title', numeric: false, order: false, disablePadding: true, editMode: true, label: 'Наименование', type: 'txt' },
+        { id: 'artist', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Заказчик', type: 'txt' },
+        { id: 'amount', numeric: true, order: false, disablePadding: false, editMode: true, label: 'Дата выполнения', type: 'txt' },
+        { id: 'requested-by', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Работник', type: 'txt' },
+        { id: 'played', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Стоимость', type: 'txt' },
+        { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Примечание', type: 'txt' },
     ];
 
     const handleFilter = () => {

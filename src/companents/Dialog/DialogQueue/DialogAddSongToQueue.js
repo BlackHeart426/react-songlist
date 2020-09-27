@@ -62,7 +62,7 @@ export function DialogAddSongToQueue(props) {
     }
 
     const data = {
-        title: 'Add song to queue',
+        title: 'Добавить заказ',
         content:
             <div>
                 <FormControl fullWidth className={classes.formControl}>
@@ -75,7 +75,7 @@ export function DialogAddSongToQueue(props) {
                     <TextField
                         margin="dense"
                         id="RequestedBy"
-                        label="Requested By"
+                        label="Заказчик"
                         type="text"
                         fullWidth
                         onChange={handleChange('requestedBy')}
@@ -87,7 +87,7 @@ export function DialogAddSongToQueue(props) {
                     <TextField
                         margin="dense"
                         id="Note"
-                        label="Note"
+                        label="Примечание"
                         type="text"
                         fullWidth
                         onChange={handleChange('note')}
@@ -96,7 +96,7 @@ export function DialogAddSongToQueue(props) {
             </div>
             <div>
                 <FormControl fullWidth className={classes.formControl}>
-                    <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel>
+                    <InputLabel htmlFor="standard-adornment-amount">Стоимость</InputLabel>
                     <Input
                         id="standard-adornment-amount"
                         onChange={handleChange('amount')}
@@ -108,10 +108,10 @@ export function DialogAddSongToQueue(props) {
         action:
             <FormControl fullWidth >
                 <Button onClick={handleClose} color="primary"  className={classes.button}>
-                    Cancel
+                    Отменить
                 </Button>
                 <Button onClick={handleAdd(song)} color="primary"   className={classes.button}>
-                    Add
+                    Добавить
                 </Button>
             </FormControl>
 

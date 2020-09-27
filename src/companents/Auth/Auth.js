@@ -24,7 +24,7 @@ export function Auth(props) {
     // },[firebaseAuth])
 
     useEffect(()=>{
-        console.log(props.isLogin)
+        console.log( 'isLogin',props.isLogin)
         if(props.isLogin) {
             setIsLogin(true)
         } else {

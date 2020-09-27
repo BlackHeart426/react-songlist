@@ -39,8 +39,8 @@ export function DialogLogin(props) {
 
     const classes = useStyles();
     const {show, onHide, onLogin} = props;
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('valepa007@gmail.com');
+    const [password, setPassword] = useState('123123');
     const [dialogOpened, setDialogOpened] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [helperText, setHelperText] = useState('');
@@ -87,7 +87,6 @@ export function DialogLogin(props) {
 
     return (
         <React.Fragment>
-            <p>qwe</p>
             <Dialog
                 open={dialogOpened}
                 onClose={handleClose}
@@ -103,6 +102,7 @@ export function DialogLogin(props) {
                                     fullWidth
                                     id="username"
                                     type="email"
+                                    value={username}
                                     label="Username"
                                     placeholder="Username"
                                     margin="normal"
@@ -114,6 +114,7 @@ export function DialogLogin(props) {
                                     fullWidth
                                     id="password"
                                     type="password"
+                                    value={password}
                                     label="Password"
                                     placeholder="Password"
                                     margin="normal"

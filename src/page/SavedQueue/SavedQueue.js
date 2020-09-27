@@ -45,11 +45,11 @@ const SavedQueue = (props) => {
     },[])
 
     const headCells = [
-        { id: 'title', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Title', type: 'txt' },
-        { id: 'artist', numeric: false, order: true, disablePadding: false, editMode: true, label: 'Artist', type: 'txt' },
-        { id: 'amount', numeric: true, order: true, disablePadding: false, editMode: true, label: 'Amount', type: 'txt' },
-        { id: 'requested-by', numeric: false, order: true, disablePadding: false, editMode: true, label: 'Requested by', type: 'txt' },
-        { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Note', type: 'txt' },
+        { id: 'title', numeric: false, order: true, disablePadding: true, editMode: true, label: 'Наименование', type: 'txt' },
+        { id: 'artist', numeric: false, order: true, disablePadding: false, editMode: true, label: 'Заказчик', type: 'txt' },
+        { id: 'amount', numeric: true, order: true, disablePadding: false, editMode: true, label: 'Дата выполнения', type: 'txt' },
+        { id: 'requested-by', numeric: false, order: true, disablePadding: false, editMode: true, label: 'Работник', type: 'txt' },
+        { id: 'note', numeric: false, order: false, disablePadding: false, editMode: true, label: 'Примечание', type: 'txt' },
     ];
     //
     // const {songData, setSongData, searchText, listSong, selected, setSelected} = useContext(SavedQueueContext);

@@ -59,7 +59,7 @@ const User = (props) => {
                 aria-controls="simple-menu"
                 aria-haspopup="true"
                 onClick={handleClick}>
-                {isLoginAuth}
+                Иванов Иван Иванович
             </Button>
             <Menu
                 id="simple-menu"
